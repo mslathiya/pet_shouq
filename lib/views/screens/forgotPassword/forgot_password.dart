@@ -1,10 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pet_shouq/theme/app.assets.dart';
-import 'package:pet_shouq/theme/app.colors.dart';
 
 import '../../../config/config.dart';
 import '../../components/components.dart';
@@ -43,39 +39,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            t.translate("forgot_password"),
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(
-                                  height: 1.2,
-                                  letterSpacing: 0.20,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                          HeaderLabel(
+                            header: t.translate("forgot_password"),
+                            subHeader: t.translate('forgot_password_text'),
                           ),
                           SizedBox(
-                            height: 6.h,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 15.w),
-                            child: Text(
-                              t.translate("forgot_password_text"),
-                              textAlign: TextAlign.left,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    height: 1.5,
-                                  ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20.h,
+                            height: 15.h,
                           ),
                           InputField(
-                            headerLabel: t.translate("lbl_email"),
+                            headerWidget: InputHeader(
+                              compulsory: true,
+                              headerLabel: t.translate("lbl_email"),
+                            ),
                             inputHint: t.translate("hint_email"),
                           ),
                           SizedBox(

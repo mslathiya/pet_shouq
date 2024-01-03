@@ -9,4 +9,5 @@ class AppAssets {
   static const passwordShied = "assets/svg/ic_pwd_shield.svg";
   static const arrowLeft = "assets/svg/arrow_left.svg";
   static const notificationBell = "assets/svg/notification_bell.svg";
+  static const camera = "assets/svg/camera.svg";
 }

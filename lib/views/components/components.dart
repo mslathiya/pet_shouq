@@ -5,3 +5,6 @@ export 'password_field.dart';
 export "button_view.dart";
 export "custom_alert_dialog.dart";
 export 'header_with_back.dart';
+export "header_label.dart";
+export "code_picker.dart";
+export 'input_header.dart';

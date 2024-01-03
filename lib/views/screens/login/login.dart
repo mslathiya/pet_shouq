@@ -39,34 +39,18 @@ class _LoginState extends State<Login> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            t.translate("welcome_back"),
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(
-                                  height: 1.2,
-                                  letterSpacing: 0.20,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                          SizedBox(
-                            height: 6.h,
-                          ),
-                          Text(
-                            t.translate('login_with_details'),
-                            textAlign: TextAlign.left,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                          HeaderLabel(
+                            header: t.translate("welcome_back"),
+                            subHeader: t.translate('login_with_details'),
                           ),
                           SizedBox(
                             height: 15.h,
                           ),
                           InputField(
-                            headerLabel: t.translate("lbl_email"),
+                            headerWidget: InputHeader(
+                              compulsory: true,
+                              headerLabel: t.translate("lbl_email"),
+                            ),
                             inputHint: t.translate("hint_email"),
                           ),
                           SizedBox(
@@ -136,7 +120,7 @@ class _LoginState extends State<Login> {
                             child: ButtonView(
                               onTap: () => Navigator.pushNamed(
                                 context,
-                                changePassword,
+                                verification,
                               ),
                               buttonTitle: t.translate("btn_login"),
                               width: width - 20,
@@ -146,6 +130,7 @@ class _LoginState extends State<Login> {
                             height: 15.h,
                           ),
                           GestureDetector(
+                            onTap: () => Navigator.pushNamed(context, register),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,

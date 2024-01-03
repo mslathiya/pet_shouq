@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_shouq/theme/theme.dart';
 
 class InputField extends StatelessWidget {
-  final String headerLabel;
+  final bool compulsory;
   final TextEditingController? editingController;
   final TextInputType? keyboardType;
   final String inputHint;
@@ -14,10 +14,12 @@ class InputField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool? enableInput;
   final int? maxLength;
+  final Widget? headerWidget;
+  final bool isMultiline;
 
   const InputField({
     super.key,
-    required this.headerLabel,
+    this.compulsory = false,
     this.editingController,
     this.keyboardType = TextInputType.text,
     this.maxLength = 50,
@@ -27,6 +29,8 @@ class InputField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.enableInput,
+    this.headerWidget,
+    this.isMultiline = false,
   });
 
   @override
@@ -35,14 +39,7 @@ class InputField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          headerLabel,
-          textAlign: TextAlign.left,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        SizedBox(
-          height: 8.h,
-        ),
+        headerWidget != null ? headerWidget! : const SizedBox(),
         TextFormField(
           cursorWidth: 2,
           maxLength: maxLength,
@@ -56,6 +53,7 @@ class InputField extends StatelessWidget {
           keyboardType: keyboardType,
           cursorColor: AppColors.hintColor,
           style: Theme.of(context).textTheme.bodyMedium,
+          maxLines: isMultiline ? 5 : 1,
           decoration: InputDecoration(
             counterText: "",
             hintText: inputHint,

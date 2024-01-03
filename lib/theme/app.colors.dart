@@ -10,4 +10,5 @@ class AppColors {
   static Color hintColor = const Color(0xff909090);
   static Color inputBorder = const Color(0xffDDDDDD);
   static Color orange = const Color(0xffFA662E);
+  static Color primaryLight = const Color(0xffFFE5DE);
 }

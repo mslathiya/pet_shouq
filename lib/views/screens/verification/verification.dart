@@ -60,25 +60,9 @@ class _VerificationState extends State<Verification> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            t.translate("otp_verification"),
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(
-                                  height: 1.2,
-                                  letterSpacing: 0.20,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                          SizedBox(
-                            height: 6.h,
-                          ),
-                          Text(
-                            t.translate("auth_code_sent"),
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.bodySmall,
+                          HeaderLabel(
+                            header: t.translate("otp_verification"),
+                            subHeader: t.translate('auth_code_sent'),
                           ),
                           SizedBox(
                             height: 3.h,

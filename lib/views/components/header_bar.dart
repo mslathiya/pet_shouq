@@ -14,13 +14,13 @@ class HeaderBar extends StatelessWidget {
       children: [
         Image.asset(
           AppAssets.headerView,
-          height: 280.h,
+          height: 260.h,
           width: double.infinity,
           fit: BoxFit.cover,
         ),
         Image.asset(
           AppAssets.headerAsset,
-          height: 190.h,
+          height: 180.h,
           width: double.infinity,
           fit: BoxFit.cover,
         ),

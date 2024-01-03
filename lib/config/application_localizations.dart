@@ -47,4 +47,8 @@ class ApplicationLocalizations {
       return _translatedKey;
     }
   }
+
+  String getLocale() {
+    return appLocale.countryCode ?? "US";
+  }
 }
