@@ -8,7 +8,7 @@ import 'application_localizations_delegate.dart';
 class ApplicationLocalizations {
   final Locale appLocale;
   late Map<String, String> _localizedStrings;
-
+  String _translatedKey = "";
   ApplicationLocalizations(this.appLocale);
 
   static ApplicationLocalizations? of(BuildContext context) {
@@ -31,7 +31,20 @@ class ApplicationLocalizations {
   }
 
   // called from every widget which needs a localized text
-  String translate(String key) {
-    return _localizedStrings[key] ?? "";
+  // String translate(String key) {
+  //   return _localizedStrings[key] ?? "";
+  // }
+  String translate(String key, {List<dynamic>? args}) {
+    if (null == _localizedStrings[key]) return "";
+
+    _translatedKey = _localizedStrings[key] ?? "";
+    if (null == args || args.isEmpty) {
+      return _translatedKey;
+    } else {
+      for (int i = 0; i < args.length; ++i) {
+        _translatedKey = _translatedKey.replaceAll("{$i}", args[i]);
+      }
+      return _translatedKey;
+    }
   }
 }

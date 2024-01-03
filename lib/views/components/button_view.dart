@@ -26,17 +26,20 @@ class ButtonView extends StatelessWidget {
         shadowColor: Theme.of(context).shadowColor.withOpacity(0.65),
         fixedSize: Size.fromWidth(width!),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(6.0),
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(
+          horizontal: 16.w,
+          vertical: 3.h,
+        ),
         child: Text(
           buttonTitle,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
                 color: AppColors.white,
-                fontSize: 18.sp,
+                fontSize: 16.sp,
               ),
         ),
       ),

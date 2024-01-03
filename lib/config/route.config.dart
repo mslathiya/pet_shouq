@@ -6,6 +6,7 @@ const String login = 'login';
 const String register = 'register';
 const String verification = 'verification';
 const String forgotPassword = 'forgotPassword';
+const String changePassword = 'changePassword';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
@@ -21,6 +22,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case forgotPassword:
       return MaterialPageRoute(
         builder: (context) => const ForgotPassword(),
+      );
+    case changePassword:
+      return MaterialPageRoute(
+        builder: (context) => const ChangePassword(),
       );
     case register:
       return MaterialPageRoute(

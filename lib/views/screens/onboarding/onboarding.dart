@@ -5,6 +5,7 @@ import 'package:pet_shouq/theme/theme.dart';
 
 import '../../../config/config.dart';
 import 'widgets/circle_indicator.dart';
+import 'widgets/item_builder.dart';
 import 'widgets/page_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -38,117 +39,98 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
-    final appLocalizations = ApplicationLocalizations.of(context)!;
+    final t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           color: AppColors.primary,
         ),
         child: SafeArea(
-          child: Column(
+          child: Stack(
             children: [
-              Expanded(
-                child: PageView.builder(
-                  itemCount: onboardingList.length,
-                  scrollDirection: Axis.horizontal,
-                  controller: _pageController,
-                  physics: const ClampingScrollPhysics(),
-                  onPageChanged: (int page) {
-                    setState(() {
-                      _currentPage = page;
-                    });
-                  },
-                  itemBuilder: (context, index) {
-                    final item = onboardingList[index];
+              Column(
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      itemCount: onboardingList.length,
+                      scrollDirection: Axis.horizontal,
+                      controller: _pageController,
+                      physics: const ClampingScrollPhysics(),
+                      onPageChanged: (int page) {
+                        setState(() {
+                          _currentPage = page;
+                        });
+                      },
+                      itemBuilder: (context, index) {
+                        final item = onboardingList[index];
 
-                    String title = appLocalizations.translate(item.title);
-                    String subTitle = appLocalizations.translate(item.content);
+                        String title = t.translate(item.title);
+                        String subTitle = t.translate(item.content);
 
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            item.image,
-                            height: 287,
-                            width: 346,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(
-                            height: 35.h,
-                          ),
-                          Text(
-                            title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(
-                                  height: 1.2,
-                                  letterSpacing: 0.20,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Text(
-                            subTitle,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.5,
-                                ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                  padding: EdgeInsets.only(
-                    left: 15.w,
-                    right: 15.w,
-                    bottom: 45.h,
+                        return ItemBuilder(
+                          item: item,
+                          title: title,
+                          subTitle: subTitle,
+                        );
+                      },
+                    ),
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      PageIndicator(
-                        controller: _pageController,
-                        onDotClicked: (count) {
-                          _pageController.animateToPage(
-                            count,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                        },
-                        length: onboardingList.length,
+                  Padding(
+                      padding: EdgeInsets.only(
+                        left: 15.w,
+                        right: 15.w,
+                        bottom: 45.h,
                       ),
-                      CircleIndicator(
-                        percent: _getPercent(_currentPage),
-                        activePage: _currentPage,
-                        totalPage: onboardingList.length,
-                        onPressNext: () {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                        },
-                        onPressSkip: () {
-                          Navigator.pushNamed(context, login);
-                        },
-                      )
-                    ],
-                  ))
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PageIndicator(
+                            controller: _pageController,
+                            onDotClicked: (count) {
+                              _pageController.animateToPage(
+                                count,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                            },
+                            length: onboardingList.length,
+                          ),
+                          CircleIndicator(
+                            percent: _getPercent(_currentPage),
+                            activePage: _currentPage,
+                            totalPage: onboardingList.length,
+                            onPressNext: () {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                            },
+                            onPressSkip: () {
+                              Navigator.pushNamed(context, login);
+                            },
+                          )
+                        ],
+                      ))
+                ],
+              ),
+              Positioned(
+                right: 15,
+                top: 10,
+                child: GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, login),
+                  child: Text(
+                    t.translate("skip"),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          height: 1.2,
+                          letterSpacing: 0.20,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.secondary,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
             ],
           ),
         ),

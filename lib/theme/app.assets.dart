@@ -6,4 +6,7 @@ class AppAssets {
   static const headerView = "assets/images/header_bg.png";
   static const appLogo = "assets/images/app_logo.png";
   static const arrowRight = "assets/svg/arrow_right.svg";
+  static const passwordShied = "assets/svg/ic_pwd_shield.svg";
+  static const arrowLeft = "assets/svg/arrow_left.svg";
+  static const notificationBell = "assets/svg/notification_bell.svg";
 }

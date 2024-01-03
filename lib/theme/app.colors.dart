@@ -9,4 +9,5 @@ class AppColors {
   static Color fontMain = const Color(0xff000000);
   static Color hintColor = const Color(0xff909090);
   static Color inputBorder = const Color(0xffDDDDDD);
+  static Color orange = const Color(0xffFA662E);
 }

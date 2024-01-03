@@ -16,7 +16,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final appLocalizations = ApplicationLocalizations.of(context)!;
+    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            appLocalizations.translate("welcome_back"),
+                            t.translate("welcome_back"),
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -55,27 +55,29 @@ class _LoginState extends State<Login> {
                             height: 6.h,
                           ),
                           Text(
-                            appLocalizations.translate('login_with_details'),
+                            t.translate('login_with_details'),
                             textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          InputField(
+                            headerLabel: t.translate("lbl_email"),
+                            inputHint: t.translate("hint_email"),
                           ),
                           SizedBox(
                             height: 10.h,
                           ),
-                          const InputField(
-                            headerLabel: "Email Id",
-                            inputHint: 'Enter email address',
+                          PasswordField(
+                            headerLabel: t.translate("lbl_password"),
+                            inputHint: t.translate("hint_password"),
                           ),
                           SizedBox(
-                            height: 10.h,
-                          ),
-                          const InputField(
-                            headerLabel: "Password",
-                            inputHint: 'Enter password',
-                            keyboardType: TextInputType.visiblePassword,
-                          ),
-                          SizedBox(
-                            height: 10.h,
+                            height: 6.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +94,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "Remember me",
+                                        t.translate("remember_me"),
                                         textAlign: TextAlign.left,
                                         style: Theme.of(context)
                                             .textTheme
@@ -100,7 +102,7 @@ class _LoginState extends State<Login> {
                                             ?.copyWith(
                                               height: 1.2,
                                               letterSpacing: 0.20,
-                                              fontWeight: FontWeight.w700,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                       ),
                                     )
@@ -111,7 +113,7 @@ class _LoginState extends State<Login> {
                                 onTap: () => Navigator.pushNamed(
                                     context, forgotPassword),
                                 child: Text(
-                                  "Forgot Password",
+                                  t.translate("forgot_password"),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
@@ -119,7 +121,7 @@ class _LoginState extends State<Login> {
                                       ?.copyWith(
                                         height: 1.2,
                                         letterSpacing: 0.20,
-                                        fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w600,
                                         color: AppColors.secondary,
                                       ),
                                 ),
@@ -132,47 +134,54 @@ class _LoginState extends State<Login> {
                           Align(
                             alignment: Alignment.center,
                             child: ButtonView(
-                              onTap: () {},
-                              buttonTitle: "Login",
-                              width: width - 40,
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                changePassword,
+                              ),
+                              buttonTitle: t.translate("btn_login"),
+                              width: width - 20,
                             ),
                           ),
                           SizedBox(
                             height: 15.h,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don't have an account?",
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      height: 1.2,
-                                      letterSpacing: 0.20,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Text(
-                                "Signup",
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(
-                                      height: 1.2,
-                                      color: AppColors.secondary,
-                                      fontSize: 16.0.sp,
-                                    ),
-                              ),
-                            ],
-                          ),
+                          GestureDetector(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  t.translate("no_account"),
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        height: 1.2,
+                                        letterSpacing: 0.20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                ),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                Text(
+                                  t.translate("sign_up"),
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium
+                                      ?.copyWith(
+                                        height: 1.2,
+                                        color: AppColors.secondary,
+                                        fontSize: 16.0.sp,
+                                        letterSpacing: 0.20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     )
