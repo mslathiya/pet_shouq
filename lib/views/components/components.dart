@@ -8,3 +8,4 @@ export 'header_with_back.dart';
 export "header_label.dart";
 export "code_picker.dart";
 export 'input_header.dart';
+export 'animated_bottom_bar.dart';

@@ -8,6 +8,8 @@ const String verification = 'verification';
 const String forgotPassword = 'forgotPassword';
 const String changePassword = 'changePassword';
 
+const String parentDashboard = "parentDashboard";
+
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
   switch (routeName) {
@@ -34,6 +36,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case verification:
       return MaterialPageRoute(
         builder: (context) => const Verification(),
+      );
+    case parentDashboard:
+      return MaterialPageRoute(
+        builder: (context) => const ParentDashboard(),
       );
     default:
       throw ('This route name does not exit');

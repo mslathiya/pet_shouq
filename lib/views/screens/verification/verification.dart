@@ -188,7 +188,10 @@ class _VerificationState extends State<Verification> {
                           Align(
                             alignment: Alignment.center,
                             child: ButtonView(
-                              onTap: () {},
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                parentDashboard,
+                              ),
                               buttonTitle: t.translate("btn_verify"),
                               width: width - 20,
                             ),

@@ -61,5 +61,9 @@
     "hint_display_name": "Enter Display Name",
     "lbl_mailing_address": "Mailing Address",
     "hint_mailing_address": "Enter Mailing Address",
-    "already_account": "Already have an account?"
+    "already_account": "Already have an account?",
+    "tab_home": "Home",
+    "tab_profile": "Profile",
+    "tab_appointment": "Appointment",
+    "tab_pets": "Pets"
 }

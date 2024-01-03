@@ -10,4 +10,8 @@ class AppAssets {
   static const arrowLeft = "assets/svg/arrow_left.svg";
   static const notificationBell = "assets/svg/notification_bell.svg";
   static const camera = "assets/svg/camera.svg";
+  static const icTabOne = "assets/svg/ic_tab_one.svg";
+  static const icTabTwo = "assets/svg/ic_tab_two.svg";
+  static const icTabThree = "assets/svg/ic_tab_three.svg";
+  static const icTabFour = "assets/svg/ic_tab_four.svg";
 }
