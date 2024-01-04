@@ -5,7 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../theme/theme.dart';
 
 class NotificationWidget extends StatelessWidget {
-  const NotificationWidget({super.key});
+  final Color iconColor;
+  const NotificationWidget({
+    super.key,
+    required this.iconColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class NotificationWidget extends StatelessWidget {
             AppAssets.notificationBell,
             height: 27.sp,
             width: 27.sp,
-            colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
           ),
         ),
         Positioned(

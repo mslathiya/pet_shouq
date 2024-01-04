@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
-import 'time_label.dart';
+import '../../../components/components.dart';
 
 class ScheduleWidget extends StatelessWidget {
   const ScheduleWidget({
@@ -54,31 +54,31 @@ class ScheduleWidget extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Monday',
             time: '09:00 Am To 8:00 Pm',
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Tuesday',
             time: '09:00 Am To 8:00 Pm',
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Wednesday',
             time: '09:00 Am To 8:00 Pm',
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Thursday',
             time: '09:00 Am To 8:00 Pm',
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Friday',
             time: '09:00 Am To 8:00 Pm',
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Saturday',
             time: '09:00 Am To 8:00 Pm',
           ),
-          const TimeLabel(
+          const InfoLabel(
             day: 'Sunday',
             time: 'Close',
           )

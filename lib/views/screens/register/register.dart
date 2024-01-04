@@ -1,7 +1,5 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../../config/config.dart';
@@ -63,7 +61,7 @@ class _RegisterState extends State<Register> {
                           SizedBox(
                             height: 15.h,
                           ),
-                          _ImagePicker(
+                          ImagePicker(
                             onPickImage: () {},
                           ),
                           SizedBox(
@@ -364,59 +362,6 @@ class PhoneInput extends StatelessWidget {
               child: VerticalDivider(
                 color: AppColors.hintColor,
                 thickness: 1,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ImagePicker extends StatelessWidget {
-  final VoidCallback onPickImage;
-  const _ImagePicker({
-    required this.onPickImage,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPickImage,
-      child: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            DottedBorder(
-              borderType: BorderType.RRect,
-              radius: Radius.elliptical(100.w, 100.w),
-              color: AppColors.secondary,
-              dashPattern: const [4, 4],
-              strokeCap: StrokeCap.butt,
-              strokeWidth: 2,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.elliptical(100.w, 100.w),
-                ),
-                child: Container(
-                  height: 100.w,
-                  width: 100.w,
-                  color: AppColors.primaryLight,
-                ),
-              ),
-            ),
-            Positioned.fill(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              top: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(33.0),
-                child: SvgPicture.asset(
-                  AppAssets.camera,
-                  height: 26.w,
-                  width: 26.w,
-                ),
               ),
             )
           ],

@@ -10,6 +10,8 @@ const String changePassword = 'changePassword';
 
 const String parentDashboard = "parentDashboard";
 const String doctorDetails = 'doctorDetails';
+const String petDetails = 'petDetails';
+const String addPet = 'addPet';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
@@ -44,7 +46,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case doctorDetails:
       return MaterialPageRoute(
-        builder: (context) => const DoctorDetails(),
+        builder: (context) => const ClinicDetails(),
+      );
+    case petDetails:
+      return MaterialPageRoute(
+        builder: (context) => const PetDetails(),
+      );
+    case addPet:
+      return MaterialPageRoute(
+        builder: (context) => const AddNewPet(),
       );
     default:
       throw ('This route name does not exit');

@@ -7,12 +7,16 @@ class ButtonView extends StatelessWidget {
   final double? width;
   final VoidCallback onTap;
   final String buttonTitle;
+  final Widget? leftWidget;
+  final Widget? rightWidget;
 
   const ButtonView({
     super.key,
     this.width = 200,
     required this.onTap,
     required this.buttonTitle,
+    this.leftWidget,
+    this.rightWidget,
   });
 
   @override
@@ -34,13 +38,21 @@ class ButtonView extends StatelessWidget {
           horizontal: 16.w,
           vertical: 3.h,
         ),
-        child: Text(
-          buttonTitle,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppColors.white,
-                fontSize: 16.sp,
-              ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            leftWidget ?? const SizedBox(),
+            Text(
+              buttonTitle,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                    color: AppColors.white,
+                    fontSize: 16.sp,
+                  ),
+            ),
+            rightWidget ?? const SizedBox()
+          ],
         ),
       ),
     );

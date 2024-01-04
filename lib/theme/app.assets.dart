@@ -18,7 +18,33 @@ class AppAssets {
   static const icSearch = "assets/svg/ic_search.svg";
   static const icDoctor = "assets/svg/ic_doctor.svg";
   static const icLocationPin = "assets/svg/ic_location_pin.svg";
+  static const icCalendar = "assets/svg/ic_calendar.svg";
+  static const icBreed = "assets/svg/ic_breed.svg";
+  static const icDelete = "assets/svg/ic_delete.svg";
+  static const icEdit = "assets/svg/ic_edit.svg";
+  static const icPetColor = "assets/svg/ic_pet_color.svg";
+  static const icPetWeight = "assets/svg/ic_pet_weight.svg";
+  static const icPetHeight = "assets/svg/ic_pet_height.svg";
+  static const icMedicalHistory = "assets/svg/ic_medical_history.svg";
+  static const icFeedingSchedule = "assets/svg/ic_feeding_schedule.svg";
+  static const icDiet = "assets/svg/ic_diet.svg";
+  static const icNutrition = "assets/svg/ic_nutrition.svg";
+  static const icMedication = "assets/svg/ic_medication.svg";
+  static const icVaccination = "assets/svg/ic_vaccination.svg";
+  static const icSpecialNeeds = "assets/svg/ic_special_need.svg";
+  static const icBirthday = "assets/svg/ic_birthday.svg";
+  static const icGender = "assets/svg/ic_gender.svg";
+  static const icEmail = "assets/svg/ic_email.svg";
+  static const icPhone = "assets/svg/ic_phone.svg";
+  static const icChangePassword = "assets/svg/ic_change_password.svg";
+  static const icNotification = "assets/svg/ic_notification.svg";
+  static const icPrivacyPolicy = "assets/svg/ic_privacy_policy.svg";
+  static const icTerms = "assets/svg/ic_terms.svg";
+  static const icContactUs = "assets/svg/ic_contact_us.svg";
+  static const icMostAsked = "assets/svg/ic_most_asked.svg";
 
   static const sampleBanner = "assets/samples/sample_banner.png";
   static const doctorBanner = "assets/samples/doctor_detail.png";
+  static const dog = "assets/samples/dog.png";
+  static const dogDetails = "assets/samples/dog_detail.png";
 }

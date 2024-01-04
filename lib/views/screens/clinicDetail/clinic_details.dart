@@ -10,14 +10,14 @@ import 'widgets/header_slider.dart';
 import 'widgets/location_widget.dart';
 import 'widgets/schedule_widget.dart';
 
-class DoctorDetails extends StatefulWidget {
-  const DoctorDetails({super.key});
+class ClinicDetails extends StatefulWidget {
+  const ClinicDetails({super.key});
 
   @override
-  State<DoctorDetails> createState() => _DoctorDetailsState();
+  State<ClinicDetails> createState() => _ClinicDetailsState();
 }
 
-class _DoctorDetailsState extends State<DoctorDetails> {
+class _ClinicDetailsState extends State<ClinicDetails> {
   @override
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
@@ -51,7 +51,7 @@ class SliverAppBarHeader extends StatelessWidget {
       stretch: true,
       expandedHeight: 280.h,
       leading: InkWell(
-        onTap: () {},
+        onTap: () => Navigator.pop(context),
         child: Padding(
           padding: EdgeInsets.only(
             left: 12.sp,
@@ -73,7 +73,9 @@ class SliverAppBarHeader extends StatelessWidget {
             ),
       ),
       actions: [
-        const NotificationWidget(),
+        NotificationWidget(
+          iconColor: AppColors.white,
+        ),
         SizedBox(
           width: 15.w,
         ),

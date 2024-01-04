@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../theme/theme.dart';
+import '../../theme/theme.dart';
 
-class TimeLabel extends StatelessWidget {
+class InfoLabel extends StatelessWidget {
   final String day;
   final String time;
 
-  const TimeLabel({
+  const InfoLabel({
     super.key,
     required this.day,
     required this.time,

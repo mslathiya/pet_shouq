@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:pet_shouq/views/components/components.dart';
+import 'package:pet_shouq/theme/theme.dart';
 
-import '../../theme/theme.dart';
+import 'notification_widget.dart';
 
-class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
+class TabHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback onPressBack;
 
-  const HeaderWithBack({
+  const TabHeader({
     super.key,
     required this.title,
     required this.onPressBack,
@@ -20,18 +19,7 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       centerTitle: true,
-      leading: InkWell(
-        onTap: onPressBack,
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 12.sp,
-            right: 12.sp,
-          ),
-          child: SvgPicture.asset(
-            AppAssets.arrowLeft,
-          ),
-        ),
-      ),
+      leading: Container(),
       title: Text(
         title,
         textAlign: TextAlign.center,
@@ -45,7 +33,7 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
           iconColor: AppColors.fontMain,
         ),
         SizedBox(
-          width: 10.w,
+          width: 15.w,
         ),
       ],
     );
