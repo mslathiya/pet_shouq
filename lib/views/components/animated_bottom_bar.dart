@@ -44,6 +44,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
               children: items.map((e) {
                 var index = items.indexOf(e);
                 return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
                   onTap: () => _select(index),
                   child: _buildItemWidget(e, index == widget.currentIndex),
                 );
@@ -64,8 +65,8 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
   Widget _buildIcon(String icon) {
     return SvgPicture.asset(
       icon,
-      height: 30.sp,
-      width: 28.sp,
+      height: 36.sp,
+      width: 36.sp,
       fit: BoxFit.contain,
     );
   }

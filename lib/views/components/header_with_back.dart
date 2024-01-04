@@ -47,16 +47,16 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
             Positioned(
               child: SvgPicture.asset(
                 AppAssets.notificationBell,
-                height: 32.sp,
-                width: 32.sp,
+                height: 27.sp,
+                width: 27.sp,
               ),
             ),
             Positioned(
               right: -8,
               top: -5,
               child: Container(
-                height: 24.sp,
-                width: 24.sp,
+                height: 20.sp,
+                width: 20.sp,
                 decoration: BoxDecoration(
                   color: AppColors.orange,
                   borderRadius: BorderRadius.all(
@@ -68,12 +68,12 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "99+",
+                    "9+",
                     textAlign: TextAlign.center,
                     textScaler: const TextScaler.linear(1),
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: AppColors.white,
-                          fontSize: 12.sp,
+                          fontSize: 10.sp,
                         ),
                   ),
                 ),
@@ -82,7 +82,7 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
         SizedBox(
-          width: 10.w,
+          width: 5.w,
         ),
       ],
     );

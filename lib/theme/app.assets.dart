@@ -14,4 +14,9 @@ class AppAssets {
   static const icTabTwo = "assets/svg/ic_tab_two.svg";
   static const icTabThree = "assets/svg/ic_tab_three.svg";
   static const icTabFour = "assets/svg/ic_tab_four.svg";
+  static const icLocation = "assets/svg/ic_location.svg";
+  static const icSearch = "assets/svg/ic_search.svg";
+  static const icDoctor = "assets/svg/ic_doctor.svg";
+  static const sampleBanner = "assets/samples/sample_banner.png";
+  static const doctorBanner = "assets/samples/doctor_detail.png";
 }

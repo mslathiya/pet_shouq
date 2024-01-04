@@ -5,3 +5,5 @@ export 'verification/verification.dart';
 export 'forgotPassword/forgot_password.dart';
 export "changePassword/change_password.dart";
 export "dashboard/dashboard.dart";
+export "parent/parent.dart";
+export "doctorDetails/doctor_details.dart";

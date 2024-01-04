@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shouq/views/screens/screens.dart';
 
 import '../../../config/config.dart';
 import '../../../data/models.dart';
@@ -13,6 +14,7 @@ class ParentDashboard extends StatefulWidget {
 }
 
 class _ParentDashboardState extends State<ParentDashboard> {
+  int currentIndex = 0;
   List<NavigationBarItem> items = [
     NavigationBarItem(title: "tab_home", icon: AppAssets.icTabOne),
     NavigationBarItem(title: 'tab_appointment', icon: AppAssets.icTabTwo),
@@ -20,33 +22,59 @@ class _ParentDashboardState extends State<ParentDashboard> {
     NavigationBarItem(title: 'tab_profile', icon: AppAssets.icTabFour),
   ];
 
+  /// Top Level Pages
+  final List<Widget> topLevelPages = const [
+    ParentHome(),
+    ParentAppointment(),
+    ParentMyPets(),
+    ParentProfile(),
+  ];
+
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  /// on Page Changed
+  void onPageChanged(int page) {}
+
   @override
   Widget build(BuildContext context) {
     final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Dashboard",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                height: 1.2,
-                letterSpacing: 0.20,
-                fontWeight: FontWeight.w600,
-                color: AppColors.secondary,
-              ),
-        ),
-      ),
+      body: _mainWrapperBody(),
       bottomNavigationBar: AnimatedBottomBar(
         itemList: items,
-        currentIndex: 2,
+        currentIndex: currentIndex,
         onTapMenu: (int value) {
-          print("Index $value");
+          pageController.animateToPage(
+            value,
+            duration: const Duration(milliseconds: 10),
+            curve: Curves.fastLinearToSlowEaseIn,
+          );
         },
         localizations: t,
       ),
     );
   }
-}
 
-// ignore: must_be_immutable
+  // Body - MainWrapper Widget
+  PageView _mainWrapperBody() {
+    return PageView(
+      onPageChanged: (int page) => onPageChanged(page),
+      controller: pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: topLevelPages,
+    );
+  }
+}
