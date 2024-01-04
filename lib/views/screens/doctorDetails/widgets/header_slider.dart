@@ -11,7 +11,7 @@ class HeaderSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 190.h,
+        height: 230.h,
         autoPlay: false,
         pageSnapping: true,
         viewportFraction: 1,

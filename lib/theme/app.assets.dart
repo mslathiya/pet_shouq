@@ -17,6 +17,8 @@ class AppAssets {
   static const icLocation = "assets/svg/ic_location.svg";
   static const icSearch = "assets/svg/ic_search.svg";
   static const icDoctor = "assets/svg/ic_doctor.svg";
+  static const icLocationPin = "assets/svg/ic_location_pin.svg";
+
   static const sampleBanner = "assets/samples/sample_banner.png";
   static const doctorBanner = "assets/samples/doctor_detail.png";
 }

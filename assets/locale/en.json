@@ -66,5 +66,6 @@
     "tab_profile": "Profile",
     "tab_appointment": "Appointment",
     "tab_pets": "Pets",
-    "location":"Location"
+    "location": "Location",
+    "opening_time": "Opening Time"
 }

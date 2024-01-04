@@ -1,0 +1,1 @@
+enum ViewType { typeDetail, typeList }

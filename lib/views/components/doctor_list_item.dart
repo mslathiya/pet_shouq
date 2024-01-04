@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:pet_shouq/helper/helpers.dart';
 
 import '../../theme/theme.dart';
 
 class DoctorListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
+  final ViewType viewType;
   const DoctorListItem({
     super.key,
     required this.onViewDetail,
+    required this.viewType,
   });
 
   @override
@@ -85,29 +88,31 @@ class DoctorListItem extends StatelessWidget {
               ],
             ),
           ),
-          Material(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: InkWell(
-              onTap: onViewDetail,
-              child: Container(
-                width: 35.w,
-                height: 35.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50.sp),
+          viewType == ViewType.typeList
+              ? Material(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
                   ),
-                  color: AppColors.primary.withOpacity(0.4),
-                ),
-                child: Icon(
-                  Entypo.chevron_right,
-                  size: 18.sp,
-                  color: AppColors.fontMain,
-                ),
-              ),
-            ),
-          ),
+                  child: InkWell(
+                    onTap: onViewDetail,
+                    child: Container(
+                      width: 35.w,
+                      height: 35.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50.sp),
+                        ),
+                        color: AppColors.primary.withOpacity(0.4),
+                      ),
+                      child: Icon(
+                        Entypo.chevron_right,
+                        size: 18.sp,
+                        color: AppColors.fontMain,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );
