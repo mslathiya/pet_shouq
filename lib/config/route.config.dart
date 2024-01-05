@@ -19,6 +19,11 @@ const String petMedication = "petMedication";
 const String petMedicationDetail = "petMedicationDetail";
 const String petAddMedication = "petAddMedication";
 
+//diet
+const String petDiet = "petDiet";
+const String petDietDetail = "petDietDetail";
+const String petAddDiet = "petAddDiet";
+
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
   switch (routeName) {
@@ -66,6 +71,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const EditParentProfile(),
       );
+    /**
+     * 
+     * Medication
+     * 
+     */
     case petMedication:
       return MaterialPageRoute(
         builder: (context) => const PetMedication(),
@@ -77,6 +87,23 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case petAddMedication:
       return MaterialPageRoute(
         builder: (context) => const AddMedication(),
+      );
+    /**
+       * 
+       * Diet
+       * 
+       */
+    case petDiet:
+      return MaterialPageRoute(
+        builder: (context) => const PetDiet(),
+      );
+    case petDietDetail:
+      return MaterialPageRoute(
+        builder: (context) => const DietDetails(),
+      );
+    case petAddDiet:
+      return MaterialPageRoute(
+        builder: (context) => const AddDiet(),
       );
     default:
       throw ('This route name does not exit');

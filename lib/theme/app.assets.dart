@@ -48,6 +48,7 @@ class AppAssets {
   static const icCalendarRemainder = "assets/svg/ic_calender_remainder.svg";
   static const icDosage = "assets/svg/ic_dosage.svg";
   static const icDosageLiquid = "assets/svg/ic_dosage_liquid.svg";
+  static const icWaterGlass = "assets/svg/ic_water_glass.svg";
 
   static const typeDog = "assets/images/type_dog.png";
 

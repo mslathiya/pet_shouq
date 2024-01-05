@@ -12,3 +12,5 @@ export "addPet/add_pet.dart";
 export "editParentProfile/edit_parent_profile.dart";
 //Medication
 export "petMedication/medication.dart";
+//Diet
+export 'petDiet/diet.dart';

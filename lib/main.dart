@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
             return supportedLocales.first;
           },
           locale: const Locale('en'),
-          initialRoute: petMedication,
+          initialRoute: petDiet,
         );
       },
     );

@@ -151,5 +151,21 @@
     "lbl_refills": "Refills",
     "hint_refills": "Enter Refills",
     "hint_special_note": "Enter Special Notes",
-    "screen_add_medication": "Add Pet Medication"
+    "screen_add_medication": "Add Pet Medication",
+    "food_type": "Food Type:",
+    "portion_size": "Portion Size:",
+    "special_instruction": "Special Instructions:",
+    "weight": "Weight:",
+    "lbl_food_type": "Food Type",
+    "hint_food_type": "Enter Food Name",
+    "date": "Date",
+    "lbl_meal_time": "Meal Time",
+    "hint_meal_time": "Select Meal Time",
+    "lbl_portion_size": "Portion Size",
+    "hint_portion_size": "Enter Portion Size",
+    "lbl_special_instruction": "Special Instructions",
+    "hint_special_instruction": "Enter Special Instructions",
+    "lbl_water": "Water",
+    "hint_water": "Select Water",
+    "lbl_weight_value": "Weight (if applicable)"
 }

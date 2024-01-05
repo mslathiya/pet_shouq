@@ -12,9 +12,11 @@ class AppColors {
   static Color orange = const Color(0xffFA662E);
   static Color primaryLight = const Color(0xffFFE5DE);
   static Color gray = const Color(0xff666666);
+  static Color grayFaded = const Color(0xffB7B7B7);
   static Color deleteBackground = const Color(0xffFFE4E4);
   static Color lightBrown = const Color(0xffFBF3EC);
   static Color deleteButton = const Color(0xffFFBDBD);
   static Color redColor = const Color(0xffFF0F0F);
   static Color petType = const Color(0xffF7D0B4);
+  static Color timeSelector = const Color(0xffFFECDB);
 }
