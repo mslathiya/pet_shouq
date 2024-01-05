@@ -185,7 +185,7 @@ class PetDetailView extends StatelessWidget {
         MenuItem(
           title: localizations.translate("medication"),
           iconName: AppAssets.icMedication,
-          onPressMenu: () {},
+          onPressMenu: () => Navigator.pushNamed(context, petMedication),
         ),
         MenuItem(
           title: localizations.translate("vaccination"),

@@ -5,11 +5,12 @@ import 'package:flutter_svg/svg.dart';
 class LabelWithIcon extends StatelessWidget {
   final String asset;
   final String value;
-
+  final TextStyle? textStyle;
   const LabelWithIcon({
     super.key,
     required this.asset,
     required this.value,
+    this.textStyle,
   });
 
   @override
@@ -35,7 +36,8 @@ class LabelWithIcon extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style:
+                  Theme.of(context).textTheme.headlineSmall?.merge(textStyle),
             ),
           )
         ],

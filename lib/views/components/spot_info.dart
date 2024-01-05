@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../theme/theme.dart';
+import '../../theme/theme.dart';
 
 class SpotInfo extends StatelessWidget {
   final String icon;
@@ -22,6 +22,8 @@ class SpotInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.sp),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
             icon,

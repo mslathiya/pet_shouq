@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../theme/theme.dart';
-import '../../../components/components.dart';
+import '../../../../../theme/theme.dart';
+import '../../../../components/components.dart';
 
-class PetDetail extends StatelessWidget {
-  const PetDetail({
+class DosageInfo extends StatelessWidget {
+  const DosageInfo({
     super.key,
   });
 
@@ -15,15 +15,18 @@ class PetDetail extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
+        top: 10.sp,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Expanded(
             flex: 1,
             child: SpotInfo(
-              icon: AppAssets.icPetColor,
-              title: 'Brown',
+              icon: AppAssets.icCalendarRemainder,
+              title: 'Once daily',
             ),
           ),
           Expanded(
@@ -31,16 +34,16 @@ class PetDetail extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: const SpotInfo(
-                icon: AppAssets.icPetWeight,
-                title: '11.00 Kg',
+                icon: AppAssets.icDosage,
+                title: ' 25mg',
               ),
             ),
           ),
           const Expanded(
             flex: 1,
             child: SpotInfo(
-              icon: AppAssets.icPetHeight,
-              title: '41.00',
+              icon: AppAssets.icDosageLiquid,
+              title: 'None',
             ),
           )
         ],

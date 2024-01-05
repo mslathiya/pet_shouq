@@ -42,6 +42,14 @@ class AppAssets {
   static const icTerms = "assets/svg/ic_terms.svg";
   static const icContactUs = "assets/svg/ic_contact_us.svg";
   static const icMostAsked = "assets/svg/ic_most_asked.svg";
+  static const icDocBag = "assets/svg/ic_doc_bag.svg";
+  static const icPetPaw = "assets/svg/ic_paw.svg";
+  static const icStethoscope = "assets/svg/stethoscope.svg";
+  static const icCalendarRemainder = "assets/svg/ic_calender_remainder.svg";
+  static const icDosage = "assets/svg/ic_dosage.svg";
+  static const icDosageLiquid = "assets/svg/ic_dosage_liquid.svg";
+
+  static const typeDog = "assets/images/type_dog.png";
 
   static const sampleBanner = "assets/samples/sample_banner.png";
   static const doctorBanner = "assets/samples/doctor_detail.png";

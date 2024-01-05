@@ -16,4 +16,5 @@ class AppColors {
   static Color lightBrown = const Color(0xffFBF3EC);
   static Color deleteButton = const Color(0xffFFBDBD);
   static Color redColor = const Color(0xffFF0F0F);
+  static Color petType = const Color(0xffF7D0B4);
 }
