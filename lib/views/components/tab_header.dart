@@ -6,12 +6,10 @@ import 'notification_widget.dart';
 
 class TabHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final VoidCallback onPressBack;
 
   const TabHeader({
     super.key,
     required this.title,
-    required this.onPressBack,
   });
 
   @override

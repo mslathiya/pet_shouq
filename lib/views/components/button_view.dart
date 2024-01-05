@@ -9,6 +9,8 @@ class ButtonView extends StatelessWidget {
   final String buttonTitle;
   final Widget? leftWidget;
   final Widget? rightWidget;
+  final Color? buttonColor;
+  final TextStyle? buttonStyle;
 
   const ButtonView({
     super.key,
@@ -17,6 +19,8 @@ class ButtonView extends StatelessWidget {
     required this.buttonTitle,
     this.leftWidget,
     this.rightWidget,
+    this.buttonColor,
+    this.buttonStyle,
   });
 
   @override
@@ -24,13 +28,13 @@ class ButtonView extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.secondary,
+        backgroundColor: buttonColor ?? AppColors.secondary,
         padding: EdgeInsets.all(12.w),
         elevation: 6,
         shadowColor: Theme.of(context).shadowColor.withOpacity(0.65),
         fixedSize: Size.fromWidth(width!),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
       ),
       child: Padding(
@@ -46,10 +50,14 @@ class ButtonView extends StatelessWidget {
             Text(
               buttonTitle,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium
+                  ?.copyWith(
                     color: AppColors.white,
                     fontSize: 16.sp,
-                  ),
+                  )
+                  .merge(buttonStyle),
             ),
             rightWidget ?? const SizedBox()
           ],

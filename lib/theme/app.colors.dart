@@ -14,4 +14,6 @@ class AppColors {
   static Color gray = const Color(0xff666666);
   static Color deleteBackground = const Color(0xffFFE4E4);
   static Color lightBrown = const Color(0xffFBF3EC);
+  static Color deleteButton = const Color(0xffFFBDBD);
+  static Color redColor = const Color(0xffFF0F0F);
 }

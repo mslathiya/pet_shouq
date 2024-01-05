@@ -12,6 +12,7 @@ const String parentDashboard = "parentDashboard";
 const String doctorDetails = 'doctorDetails';
 const String petDetails = 'petDetails';
 const String addPet = 'addPet';
+const String editParentProfile = 'editParentProfile';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
@@ -55,6 +56,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case addPet:
       return MaterialPageRoute(
         builder: (context) => const AddNewPet(),
+      );
+    case editParentProfile:
+      return MaterialPageRoute(
+        builder: (context) => const EditParentProfile(),
       );
     default:
       throw ('This route name does not exit');

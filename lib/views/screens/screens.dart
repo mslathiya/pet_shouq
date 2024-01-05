@@ -9,3 +9,4 @@ export "parent/parent.dart";
 export 'clinicDetail/clinic_details.dart';
 export "petDetails/pet_details.dart";
 export "addPet/add_pet.dart";
+export "editParentProfile/edit_parent_profile.dart";

@@ -18,3 +18,6 @@ export 'pet_information.dart';
 export 'info_label.dart';
 export "image_picker.dart";
 export "menu_item.dart";
+export "label_with_icon.dart";
+export "phone_input.dart";
+export "selector_field.dart";

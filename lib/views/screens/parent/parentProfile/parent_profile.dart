@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/config/config.dart';
+import 'package:pet_shouq/theme/theme.dart';
 
-import '../../../../theme/theme.dart';
+import '../../../../config/config.dart';
 import '../../../components/components.dart';
+import 'widgets/profile_info.dart';
+import 'widgets/profile_menus.dart';
 
 class ParentProfile extends StatefulWidget {
   const ParentProfile({super.key});
@@ -15,72 +17,91 @@ class ParentProfile extends StatefulWidget {
 class _ParentProfileState extends State<ParentProfile> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     var t = ApplicationLocalizations.of(context)!;
+
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 12.w,
-                  right: 12.w,
-                  bottom: 10.h,
-                ),
-                child: Text(
-                  t.translate("account"),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 16.sp,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TabHeader(
+              title: t.translate("account"),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                    ProfileInfo(
+                      onTapEdit: () => Navigator.pushNamed(
+                        context,
+                        editParentProfile,
                       ),
-                ),
-              ),
-              MenuItem(
-                title: t.translate("screen_change_password"),
-                iconName: AppAssets.icChangePassword,
-                onPressMenu: () {},
-              ),
-              MenuItem(
-                title: t.translate("screen_notifications"),
-                iconName: AppAssets.icNotification,
-                onPressMenu: () {},
-              ),
-              MenuItem(
-                title: t.translate("screen_privacy_policy"),
-                iconName: AppAssets.icPrivacyPolicy,
-                onPressMenu: () {},
-              ),
-              MenuItem(
-                title: t.translate("screen_terms"),
-                iconName: AppAssets.icTerms,
-                onPressMenu: () {},
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 12.w,
-                  right: 12.w,
-                  bottom: 10.h,
-                ),
-                child: Text(
-                  t.translate("help"),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 16.sp,
+                    ),
+                    ProfileMenus(
+                      t: t,
+                      onTapMenu: (menuName) {},
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: ButtonView(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                verification,
+                              ),
+                              buttonTitle: t.translate("btn_logout"),
+                              width: width * .45,
+                              buttonStyle: TextStyle(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: ButtonView(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                verification,
+                              ),
+                              buttonTitle: t.translate("btn_delete_account"),
+                              width: width * .45,
+                              buttonColor: AppColors.deleteButton,
+                              buttonStyle: TextStyle(
+                                color: AppColors.redColor,
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                  ],
                 ),
               ),
-              MenuItem(
-                title: t.translate("screen_contact_us"),
-                iconName: AppAssets.icContactUs,
-                onPressMenu: () {},
-              ),
-              MenuItem(
-                title: t.translate("screen_faq"),
-                iconName: AppAssets.icMostAsked,
-                onPressMenu: () {},
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

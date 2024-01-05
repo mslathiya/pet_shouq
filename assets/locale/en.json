@@ -112,11 +112,15 @@
     "hint_description": "Enter description",
     "lbl_qr_code": "QR Code",
     "hint_qr_code": "Scan QR Code",
-    "account": "Account",
+    "account": "Profile",
     "screen_notifications": "Notifications",
     "screen_privacy_policy": "Privacy Policy",
     "screen_terms": "Terms & Conditions",
     "screen_contact_us": "Contact Us",
     "screen_faq": "FAQ",
-    "help": "Help"
+    "help": "Help",
+    "btn_delete_account": "Delete Account",
+    "btn_logout": "Logout",
+    "screen_edit_profile": "Edit Profile",
+    "btn_save": "Save"
 }

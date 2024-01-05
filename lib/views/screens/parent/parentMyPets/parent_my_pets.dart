@@ -21,7 +21,6 @@ class _ParentMyPetsState extends State<ParentMyPets> {
     return Scaffold(
       appBar: TabHeader(
         title: t.translate("tab_pets"),
-        onPressBack: () {},
       ),
       body: Column(
         children: [
