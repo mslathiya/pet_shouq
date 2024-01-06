@@ -21,10 +21,12 @@ class InfoLabel extends StatelessWidget {
         vertical: 5.h,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
+          Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
             child: Text(
               day,
               textAlign: TextAlign.left,
@@ -33,14 +35,15 @@ class InfoLabel extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-          Text(
-            time,
-            textAlign: TextAlign.left,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppColors.gray,
-                ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              time,
+              textAlign: TextAlign.right,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: AppColors.gray,
+                  ),
+            ),
           )
         ],
       ),

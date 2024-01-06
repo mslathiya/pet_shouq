@@ -49,6 +49,9 @@ class AppAssets {
   static const icDosage = "assets/svg/ic_dosage.svg";
   static const icDosageLiquid = "assets/svg/ic_dosage_liquid.svg";
   static const icWaterGlass = "assets/svg/ic_water_glass.svg";
+  static const icBestProduct = "assets/svg/ic_best_product.svg";
+  static const icBreedType = "assets/svg/ic_breed_type.svg";
+  static const icFoodType = "assets/svg/ic_food_type.svg";
 
   static const typeDog = "assets/images/type_dog.png";
 

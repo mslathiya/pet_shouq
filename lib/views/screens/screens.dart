@@ -14,3 +14,5 @@ export "editParentProfile/edit_parent_profile.dart";
 export "petMedication/medication.dart";
 //Diet
 export 'petDiet/diet.dart';
+//Nutrition
+export "petNutrition/nutrition.dart";

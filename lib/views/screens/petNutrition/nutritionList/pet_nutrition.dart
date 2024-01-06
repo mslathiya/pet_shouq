@@ -6,14 +6,14 @@ import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
-class PetDiet extends StatefulWidget {
-  const PetDiet({super.key});
+class PetNutrition extends StatefulWidget {
+  const PetNutrition({super.key});
 
   @override
-  State<PetDiet> createState() => _PetDietState();
+  State<PetNutrition> createState() => _PetNutritionState();
 }
 
-class _PetDietState extends State<PetDiet> {
+class _PetNutritionState extends State<PetNutrition> {
   @override
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
@@ -21,7 +21,7 @@ class _PetDietState extends State<PetDiet> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
-        title: t.translate("screen_diet_log"),
+        title: t.translate("nutrition_feeding"),
         onPressBack: () => Navigator.pop(context),
       ),
       body: Column(
@@ -37,9 +37,10 @@ class _PetDietState extends State<PetDiet> {
                 bottom: 15.sp,
               ),
               itemBuilder: (_, index) {
-                return DietListItem(
+                return NutritionListItem(
+                  t: t,
                   onViewDetail: () {
-                    Navigator.pushNamed(context, petDietDetail);
+                    Navigator.pushNamed(context, petNutritionDetail);
                   },
                 );
               },
@@ -52,7 +53,7 @@ class _PetDietState extends State<PetDiet> {
             alignment: Alignment.center,
             child: ButtonView(
               onTap: () => Navigator.pushNamed(context, petAddDiet),
-              buttonTitle: t.translate("screen_add_diet_log"),
+              buttonTitle: t.translate("screen_nutrition_feeding"),
               width: width - 20,
               leftWidget: Padding(
                 padding: EdgeInsets.only(

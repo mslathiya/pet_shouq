@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pet_shouq/views/screens/petDiet/dietDetails/widgets/other_details.dart';
 
 import '../../../../config/config.dart';
 import '../../../components/components.dart';
 import 'widgets/diet_info.dart';
+import 'widgets/other_details.dart';
 import 'widgets/time_chart.dart';
 
 class DietDetails extends StatelessWidget {
@@ -14,7 +14,7 @@ class DietDetails extends StatelessWidget {
     var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("medication"),
+        title: t.translate("screen_diet_log_details"),
         onPressBack: () => Navigator.pop(context),
       ),
       body: SingleChildScrollView(

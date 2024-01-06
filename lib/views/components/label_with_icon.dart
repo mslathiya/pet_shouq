@@ -21,7 +21,7 @@ class LabelWithIcon extends StatelessWidget {
         vertical: 5.h,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SvgPicture.asset(
@@ -32,10 +32,11 @@ class LabelWithIcon extends StatelessWidget {
           SizedBox(
             width: 8.sp,
           ),
-          Expanded(
+          Flexible(
             child: Text(
               value,
               textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
               style:
                   Theme.of(context).textTheme.headlineSmall?.merge(textStyle),
             ),

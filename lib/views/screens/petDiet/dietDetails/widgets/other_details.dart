@@ -39,22 +39,24 @@ class OtherDetails extends StatelessWidget {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           InfoLabel(
             day: t.translate("food_type"),
-            time: '900133000003382',
+            time: 'Small dog treat',
           ),
           InfoLabel(
             day: t.translate("portion_size"),
-            time: 'Yes',
+            time: '2 treats',
           ),
           InfoLabel(
             day: t.translate("special_instruction"),
-            time: 'Lorem ipsum',
+            time: 'Given as a reward for good behavior',
           ),
           InfoLabel(
             day: t.translate("weight"),
-            time: 'Lorem ipsum',
+            time: '45.2 pounds',
           ),
         ],
       ),

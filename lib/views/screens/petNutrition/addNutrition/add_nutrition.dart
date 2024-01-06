@@ -6,14 +6,14 @@ import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
-class AddDiet extends StatefulWidget {
-  const AddDiet({super.key});
+class AddNutrition extends StatefulWidget {
+  const AddNutrition({super.key});
 
   @override
-  State<AddDiet> createState() => _AddDietState();
+  State<AddNutrition> createState() => _AddNutritionState();
 }
 
-class _AddDietState extends State<AddDiet> {
+class _AddNutritionState extends State<AddNutrition> {
   int selectedOption = 1;
 
   @override

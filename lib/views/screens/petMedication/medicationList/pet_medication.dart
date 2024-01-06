@@ -18,64 +18,58 @@ class _PetMedicationState extends State<PetMedication> {
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: HeaderWithBack(
-          title: t.translate("pet_medication"),
-          onPressBack: () => Navigator.pop(context),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 15.h,
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: HeaderWithBack(
+        title: t.translate("pet_medication"),
+        onPressBack: () => Navigator.pop(context),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          //Bottom List
+          Expanded(
+            child: ListView.builder(
+              itemCount: 15,
+              padding: EdgeInsets.only(
+                top: 10.sp,
+                bottom: 15.sp,
+              ),
+              itemBuilder: (_, index) {
+                return MedicationListItem(
+                  onViewDetail: () {
+                    Navigator.pushNamed(context, petMedicationDetail);
+                  },
+                );
+              },
             ),
-
-            //Bottom List
-            Expanded(
-              child: ListView.builder(
-                itemCount: 15,
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: ButtonView(
+              onTap: () => Navigator.pushNamed(context, petAddMedication),
+              buttonTitle: t.translate("btn_add_medication"),
+              width: width - 20,
+              leftWidget: Padding(
                 padding: EdgeInsets.only(
-                  top: 10.sp,
-                  bottom: 15.sp,
+                  right: 5.w,
                 ),
-                itemBuilder: (_, index) {
-                  return MedicationListItem(
-                    onViewDetail: () {
-                      Navigator.pushNamed(context, petMedicationDetail);
-                    },
-                  );
-                },
-              ),
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: ButtonView(
-                onTap: () => Navigator.pushNamed(context, petAddMedication),
-                buttonTitle: t.translate("btn_add_medication"),
-                width: width - 20,
-                leftWidget: Padding(
-                  padding: EdgeInsets.only(
-                    right: 5.w,
-                  ),
-                  child: Icon(
-                    Entypo.plus,
-                    size: 20.sp,
-                    color: AppColors.white,
-                  ),
+                child: Icon(
+                  Entypo.plus,
+                  size: 20.sp,
+                  color: AppColors.white,
                 ),
               ),
             ),
-            SizedBox(
-              height: 15.h,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+        ],
       ),
     );
   }

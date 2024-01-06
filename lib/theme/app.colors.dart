@@ -18,5 +18,5 @@ class AppColors {
   static Color deleteButton = const Color(0xffFFBDBD);
   static Color redColor = const Color(0xffFF0F0F);
   static Color petType = const Color(0xffF7D0B4);
-  static Color timeSelector = const Color(0xffFFECDB);
+  static Color timeSelector = const Color(0xffFFD9B8);
 }

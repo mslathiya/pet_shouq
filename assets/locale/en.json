@@ -167,5 +167,11 @@
     "hint_special_instruction": "Enter Special Instructions",
     "lbl_water": "Water",
     "hint_water": "Select Water",
-    "lbl_weight_value": "Weight (if applicable)"
+    "lbl_weight_value": "Weight (if applicable)",
+    "screen_diet_log": "Pet Diet Log",
+    "screen_diet_log_details": "Pet Diet Log Details",
+    "screen_add_diet_log": "Add Pet Diet Log",
+    "nutrition_feeding": "Pet Nutrition & Feeding",
+    "screen_nutrition_feeding": "Add Pet Nutrition & Feeding",
+    "per_pound": "Per Pound"
 }

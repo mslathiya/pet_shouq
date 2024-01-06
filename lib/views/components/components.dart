@@ -25,3 +25,4 @@ export "medication_list_item.dart";
 export 'spot_info.dart';
 export "diet_list_item.dart";
 export "time_view.dart";
+export "nutrition_list_item.dart";

@@ -63,22 +63,27 @@ class DietListItem extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 8.w,
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    alignment: WrapAlignment.start,
+                    direction: Axis.horizontal,
                     children: [
-                      const Flexible(
-                        child: LabelWithIcon(
+                      SizedBox(
+                        width: 110.sp,
+                        child: const LabelWithIcon(
                           asset: AppAssets.icCalendar,
                           value: '2023-10-15',
                         ),
                       ),
                       SizedBox(
-                        width: 5.h,
+                        width: 5.w,
                       ),
-                      const Flexible(
-                        child: LabelWithIcon(
-                            asset: AppAssets.icWaterGlass, value: 'Yes'),
+                      SizedBox(
+                        width: 100.sp,
+                        child: const LabelWithIcon(
+                          asset: AppAssets.icWaterGlass,
+                          value: 'Yes',
+                        ),
                       )
                     ],
                   ),
