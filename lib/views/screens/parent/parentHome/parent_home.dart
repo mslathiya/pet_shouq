@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/config/config.dart';
-import 'package:pet_shouq/helper/helpers.dart';
 
+import '../../../../config/config.dart';
+import '../../../../helper/helpers.dart';
 import '../../../components/components.dart';
 import 'widgets/top_slider.dart';
 

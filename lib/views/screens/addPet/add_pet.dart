@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../../config/config.dart';
@@ -59,31 +60,29 @@ class _AddNewPetState extends State<AddNewPet> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      InputField(
+                      SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_breed"),
                         ),
                         inputHint: t.translate("hint_breed"),
                         suffixIcon: SizedBox(
                           width: 24.w,
                           height: 24.h,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Entypo.chevron_down,
-                              size: 26.sp,
-                              color: AppColors.hintColor,
-                            ),
+                          child: Icon(
+                            Entypo.chevron_down,
+                            size: 26.sp,
+                            color: AppColors.hintColor,
                           ),
                         ),
+                        onSelectItem: () {},
                       ),
                       SizedBox(
                         height: 15.h,
                       ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_marking"),
                         ),
                         inputHint: t.translate("hint_marking"),
@@ -91,24 +90,26 @@ class _AddNewPetState extends State<AddNewPet> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      InputField(
+                      SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_birth_date"),
                         ),
                         inputHint: t.translate("hint_birth_date"),
                         suffixIcon: SizedBox(
                           width: 24.w,
                           height: 24.h,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Entypo.calendar,
-                              size: 26.sp,
-                              color: AppColors.hintColor,
+                          child: SvgPicture.asset(
+                            AppAssets.icCalendar,
+                            height: 18.sp,
+                            width: 18.sp,
+                            colorFilter: ColorFilter.mode(
+                              AppColors.hintColor,
+                              BlendMode.srcIn,
                             ),
                           ),
                         ),
+                        onSelectItem: () {},
                       ),
                       SizedBox(
                         height: 15.h,
@@ -120,7 +121,7 @@ class _AddNewPetState extends State<AddNewPet> {
                           Expanded(
                             child: InputField(
                               headerWidget: InputHeader(
-                                compulsory: true,
+                                compulsory: false,
                                 headerLabel: t.translate("lbl_weight"),
                               ),
                               inputHint: t.translate("hint_weight"),
@@ -132,7 +133,7 @@ class _AddNewPetState extends State<AddNewPet> {
                           Expanded(
                             child: InputField(
                               headerWidget: InputHeader(
-                                compulsory: true,
+                                compulsory: false,
                                 headerLabel: t.translate("lbl_height"),
                               ),
                               inputHint: t.translate("hint_height"),
@@ -145,7 +146,7 @@ class _AddNewPetState extends State<AddNewPet> {
                       ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_chip_no"),
                         ),
                         inputHint: t.translate("hint_chip_no"),
@@ -153,31 +154,29 @@ class _AddNewPetState extends State<AddNewPet> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      InputField(
+                      SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_spayed"),
                         ),
                         inputHint: t.translate("hint_spayed"),
                         suffixIcon: SizedBox(
                           width: 24.w,
                           height: 24.h,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Entypo.chevron_down,
-                              size: 26.sp,
-                              color: AppColors.hintColor,
-                            ),
+                          child: Icon(
+                            Entypo.chevron_down,
+                            size: 26.sp,
+                            color: AppColors.hintColor,
                           ),
                         ),
+                        onSelectItem: () {},
                       ),
                       SizedBox(
                         height: 15.h,
                       ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_pedigree_front"),
                         ),
                         inputHint: t.translate("hint_pedigree_front"),
@@ -187,7 +186,7 @@ class _AddNewPetState extends State<AddNewPet> {
                       ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_pedigree_back"),
                         ),
                         inputHint: t.translate("hint_pedigree_back"),
@@ -197,7 +196,7 @@ class _AddNewPetState extends State<AddNewPet> {
                       ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_allergies"),
                         ),
                         inputHint: t.translate("hint_allergies"),
@@ -241,7 +240,7 @@ class _AddNewPetState extends State<AddNewPet> {
                       InputField(
                         isMultiline: true,
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_description"),
                         ),
                         inputHint: t.translate("hint_description"),
@@ -249,24 +248,22 @@ class _AddNewPetState extends State<AddNewPet> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      InputField(
+                      SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: true,
+                          compulsory: false,
                           headerLabel: t.translate("lbl_qr_code"),
                         ),
                         inputHint: t.translate("hint_qr_code"),
                         suffixIcon: SizedBox(
                           width: 24.w,
                           height: 24.h,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              FontAwesome.qrcode,
-                              size: 26.sp,
-                              color: AppColors.hintColor,
-                            ),
+                          child: SvgPicture.asset(
+                            AppAssets.icQrCode,
+                            height: 18.sp,
+                            width: 18.sp,
                           ),
                         ),
+                        onSelectItem: () {},
                       ),
                       SizedBox(
                         height: 15.h,

@@ -55,32 +55,32 @@ class ScheduleWidget extends StatelessWidget {
             height: 10.h,
           ),
           const InfoLabel(
-            day: 'Monday',
-            time: '09:00 Am To 8:00 Pm',
+            title: 'Monday',
+            description: '09:00 Am To 8:00 Pm',
           ),
           const InfoLabel(
-            day: 'Tuesday',
-            time: '09:00 Am To 8:00 Pm',
+            title: 'Tuesday',
+            description: '09:00 Am To 8:00 Pm',
           ),
           const InfoLabel(
-            day: 'Wednesday',
-            time: '09:00 Am To 8:00 Pm',
+            title: 'Wednesday',
+            description: '09:00 Am To 8:00 Pm',
           ),
           const InfoLabel(
-            day: 'Thursday',
-            time: '09:00 Am To 8:00 Pm',
+            title: 'Thursday',
+            description: '09:00 Am To 8:00 Pm',
           ),
           const InfoLabel(
-            day: 'Friday',
-            time: '09:00 Am To 8:00 Pm',
+            title: 'Friday',
+            description: '09:00 Am To 8:00 Pm',
           ),
           const InfoLabel(
-            day: 'Saturday',
-            time: '09:00 Am To 8:00 Pm',
+            title: 'Saturday',
+            description: '09:00 Am To 8:00 Pm',
           ),
           const InfoLabel(
-            day: 'Sunday',
-            time: 'Close',
+            title: 'Sunday',
+            description: 'Close',
           )
         ],
       ),

@@ -18,7 +18,7 @@ class SpotInfo extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8.sp),
       decoration: BoxDecoration(
-        color: AppColors.lightBrown,
+        color: AppColors.primary,
         borderRadius: BorderRadius.circular(10.sp),
       ),
       child: Column(

@@ -45,7 +45,7 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
           iconColor: AppColors.fontMain,
         ),
         SizedBox(
-          width: 10.w,
+          width: 15.w,
         ),
       ],
     );

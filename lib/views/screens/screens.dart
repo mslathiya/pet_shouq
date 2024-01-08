@@ -16,3 +16,7 @@ export "petMedication/medication.dart";
 export 'petDiet/diet.dart';
 //Nutrition
 export "petNutrition/nutrition.dart";
+//Feeding Schedule
+export 'petFeedingSchedule/feeding_schedule.dart';
+//Appointment
+export "petAppointment/pet_appointment.dart";

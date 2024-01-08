@@ -25,6 +25,9 @@ class PetInformation extends StatelessWidget {
                   fontSize: 16.sp,
                 ),
           ),
+          SizedBox(
+            height: 5.h,
+          ),
           Row(
             children: [
               SvgPicture.asset(
@@ -45,6 +48,9 @@ class PetInformation extends StatelessWidget {
                 ),
               )
             ],
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           Row(
             children: [

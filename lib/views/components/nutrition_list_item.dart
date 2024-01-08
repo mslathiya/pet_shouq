@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:pet_shouq/config/config.dart';
-import 'package:pet_shouq/views/components/components.dart';
 
+import '../../config/config.dart';
 import '../../theme/theme.dart';
+import 'label_with_icon.dart';
 
 class NutritionListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
@@ -122,7 +122,7 @@ class NutritionListItem extends StatelessWidget {
                   text: '\$1.50\n',
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
                         fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w900,
                         color: AppColors.secondary,
                         height: 1.3,
                       ),

@@ -64,24 +64,24 @@ class PetOtherDetails extends StatelessWidget {
               height: 10.h,
             ),
             InfoLabel(
-              day: localizations.translate("chip_number"),
-              time: '900133000003382',
+              title: localizations.translate("chip_number"),
+              description: '900133000003382',
             ),
             InfoLabel(
-              day: localizations.translate("spayed"),
-              time: 'Yes',
+              title: localizations.translate("spayed"),
+              description: 'Yes',
             ),
             InfoLabel(
-              day: localizations.translate("pedigree_front"),
-              time: 'Lorem ipsum',
+              title: localizations.translate("pedigree_front"),
+              description: 'Lorem ipsum',
             ),
             InfoLabel(
-              day: localizations.translate("pedigree_back"),
-              time: 'Lorem ipsum',
+              title: localizations.translate("pedigree_back"),
+              description: 'Lorem ipsum',
             ),
             InfoLabel(
-              day: localizations.translate("allergies"),
-              time: 'Lorem ipsum',
+              title: localizations.translate("allergies"),
+              description: 'Lorem ipsum',
             ),
             Padding(
               padding: EdgeInsets.symmetric(

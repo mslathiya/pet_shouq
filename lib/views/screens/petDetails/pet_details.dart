@@ -170,17 +170,17 @@ class PetDetailView extends StatelessWidget {
         MenuItem(
           title: localizations.translate("feeding_schedule"),
           iconName: AppAssets.icFeedingSchedule,
-          onPressMenu: () {},
+          onPressMenu: () => Navigator.pushNamed(context, petFeedSchedule),
         ),
         MenuItem(
           title: localizations.translate("diet"),
           iconName: AppAssets.icDiet,
-          onPressMenu: () {},
+          onPressMenu: () => Navigator.pushNamed(context, petDiet),
         ),
         MenuItem(
           title: localizations.translate("nutrition"),
           iconName: AppAssets.icNutrition,
-          onPressMenu: () {},
+          onPressMenu: () => Navigator.pushNamed(context, petNutrition),
         ),
         MenuItem(
           title: localizations.translate("medication"),

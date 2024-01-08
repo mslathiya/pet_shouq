@@ -52,7 +52,7 @@ class _PetNutritionState extends State<PetNutrition> {
           Align(
             alignment: Alignment.center,
             child: ButtonView(
-              onTap: () => Navigator.pushNamed(context, petAddDiet),
+              onTap: () => Navigator.pushNamed(context, petAddNutrition),
               buttonTitle: t.translate("screen_nutrition_feeding"),
               width: width - 20,
               leftWidget: Padding(

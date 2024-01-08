@@ -4,47 +4,74 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/theme.dart';
 
 class InfoLabel extends StatelessWidget {
-  final String day;
-  final String time;
+  final String title;
+  final String description;
+  final bool? allPadding;
 
   const InfoLabel({
     super.key,
-    required this.day,
-    required this.time,
+    required this.title,
+    required this.description,
+    this.allPadding = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 3.w,
-        vertical: 5.h,
-      ),
+      padding: allPadding == true
+          ? EdgeInsets.symmetric(
+              horizontal: 3.w,
+              vertical: 5.h,
+            )
+          : EdgeInsets.symmetric(
+              vertical: 5.h,
+            ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Flexible(
-            flex: 1,
+            flex: 6,
             fit: FlexFit.tight,
-            child: Text(
-              day,
+            child: RichText(
               textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: Theme.of(context).textTheme.headlineSmall,
+              text: TextSpan(
+                text: title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(fontSize: 14.sp),
+                children: [
+                  WidgetSpan(
+                    child: SizedBox(
+                      width: 5.w,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ":",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
             ),
           ),
+          SizedBox(
+            width: 5.w,
+          ),
           Expanded(
-            flex: 1,
+            flex: 4,
             child: Text(
-              time,
+              description,
               textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: AppColors.gray,
+                    fontSize: 14.sp,
+                    color: AppColors.hintColor,
                   ),
             ),
-          )
+          ),
         ],
       ),
     );

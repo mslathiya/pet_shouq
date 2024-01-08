@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../../../config/config.dart';
@@ -154,7 +155,7 @@ class _AddMedicationState extends State<AddMedication> {
                       InputField(
                         headerWidget: InputHeader(
                           compulsory: false,
-                          headerLabel: t.translate("hint_prescription_reason"),
+                          headerLabel: t.translate("prescription_reason"),
                         ),
                         inputHint: t.translate("hint_administrative_info"),
                       ),
@@ -183,12 +184,16 @@ class _AddMedicationState extends State<AddMedication> {
                                 headerLabel: t.translate("hint_select_date"),
                               ),
                               suffixIcon: SizedBox(
-                                width: 26.w,
-                                height: 26.h,
-                                child: Icon(
-                                  Entypo.calendar,
-                                  size: 26.sp,
-                                  color: AppColors.hintColor,
+                                width: 24.w,
+                                height: 24.h,
+                                child: SvgPicture.asset(
+                                  AppAssets.icCalendar,
+                                  height: 18.sp,
+                                  width: 18.sp,
+                                  colorFilter: ColorFilter.mode(
+                                    AppColors.hintColor,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                               ),
                               onSelectItem: () {},
@@ -205,12 +210,16 @@ class _AddMedicationState extends State<AddMedication> {
                                 headerLabel: t.translate("hint_select_date"),
                               ),
                               suffixIcon: SizedBox(
-                                width: 26.w,
-                                height: 26.h,
-                                child: Icon(
-                                  Entypo.calendar,
-                                  size: 26.sp,
-                                  color: AppColors.hintColor,
+                                width: 24.w,
+                                height: 24.h,
+                                child: SvgPicture.asset(
+                                  AppAssets.icCalendar,
+                                  height: 18.sp,
+                                  width: 18.sp,
+                                  colorFilter: ColorFilter.mode(
+                                    AppColors.hintColor,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                               ),
                               onSelectItem: () {},

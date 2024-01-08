@@ -23,10 +23,10 @@ class ImagePicker extends StatelessWidget {
             DottedBorder(
               borderType: BorderType.RRect,
               radius: Radius.elliptical(100.w, 100.w),
-              color: AppColors.secondary,
+              color: AppColors.imagePickerContainer,
               dashPattern: const [4, 4],
               strokeCap: StrokeCap.butt,
-              strokeWidth: 2,
+              strokeWidth: 1,
               child: ClipRRect(
                 borderRadius: BorderRadius.all(
                   Radius.elliptical(100.w, 100.w),
@@ -34,7 +34,7 @@ class ImagePicker extends StatelessWidget {
                 child: Container(
                   height: 100.w,
                   width: 100.w,
-                  color: AppColors.primaryLight,
+                  color: AppColors.primary,
                 ),
               ),
             ),
@@ -44,11 +44,15 @@ class ImagePicker extends StatelessWidget {
               right: 0,
               top: 0,
               child: Padding(
-                padding: const EdgeInsets.all(33.0),
+                padding: const EdgeInsets.all(35.0),
                 child: SvgPicture.asset(
                   AppAssets.camera,
-                  height: 26.w,
-                  width: 26.w,
+                  height: 20.w,
+                  width: 20.w,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.fontMain,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             )

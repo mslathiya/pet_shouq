@@ -19,4 +19,8 @@ class AppColors {
   static Color redColor = const Color(0xffFF0F0F);
   static Color petType = const Color(0xffF7D0B4);
   static Color timeSelector = const Color(0xffFFD9B8);
+  static Color imagePickerContainer = const Color(0xffFFA351);
+  static Color disableFieldColor = const Color(0xffE8E8E8);
+  static Color disableFieldBorder = const Color(0xffD9D9D9);
+  static Color disableFieldText = const Color(0xffAAAAAA);
 }

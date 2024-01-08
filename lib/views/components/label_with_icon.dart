@@ -21,24 +21,28 @@ class LabelWithIcon extends StatelessWidget {
         vertical: 5.h,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SvgPicture.asset(
             asset,
-            height: 18.sp,
-            width: 18.sp,
+            height: 17.sp,
+            width: 17.sp,
           ),
           SizedBox(
-            width: 8.sp,
+            width: 6.sp,
           ),
           Flexible(
             child: Text(
               value,
               textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              style:
-                  Theme.of(context).textTheme.headlineSmall?.merge(textStyle),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(
+                    fontSize: 13.sp,
+                  )
+                  .merge(textStyle),
             ),
           )
         ],

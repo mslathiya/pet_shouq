@@ -5,10 +5,8 @@ import 'package:pet_shouq/config/config.dart';
 import 'package:pet_shouq/theme/theme.dart';
 import 'package:pet_shouq/views/components/components.dart';
 
-import '../../../helper/helpers.dart';
+import 'widgets/clinic_info.dart';
 import 'widgets/header_slider.dart';
-import 'widgets/location_widget.dart';
-import 'widgets/schedule_widget.dart';
 
 class ClinicDetails extends StatefulWidget {
   const ClinicDetails({super.key});
@@ -25,10 +23,14 @@ class _ClinicDetailsState extends State<ClinicDetails> {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          const SliverAppBarHeader(),
+          SliverAppBarHeader(localizations: t),
           SliverFillRemaining(
             hasScrollBody: false,
-            child: DetailChildView(localizations: t),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [],
+            ),
           ),
         ],
       ),
@@ -39,7 +41,10 @@ class _ClinicDetailsState extends State<ClinicDetails> {
 class SliverAppBarHeader extends StatelessWidget {
   const SliverAppBarHeader({
     super.key,
+    required this.localizations,
   });
+
+  final ApplicationLocalizations localizations;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,7 @@ class SliverAppBarHeader extends StatelessWidget {
       pinned: true,
       centerTitle: true,
       stretch: true,
-      expandedHeight: 280.h,
+      expandedHeight: 350.h,
       leading: InkWell(
         onTap: () => Navigator.pop(context),
         child: Padding(
@@ -115,13 +120,10 @@ class SliverAppBarHeader extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0,
+              bottom: -10,
               left: 0,
               right: 0,
-              child: DoctorListItem(
-                onViewDetail: () {},
-                viewType: ViewType.typeDetail,
-              ),
+              child: ClinicInfo(localizations: localizations),
             ),
           ],
         ),
@@ -131,21 +133,93 @@ class SliverAppBarHeader extends StatelessWidget {
 }
 
 class DetailChildView extends StatelessWidget {
-  final ApplicationLocalizations localizations;
   const DetailChildView({super.key, required this.localizations});
 
+  final ApplicationLocalizations localizations;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        LocationWidget(localizations: localizations),
-        SizedBox(
-          height: 5.h,
-        ),
-        ScheduleWidget(localizations: localizations),
-      ],
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 12.w,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            localizations.translate("date"),
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          SizedBox(
+            height: 60.sp,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 7,
+              physics: const ClampingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return const DateItem(
+                  date: "1",
+                  day: "Mon",
+                  isSelected: false,
+                  isDisabled: false,
+                );
+              },
+            ),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          Text(
+            localizations.translate("time"),
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          SliverGrid.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              mainAxisExtent: 42.sp,
+            ),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return const TimeItem(
+                isSelected: false,
+                time: "10:00 Am To 10:30 Am",
+                isDisabled: false,
+              );
+            },
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: ButtonView(
+              onTap: () => Navigator.pop(context),
+              buttonTitle: localizations.translate("btn_reschedule"),
+              width: width * .41,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

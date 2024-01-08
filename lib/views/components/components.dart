@@ -26,3 +26,8 @@ export 'spot_info.dart';
 export "diet_list_item.dart";
 export "time_view.dart";
 export "nutrition_list_item.dart";
+export "feed_schedule_list_item.dart";
+export "switch_component.dart";
+export "appointment_list_item.dart";
+export "date_item.dart";
+export "time_item.dart";

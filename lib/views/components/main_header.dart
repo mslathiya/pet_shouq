@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pet_shouq/config/config.dart';
-import 'package:pet_shouq/views/components/components.dart';
 
+import '../../config/config.dart';
 import '../../theme/theme.dart';
+import 'notification_widget.dart';
 
 class MainHeader extends StatelessWidget implements PreferredSizeWidget {
   const MainHeader({super.key});
@@ -23,14 +23,23 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  t.translate("location"),
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.hintColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
+                Row(
+                  children: [
+                    Text(
+                      t.translate("location"),
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.hintColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                    SvgPicture.asset(
+                      AppAssets.icLocation,
+                      height: 18.sp,
+                      width: 18.sp,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 5.w,

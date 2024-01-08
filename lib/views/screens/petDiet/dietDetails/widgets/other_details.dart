@@ -43,20 +43,20 @@ class OtherDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           InfoLabel(
-            day: t.translate("food_type"),
-            time: 'Small dog treat',
+            title: t.translate("food_type"),
+            description: 'Small dog treat',
           ),
           InfoLabel(
-            day: t.translate("portion_size"),
-            time: '2 treats',
+            title: t.translate("portion_size"),
+            description: '2 treats',
           ),
           InfoLabel(
-            day: t.translate("special_instruction"),
-            time: 'Given as a reward for good behavior',
+            title: t.translate("special_instruction"),
+            description: 'Given as a reward for good behavior',
           ),
           InfoLabel(
-            day: t.translate("weight"),
-            time: '45.2 pounds',
+            title: t.translate("weight"),
+            description: '45.2 pounds',
           ),
         ],
       ),

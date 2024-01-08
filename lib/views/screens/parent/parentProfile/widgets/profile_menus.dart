@@ -31,6 +31,11 @@ class ProfileMenus extends StatelessWidget {
           ),
         ),
         MenuItem(
+          title: t.translate("screen_booking_history"),
+          iconName: AppAssets.icBookingHistory,
+          onPressMenu: () => onTapMenu(petAppointment),
+        ),
+        MenuItem(
           title: t.translate("screen_change_password"),
           iconName: AppAssets.icChangePassword,
           onPressMenu: () => onTapMenu(changePassword),

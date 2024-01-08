@@ -52,8 +52,15 @@ class AppAssets {
   static const icBestProduct = "assets/svg/ic_best_product.svg";
   static const icBreedType = "assets/svg/ic_breed_type.svg";
   static const icFoodType = "assets/svg/ic_food_type.svg";
+  static const icRecipe = "assets/svg/recipe.svg";
+  static const icFeedTag = "assets/svg/feed_tag.svg";
+  static const icQrCode = "assets/svg/qr_code.svg";
+  static const icBookingHistory = "assets/svg/ic_booking_history.svg";
+  static const icClock = "assets/svg/ic_clock.svg";
+  static const icHospital = "assets/svg/ic_hospital.svg";
 
   static const typeDog = "assets/images/type_dog.png";
+  static const timeContainer = "assets/images/time_container.png";
 
   static const sampleBanner = "assets/samples/sample_banner.png";
   static const doctorBanner = "assets/samples/doctor_detail.png";
