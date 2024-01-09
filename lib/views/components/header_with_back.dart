@@ -8,11 +8,13 @@ import 'notification_widget.dart';
 class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback onPressBack;
+  final bool? showNotification;
 
   const HeaderWithBack({
     super.key,
     required this.title,
     required this.onPressBack,
+    this.showNotification = true,
   });
 
   @override
@@ -40,14 +42,16 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
               letterSpacing: 0,
             ),
       ),
-      actions: [
-        NotificationWidget(
-          iconColor: AppColors.fontMain,
-        ),
-        SizedBox(
-          width: 15.w,
-        ),
-      ],
+      actions: showNotification == true
+          ? [
+              NotificationWidget(
+                iconColor: AppColors.fontMain,
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+            ]
+          : [],
     );
   }
 

@@ -26,15 +26,18 @@ class PetDetail extends StatelessWidget {
               title: 'Brown',
             ),
           ),
-          Expanded(
+          SizedBox(
+            width: 8.w,
+          ),
+          const Expanded(
             flex: 1,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: const SpotInfo(
-                icon: AppAssets.icPetWeight,
-                title: '11.00 Kg',
-              ),
+            child: SpotInfo(
+              icon: AppAssets.icPetWeight,
+              title: '11.00 Kg',
             ),
+          ),
+          SizedBox(
+            width: 8.w,
           ),
           const Expanded(
             flex: 1,

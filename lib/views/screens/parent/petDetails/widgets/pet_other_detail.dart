@@ -23,7 +23,7 @@ class PetOtherDetails extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(
         horizontal: 12.sp,
-        vertical: 10.sp,
+        vertical: 5.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -60,9 +60,6 @@ class PetOtherDetails extends StatelessWidget {
                 ),
           ),
           children: [
-            SizedBox(
-              height: 10.h,
-            ),
             InfoLabel(
               title: localizations.translate("chip_number"),
               description: '900133000003382',
@@ -97,7 +94,10 @@ class PetOtherDetails extends StatelessWidget {
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontSize: 13.sp),
                   ),
                   SizedBox(
                     height: 2.h,
@@ -107,6 +107,7 @@ class PetOtherDetails extends StatelessWidget {
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: AppColors.gray,
+                          fontSize: 13.sp,
                         ),
                   )
                 ],

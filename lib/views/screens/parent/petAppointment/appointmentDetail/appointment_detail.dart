@@ -18,7 +18,7 @@ class AppointmentDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_appointment_detail"),
+        title: t.translate("screen_details"),
         onPressBack: () => Navigator.pop(context),
       ),
       body: SingleChildScrollView(
@@ -49,41 +49,26 @@ class AppointmentDetails extends StatelessWidget {
                         .displayMedium
                         ?.copyWith(fontSize: 16.sp, height: 2),
                   ),
+                  const LabelWithIcon(
+                    asset: AppAssets.icHospital,
+                    value: 'Rimadyl',
+                  ),
                   SizedBox(
-                    height: 10.h,
+                    height: 3.h,
+                  ),
+                  const LabelWithIcon(
+                    asset: AppAssets.icPetPaw,
+                    value: 'Max',
+                  ),
+                  SizedBox(
+                    height: 3.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icHospital,
-                          value: 'Rimadyl',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.h,
-                      ),
-                      SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icPetPaw,
-                          value: 'Max',
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 130.sp,
+                        width: 115.sp,
                         child: const LabelWithIcon(
                           asset: AppAssets.icCalendar,
                           value: '04-Jan-2024',

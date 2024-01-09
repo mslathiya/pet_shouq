@@ -112,14 +112,9 @@ class _VerificationState extends State<Verification> {
                             enableActiveFill: true,
                             errorAnimationController: errorController,
                             controller: controller,
-                            onCompleted: (v) {
-                              print("Completed");
-                            },
-                            onChanged: (value) {
-                              print(value);
-                            },
+                            onCompleted: (v) {},
+                            onChanged: (value) {},
                             beforeTextPaste: (text) {
-                              print("Allowing to paste $text");
                               return true;
                             },
                           ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../theme/theme.dart';
+import 'label_with_icon.dart';
 
 class PetInformation extends StatelessWidget {
   const PetInformation({
@@ -22,57 +22,20 @@ class PetInformation extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: 15.sp,
                 ),
           ),
           SizedBox(
-            height: 5.h,
+            height: 3.h,
           ),
-          Row(
-            children: [
-              SvgPicture.asset(
-                AppAssets.icCalendar,
-                height: 16.sp,
-                width: 16.sp,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: Expanded(
-                  child: Text(
-                    '21-Dec-2023',
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-              )
-            ],
+          const LabelWithIcon(
+            asset: AppAssets.icCalendar,
+            value: '21-Dec-2023',
           ),
-          SizedBox(
-            height: 5.h,
+          const LabelWithIcon(
+            asset: AppAssets.icBreed,
+            value: 'German Shepherd',
           ),
-          Row(
-            children: [
-              SvgPicture.asset(
-                AppAssets.icBreed,
-                height: 16.sp,
-                width: 16.sp,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: Expanded(
-                  child: Text(
-                    'German Shepherd',
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );

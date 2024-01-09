@@ -31,7 +31,7 @@ class HeaderSlider extends StatelessWidget {
                 ],
               ),
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(left: 1, right: 1),
+              margin: const EdgeInsets.only(left: 1, right: 1),
               child: Image.asset(
                 AppAssets.doctorBanner,
                 height: double.maxFinite,

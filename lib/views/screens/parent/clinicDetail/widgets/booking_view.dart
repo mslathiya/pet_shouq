@@ -66,7 +66,7 @@ class AppointmentBookingView extends StatelessWidget {
                           children: [
                             SelectorField(
                               headerWidget: InputHeader(
-                                compulsory: false,
+                                compulsory: true,
                                 headerLabel: t.translate("lbl_dog_name"),
                               ),
                               inputHint: t.translate("hint_dog_name"),
@@ -86,7 +86,7 @@ class AppointmentBookingView extends StatelessWidget {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                compulsory: false,
+                                compulsory: true,
                                 headerLabel: t.translate("disease"),
                               ),
                               inputHint: t.translate("hint_disease"),

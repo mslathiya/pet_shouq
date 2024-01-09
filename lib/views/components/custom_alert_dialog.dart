@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pet_shouq/theme/theme.dart';
 
 import 'button_view.dart';
 
@@ -10,6 +11,8 @@ class CustomAlertDialog extends StatelessWidget {
   final String? subLabel;
   final String buttonText;
   final VoidCallback onPressButton;
+  final String? secondaryButtonText;
+  final VoidCallback? onPressSecondaryButton;
 
   const CustomAlertDialog({
     super.key,
@@ -18,6 +21,8 @@ class CustomAlertDialog extends StatelessWidget {
     this.subLabel,
     required this.buttonText,
     required this.onPressButton,
+    this.secondaryButtonText,
+    this.onPressSecondaryButton,
   });
 
   @override
@@ -64,7 +69,7 @@ class CustomAlertDialog extends StatelessWidget {
                   ? Column(
                       children: [
                         SizedBox(
-                          height: 12.h,
+                          height: 5.h,
                         ),
                         Text(
                           subLabel!,
@@ -84,17 +89,45 @@ class CustomAlertDialog extends StatelessWidget {
               SizedBox(
                 height: 15.h,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: ButtonView(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    onPressButton();
-                  },
-                  buttonTitle: buttonText,
-                  width: 120.w,
-                ),
-              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  secondaryButtonText != null
+                      ? Align(
+                          alignment: Alignment.center,
+                          child: ButtonView(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              onPressSecondaryButton!();
+                            },
+                            buttonTitle: secondaryButtonText!,
+                            width: 120.w,
+                            buttonColor: AppColors.inputBorder,
+                            buttonStyle: TextStyle(
+                              color: AppColors.hintColor,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                  secondaryButtonText != null
+                      ? SizedBox(
+                          width: 15.w,
+                        )
+                      : const SizedBox(),
+                  Align(
+                    alignment: Alignment.center,
+                    child: ButtonView(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        onPressButton();
+                      },
+                      buttonTitle: buttonText,
+                      width: 120.w,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

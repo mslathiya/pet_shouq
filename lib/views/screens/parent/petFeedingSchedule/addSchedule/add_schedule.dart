@@ -208,6 +208,13 @@ class _AddScheduleState extends State<AddSchedule> {
                                           .headlineMedium
                                           ?.copyWith(fontSize: 14.sp),
                                       children: [
+                                        TextSpan(
+                                          text: '*',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall
+                                              ?.copyWith(color: Colors.red),
+                                        ),
                                         WidgetSpan(
                                           child: SizedBox(
                                             width: 5.w,
@@ -279,7 +286,7 @@ class _AddScheduleState extends State<AddSchedule> {
                             ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_title"),
                         ),
                         inputHint: t.translate("hint_title"),

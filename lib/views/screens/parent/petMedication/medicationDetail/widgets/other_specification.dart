@@ -23,7 +23,7 @@ class OtherSpecification extends StatelessWidget {
         left: 10.sp,
         right: 10.sp,
         bottom: 10.sp,
-        top: 10.sp,
+        top: 5.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -57,7 +57,7 @@ class OtherSpecification extends StatelessWidget {
             description,
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontSize: 14.sp,
+                  fontSize: 13.sp,
                   color: AppColors.hintColor,
                 ),
           ),

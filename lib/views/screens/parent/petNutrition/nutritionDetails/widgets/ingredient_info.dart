@@ -45,12 +45,12 @@ class IngredientsInfo extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppAssets.icRecipe,
-            height: 26.sp,
-            width: 26.sp,
+            height: 32.sp,
+            width: 32.sp,
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w),
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -63,7 +63,7 @@ class IngredientsInfo extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.copyWith(fontSize: 16.sp),
+                        ?.copyWith(fontSize: 14.sp),
                   ),
                   SizedBox(
                     height: 5.h,
@@ -71,7 +71,10 @@ class IngredientsInfo extends StatelessWidget {
                   Text(
                     'Chicken meal, brown rice, peas, barley, chicken fat, etc.',
                     textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontSize: 12.sp),
                   ),
                 ],
               ),

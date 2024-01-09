@@ -44,7 +44,7 @@ class _AddMedicationState extends State<AddMedication> {
                     children: [
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_medication_name"),
                         ),
                         inputHint: t.translate("hint_medication_name"),
@@ -54,7 +54,7 @@ class _AddMedicationState extends State<AddMedication> {
                       ),
                       SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_medication_type"),
                         ),
                         inputHint: t.translate("hint_medication_type"),
@@ -84,7 +84,7 @@ class _AddMedicationState extends State<AddMedication> {
                       ),
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_pet_name"),
                         ),
                         inputHint: t.translate("hint_pet_name"),
@@ -180,7 +180,7 @@ class _AddMedicationState extends State<AddMedication> {
                             child: SelectorField(
                               inputHint: t.translate("lbl_start_date"),
                               headerWidget: InputHeader(
-                                compulsory: false,
+                                compulsory: true,
                                 headerLabel: t.translate("hint_select_date"),
                               ),
                               suffixIcon: SizedBox(
@@ -206,7 +206,7 @@ class _AddMedicationState extends State<AddMedication> {
                             child: SelectorField(
                               inputHint: t.translate("lbl_end_date"),
                               headerWidget: InputHeader(
-                                compulsory: false,
+                                compulsory: true,
                                 headerLabel: t.translate("hint_select_date"),
                               ),
                               suffixIcon: SizedBox(

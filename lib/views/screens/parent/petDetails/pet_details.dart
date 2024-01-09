@@ -24,7 +24,7 @@ class _PetDetailsState extends State<PetDetails> {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          const AppBarHeader(),
+          AppBarHeader(l: t),
           SliverFillRemaining(
             hasScrollBody: false,
             child: PetDetailView(localizations: t),
@@ -38,8 +38,9 @@ class _PetDetailsState extends State<PetDetails> {
 class AppBarHeader extends StatelessWidget {
   const AppBarHeader({
     super.key,
+    required this.l,
   });
-
+  final ApplicationLocalizations l;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -63,7 +64,7 @@ class AppBarHeader extends StatelessWidget {
         ),
       ),
       title: Text(
-        "Detail page",
+        l.translate("screen_detail_page"),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               height: 2,
@@ -152,7 +153,7 @@ class PetDetailView extends StatelessWidget {
           padding: EdgeInsets.only(
             left: 12.w,
             right: 12.w,
-            bottom: 10.h,
+            bottom: 12.h,
           ),
           child: Text(
             localizations.translate("pet_menu"),

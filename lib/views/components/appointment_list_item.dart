@@ -18,10 +18,6 @@ class AppointmentListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130.sp,
-      padding: EdgeInsets.symmetric(
-        vertical: 10.sp,
-      ),
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
@@ -40,17 +36,21 @@ class AppointmentListItem extends StatelessWidget {
           )
         ],
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 12.w, right: 12.w),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 12.w,
+                    right: 12.w,
+                    top: 4.h,
+                  ),
                   child: Text(
                     'HB0053K05',
                     textAlign: TextAlign.left,
@@ -62,81 +62,129 @@ class AppointmentListItem extends StatelessWidget {
                         ?.copyWith(fontSize: 16.sp, height: 2),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.w,
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    left: 10.w,
+                    right: 10.w,
+                    top: 5.h,
+                    bottom: 5.h,
                   ),
-                  child: Wrap(
-                    alignment: WrapAlignment.start,
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    runAlignment: WrapAlignment.start,
-                    direction: Axis.horizontal,
-                    children: [
-                      SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icHospital,
-                          value: 'Rimadyl',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.h,
-                      ),
-                      SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icPetPaw,
-                          value: 'Max',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 130.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icCalendar,
-                          value: '04-Jan-2024',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.h,
-                      ),
-                      SizedBox(
-                        width: 160.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icClock,
-                          value: '11:00 Am To 11:30 AM',
-                        ),
-                      )
-                    ],
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10.h),
+                    ),
+                    color: const Color.fromRGBO(32, 113, 30, 1),
                   ),
+                  child: Text(
+                    'Reschedule',
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppColors.white,
+                          fontSize: 12.sp,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 3.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: 12.w,
+              right: 12.w,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const LabelWithIcon(
+                            asset: AppAssets.icHospital,
+                            value: 'Rimadyl',
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          const LabelWithIcon(
+                            asset: AppAssets.icPetPaw,
+                            value: 'Max',
+                          ),
+                        ],
+                      ),
+                    ),
+                    Material(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: InkWell(
+                        onTap: onViewDetail,
+                        child: Container(
+                          width: 35.w,
+                          height: 35.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.sp),
+                            ),
+                            color: AppColors.primary.withOpacity(0.4),
+                          ),
+                          child: Icon(
+                            Entypo.chevron_right,
+                            size: 18.sp,
+                            color: AppColors.fontMain,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Wrap(
+                  alignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  runAlignment: WrapAlignment.start,
+                  direction: Axis.horizontal,
+                  children: [
+                    SizedBox(
+                      width: 115.sp,
+                      child: const LabelWithIcon(
+                        asset: AppAssets.icCalendar,
+                        value: '04-Jan-2024',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    SizedBox(
+                      width: 170.sp,
+                      child: const LabelWithIcon(
+                        asset: AppAssets.icClock,
+                        value: '11:00 Am To 11:30 AM',
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 5.h,
                 ),
               ],
             ),
-          ),
-          Material(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: InkWell(
-              onTap: onViewDetail,
-              child: Container(
-                width: 35.w,
-                height: 35.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50.sp),
-                  ),
-                  color: AppColors.primary.withOpacity(0.4),
-                ),
-                child: Icon(
-                  Entypo.chevron_right,
-                  size: 18.sp,
-                  color: AppColors.fontMain,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 8.w,
           ),
         ],
       ),

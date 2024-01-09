@@ -9,9 +9,11 @@ import 'input_header.dart';
 
 class PhoneInput extends StatelessWidget {
   final String headerLabel;
+  final bool? isCompulsory;
   const PhoneInput({
     super.key,
     required this.headerLabel,
+    this.isCompulsory = false,
   });
 
   @override
@@ -19,7 +21,7 @@ class PhoneInput extends StatelessWidget {
     final t = ApplicationLocalizations.of(context)!;
     return InputField(
       headerWidget: InputHeader(
-        compulsory: false,
+        compulsory: isCompulsory!,
         headerLabel: headerLabel,
       ),
       inputHint: t.translate("hint_phone"),

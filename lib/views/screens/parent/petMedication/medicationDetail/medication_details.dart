@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../components/components.dart';
@@ -26,6 +27,9 @@ class MedicationDetails extends StatelessWidget {
             const MedicationInfo(),
             const MedicationDateTime(),
             const DosageInfo(),
+            SizedBox(
+              height: 5.h,
+            ),
             OtherSpecification(
               title: t.translate("prescription_reason"),
               description: "Osteoarthritis pain",

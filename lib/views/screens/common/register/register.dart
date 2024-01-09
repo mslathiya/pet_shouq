@@ -94,6 +94,7 @@ class _RegisterState extends State<Register> {
                             height: 15.h,
                           ),
                           PhoneInput(
+                            isCompulsory: true,
                             headerLabel: t.translate("lbl_parent_phone"),
                           ),
                           SizedBox(
@@ -106,7 +107,7 @@ class _RegisterState extends State<Register> {
                               Expanded(
                                 child: InputField(
                                   headerWidget: InputHeader(
-                                    compulsory: true,
+                                    compulsory: false,
                                     headerLabel: t.translate("lbl_gender"),
                                   ),
                                   inputHint: t.translate("hint_gender"),
@@ -130,7 +131,7 @@ class _RegisterState extends State<Register> {
                               Expanded(
                                 child: InputField(
                                   headerWidget: InputHeader(
-                                    compulsory: true,
+                                    compulsory: false,
                                     headerLabel: t.translate("lbl_age"),
                                   ),
                                   inputHint: t.translate("hint_age"),
@@ -186,7 +187,7 @@ class _RegisterState extends State<Register> {
                               Expanded(
                                 child: InputField(
                                   headerWidget: InputHeader(
-                                    compulsory: true,
+                                    compulsory: false,
                                     headerLabel: t.translate("lbl_city"),
                                   ),
                                   inputHint: t.translate("hint_city"),
@@ -198,7 +199,7 @@ class _RegisterState extends State<Register> {
                               Expanded(
                                 child: InputField(
                                   headerWidget: InputHeader(
-                                    compulsory: true,
+                                    compulsory: false,
                                     headerLabel: t.translate("lbl_province"),
                                   ),
                                   inputHint: t.translate("hint_province"),
@@ -217,7 +218,7 @@ class _RegisterState extends State<Register> {
                           ),
                           InputField(
                             headerWidget: InputHeader(
-                              compulsory: true,
+                              compulsory: false,
                               headerLabel: t.translate("lbl_display_name"),
                             ),
                             inputHint: t.translate("hint_display_name"),
@@ -228,7 +229,7 @@ class _RegisterState extends State<Register> {
                           InputField(
                             isMultiline: true,
                             headerWidget: InputHeader(
-                              compulsory: true,
+                              compulsory: false,
                               headerLabel: t.translate("lbl_mailing_address"),
                             ),
                             inputHint: t.translate("hint_mailing_address"),

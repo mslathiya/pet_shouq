@@ -46,8 +46,8 @@ class MedicationInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 80.w,
-                  width: 80.w,
+                  height: 67.w,
+                  width: 67.w,
                   decoration: BoxDecoration(
                     color: AppColors.petType,
                     borderRadius: BorderRadius.all(
@@ -79,42 +79,26 @@ class MedicationInfo extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
-                              ?.copyWith(fontSize: 16.sp),
+                              ?.copyWith(fontSize: 14.sp),
                         ),
                         SizedBox(
                           height: 5.h,
+                        ),
+                        const LabelWithIcon(
+                          asset: AppAssets.icDoctor,
+                          value: 'Whiskers',
+                        ),
+                        const LabelWithIcon(
+                          asset: AppAssets.icPetPaw,
+                          value: 'Tablet',
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Flexible(
-                              child: LabelWithIcon(
-                                asset: AppAssets.icPetPaw,
-                                value: 'Whiskers',
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.h,
-                            ),
                             const Flexible(
                               child: LabelWithIcon(
                                 asset: AppAssets.icDocBag,
-                                value: 'Tablet',
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Flexible(
-                              child: LabelWithIcon(
-                                asset: AppAssets.icStethoscope,
                                 value: 'Dog',
                               ),
                             ),
@@ -123,7 +107,7 @@ class MedicationInfo extends StatelessWidget {
                             ),
                             const Flexible(
                               child: LabelWithIcon(
-                                asset: AppAssets.icDoctor,
+                                asset: AppAssets.icStethoscope,
                                 value: 'Dr.Smith',
                               ),
                             ),
@@ -143,8 +127,8 @@ class MedicationInfo extends StatelessWidget {
                 onTap: () {},
                 child: SvgPicture.asset(
                   AppAssets.icEdit,
-                  height: 42.sp,
-                  width: 42.sp,
+                  height: 40.sp,
+                  width: 40.sp,
                 ),
               ),
             ),

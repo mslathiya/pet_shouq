@@ -59,10 +59,7 @@ class _ParentProfileState extends State<ParentProfile> {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          verification,
-                        ),
+                        onTap: () => _dialogBuilderLogout(context, t),
                         buttonTitle: t.translate("btn_logout"),
                         width: width * .45,
                         buttonStyle: TextStyle(
@@ -76,10 +73,7 @@ class _ParentProfileState extends State<ParentProfile> {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          verification,
-                        ),
+                        onTap: () => _dialogBuilderDeleteAccount(context, t),
                         buttonTitle: t.translate("btn_delete_account"),
                         width: width * .45,
                         buttonColor: AppColors.deleteButton,
@@ -99,6 +93,84 @@ class _ParentProfileState extends State<ParentProfile> {
           ),
         ),
       ),
+    );
+  }
+
+  // Delete account
+  Future<void> _dialogBuilderLogout(
+      BuildContext context, ApplicationLocalizations t) {
+    return showGeneralDialog<void>(
+      context: context,
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 700),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return CustomAlertDialog(
+          topIcon: AppAssets.icLogout,
+          label: t.translate("btn_logout"),
+          subLabel: t.translate("message_logout"),
+          buttonText: t.translate("btn_logout"),
+          onPressButton: () {},
+          secondaryButtonText: t.translate("btn_cancel"),
+          onPressSecondaryButton: () {},
+        );
+      },
+      transitionBuilder: (_, anim, __, child) {
+        Tween<Offset> tween;
+        if (anim.status == AnimationStatus.reverse) {
+          tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
+        } else {
+          tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
+        }
+
+        return SlideTransition(
+          position: tween.animate(anim),
+          child: FadeTransition(
+            opacity: anim,
+            child: child,
+          ),
+        );
+      },
+    );
+  }
+
+  //Delete Account
+  Future<void> _dialogBuilderDeleteAccount(
+      BuildContext context, ApplicationLocalizations t) {
+    return showGeneralDialog<void>(
+      context: context,
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 700),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return CustomAlertDialog(
+          topIcon: AppAssets.icDeleteAccount,
+          label: t.translate("account_deletion"),
+          subLabel: t.translate("account_deletion_message"),
+          buttonText: t.translate("btn_delete"),
+          onPressButton: () {},
+          secondaryButtonText: t.translate("btn_cancel"),
+          onPressSecondaryButton: () {},
+        );
+      },
+      transitionBuilder: (_, anim, __, child) {
+        Tween<Offset> tween;
+        if (anim.status == AnimationStatus.reverse) {
+          tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
+        } else {
+          tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
+        }
+
+        return SlideTransition(
+          position: tween.animate(anim),
+          child: FadeTransition(
+            opacity: anim,
+            child: child,
+          ),
+        );
+      },
     );
   }
 }

@@ -92,7 +92,7 @@ class _AddNewPetState extends State<AddNewPet> {
                       ),
                       SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_birth_date"),
                         ),
                         inputHint: t.translate("hint_birth_date"),
@@ -248,22 +248,24 @@ class _AddNewPetState extends State<AddNewPet> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      SelectorField(
+                      InputField(
                         headerWidget: InputHeader(
                           compulsory: false,
                           headerLabel: t.translate("lbl_qr_code"),
                         ),
                         inputHint: t.translate("hint_qr_code"),
-                        suffixIcon: SizedBox(
-                          width: 24.w,
-                          height: 24.h,
-                          child: SvgPicture.asset(
-                            AppAssets.icQrCode,
-                            height: 18.sp,
-                            width: 18.sp,
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: 24.w,
+                            height: 24.h,
+                            child: SvgPicture.asset(
+                              AppAssets.icQrCode,
+                              height: 18.sp,
+                              width: 18.sp,
+                            ),
                           ),
                         ),
-                        onSelectItem: () {},
                       ),
                       SizedBox(
                         height: 15.h,

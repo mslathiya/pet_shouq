@@ -73,7 +73,7 @@ class AppointmentBookView extends StatelessWidget {
                             children: [
                               SelectorField(
                                 headerWidget: InputHeader(
-                                  compulsory: false,
+                                  compulsory: true,
                                   headerLabel: t.translate("lbl_doctor_name"),
                                 ),
                                 inputHint: t.translate("hint_doctor_name"),
@@ -91,17 +91,30 @@ class AppointmentBookView extends StatelessWidget {
                               SizedBox(
                                 height: 15.h,
                               ),
-                              Text(
-                                t.translate("date"),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(
-                                      fontSize: 16.sp,
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: t.translate("date"),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium
+                                          ?.copyWith(
+                                            fontSize: 16.sp,
+                                          ),
                                     ),
+                                    WidgetSpan(
+                                      child: SizedBox(width: 5.w),
+                                    ),
+                                    TextSpan(
+                                      text: '*',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall
+                                          ?.copyWith(color: Colors.red),
+                                    ),
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -126,17 +139,30 @@ class AppointmentBookView extends StatelessWidget {
                               SizedBox(
                                 height: 15.h,
                               ),
-                              Text(
-                                t.translate("time"),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(
-                                      fontSize: 16.sp,
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: t.translate("time"),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium
+                                          ?.copyWith(
+                                            fontSize: 16.sp,
+                                          ),
                                     ),
+                                    WidgetSpan(
+                                      child: SizedBox(width: 5.w),
+                                    ),
+                                    TextSpan(
+                                      text: '*',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall
+                                          ?.copyWith(color: Colors.red),
+                                    ),
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 15.h,

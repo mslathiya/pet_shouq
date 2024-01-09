@@ -145,14 +145,27 @@ class DetailChildView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            localizations.translate("date"),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 16.sp,
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: localizations.translate("date"),
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        fontSize: 16.sp,
+                      ),
                 ),
+                WidgetSpan(
+                  child: SizedBox(width: 5.w),
+                ),
+                TextSpan(
+                  text: '*',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(color: Colors.red),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 15.h,
@@ -177,14 +190,27 @@ class DetailChildView extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          Text(
-            localizations.translate("time"),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 16.sp,
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: localizations.translate("time"),
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        fontSize: 16.sp,
+                      ),
                 ),
+                WidgetSpan(
+                  child: SizedBox(width: 5.w),
+                ),
+                TextSpan(
+                  text: '*',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(color: Colors.red),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 15.h,

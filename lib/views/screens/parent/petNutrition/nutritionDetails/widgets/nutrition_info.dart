@@ -42,8 +42,8 @@ class NutritionInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 80.w,
-            width: 80.w,
+            height: 67.w,
+            width: 67.w,
             decoration: BoxDecoration(
               color: AppColors.petType,
               borderRadius: BorderRadius.all(
@@ -73,10 +73,18 @@ class NutritionInfo extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.copyWith(fontSize: 16.sp),
+                        ?.copyWith(fontSize: 14.sp),
+                  ),
+                  const LabelWithIcon(
+                    asset: AppAssets.icBestProduct,
+                    value: 'ABC Pet Foods',
                   ),
                   SizedBox(
-                    height: 5.h,
+                    width: 5.h,
+                  ),
+                  const LabelWithIcon(
+                    asset: AppAssets.icBreedType,
+                    value: 'Puppy',
                   ),
                   Wrap(
                     alignment: WrapAlignment.start,
@@ -85,24 +93,7 @@ class NutritionInfo extends StatelessWidget {
                     direction: Axis.horizontal,
                     children: [
                       SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icBestProduct,
-                          value: 'ABC Pet Foods',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5.h,
-                      ),
-                      SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icBreedType,
-                          value: 'Puppy',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 110.sp,
+                        width: 70.sp,
                         child: const LabelWithIcon(
                           asset: AppAssets.icDocBag,
                           value: 'Dog',
@@ -112,7 +103,7 @@ class NutritionInfo extends StatelessWidget {
                         width: 5.h,
                       ),
                       SizedBox(
-                        width: 110.sp,
+                        width: 160.sp,
                         child: const LabelWithIcon(
                           asset: AppAssets.icFoodType,
                           value: 'Dry Kibble',

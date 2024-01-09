@@ -44,8 +44,8 @@ class DietInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 80.w,
-                  width: 80.w,
+                  height: 70.w,
+                  width: 70.w,
                   decoration: BoxDecoration(
                     color: AppColors.petType,
                     borderRadius: BorderRadius.all(
@@ -77,19 +77,16 @@ class DietInfo extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
-                              ?.copyWith(fontSize: 16.sp),
+                              ?.copyWith(fontSize: 14.sp),
                         ),
                         SizedBox(
-                          height: 5.h,
+                          height: 3.h,
                         ),
-                        LabelWithIcon(
+                        const LabelWithIcon(
                           asset: AppAssets.icCalendar,
                           value: '2023-10-15',
                         ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        LabelWithIcon(
+                        const LabelWithIcon(
                           asset: AppAssets.icWaterGlass,
                           value: 'Yes',
                         ),

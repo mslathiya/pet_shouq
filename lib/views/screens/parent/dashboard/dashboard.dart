@@ -4,7 +4,7 @@ import '../../../../config/config.dart';
 import '../../../../data/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
-import '../parentAppointment/parent_appointment.dart';
+import '../calendar/calendar.dart';
 import '../parentHome/parent_home.dart';
 import '../parentMyPets/parent_my_pets.dart';
 import '../parentProfile/parent_profile.dart';
@@ -28,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
   /// Top Level Pages
   final List<Widget> topLevelPages = const [
     ParentHome(),
-    ParentAppointment(),
+    CalendarAppointment(),
     ParentMyPets(),
     ParentProfile(),
   ];

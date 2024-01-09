@@ -52,7 +52,7 @@ class InfoLabel extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall
-                        ?.copyWith(fontSize: 14.sp),
+                        ?.copyWith(fontSize: 13.sp),
                   ),
                 ],
               ),
@@ -67,7 +67,7 @@ class InfoLabel extends StatelessWidget {
               description,
               textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontSize: 14.sp,
+                    fontSize: 13.sp,
                     color: AppColors.hintColor,
                   ),
             ),

@@ -74,6 +74,7 @@ class _EditProfileState extends State<EditProfile> {
                         height: 15.h,
                       ),
                       PhoneInput(
+                        isCompulsory: true,
                         headerLabel: t.translate("lbl_parent_phone"),
                       ),
                       SizedBox(

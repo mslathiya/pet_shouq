@@ -7,13 +7,16 @@ const String register = 'register';
 const String verification = 'verification';
 const String forgotPassword = 'forgotPassword';
 const String changePassword = 'changePassword';
+const String editParentProfile = 'editParentProfile';
+const String notifications = "notifications";
+const String contactUs = "contactUs";
+const String topAsked = "topAsked";
 
+//Specific for parent
 const String parentDashboard = "parentDashboard";
 const String doctorDetails = 'doctorDetails';
 const String petDetails = 'petDetails';
 const String addPet = 'addPet';
-const String editParentProfile = 'editParentProfile';
-
 //medication
 const String petMedication = "petMedication";
 const String petMedicationDetail = "petMedicationDetail";
@@ -36,6 +39,8 @@ const String petAddSchedule = "petAddSchedule";
 //Appointment booking
 const String petAppointment = "petAppointment";
 const String petBookingDetails = "petBookingDetails";
+
+//Specific for parent
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
@@ -64,6 +69,24 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const Verification(),
       );
+    case notifications:
+      return MaterialPageRoute(
+        builder: (context) => const Notifications(),
+      );
+    case contactUs:
+      return MaterialPageRoute(
+        builder: (context) => const ContactUs(),
+      );
+    case topAsked:
+      return MaterialPageRoute(
+        builder: (context) => const TopAsked(),
+      );
+    case editParentProfile:
+      return MaterialPageRoute(
+        builder: (context) => const EditProfile(),
+      );
+
+    /**Specific for parent**/
     case parentDashboard:
       return MaterialPageRoute(
         builder: (context) => const Dashboard(),
@@ -80,10 +103,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const AddNewPet(),
       );
-    case editParentProfile:
-      return MaterialPageRoute(
-        builder: (context) => const EditProfile(),
-      );
+
     /**
      * 
      * Medication
@@ -161,6 +181,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const AppointmentDetails(),
       );
+    /**Specific for parent**/
     default:
       throw ('This route name does not exit');
   }

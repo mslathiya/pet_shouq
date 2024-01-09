@@ -43,8 +43,8 @@ class MedicationDateTime extends StatelessWidget {
         children: [
           SvgPicture.asset(
             AppAssets.icCalendar,
-            height: 32.sp,
-            width: 32.sp,
+            height: 30.sp,
+            width: 30.sp,
           ),
           Expanded(
             child: Padding(
@@ -63,7 +63,7 @@ class MedicationDateTime extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
-                        ?.copyWith(fontSize: 16.sp),
+                        ?.copyWith(fontSize: 14.sp),
                   ),
                   SizedBox(
                     height: 5.h,
@@ -76,7 +76,7 @@ class MedicationDateTime extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall
-                        ?.copyWith(fontSize: 15.sp),
+                        ?.copyWith(fontSize: 13.sp),
                   ),
                 ],
               ),

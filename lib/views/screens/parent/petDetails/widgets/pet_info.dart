@@ -13,7 +13,6 @@ class PetInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90.h,
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,

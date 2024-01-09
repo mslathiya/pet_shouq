@@ -43,7 +43,7 @@ class _AddDietState extends State<AddDiet> {
                     children: [
                       InputField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_food_type"),
                         ),
                         inputHint: t.translate("hint_food_type"),
@@ -53,7 +53,7 @@ class _AddDietState extends State<AddDiet> {
                       ),
                       SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("date"),
                         ),
                         inputHint: t.translate("hint_select_date"),
@@ -73,7 +73,7 @@ class _AddDietState extends State<AddDiet> {
                       ),
                       SelectorField(
                         headerWidget: InputHeader(
-                          compulsory: false,
+                          compulsory: true,
                           headerLabel: t.translate("lbl_meal_time"),
                         ),
                         inputHint: t.translate("hint_meal_time"),
@@ -118,7 +118,7 @@ class _AddDietState extends State<AddDiet> {
                           Expanded(
                             child: InputField(
                               headerWidget: InputHeader(
-                                compulsory: false,
+                                compulsory: true,
                                 headerLabel: t.translate("lbl_water"),
                               ),
                               inputHint: t.translate("hint_water"),

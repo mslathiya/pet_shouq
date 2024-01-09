@@ -76,9 +76,6 @@ class DietListItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 5.w,
-                      ),
-                      SizedBox(
                         width: 100.sp,
                         child: const LabelWithIcon(
                           asset: AppAssets.icWaterGlass,

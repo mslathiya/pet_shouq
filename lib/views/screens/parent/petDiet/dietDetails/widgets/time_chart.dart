@@ -11,10 +11,6 @@ class TimeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 10.sp,
-        horizontal: 10.sp,
-      ),
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,

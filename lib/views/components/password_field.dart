@@ -43,10 +43,25 @@ class _PasswordFieldState extends State<PasswordField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          widget.headerLabel,
-          textAlign: TextAlign.left,
-          style: Theme.of(context).textTheme.headlineSmall,
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: widget.headerLabel,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              WidgetSpan(
+                child: SizedBox(width: 5.w),
+              ),
+              TextSpan(
+                text: '*',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(color: Colors.red),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 8.h,

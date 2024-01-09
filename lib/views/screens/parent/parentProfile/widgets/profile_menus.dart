@@ -43,7 +43,7 @@ class ProfileMenus extends StatelessWidget {
         MenuItem(
           title: t.translate("screen_notifications"),
           iconName: AppAssets.icNotification,
-          onPressMenu: () {},
+          onPressMenu: () => onTapMenu(notifications),
         ),
         MenuItem(
           title: t.translate("screen_privacy_policy"),
@@ -72,12 +72,12 @@ class ProfileMenus extends StatelessWidget {
         MenuItem(
           title: t.translate("screen_contact_us"),
           iconName: AppAssets.icContactUs,
-          onPressMenu: () {},
+          onPressMenu: () => onTapMenu(contactUs),
         ),
         MenuItem(
           title: t.translate("screen_faq"),
           iconName: AppAssets.icMostAsked,
-          onPressMenu: () {},
+          onPressMenu: () => onTapMenu(topAsked),
         ),
       ],
     );
