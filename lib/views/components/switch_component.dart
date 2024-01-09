@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pet_shouq/theme/theme.dart';
+
+import '../../theme/theme.dart';
 
 class StyledSwitch extends StatefulWidget {
   final void Function(bool isToggled) onToggled;

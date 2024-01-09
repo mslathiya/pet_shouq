@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/theme/theme.dart';
 
 import '../../config/config.dart';
+import '../../theme/theme.dart';
 import 'code_picker.dart';
 import 'input_field.dart';
 import 'input_header.dart';

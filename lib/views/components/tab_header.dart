@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/theme/theme.dart';
 
+import '../../theme/theme.dart';
 import 'notification_widget.dart';
 
 class TabHeader extends StatelessWidget implements PreferredSizeWidget {

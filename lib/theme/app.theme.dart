@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pet_shouq/theme/app.colors.dart';
-import 'package:pet_shouq/theme/text.theme.dart';
+
+import 'app.colors.dart';
+import 'text.theme.dart';
 
 class AppTheme {
   static final ColorScheme _lightScheme = ColorScheme.light(

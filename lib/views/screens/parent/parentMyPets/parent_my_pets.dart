@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:pet_shouq/config/config.dart';
-import 'package:pet_shouq/theme/app.colors.dart';
 
+import '../../../../config/config.dart';
+import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
 class ParentMyPets extends StatefulWidget {

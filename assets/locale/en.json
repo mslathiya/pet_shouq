@@ -233,8 +233,13 @@
     "screen_appointment_detail": "Appointment Details",
     "screen_appointment_booking": "Appointment Booking",
     "disease": "Disease",
+    "hint_disease": "Enter Disease",
     "btn_reschedule_appointment": "Reschedule Appointment",
     "lbl_doctor_name": "Doctor Name",
     "hint_doctor_name": "Select Doctor Name",
-    "btn_reschedule": "Reschedule"
+    "btn_reschedule": "Reschedule",
+    "btn_book_now": "Book Now",
+    "lbl_dog_name": "Dog Name",
+    "hint_dog_name": "Select Dog Name",
+    "btn_confirm_booking": "Confirm Booking"
 }

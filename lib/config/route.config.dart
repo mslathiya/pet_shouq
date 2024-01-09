@@ -66,7 +66,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case parentDashboard:
       return MaterialPageRoute(
-        builder: (context) => const ParentDashboard(),
+        builder: (context) => const Dashboard(),
       );
     case doctorDetails:
       return MaterialPageRoute(
@@ -82,7 +82,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case editParentProfile:
       return MaterialPageRoute(
-        builder: (context) => const EditParentProfile(),
+        builder: (context) => const EditProfile(),
       );
     /**
      * 

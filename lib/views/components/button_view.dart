@@ -11,6 +11,7 @@ class ButtonView extends StatelessWidget {
   final Widget? rightWidget;
   final Color? buttonColor;
   final TextStyle? buttonStyle;
+  final ButtonStyle? buttonContainer;
 
   const ButtonView({
     super.key,
@@ -21,6 +22,7 @@ class ButtonView extends StatelessWidget {
     this.rightWidget,
     this.buttonColor,
     this.buttonStyle,
+    this.buttonContainer,
   });
 
   @override
@@ -36,10 +38,10 @@ class ButtonView extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
-      ),
+      ).merge(buttonContainer),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 16.w,
+          horizontal: 12.w,
           vertical: 3.h,
         ),
         child: Row(
