@@ -253,5 +253,11 @@
     "account_deletion_message": "Are You sure you want to delete?",
     "btn_delete": "Delete",
     "screen_details": "Details",
-    "screen_detail_page": "Detail page"
+    "screen_detail_page": "Detail page",
+    "screen_appointments": "Appointments",
+    "current_appointment": "Current Appointments",
+    "tab_current": "Current",
+    "tab_upcoming": "Upcoming",
+    "tab_past": "Past",
+    "tab_cancelled": "Cancelled"
 }

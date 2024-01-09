@@ -34,3 +34,6 @@ export "time_item.dart";
 export "event_list_item.dart";
 export 'notification_list_item.dart';
 export "top_asked_item.dart";
+export "banner_slider.dart";
+export "vet_appointment_list_item.dart";
+export 'tab_bar_widget.dart';

@@ -39,8 +39,11 @@ const String petAddSchedule = "petAddSchedule";
 //Appointment booking
 const String petAppointment = "petAppointment";
 const String petBookingDetails = "petBookingDetails";
-
 //Specific for parent
+
+//Specific for vet
+const String vetDashboard = "vetDashboard";
+//Specific for vet
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final routeName = settings.name;
@@ -182,6 +185,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => const AppointmentDetails(),
       );
     /**Specific for parent**/
+
+    /**Specific for vet**/
+    case vetDashboard:
+      return MaterialPageRoute(
+        builder: (context) => const VetDashboard(),
+      );
+    /**Specific for vet**/
     default:
       throw ('This route name does not exit');
   }
