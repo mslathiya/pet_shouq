@@ -7,12 +7,13 @@ class InfoLabel extends StatelessWidget {
   final String title;
   final String description;
   final bool? allPadding;
-
+  final Widget? customRight;
   const InfoLabel({
     super.key,
     required this.title,
     required this.description,
     this.allPadding = true,
+    this.customRight,
   });
 
   @override
@@ -63,14 +64,15 @@ class InfoLabel extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: Text(
-              description,
-              textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontSize: 13.sp,
-                    color: AppColors.hintColor,
-                  ),
-            ),
+            child: customRight ??
+                Text(
+                  description,
+                  textAlign: TextAlign.right,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontSize: 13.sp,
+                        color: AppColors.hintColor,
+                      ),
+                ),
           ),
         ],
       ),

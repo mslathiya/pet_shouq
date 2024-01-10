@@ -23,4 +23,6 @@ class AppColors {
   static Color disableFieldColor = const Color(0xffE8E8E8);
   static Color disableFieldBorder = const Color(0xffD9D9D9);
   static Color disableFieldText = const Color(0xffAAAAAA);
+  static Color greenColor = const Color(0xff20721F);
+
 }

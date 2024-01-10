@@ -24,10 +24,14 @@ class LabelWithIcon extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            asset,
+          SizedBox(
             height: 17.sp,
             width: 17.sp,
+            child: SvgPicture.asset(
+              asset,
+              height: 17.sp,
+              width: 17.sp,
+            ),
           ),
           SizedBox(
             width: 6.sp,

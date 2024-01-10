@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../config/config.dart';
-import '../../../../../../theme/theme.dart';
+import '../../theme/theme.dart';
 
-class MedicationDateTime extends StatelessWidget {
-  const MedicationDateTime({
+class DateTimeItem extends StatelessWidget {
+  const DateTimeItem({
     super.key,
+    required this.title,
+    required this.subTitle,
   });
+
+  final String title;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 10.sp,
-        horizontal: 10.sp,
+      padding: EdgeInsets.all(
+        10.sp,
       ),
-      margin: EdgeInsets.only(
-        left: 10.sp,
-        right: 10.sp,
-        bottom: 10.sp,
-        top: 10.sp,
+      margin: EdgeInsets.all(
+        10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -56,7 +55,7 @@ class MedicationDateTime extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    t.translate("date_nutrition"),
+                    title,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -69,7 +68,7 @@ class MedicationDateTime extends StatelessWidget {
                     height: 5.h,
                   ),
                   Text(
-                    "2023-05-01 To  2023-05-14 / 14 days",
+                    subTitle,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

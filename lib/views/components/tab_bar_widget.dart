@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/config/config.dart';
 
+import '../../config/config.dart';
 import '../../theme/theme.dart';
 
 class TabWidget extends StatefulWidget {
@@ -47,7 +47,14 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
   double _prevAniValue = 0.0;
 
   // these will be our tab icons. You can use whatever you like for the content of your buttons
-  List<String> _tabs = [];
+  List<String> _tabs = [
+     "vaccination",
+    "medical_history",
+    "medical_details",
+    "nutrition_feeding",
+    "screen_diet_log",
+    "screen_feeding_schedule",
+  ];
 
   // active button's foreground color
   final Color _foregroundOn = AppColors.white;
@@ -70,7 +77,7 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _tabs = widget.tabList;
+    // _tabs = widget.tabList;
 
     for (int index = 0; index < _tabs.length; index++) {
       // create a GlobalKey for each Tab
@@ -78,7 +85,10 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
     }
 
     // this creates the controller with 6 tabs (in our case)
-    _controller = widget.controller;
+    _controller = TabController(
+      length: _tabs.length,
+      vsync: this,
+    );
     // this will execute the function every time there's a swipe animation
     _controller.animation?.addListener(_handleTabAnimation);
     // this will execute the function every time the _controller.index value changes

@@ -169,7 +169,7 @@ class PetDetailView extends StatelessWidget {
           onPressMenu: () {},
         ),
         MenuItem(
-          title: localizations.translate("feeding_schedule"),
+          title: localizations.translate("set_feeding_schedule"),
           iconName: AppAssets.icFeedingSchedule,
           onPressMenu: () => Navigator.pushNamed(context, petFeedSchedule),
         ),
@@ -184,7 +184,7 @@ class PetDetailView extends StatelessWidget {
           onPressMenu: () => Navigator.pushNamed(context, petNutrition),
         ),
         MenuItem(
-          title: localizations.translate("medication"),
+          title: localizations.translate("medication_details"),
           iconName: AppAssets.icMedication,
           onPressMenu: () => Navigator.pushNamed(context, petMedication),
         ),

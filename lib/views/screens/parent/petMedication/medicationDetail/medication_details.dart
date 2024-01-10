@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/config.dart';
 import '../../../../components/components.dart';
 import 'widgets/dosage_info.dart';
-import 'widgets/medication_date_time.dart';
 import 'widgets/medication_info.dart';
 import 'widgets/other_specification.dart';
 
@@ -16,7 +15,7 @@ class MedicationDetails extends StatelessWidget {
     var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("medication"),
+        title: t.translate("medication_details"),
         onPressBack: () => Navigator.pop(context),
       ),
       body: SingleChildScrollView(
@@ -25,7 +24,10 @@ class MedicationDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const MedicationInfo(),
-            const MedicationDateTime(),
+            DateTimeItem(
+              title: t.translate("date_nutrition"),
+              subTitle: "2023-05-01 To  2023-05-14 / 14 days",
+            ),
             const DosageInfo(),
             SizedBox(
               height: 5.h,

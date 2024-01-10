@@ -7,10 +7,15 @@ import '../../theme/theme.dart';
 class SpotInfo extends StatelessWidget {
   final String icon;
   final String title;
+  final TextStyle? textStyle;
+  final Color? boxColor;
+
   const SpotInfo({
     super.key,
     required this.icon,
     required this.title,
+    this.textStyle,
+    this.boxColor,
   });
 
   @override
@@ -18,7 +23,7 @@ class SpotInfo extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8.sp),
       decoration: BoxDecoration(
-        color: AppColors.primary,
+        color: boxColor ?? AppColors.primary,
         borderRadius: BorderRadius.circular(10.sp),
       ),
       child: Column(
@@ -38,9 +43,13 @@ class SpotInfo extends StatelessWidget {
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium
+                ?.copyWith(
                   fontSize: 14.sp,
-                ),
+                )
+                .merge(textStyle),
           ),
         ],
       ),

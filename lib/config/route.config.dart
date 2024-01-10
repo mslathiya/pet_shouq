@@ -43,6 +43,7 @@ const String petBookingDetails = "petBookingDetails";
 
 //Specific for vet
 const String vetDashboard = "vetDashboard";
+const String vetAppointmentDetail = "vetAppointmentDetail";
 //Specific for vet
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -190,6 +191,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case vetDashboard:
       return MaterialPageRoute(
         builder: (context) => const VetDashboard(),
+      );
+    case vetAppointmentDetail:
+      return MaterialPageRoute(
+        builder: (context) => const VetAppointmentDetail(),
       );
     /**Specific for vet**/
     default:
