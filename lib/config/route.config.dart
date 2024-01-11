@@ -7,12 +7,12 @@ const String register = 'register';
 const String verification = 'verification';
 const String forgotPassword = 'forgotPassword';
 const String changePassword = 'changePassword';
-const String editParentProfile = 'editParentProfile';
 const String notifications = "notifications";
 const String contactUs = "contactUs";
 const String topAsked = "topAsked";
 
 //Specific for parent
+const String editParentProfile = 'editParentProfile';
 const String parentDashboard = "parentDashboard";
 const String doctorDetails = 'doctorDetails';
 const String petDetails = 'petDetails';
@@ -44,6 +44,9 @@ const String petBookingDetails = "petBookingDetails";
 //Specific for vet
 const String vetDashboard = "vetDashboard";
 const String vetAppointmentDetail = "vetAppointmentDetail";
+const String vetEditProfile = "vetEditProfile";
+const String vetRegister = "vetRegister";
+const String vetAvailability = "vetAvailability";
 //Specific for vet
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -87,7 +90,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case editParentProfile:
       return MaterialPageRoute(
-        builder: (context) => const EditProfile(),
+        builder: (context) => const EditParentProfile(),
       );
 
     /**Specific for parent**/
@@ -195,6 +198,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case vetAppointmentDetail:
       return MaterialPageRoute(
         builder: (context) => const VetAppointmentDetail(),
+      );
+    case vetEditProfile:
+      return MaterialPageRoute(
+        builder: (context) => const EditVetProfile(),
+      );
+    case vetAvailability:
+      return MaterialPageRoute(
+        builder: (context) => const VetAvailability(),
       );
     /**Specific for vet**/
     default:

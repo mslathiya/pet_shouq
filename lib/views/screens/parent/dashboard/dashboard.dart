@@ -4,10 +4,7 @@ import '../../../../config/config.dart';
 import '../../../../data/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
-import '../calendar/calendar.dart';
-import '../parentHome/parent_home.dart';
-import '../parentMyPets/parent_my_pets.dart';
-import '../parentProfile/parent_profile.dart';
+import '../../screens.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -30,7 +27,7 @@ class _DashboardState extends State<Dashboard> {
     ParentHome(),
     CalendarAppointment(),
     ParentMyPets(),
-    ParentProfile(),
+    Profile(userType: UserType.typeParent),
   ];
 
   late PageController pageController;

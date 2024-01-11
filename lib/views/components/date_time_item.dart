@@ -4,15 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../theme/theme.dart';
 
-class DateTimeItem extends StatelessWidget {
-  const DateTimeItem({
+class SingleLabelItem extends StatelessWidget {
+  const SingleLabelItem({
     super.key,
     required this.title,
     required this.subTitle,
+    required this.asset,
   });
 
   final String title;
   final String subTitle;
+  final String asset;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class DateTimeItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SvgPicture.asset(
-            AppAssets.icCalendar,
+            asset,
             height: 30.sp,
             width: 30.sp,
           ),

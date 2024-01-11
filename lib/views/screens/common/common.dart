@@ -4,7 +4,7 @@ export 'register/register.dart';
 export 'verification/verification.dart';
 export 'forgotPassword/forgot_password.dart';
 export 'changePassword/change_password.dart';
-export 'editProfile/edit_profile.dart';
 export 'notification/notifications.dart';
 export 'contactUs/contact_us.dart';
 export "topAsked/top_asked.dart";
+export 'account/account.dart';

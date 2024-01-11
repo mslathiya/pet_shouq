@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
+import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/dosage_info.dart';
 import 'widgets/medication_info.dart';
@@ -24,9 +25,10 @@ class MedicationDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const MedicationInfo(),
-            DateTimeItem(
+            SingleLabelItem(
               title: t.translate("date_nutrition"),
               subTitle: "2023-05-01 To  2023-05-14 / 14 days",
+              asset: AppAssets.icCalendar,
             ),
             const DosageInfo(),
             SizedBox(

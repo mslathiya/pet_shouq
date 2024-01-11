@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
+import '../../../../../data/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
 class ProfileMenus extends StatelessWidget {
-  final ApplicationLocalizations t;
   final Function(String) onTapMenu;
-  const ProfileMenus({super.key, required this.t, required this.onTapMenu});
+  const ProfileMenus(
+      {super.key, required this.onTapMenu, required this.userType});
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
+    var t = ApplicationLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -30,11 +33,13 @@ class ProfileMenus extends StatelessWidget {
                 ),
           ),
         ),
-        MenuItem(
-          title: t.translate("screen_booking_history"),
-          iconName: AppAssets.icBookingHistory,
-          onPressMenu: () => onTapMenu(petAppointment),
-        ),
+        userType == UserType.typeParent
+            ? MenuItem(
+                title: t.translate("screen_booking_history"),
+                iconName: AppAssets.icBookingHistory,
+                onPressMenu: () => onTapMenu(petAppointment),
+              )
+            : const SizedBox(),
         MenuItem(
           title: t.translate("screen_change_password"),
           iconName: AppAssets.icChangePassword,

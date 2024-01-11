@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
+import '../../../../data/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widgets/profile_info.dart';
 import 'widgets/profile_menus.dart';
 
-class ParentProfile extends StatefulWidget {
-  const ParentProfile({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key, required this.userType});
+
+  final UserType userType;
 
   @override
-  State<ParentProfile> createState() => _ParentProfileState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _ParentProfileState extends State<ParentProfile> {
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -35,17 +38,40 @@ class _ParentProfileState extends State<ParentProfile> {
                 height: 50.h,
               ),
               ProfileInfo(
-                onTapEdit: () => Navigator.pushNamed(
-                  context,
-                  editParentProfile,
-                ),
+                onTapEdit: () {
+                  if (widget.userType == UserType.typeParent) {
+                    Navigator.pushNamed(
+                      context,
+                      editParentProfile,
+                    );
+                  } else {
+                    Navigator.pushNamed(
+                      context,
+                      vetEditProfile,
+                    );
+                  }
+                },
               ),
+              widget.userType == UserType.typeVet
+                  ? Column(
+                      children: [
+                        SingleLabelItem(
+                          title: t.translate("specialization"),
+                          subTitle: "Surgery, Dermatology, Nutrition",
+                          asset: AppAssets.icDoctor,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        )
+                      ],
+                    )
+                  : const SizedBox(),
               ProfileMenus(
-                t: t,
                 onTapMenu: (menuName) => Navigator.pushNamed(
                   context,
                   menuName,
                 ),
+                userType: widget.userType,
               ),
               SizedBox(
                 height: 10.h,

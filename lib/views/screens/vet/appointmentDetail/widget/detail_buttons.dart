@@ -6,7 +6,9 @@ import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
 class DetailButtons extends StatelessWidget {
-  const DetailButtons({super.key});
+  const DetailButtons({super.key, required this.onScheduleAppointment});
+
+  final VoidCallback onScheduleAppointment;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class DetailButtons extends StatelessWidget {
           ),
           child: ButtonView(
             isBordered: true,
-            onTap: () => Navigator.pop(context),
+            onTap: onScheduleAppointment,
             buttonTitle: t.translate("btn_reschedule_appointment"),
             width: width - 20,
             buttonStyle: TextStyle(
@@ -42,7 +44,7 @@ class DetailButtons extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: ButtonView(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => {},
                   buttonTitle: t.translate("btn_reject"),
                   width: width * .45,
                   buttonStyle: TextStyle(
@@ -54,7 +56,7 @@ class DetailButtons extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: ButtonView(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => {},
                   buttonTitle: t.translate("btn_accept"),
                   width: width * .45,
                   buttonStyle: TextStyle(

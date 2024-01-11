@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pet_shouq/helper/helpers.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/models.dart';
+import '../../../../helper/helpers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
+import '../../screens.dart';
 import '../vetAppointment/vet_appointment.dart';
 
 class VetDashboard extends StatefulWidget {
@@ -30,7 +31,7 @@ class _VetDashboardState extends State<VetDashboard> {
     VetAppointment(
       type: AppointmentType.typeAll,
     ),
-    Text("data"),
+    Profile(userType: UserType.typeVet),
   ];
 
   late PageController pageController;

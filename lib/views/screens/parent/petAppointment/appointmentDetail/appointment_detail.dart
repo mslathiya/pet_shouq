@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
-import 'widgets/appointment_book_view.dart';
 import 'widgets/header_slider.dart';
 import 'widgets/informative_text.dart';
 
@@ -133,24 +132,7 @@ class AppointmentDetails extends StatelessWidget {
       barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 700),
       pageBuilder: (_, __, ___) {
-        double height = MediaQuery.of(context).size.height;
-        return PopScope(
-          canPop: false,
-          onPopInvoked: (didPop) {},
-          child: Center(
-            child: Container(
-              height: height * .75,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.sp),
-              ),
-              child: AppointmentBookView(
-                t: t,
-              ),
-            ),
-          ),
-        );
+        return const ReScheduleAppointment();
       },
       transitionBuilder: (_, anim, __, child) {
         Tween<Offset> tween;

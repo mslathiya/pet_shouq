@@ -3,7 +3,6 @@ export 'dashboard/dashboard.dart';
 export 'calendar/calendar.dart';
 export "parentHome/parent_home.dart";
 export 'parentMyPets/parent_my_pets.dart';
-export 'parentProfile/parent_profile.dart';
 
 export 'clinicDetail/clinic_details.dart';
 //Pet
@@ -19,3 +18,5 @@ export 'petNutrition/nutrition.dart';
 export 'petFeedingSchedule/feeding_schedule.dart';
 //Appointment
 export 'petAppointment/pet_appointment.dart';
+
+export 'editParent/edit_parent_profile.dart';

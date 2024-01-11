@@ -9,6 +9,7 @@ class SelectorField extends StatelessWidget {
   final TextStyle? labelStyle;
   final String inputHint;
   final VoidCallback onSelectItem;
+  final bool? documentUploader;
   const SelectorField({
     super.key,
     this.headerWidget,
@@ -16,6 +17,7 @@ class SelectorField extends StatelessWidget {
     this.labelStyle,
     required this.inputHint,
     required this.onSelectItem,
+    this.documentUploader = false,
   });
 
   @override
@@ -29,9 +31,11 @@ class SelectorField extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           onTap: onSelectItem,
           child: Container(
-            padding: const EdgeInsets.all(
-              13,
-            ),
+            padding: documentUploader == true
+                ? EdgeInsets.zero
+                : const EdgeInsets.all(
+                    13,
+                  ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(10.sp),
@@ -46,18 +50,25 @@ class SelectorField extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Text(
-                    inputHint,
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(
-                          color: AppColors.hintColor,
-                        )
-                        .merge(labelStyle),
+                  child: Padding(
+                    padding: documentUploader == false
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.all(
+                            13,
+                          ),
+                    child: Text(
+                      inputHint,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(
+                            color: AppColors.hintColor,
+                          )
+                          .merge(labelStyle),
+                    ),
                   ),
                 ),
                 Center(

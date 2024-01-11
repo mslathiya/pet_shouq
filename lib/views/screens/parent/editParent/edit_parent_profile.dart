@@ -6,14 +6,14 @@ import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
-class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+class EditParentProfile extends StatefulWidget {
+  const EditParentProfile({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<EditParentProfile> createState() => _EditParentProfileState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _EditParentProfileState extends State<EditParentProfile> {
   int selectedOption = 1;
 
   @override

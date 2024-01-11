@@ -8,9 +8,11 @@ class ShadowBox extends StatelessWidget {
     super.key,
     required this.childWidget,
     this.isExpanded = false,
+    this.withPadding = true,
   });
   final Widget childWidget;
   final bool? isExpanded;
+  final bool? withPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +22,17 @@ class ShadowBox extends StatelessWidget {
         right: 10.sp,
         bottom: 15.sp,
       ),
-      padding: isExpanded!
-          ? EdgeInsets.symmetric(
-              vertical: 5.sp,
-              horizontal: 10.sp,
-            )
-          : EdgeInsets.symmetric(
-              horizontal: 12.sp,
-              vertical: 10.sp,
-            ),
+      padding: withPadding == true
+          ? isExpanded!
+              ? EdgeInsets.symmetric(
+                  vertical: 5.sp,
+                  horizontal: 10.sp,
+                )
+              : EdgeInsets.symmetric(
+                  horizontal: 12.sp,
+                  vertical: 10.sp,
+                )
+          : EdgeInsets.zero,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.all(
