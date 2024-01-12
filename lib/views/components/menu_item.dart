@@ -44,7 +44,7 @@ class MenuItem extends StatelessWidget {
                           height: 1.2,
                           letterSpacing: 0.20,
                           fontWeight: FontWeight.w700,
-                          fontSize: 15.sp,
+                          fontSize: 14.sp,
                         ),
                   ),
                 ),

@@ -56,7 +56,7 @@ class PetOtherDetails extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: 15.sp,
                 ),
           ),
           children: [
@@ -107,7 +107,7 @@ class PetOtherDetails extends StatelessWidget {
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: AppColors.gray,
-                          fontSize: 13.sp,
+                          fontSize: 12.sp,
                         ),
                   )
                 ],

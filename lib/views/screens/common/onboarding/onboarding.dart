@@ -1,3 +1,4 @@
+import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -67,10 +68,12 @@ class _OnBoardingState extends State<OnBoarding> {
                         String title = t.translate(item.title);
                         String subTitle = t.translate(item.content);
 
-                        return ItemBuilder(
-                          item: item,
-                          title: title,
-                          subTitle: subTitle,
+                        return FadedScaleAnimation(
+                          child: ItemBuilder(
+                            item: item,
+                            title: title,
+                            subTitle: subTitle,
+                          ),
                         );
                       },
                     ),
@@ -108,6 +111,16 @@ class _OnBoardingState extends State<OnBoarding> {
                             },
                             onPressSkip: () {
                               Navigator.pushNamed(context, login);
+                            },
+                            onAnimationEnd: () {
+                              if (_currentPage != onboardingList.length - 1) {
+                                _pageController.nextPage(
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              } else {
+                                Navigator.pushNamed(context, login);
+                              }
                             },
                           )
                         ],

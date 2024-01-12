@@ -19,6 +19,7 @@ class HeaderLabel extends StatelessWidget {
                 height: 1.2,
                 letterSpacing: 0.20,
                 fontWeight: FontWeight.w700,
+                fontSize: 25.sp,
               ),
         ),
         SizedBox(

@@ -37,11 +37,12 @@ class ItemBuilder extends StatelessWidget {
                   height: 1.2,
                   letterSpacing: 0.20,
                   fontWeight: FontWeight.w700,
+                  fontSize: 25.sp,
                 ),
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 20.h,
+            height: 10.h,
           ),
           Text(
             subTitle,

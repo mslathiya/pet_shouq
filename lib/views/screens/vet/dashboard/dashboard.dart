@@ -19,6 +19,7 @@ class _VetDashboardState extends State<VetDashboard> {
   int currentIndex = 0;
   List<NavigationBarItem> items = [
     NavigationBarItem(title: "tab_home", icon: AppAssets.icTabOne),
+    NavigationBarItem(title: 'availability', icon: AppAssets.icAvailability),
     NavigationBarItem(title: 'tab_appointment', icon: AppAssets.icTabTwo),
     NavigationBarItem(title: 'tab_profile', icon: AppAssets.icTabFour),
   ];
@@ -28,6 +29,7 @@ class _VetDashboardState extends State<VetDashboard> {
     VetAppointment(
       type: AppointmentType.typeToday,
     ),
+    VetAvailability(),
     VetAppointment(
       type: AppointmentType.typeAll,
     ),
@@ -57,17 +59,20 @@ class _VetDashboardState extends State<VetDashboard> {
 
     return Scaffold(
       body: _mainWrapperBody(),
-      bottomNavigationBar: AnimatedBottomBar(
-        itemList: items,
-        currentIndex: currentIndex,
-        onTapMenu: (int value) {
-          pageController.animateToPage(
-            value,
-            duration: const Duration(milliseconds: 10),
-            curve: Curves.fastLinearToSlowEaseIn,
-          );
-        },
-        localizations: t,
+      resizeToAvoidBottomInset: true,
+      bottomNavigationBar: SafeArea(
+        child: AnimatedBottomBar(
+          itemList: items,
+          currentIndex: currentIndex,
+          onTapMenu: (int value) {
+            pageController.animateToPage(
+              value,
+              duration: const Duration(milliseconds: 10),
+              curve: Curves.fastLinearToSlowEaseIn,
+            );
+          },
+          localizations: t,
+        ),
       ),
     );
   }

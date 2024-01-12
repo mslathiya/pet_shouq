@@ -21,7 +21,7 @@ class ProfileInfo extends StatelessWidget {
           margin: EdgeInsets.only(
             left: 10.sp,
             right: 10.sp,
-            bottom: 15.sp,
+            bottom: 5.sp,
           ),
           padding: EdgeInsets.only(
             left: 12.w,
@@ -53,8 +53,8 @@ class ProfileInfo extends StatelessWidget {
                     onTap: onTapEdit,
                     child: SvgPicture.asset(
                       AppAssets.icEdit,
-                      height: 42.sp,
-                      width: 42.sp,
+                      height: 40.sp,
+                      width: 40.sp,
                     ),
                   ),
                 ),
@@ -63,7 +63,7 @@ class ProfileInfo extends StatelessWidget {
                 "Deirdre Starnes",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontSize: 18.sp,
+                      fontSize: 16.sp,
                     ),
               ),
               SizedBox(
@@ -124,14 +124,14 @@ class ProfileInfo extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.all(
                 Radius.elliptical(
-                  80.h,
-                  80.h,
+                  95.h,
+                  95.h,
                 ),
               ),
               child: Image.asset(
                 AppAssets.dog,
-                height: 100.h,
-                width: 100.w,
+                height: 95.h,
+                width: 95.w,
                 fit: BoxFit.cover,
               ),
             ),

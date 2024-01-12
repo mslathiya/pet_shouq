@@ -41,7 +41,7 @@ class InfoLabel extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(fontSize: 14.sp),
+                    ?.copyWith(fontSize: 13.sp),
                 children: [
                   WidgetSpan(
                     child: SizedBox(
@@ -69,7 +69,7 @@ class InfoLabel extends StatelessWidget {
                   description,
                   textAlign: TextAlign.right,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontSize: 13.sp,
+                        fontSize: 12.sp,
                         color: AppColors.hintColor,
                       ),
                 ),

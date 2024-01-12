@@ -19,8 +19,8 @@ class DateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.sp,
-      width: 55.sp,
+      height: 55.sp,
+      width: 50.sp,
       padding: EdgeInsets.all(9.sp),
       margin: EdgeInsets.symmetric(horizontal: 5.w),
       decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class DateItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   color: isDisabled
                       ? AppColors.disableFieldText
                       : isSelected
@@ -65,6 +65,7 @@ class DateItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontSize: 12.sp,
                   color: isDisabled
                       ? AppColors.disableFieldText
                       : isSelected

@@ -6,6 +6,7 @@ import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widget/appointment_header.dart';
 import 'widget/detail_buttons.dart';
+import 'widget/diet_details.dart';
 import 'widget/feeding_detail.dart';
 import 'widget/medical_detail.dart';
 import 'widget/medical_history.dart';
@@ -28,7 +29,7 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
     "medical_history",
     "medical_details",
     "nutrition_feeding",
-    // "screen_diet_log",
+    "screen_diet_log",
     "screen_feeding_schedule",
   ];
 
@@ -36,42 +37,39 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: HeaderWithBack(
-          title: t.translate("screen_details"),
-          onPressBack: () => Navigator.pop(context),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const AppointmentInfo(),
-              SingleLabelItem(
-                title: t.translate("date_time"),
-                subTitle: "01-Jan-2024, 4:00 PM",
-                asset: AppAssets.icCalendar,
-              ),
-              DetailButtons(
-                  onScheduleAppointment: () => _dialogBuilder(context)),
-              TabSelector(
-                tabList: _tabList,
-                currentIndex: _currentIndex,
-                onTapMenu: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                t: t,
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-              _renderWidgetByIndex(_currentIndex)
-            ],
-          ),
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: HeaderWithBack(
+        title: t.translate("screen_details"),
+        onPressBack: () => Navigator.pop(context),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const AppointmentInfo(),
+            SingleLabelItem(
+              title: t.translate("date_time"),
+              subTitle: "01-Jan-2024, 4:00 PM",
+              asset: AppAssets.icCalendar,
+            ),
+            DetailButtons(onScheduleAppointment: () => _dialogBuilder(context)),
+            TabSelector(
+              tabList: _tabList,
+              currentIndex: _currentIndex,
+              onTapMenu: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              t: t,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            _renderWidgetByIndex(_currentIndex)
+          ],
         ),
       ),
     );
@@ -119,6 +117,8 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
       case 3:
         return const NutritionFeedingDetail();
       case 4:
+        return const DietDetails();
+      case 5:
         return const FeedingDetail();
       default:
         return const SizedBox();

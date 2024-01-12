@@ -46,7 +46,7 @@ const String vetDashboard = "vetDashboard";
 const String vetAppointmentDetail = "vetAppointmentDetail";
 const String vetEditProfile = "vetEditProfile";
 const String vetRegister = "vetRegister";
-const String vetAvailability = "vetAvailability";
+const String vetAddAvailability = "vetAddAvailability";
 //Specific for vet
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -203,9 +203,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const EditVetProfile(),
       );
-    case vetAvailability:
+    case vetAddAvailability:
       return MaterialPageRoute(
-        builder: (context) => const VetAvailability(),
+        builder: (context) => const AddAvailability(),
       );
     /**Specific for vet**/
     default:

@@ -18,6 +18,7 @@ class FeedScheduleListItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 10.sp,
+        horizontal: 12.w,
       ),
       margin: EdgeInsets.only(
         left: 10.sp,
@@ -46,27 +47,19 @@ class FeedScheduleListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 12.w, right: 12.w),
-                  child: Text(
-                    '12:00 Pm',
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium
-                        ?.copyWith(fontSize: 16.sp, height: 2),
-                  ),
+                Text(
+                  '12:00 Pm',
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium
+                      ?.copyWith(fontSize: 15.sp),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.w,
-                  ),
-                  child: const LabelWithIcon(
-                    asset: AppAssets.icFeedTag,
-                    value: 'Morning Feeding',
-                  ),
+                const LabelWithIcon(
+                  asset: AppAssets.icFeedTag,
+                  value: 'Morning Feeding',
                 ),
               ],
             ),
@@ -74,9 +67,6 @@ class FeedScheduleListItem extends StatelessWidget {
           StyledSwitch(
             onToggled: onToggleSwitch,
             isActive: false,
-          ),
-          SizedBox(
-            width: 8.w,
           ),
         ],
       ),

@@ -228,12 +228,12 @@ class _EditVetProfileState extends State<EditVetProfile> {
                           width: 60.w,
                           height: 48.h,
                           padding: EdgeInsets.all(
-                            10.sp,
+                            12.sp,
                           ),
                           child: SvgPicture.asset(
                             AppAssets.icUpload,
-                            height: 18.sp,
-                            width: 18.sp,
+                            height: 14.sp,
+                            width: 14.sp,
                           ),
                         ),
                         onSelectItem: () {},

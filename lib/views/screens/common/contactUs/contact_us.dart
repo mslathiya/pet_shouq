@@ -20,7 +20,7 @@ class _ContactUsState extends State<ContactUs> {
     return Scaffold(
       appBar: HeaderWithBack(
         title: t.translate("screen_contact_us"),
-        onPressBack: () {},
+        onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
         child: LayoutBuilder(

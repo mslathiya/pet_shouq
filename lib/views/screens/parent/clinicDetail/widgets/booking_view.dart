@@ -122,7 +122,7 @@ class AppointmentBookingView extends StatelessWidget {
                                       width: width * .43,
                                       buttonStyle: TextStyle(
                                         color: AppColors.hintColor,
-                                        fontSize: 12.sp,
+                                        fontSize: 9.sp,
                                       ),
                                       buttonColor: AppColors.inputBorder,
                                     ),
@@ -135,7 +135,7 @@ class AppointmentBookingView extends StatelessWidget {
                                           t.translate("btn_confirm_booking"),
                                       width: width * .43,
                                       buttonStyle: TextStyle(
-                                        fontSize: 12.sp,
+                                        fontSize: 9.sp,
                                       ),
                                     ),
                                   )

@@ -52,7 +52,7 @@ class SliverAppBarHeader extends StatelessWidget {
       pinned: true,
       centerTitle: true,
       stretch: true,
-      expandedHeight: 350.h,
+      expandedHeight: 315,
       leading: InkWell(
         onTap: () => Navigator.pop(context),
         child: Padding(
@@ -99,7 +99,7 @@ class SliverAppBarHeader extends StatelessWidget {
               top: 0,
               bottom: 0,
               child: Container(
-                height: 230.h,
+                height: 230,
                 decoration: BoxDecoration(
                   color: AppColors.white,
                 ),
@@ -145,13 +145,16 @@ class DetailChildView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 5.h,
+          ),
           RichText(
             text: TextSpan(
               children: [
                 TextSpan(
                   text: localizations.translate("date"),
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 16.sp,
+                        fontSize: 15.sp,
                       ),
                 ),
                 WidgetSpan(
@@ -168,10 +171,10 @@ class DetailChildView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 15.h,
+            height: 5.h,
           ),
           SizedBox(
-            height: 60.sp,
+            height: 55.sp,
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: 7,
@@ -196,7 +199,7 @@ class DetailChildView extends StatelessWidget {
                 TextSpan(
                   text: localizations.translate("time"),
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 16.sp,
+                        fontSize: 15.sp,
                       ),
                 ),
                 WidgetSpan(
@@ -213,7 +216,7 @@ class DetailChildView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 15.h,
+            height: 5.h,
           ),
           GridView.builder(
             shrinkWrap: true,

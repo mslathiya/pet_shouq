@@ -41,7 +41,7 @@ class TabItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    fontSize: 16.sp,
+                    fontSize: 14.sp,
                     height: 2,
                     color: isSelected ? AppColors.white : AppColors.hintColor,
                   ),

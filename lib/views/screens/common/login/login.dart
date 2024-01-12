@@ -118,10 +118,13 @@ class _LoginState extends State<Login> {
                           Align(
                             alignment: Alignment.center,
                             child: ButtonView(
-                              onTap: () => Navigator.pushNamed(
-                                context,
-                                verification,
-                              ),
+                              isLoading: false,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  verification,
+                                );
+                              },
                               buttonTitle: t.translate("btn_login"),
                               width: width - 20,
                             ),

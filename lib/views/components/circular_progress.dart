@@ -8,13 +8,15 @@ class CircleProgressBar extends StatefulWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final double? value;
+  final VoidCallback onAnimationEnd;
 
   const CircleProgressBar({
     super.key,
-    this.animationDuration = const Duration(seconds: 1),
+    this.animationDuration = const Duration(seconds: 6),
     this.backgroundColor = const Color(0x00000000),
     required this.foregroundColor,
     this.value = 0,
+    required this.onAnimationEnd,
   });
 
   @override
@@ -39,17 +41,25 @@ class CircleProgressBarState extends State<CircleProgressBar>
     _controller = AnimationController(
       duration: widget.animationDuration,
       vsync: this,
-    );
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          widget.onAnimationEnd();
+        }
+      });
 
     curve = CurvedAnimation(
       parent: _controller!,
       curve: Curves.easeInOut,
     );
 
-    // Build the initial required tweens.
+    // Build the initial required tween.
+    // valueTween = Tween<double>(
+    //   begin: 0,
+    //   end: widget.value,
+    // );
     valueTween = Tween<double>(
       begin: 0,
-      end: widget.value,
+      end: 1,
     );
 
     _controller!.forward();
@@ -65,12 +75,16 @@ class CircleProgressBarState extends State<CircleProgressBar>
       double beginValue = valueTween?.evaluate(curve) ?? oldWidget.value!;
 
       // Update the value tween.
+      // valueTween = Tween<double>(
+      //   begin: beginValue,
+      //   end: widget.value,
+      // );
       valueTween = Tween<double>(
-        begin: beginValue,
-        end: widget.value,
+        begin: 0,
+        end: 1,
       );
 
-      // Clear cached color tweens when the color hasn't changed.
+      // Clear cached color tween when the color hasn't changed.
       if (oldWidget.backgroundColor != widget.backgroundColor) {
         backgroundColorTween = ColorTween(
           begin: oldWidget.backgroundColor,

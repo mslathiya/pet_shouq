@@ -27,7 +27,7 @@ class MedicalSpecification extends StatelessWidget {
               title: '3 Years',
               textStyle: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 15.sp,
+                fontSize: 13.sp,
               ),
             ),
           ),
@@ -42,7 +42,7 @@ class MedicalSpecification extends StatelessWidget {
               title: 'Female',
               textStyle: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 15.sp,
+                fontSize: 13.sp,
               ),
             ),
           ),
@@ -57,7 +57,7 @@ class MedicalSpecification extends StatelessWidget {
               title: '70 Pounds',
               textStyle: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 15.sp,
+                fontSize: 13.sp,
               ),
             ),
           )

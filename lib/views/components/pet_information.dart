@@ -22,11 +22,8 @@ class PetInformation extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                 ),
-          ),
-          SizedBox(
-            height: 3.h,
           ),
           const LabelWithIcon(
             asset: AppAssets.icCalendar,

@@ -56,7 +56,7 @@ class VetAppointmentListItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
-                        ?.copyWith(fontSize: 16.sp, height: 2),
+                        ?.copyWith(fontSize: 15.sp, height: 2),
                   ),
                 ),
               ),
@@ -102,19 +102,16 @@ class VetAppointmentListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const LabelWithIcon(
+                          LabelWithIcon(
                             asset: AppAssets.icPetPaw,
                             value: 'Bella',
                           ),
-                          SizedBox(
-                            height: 3.h,
-                          ),
-                          const LabelWithIcon(
+                          LabelWithIcon(
                             asset: AppAssets.icHospital,
                             value: 'Roselyn Felton',
                           ),
@@ -145,9 +142,6 @@ class VetAppointmentListItem extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                SizedBox(
-                  height: 3.h,
                 ),
                 SizedBox(
                   width: 170.sp,

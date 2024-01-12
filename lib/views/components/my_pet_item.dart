@@ -83,8 +83,8 @@ class MyPetItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   child: Image.asset(
                     AppAssets.dog,
-                    height: 70.h,
-                    width: 67.w,
+                    height: 60.h,
+                    width: 64.w,
                     fit: BoxFit.cover,
                   ),
                 ),

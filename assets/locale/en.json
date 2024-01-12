@@ -342,6 +342,7 @@
     "lbl_state": "State",
     "hint_state": "Enter State",
     "availability": "Availability",
+    "add_availability": "Add Availability",
     "closed": "Closed",
     "start_time": "Start Time",
     "end_time": "End Time",

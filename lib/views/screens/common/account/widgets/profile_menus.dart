@@ -29,7 +29,7 @@ class ProfileMenus extends StatelessWidget {
             t.translate("account"),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                 ),
           ),
         ),
@@ -70,7 +70,7 @@ class ProfileMenus extends StatelessWidget {
             t.translate("help"),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                 ),
           ),
         ),

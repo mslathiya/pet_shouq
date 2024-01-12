@@ -53,17 +53,19 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
       body: _mainWrapperBody(),
-      bottomNavigationBar: AnimatedBottomBar(
-        itemList: items,
-        currentIndex: currentIndex,
-        onTapMenu: (int value) {
-          pageController.animateToPage(
-            value,
-            duration: const Duration(milliseconds: 10),
-            curve: Curves.fastLinearToSlowEaseIn,
-          );
-        },
-        localizations: t,
+      bottomNavigationBar: SafeArea(
+        child: AnimatedBottomBar(
+          itemList: items,
+          currentIndex: currentIndex,
+          onTapMenu: (int value) {
+            pageController.animateToPage(
+              value,
+              duration: const Duration(milliseconds: 10),
+              curve: Curves.fastLinearToSlowEaseIn,
+            );
+          },
+          localizations: t,
+        ),
       ),
     );
   }

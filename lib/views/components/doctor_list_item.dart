@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:pet_shouq/helper/helpers.dart';
 
+import '../../helper/helpers.dart';
 import '../../theme/theme.dart';
+import 'label_with_icon.dart';
 
 class DoctorListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
@@ -59,32 +59,10 @@ class DoctorListItem extends StatelessWidget {
                       .displayMedium
                       ?.copyWith(fontSize: 16.sp, height: 2),
                 ),
-                SizedBox(
-                  height: 5.h,
+                const LabelWithIcon(
+                  asset: AppAssets.icDoctor,
+                  value: 'Acute Kidney Disease',
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(
-                      AppAssets.icDoctor,
-                      height: 16.sp,
-                      width: 16.sp,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8.sp,
-                      ),
-                      child: Text(
-                        'Acute Kidney Disease',
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),

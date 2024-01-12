@@ -6,6 +6,7 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+  animation_wrappers: ^3.0.0
   cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
   country_code_picker: ^3.0.0

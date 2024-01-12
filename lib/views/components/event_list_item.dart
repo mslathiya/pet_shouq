@@ -55,7 +55,7 @@ class EventListItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
-                        ?.copyWith(fontSize: 16.sp, height: 2),
+                        ?.copyWith(fontSize: 15.sp, height: 1.5),
                   ),
                 ),
                 Padding(
@@ -71,15 +71,9 @@ class EventListItem extends StatelessWidget {
                               asset: AppAssets.icHospital,
                               value: 'Rimadyl',
                             ),
-                            SizedBox(
-                              height: 3.h,
-                            ),
                             const LabelWithIcon(
                               asset: AppAssets.icPetPaw,
                               value: 'Max',
-                            ),
-                            SizedBox(
-                              height: 3.h,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,

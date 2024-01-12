@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(375, 790),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
             return supportedLocales.first;
           },
           locale: const Locale('en'),
-          initialRoute: vetAvailability,
+          initialRoute: intro,
         );
       },
     );

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
+import '../../../../components/components.dart';
 
 class ClinicInfo extends StatelessWidget {
   const ClinicInfo({
@@ -18,7 +19,7 @@ class ClinicInfo extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 12.sp,
-        vertical: 10.sp,
+        vertical: 5.sp,
       ),
       margin: EdgeInsets.only(
         left: 10.sp,
@@ -50,36 +51,11 @@ class ClinicInfo extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(fontSize: 16.sp, height: 2),
+                ?.copyWith(fontSize: 14.sp, height: 2),
           ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SvgPicture.asset(
-                AppAssets.icDoctor,
-                height: 16.sp,
-                width: 16.sp,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8.sp,
-                ),
-                child: Text(
-                  'Acute Kidney Disease',
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 5.h,
+          const LabelWithIcon(
+            asset: AppAssets.icDoctor,
+            value: 'Acute Kidney Disease',
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,14 +82,17 @@ class ClinicInfo extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .displayMedium
-                          ?.copyWith(fontSize: 16.sp, height: 2),
+                          ?.copyWith(fontSize: 15.sp, height: 2),
                     ),
                     Text(
                       'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore, karnataka - 560016',
                       textAlign: TextAlign.left,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(fontSize: 12.sp),
                     )
                   ],
                 ),

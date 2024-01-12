@@ -89,7 +89,7 @@ class _ProfileState extends State<Profile> {
                         buttonTitle: t.translate("btn_logout"),
                         width: width * .45,
                         buttonStyle: TextStyle(
-                          fontSize: 14.sp,
+                          fontSize: 8.sp,
                         ),
                       ),
                     ),
@@ -105,7 +105,7 @@ class _ProfileState extends State<Profile> {
                         buttonColor: AppColors.deleteButton,
                         buttonStyle: TextStyle(
                           color: AppColors.redColor,
-                          fontSize: 14.sp,
+                          fontSize: 8.sp,
                         ),
                       ),
                     ),
@@ -137,7 +137,9 @@ class _ProfileState extends State<Profile> {
           label: t.translate("btn_logout"),
           subLabel: t.translate("message_logout"),
           buttonText: t.translate("btn_logout"),
-          onPressButton: () {},
+          onPressButton: () {
+            Navigator.pushNamedAndRemoveUntil(context, login, (_) => false);
+          },
           secondaryButtonText: t.translate("btn_cancel"),
           onPressSecondaryButton: () {},
         );
@@ -176,7 +178,9 @@ class _ProfileState extends State<Profile> {
           label: t.translate("account_deletion"),
           subLabel: t.translate("account_deletion_message"),
           buttonText: t.translate("btn_delete"),
-          onPressButton: () {},
+          onPressButton: () {
+            Navigator.pushNamedAndRemoveUntil(context, login, (_) => false);
+          },
           secondaryButtonText: t.translate("btn_cancel"),
           onPressSecondaryButton: () {},
         );

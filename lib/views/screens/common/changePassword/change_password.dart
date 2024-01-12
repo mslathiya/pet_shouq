@@ -20,7 +20,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Scaffold(
       appBar: HeaderWithBack(
         title: t.translate("screen_change_password"),
-        onPressBack: () {},
+        onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
         child: LayoutBuilder(

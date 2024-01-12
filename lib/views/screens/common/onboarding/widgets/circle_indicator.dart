@@ -11,6 +11,7 @@ class CircleIndicator extends StatelessWidget {
   final int totalPage;
   final VoidCallback onPressNext;
   final VoidCallback onPressSkip;
+  final VoidCallback onAnimationEnd;
 
   const CircleIndicator({
     super.key,
@@ -19,6 +20,7 @@ class CircleIndicator extends StatelessWidget {
     required this.totalPage,
     required this.onPressNext,
     required this.onPressSkip,
+    required this.onAnimationEnd,
   });
 
   @override
@@ -33,6 +35,7 @@ class CircleIndicator extends StatelessWidget {
             backgroundColor: AppColors.primary,
             foregroundColor: AppColors.secondary,
             value: percent,
+            onAnimationEnd: onAnimationEnd,
           ),
         ),
         Container(

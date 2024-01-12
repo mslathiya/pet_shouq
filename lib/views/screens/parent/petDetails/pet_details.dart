@@ -49,7 +49,7 @@ class AppBarHeader extends StatelessWidget {
       pinned: true,
       centerTitle: true,
       stretch: true,
-      expandedHeight: 280.h,
+      expandedHeight: 290,
       leading: InkWell(
         onTap: () => Navigator.pop(context),
         child: Padding(
@@ -106,7 +106,7 @@ class AppBarHeader extends StatelessWidget {
               tag: "pet0",
               child: Image.asset(
                 AppAssets.dogDetails,
-                height: 230.h,
+                height: 270,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -116,7 +116,7 @@ class AppBarHeader extends StatelessWidget {
               right: 0,
               top: 0,
               child: Container(
-                height: 230.h,
+                height: 270,
                 decoration: BoxDecoration(
                   color: AppColors.fontMain.withOpacity(0.3),
                 ),
@@ -159,7 +159,7 @@ class PetDetailView extends StatelessWidget {
             localizations.translate("pet_menu"),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: 15.sp,
                 ),
           ),
         ),
@@ -197,7 +197,10 @@ class PetDetailView extends StatelessWidget {
           title: localizations.translate("special_needs"),
           iconName: AppAssets.icSpecialNeeds,
           onPressMenu: () {},
-        )
+        ),
+        SizedBox(
+          height: 15.h,
+        ),
       ],
     );
   }

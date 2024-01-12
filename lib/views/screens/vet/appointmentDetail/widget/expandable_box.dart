@@ -35,7 +35,9 @@ class ExpandableBox extends StatelessWidget {
           title: Text(
             title,
             textAlign: TextAlign.left,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontSize: 15.sp,
+                ),
           ),
           expandedAlignment: Alignment.topLeft,
           children: customWidget != null

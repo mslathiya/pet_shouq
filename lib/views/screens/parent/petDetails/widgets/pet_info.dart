@@ -42,8 +42,8 @@ class PetInfo extends StatelessWidget {
           const PetInformation(),
           SvgPicture.asset(
             AppAssets.icEdit,
-            height: 42.sp,
-            width: 42.sp,
+            height: 38.sp,
+            width: 38.sp,
           )
         ],
       ),

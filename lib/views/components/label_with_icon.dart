@@ -18,19 +18,19 @@ class LabelWithIcon extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 3.w,
-        vertical: 5.h,
+        vertical: 3.h,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: 17.sp,
-            width: 17.sp,
+            height: 16.sp,
+            width: 16.sp,
             child: SvgPicture.asset(
               asset,
-              height: 17.sp,
-              width: 17.sp,
+              height: 16.sp,
+              width: 16.sp,
             ),
           ),
           SizedBox(
@@ -44,7 +44,7 @@ class LabelWithIcon extends StatelessWidget {
                   .textTheme
                   .headlineSmall
                   ?.copyWith(
-                    fontSize: 13.sp,
+                    fontSize: 12.sp,
                   )
                   .merge(textStyle),
             ),
