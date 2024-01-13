@@ -25,111 +25,113 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
         title: t.translate("screen_feeding_schedule"),
         onPressBack: () => Navigator.pop(context),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          //Bottom List
-          Expanded(
-            child: ListView.builder(
-              itemCount: 15,
-              padding: EdgeInsets.only(
-                top: 10.sp,
-                bottom: 15.sp,
-              ),
-              itemBuilder: (_, index) {
-                return FeedScheduleListItem(
-                  onToggleSwitch: (bool isToggled) {
-                    if (isToggled) {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        showDragHandle: false,
-                        useSafeArea: true,
-                        enableDrag: false,
-                        isDismissible: false,
-                        constraints: BoxConstraints(
-                          maxWidth: width * 0.95,
-                        ),
-                        backgroundColor: Colors.transparent,
-                        builder: (context) => Container(
-                          height: 162.h,
-                          width: width * 0.95,
-                          margin: EdgeInsets.all(
-                            10.sp,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.sp),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.fontMain.withOpacity(0.13),
-                                blurRadius: 5.sp,
-                                offset: const Offset(0, 0),
-                              )
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SheetMenuItem(
-                                menuName: t.translate("btn_off_tomorrow"),
-                                onTapMenu: () => Navigator.pop(context),
-                              ),
-                              Divider(
-                                height: 1,
-                                color: AppColors.inputBorder,
-                              ),
-                              SheetMenuItem(
-                                menuName: t.translate("btn_no_repeat"),
-                                onTapMenu: () => Navigator.pop(context),
-                              ),
-                              Divider(
-                                height: 1,
-                                color: AppColors.inputBorder,
-                              ),
-                              SheetMenuItem(
-                                menuName: t.translate("btn_cancel"),
-                                onTapMenu: () => Navigator.pop(context),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: ButtonView(
-              onTap: () => Navigator.pushNamed(context, petAddSchedule),
-              buttonTitle: t.translate("screen_add_feed_schedule"),
-              width: width - 20,
-              leftWidget: Padding(
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            //Bottom List
+            Expanded(
+              child: ListView.builder(
+                itemCount: 15,
                 padding: EdgeInsets.only(
-                  right: 5.w,
+                  top: 10.sp,
+                  bottom: 15.sp,
                 ),
-                child: Icon(
-                  Entypo.plus,
-                  size: 20.sp,
-                  color: AppColors.white,
+                itemBuilder: (_, index) {
+                  return FeedScheduleListItem(
+                    onToggleSwitch: (bool isToggled) {
+                      if (isToggled) {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          showDragHandle: false,
+                          useSafeArea: true,
+                          enableDrag: false,
+                          isDismissible: false,
+                          constraints: BoxConstraints(
+                            maxWidth: width * 0.95,
+                          ),
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => Container(
+                            height: 162.h,
+                            width: width * 0.95,
+                            margin: EdgeInsets.all(
+                              10.sp,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.sp),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.fontMain.withOpacity(0.13),
+                                  blurRadius: 5.sp,
+                                  offset: const Offset(0, 0),
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SheetMenuItem(
+                                  menuName: t.translate("btn_off_tomorrow"),
+                                  onTapMenu: () => Navigator.pop(context),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  color: AppColors.inputBorder,
+                                ),
+                                SheetMenuItem(
+                                  menuName: t.translate("btn_no_repeat"),
+                                  onTapMenu: () => Navigator.pop(context),
+                                ),
+                                Divider(
+                                  height: 1,
+                                  color: AppColors.inputBorder,
+                                ),
+                                SheetMenuItem(
+                                  menuName: t.translate("btn_cancel"),
+                                  onTapMenu: () => Navigator.pop(context),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: ButtonView(
+                onTap: () => Navigator.pushNamed(context, petAddSchedule),
+                buttonTitle: t.translate("screen_add_feed_schedule"),
+                width: width - 20,
+                buttonStyle: TextStyle(
+                  fontSize: 9.sp,
+                ),
+                leftWidget: Padding(
+                  padding: EdgeInsets.only(
+                    right: 5.w,
+                  ),
+                  child: Icon(
+                    Entypo.plus,
+                    size: 20.sp,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

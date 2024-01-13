@@ -24,7 +24,7 @@ class ClinicInfo extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 5.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -51,11 +51,18 @@ class ClinicInfo extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(fontSize: 14.sp, height: 2),
+                ?.copyWith(fontSize: 14.sp),
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           const LabelWithIcon(
             asset: AppAssets.icDoctor,
             value: 'Acute Kidney Disease',
+            padding: EdgeInsets.zero,
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,11 +70,11 @@ class ClinicInfo extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppAssets.icLocationPin,
-                height: 25.sp,
-                width: 25.sp,
+                height: 22.sp,
+                width: 22.sp,
               ),
               SizedBox(
-                width: 10.w,
+                width: 5.w,
               ),
               Expanded(
                 child: Column(
@@ -79,10 +86,10 @@ class ClinicInfo extends StatelessWidget {
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayMedium
-                          ?.copyWith(fontSize: 15.sp, height: 2),
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                fontSize: 14.sp,
+                              ),
                     ),
                     Text(
                       'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore, karnataka - 560016',

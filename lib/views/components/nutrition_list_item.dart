@@ -25,7 +25,7 @@ class NutritionListItem extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -61,15 +61,23 @@ class NutritionListItem extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .displayMedium
-                          ?.copyWith(fontSize: 16.sp),
+                          ?.copyWith(fontSize: 14.sp),
+                    ),
+                    SizedBox(
+                      height: 5.h,
                     ),
                     const LabelWithIcon(
                       asset: AppAssets.icBestProduct,
                       value: 'ABC Pet Foods',
+                      padding: EdgeInsets.zero,
+                    ),
+                    SizedBox(
+                      height: 5.h,
                     ),
                     const LabelWithIcon(
                       asset: AppAssets.icBreedType,
                       value: 'Puppy',
+                      padding: EdgeInsets.zero,
                     ),
                   ],
                 ),
@@ -87,7 +95,6 @@ class NutritionListItem extends StatelessWidget {
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w900,
                                 color: AppColors.secondary,
-                                height: 1.3,
                               ),
                       children: [
                         TextSpan(
@@ -104,7 +111,7 @@ class NutritionListItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 8.h,
+                    height: 4.h,
                   ),
                   Material(
                     shape: RoundedRectangleBorder(
@@ -144,6 +151,7 @@ class NutritionListItem extends StatelessWidget {
                 child: const LabelWithIcon(
                   asset: AppAssets.icDocBag,
                   value: 'Dog',
+                  padding: EdgeInsets.zero,
                 ),
               ),
               SizedBox(
@@ -151,6 +159,7 @@ class NutritionListItem extends StatelessWidget {
                 child: const LabelWithIcon(
                   asset: AppAssets.icFoodType,
                   value: 'Dry Kibble',
+                  padding: EdgeInsets.zero,
                 ),
               )
             ],

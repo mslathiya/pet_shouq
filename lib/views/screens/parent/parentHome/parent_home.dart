@@ -31,12 +31,12 @@ class _ParentHomeState extends State<ParentHome> {
             const TopSlider(),
             // Slider
             SizedBox(
-              height: 15.h,
+              height: 5.h,
             ),
             //Bottom List
             Expanded(
               child: ListView.builder(
-                itemCount: 15,
+                itemCount: 10,
                 padding: EdgeInsets.only(
                   top: 10.sp,
                   bottom: 15.sp,

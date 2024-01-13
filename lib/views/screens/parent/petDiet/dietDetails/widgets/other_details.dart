@@ -45,18 +45,22 @@ class OtherDetails extends StatelessWidget {
           InfoLabel(
             title: t.translate("food_type"),
             description: 'Small dog treat',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("portion_size"),
             description: '2 treats',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("special_instruction"),
             description: 'Given as a reward for good behavior',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("weight"),
             description: '45.2 pounds',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_shouq/config/route.config.dart';
 
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
@@ -44,8 +44,8 @@ class DietInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 70.w,
-                  width: 70.w,
+                  height: 65.w,
+                  width: 65.w,
                   decoration: BoxDecoration(
                     color: AppColors.petType,
                     borderRadius: BorderRadius.all(
@@ -80,15 +80,20 @@ class DietInfo extends StatelessWidget {
                               ?.copyWith(fontSize: 14.sp),
                         ),
                         SizedBox(
-                          height: 3.h,
+                          height: 5.h,
                         ),
                         const LabelWithIcon(
                           asset: AppAssets.icCalendar,
                           value: '2023-10-15',
+                          padding: EdgeInsets.zero,
+                        ),
+                        SizedBox(
+                          height: 5.h,
                         ),
                         const LabelWithIcon(
                           asset: AppAssets.icWaterGlass,
                           value: 'Yes',
+                          padding: EdgeInsets.zero,
                         ),
                       ],
                     ),
@@ -97,15 +102,8 @@ class DietInfo extends StatelessWidget {
               ],
             ),
           ),
-          Material(
-            child: InkWell(
-              onTap: () {},
-              child: SvgPicture.asset(
-                AppAssets.icEdit,
-                height: 42.sp,
-                width: 42.sp,
-              ),
-            ),
+          EditButton(
+            onPressEdit: () => Navigator.pushNamed(context, petAddDiet),
           ),
         ],
       ),

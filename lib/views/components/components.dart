@@ -38,6 +38,7 @@ export "banner_slider.dart";
 export "vet_appointment_list_item.dart";
 export 'tab_bar_widget.dart';
 export "tab_item.dart";
-export "date_time_item.dart";
+export 'single_label_item.dart';
 export "shadow_box.dart";
 export "reschedule_appointment.dart";
+export "edit_button.dart";

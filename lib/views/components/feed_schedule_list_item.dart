@@ -23,7 +23,7 @@ class FeedScheduleListItem extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -55,11 +55,15 @@ class FeedScheduleListItem extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .displayMedium
-                      ?.copyWith(fontSize: 15.sp),
+                      ?.copyWith(fontSize: 14.sp),
+                ),
+                SizedBox(
+                  height: 5.h,
                 ),
                 const LabelWithIcon(
                   asset: AppAssets.icFeedTag,
                   value: 'Morning Feeding',
+                  padding: EdgeInsets.zero,
                 ),
               ],
             ),

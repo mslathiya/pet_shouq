@@ -17,12 +17,13 @@ class DietListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
+        horizontal: 12.sp,
         vertical: 10.sp,
       ),
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -46,44 +47,40 @@ class DietListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 12.w, right: 12.w),
-                  child: Text(
-                    'Dry dog food (Brand X)',
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium
-                        ?.copyWith(fontSize: 16.sp, height: 2),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.w,
-                  ),
-                  child: Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    alignment: WrapAlignment.start,
-                    direction: Axis.horizontal,
-                    children: [
-                      SizedBox(
-                        width: 110.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icCalendar,
-                          value: '2023-10-15',
-                        ),
+                Text(
+                  'Dry dog food (Brand X)',
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        fontSize: 14.sp,
                       ),
-                      SizedBox(
-                        width: 100.sp,
-                        child: const LabelWithIcon(
-                          asset: AppAssets.icWaterGlass,
-                          value: 'Yes',
-                        ),
-                      )
-                    ],
-                  ),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.start,
+                  direction: Axis.horizontal,
+                  children: [
+                    SizedBox(
+                      width: 110.sp,
+                      child: const LabelWithIcon(
+                        asset: AppAssets.icCalendar,
+                        value: '2023-10-15',
+                        padding: EdgeInsets.zero,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100.sp,
+                      child: const LabelWithIcon(
+                        asset: AppAssets.icWaterGlass,
+                        value: 'Yes',
+                        padding: EdgeInsets.zero,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
@@ -110,9 +107,6 @@ class DietListItem extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 8.w,
           ),
         ],
       ),

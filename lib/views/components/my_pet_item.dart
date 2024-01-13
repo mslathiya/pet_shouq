@@ -24,18 +24,18 @@ class MyPetItem extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       child: Slidable(
         key: Key(itemIndex.toString()),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
-          extentRatio: 0.3,
+          extentRatio: 0.35,
           children: [
             CustomSlidableAction(
               onPressed: (context) => onDeletePet,
               child: Container(
-                width: 50.w,
+                width: 45.w,
                 height: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
@@ -44,11 +44,11 @@ class MyPetItem extends StatelessWidget {
                   color: AppColors.deleteBackground,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(13.0),
                   child: SvgPicture.asset(
                     AppAssets.icDelete,
-                    height: 25.sp,
-                    width: 25.sp,
+                    height: 20.sp,
+                    width: 20.sp,
                   ),
                 ),
               ),

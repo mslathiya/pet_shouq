@@ -136,6 +136,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                   ? AppColors.timeSelector
                                   : AppColors.secondary,
                               buttonStyle: TextStyle(
+                                fontSize: 7.sp,
                                 color: activeTab == 2
                                     ? AppColors.grayFaded
                                     : AppColors.white,
@@ -156,6 +157,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                   ? AppColors.timeSelector
                                   : AppColors.secondary,
                               buttonStyle: TextStyle(
+                                fontSize: 7.sp,
                                 color: activeTab == 1
                                     ? AppColors.grayFaded
                                     : AppColors.white,
@@ -313,6 +315,9 @@ class _AddScheduleState extends State<AddSchedule> {
                           ),
                           buttonTitle: t.translate("btn_save"),
                           width: width - 20,
+                          buttonStyle: TextStyle(
+                            fontSize: 8.sp,
+                          ),
                         ),
                       ),
                       SizedBox(

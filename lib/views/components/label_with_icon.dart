@@ -6,20 +6,25 @@ class LabelWithIcon extends StatelessWidget {
   final String asset;
   final String value;
   final TextStyle? textStyle;
+  final EdgeInsetsGeometry? padding;
+
   const LabelWithIcon({
     super.key,
     required this.asset,
     required this.value,
     this.textStyle,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 3.w,
-        vertical: 3.h,
-      ),
+      padding: padding != null
+          ? padding!
+          : EdgeInsets.symmetric(
+              horizontal: 3.w,
+              vertical: 3.h,
+            ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

@@ -22,7 +22,7 @@ class PetOtherDetails extends StatelessWidget {
         bottom: 15.sp,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: 12.sp,
+        horizontal: 10.sp,
         vertical: 5.sp,
       ),
       decoration: BoxDecoration(
@@ -56,29 +56,34 @@ class PetOtherDetails extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                 ),
           ),
           children: [
             InfoLabel(
               title: localizations.translate("chip_number"),
               description: '900133000003382',
+              padding: EdgeInsets.only(bottom: 5.h),
             ),
             InfoLabel(
               title: localizations.translate("spayed"),
               description: 'Yes',
+              padding: EdgeInsets.only(bottom: 5.h),
             ),
             InfoLabel(
               title: localizations.translate("pedigree_front"),
               description: 'Lorem ipsum',
+              padding: EdgeInsets.only(bottom: 5.h),
             ),
             InfoLabel(
               title: localizations.translate("pedigree_back"),
               description: 'Lorem ipsum',
+              padding: EdgeInsets.only(bottom: 5.h),
             ),
             InfoLabel(
               title: localizations.translate("allergies"),
               description: 'Lorem ipsum',
+              padding: EdgeInsets.only(bottom: 5.h),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -100,7 +105,7 @@ class PetOtherDetails extends StatelessWidget {
                         ?.copyWith(fontSize: 13.sp),
                   ),
                   SizedBox(
-                    height: 2.h,
+                    height: 5.h,
                   ),
                   Text(
                     "Lorem Ipsum is simply dummy text of the of printing and typesetting industry. Lorem by Ipsum has been the industry's standard ",

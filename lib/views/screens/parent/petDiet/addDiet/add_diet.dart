@@ -149,6 +149,9 @@ class _AddDietState extends State<AddDiet> {
                           ),
                           buttonTitle: t.translate("btn_save"),
                           width: width - 20,
+                          buttonStyle: TextStyle(
+                            fontSize: 8.sp,
+                          ),
                         ),
                       ),
                       SizedBox(

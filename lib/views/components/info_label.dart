@@ -8,25 +8,30 @@ class InfoLabel extends StatelessWidget {
   final String description;
   final bool? allPadding;
   final Widget? customRight;
+  final EdgeInsetsGeometry? padding;
+
   const InfoLabel({
     super.key,
     required this.title,
     required this.description,
     this.allPadding = true,
     this.customRight,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: allPadding == true
-          ? EdgeInsets.symmetric(
-              horizontal: 3.w,
-              vertical: 5.h,
-            )
-          : EdgeInsets.symmetric(
-              vertical: 5.h,
-            ),
+      padding: padding != null
+          ? padding!
+          : allPadding == true
+              ? EdgeInsets.symmetric(
+                  horizontal: 3.w,
+                  vertical: 5.h,
+                )
+              : EdgeInsets.symmetric(
+                  vertical: 5.h,
+                ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

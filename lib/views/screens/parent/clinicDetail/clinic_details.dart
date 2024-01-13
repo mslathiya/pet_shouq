@@ -52,7 +52,7 @@ class SliverAppBarHeader extends StatelessWidget {
       pinned: true,
       centerTitle: true,
       stretch: true,
-      expandedHeight: 315,
+      expandedHeight: 300,
       leading: InkWell(
         onTap: () => Navigator.pop(context),
         child: Padding(
@@ -67,7 +67,7 @@ class SliverAppBarHeader extends StatelessWidget {
         ),
       ),
       title: Text(
-        "Detail page",
+        localizations.translate("screen_detail_page"),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               height: 2,
@@ -118,7 +118,7 @@ class SliverAppBarHeader extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: -10,
+              bottom: 5,
               left: 0,
               right: 0,
               child: ClinicInfo(localizations: localizations),
@@ -148,27 +148,12 @@ class DetailChildView extends StatelessWidget {
           SizedBox(
             height: 5.h,
           ),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: localizations.translate("date"),
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 15.sp,
-                      ),
+          InputHeader(
+            headerLabel: localizations.translate("date"),
+            compulsory: true,
+            headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 14.sp,
                 ),
-                WidgetSpan(
-                  child: SizedBox(width: 5.w),
-                ),
-                TextSpan(
-                  text: '*',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(color: Colors.red),
-                ),
-              ],
-            ),
           ),
           SizedBox(
             height: 5.h,
@@ -193,27 +178,12 @@ class DetailChildView extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: localizations.translate("time"),
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 15.sp,
-                      ),
+          InputHeader(
+            headerLabel: localizations.translate("time"),
+            compulsory: true,
+            headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontSize: 14.sp,
                 ),
-                WidgetSpan(
-                  child: SizedBox(width: 5.w),
-                ),
-                TextSpan(
-                  text: '*',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(color: Colors.red),
-                ),
-              ],
-            ),
           ),
           SizedBox(
             height: 5.h,
@@ -246,6 +216,9 @@ class DetailChildView extends StatelessWidget {
               onTap: () => _dialogBuilder(context, localizations),
               buttonTitle: localizations.translate("btn_book_now"),
               width: width - 40,
+              buttonStyle: TextStyle(
+                fontSize: 7.sp,
+              ),
             ),
           )
         ],

@@ -14,7 +14,7 @@ class StyledSwitch extends StatefulWidget {
 
 class _StyledSwitchState extends State<StyledSwitch> {
   bool isToggled = false;
-  double size = 26;
+  double size = 24;
   double innerPadding = 0;
 
   @override

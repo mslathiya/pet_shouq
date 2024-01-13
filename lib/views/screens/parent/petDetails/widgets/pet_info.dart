@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
@@ -19,7 +18,7 @@ class PetInfo extends StatelessWidget {
         bottom: 15.sp,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: 12.sp,
+        horizontal: 10.sp,
         vertical: 10.sp,
       ),
       decoration: BoxDecoration(
@@ -40,11 +39,9 @@ class PetInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const PetInformation(),
-          SvgPicture.asset(
-            AppAssets.icEdit,
-            height: 38.sp,
-            width: 38.sp,
-          )
+          EditButton(
+            onPressEdit: () {},
+          ),
         ],
       ),
     );

@@ -25,7 +25,7 @@ class DoctorListItem extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -57,11 +57,15 @@ class DoctorListItem extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .displayMedium
-                      ?.copyWith(fontSize: 16.sp, height: 2),
+                      ?.copyWith(fontSize: 14.sp),
+                ),
+                SizedBox(
+                  height: 8.h,
                 ),
                 const LabelWithIcon(
                   asset: AppAssets.icDoctor,
                   value: 'Acute Kidney Disease',
+                  padding: EdgeInsets.zero,
                 ),
               ],
             ),

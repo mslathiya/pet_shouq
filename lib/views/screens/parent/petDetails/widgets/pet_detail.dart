@@ -15,7 +15,7 @@ class PetDetail extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       child: Row(
         children: [

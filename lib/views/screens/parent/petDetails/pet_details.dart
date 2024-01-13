@@ -159,7 +159,7 @@ class PetDetailView extends StatelessWidget {
             localizations.translate("pet_menu"),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                 ),
           ),
         ),

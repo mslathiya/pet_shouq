@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class InputHeader extends StatelessWidget {
   final String? headerLabel;
   final bool compulsory;
+  final TextStyle? headerStyle;
 
   const InputHeader({
     super.key,
     this.headerLabel,
     this.compulsory = false,
+    this.headerStyle,
   });
 
   @override
@@ -22,7 +24,10 @@ class InputHeader extends StatelessWidget {
             children: [
               TextSpan(
                 text: headerLabel!,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.merge(headerStyle),
               ),
               WidgetSpan(
                 child: SizedBox(width: 5.w),

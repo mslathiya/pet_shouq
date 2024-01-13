@@ -25,13 +25,21 @@ class PetInformation extends StatelessWidget {
                   fontSize: 14.sp,
                 ),
           ),
+          SizedBox(
+            height: 5.h,
+          ),
           const LabelWithIcon(
             asset: AppAssets.icCalendar,
             value: '21-Dec-2023',
+            padding: EdgeInsets.zero,
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           const LabelWithIcon(
             asset: AppAssets.icBreed,
             value: 'German Shepherd',
+            padding: EdgeInsets.zero,
           ),
         ],
       ),

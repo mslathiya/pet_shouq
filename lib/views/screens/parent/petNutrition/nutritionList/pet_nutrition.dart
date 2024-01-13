@@ -24,53 +24,52 @@ class _PetNutritionState extends State<PetNutrition> {
         title: t.translate("nutrition_feeding"),
         onPressBack: () => Navigator.pop(context),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          //Bottom List
-          Expanded(
-            child: ListView.builder(
-              itemCount: 15,
-              padding: EdgeInsets.only(
-                top: 10.sp,
-                bottom: 15.sp,
-              ),
-              itemBuilder: (_, index) {
-                return NutritionListItem(
-                  t: t,
-                  onViewDetail: () {
-                    Navigator.pushNamed(context, petNutritionDetail);
-                  },
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: ButtonView(
-              onTap: () => Navigator.pushNamed(context, petAddNutrition),
-              buttonTitle: t.translate("screen_nutrition_feeding"),
-              width: width - 20,
-              leftWidget: Padding(
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 15,
                 padding: EdgeInsets.only(
-                  right: 5.w,
+                  top: 10.sp,
+                  bottom: 15.sp,
                 ),
-                child: Icon(
-                  Entypo.plus,
-                  size: 20.sp,
-                  color: AppColors.white,
+                itemBuilder: (_, index) {
+                  return NutritionListItem(
+                    t: t,
+                    onViewDetail: () {
+                      Navigator.pushNamed(context, petNutritionDetail);
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: ButtonView(
+                onTap: () => Navigator.pushNamed(context, petAddNutrition),
+                buttonTitle: t.translate("screen_nutrition_feeding"),
+                width: width - 20,
+                buttonStyle: TextStyle(fontSize: 9.sp),
+                leftWidget: Padding(
+                  padding: EdgeInsets.only(
+                    right: 5.w,
+                  ),
+                  child: Icon(
+                    Entypo.plus,
+                    size: 20.sp,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

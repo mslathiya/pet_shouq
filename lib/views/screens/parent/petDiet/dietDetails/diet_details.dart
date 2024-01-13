@@ -18,14 +18,16 @@ class DietDetails extends StatelessWidget {
         onPressBack: () => Navigator.pop(context),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const DietInfo(),
-            const TimeChart(),
-            OtherDetails(t: t),
-          ],
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const DietInfo(),
+              const TimeChart(),
+              OtherDetails(t: t),
+            ],
+          ),
         ),
       ),
     );
