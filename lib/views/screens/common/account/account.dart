@@ -138,7 +138,7 @@ class _ProfileState extends State<Profile> {
           subLabel: t.translate("message_logout"),
           buttonText: t.translate("btn_logout"),
           onPressButton: () {
-            Navigator.pushNamedAndRemoveUntil(context, login, (_) => false);
+            Navigator.pushNamedAndRemoveUntil(context, intro, (_) => false);
           },
           secondaryButtonText: t.translate("btn_cancel"),
           onPressSecondaryButton: () {},
@@ -179,7 +179,7 @@ class _ProfileState extends State<Profile> {
           subLabel: t.translate("account_deletion_message"),
           buttonText: t.translate("btn_delete"),
           onPressButton: () {
-            Navigator.pushNamedAndRemoveUntil(context, login, (_) => false);
+            Navigator.pushNamedAndRemoveUntil(context, intro, (_) => false);
           },
           secondaryButtonText: t.translate("btn_cancel"),
           onPressSecondaryButton: () {},
