@@ -70,35 +70,33 @@ class VetAvailabilityState extends State<VetAvailability> {
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: TabHeader(
-          title: t.translate("availability"),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 8.h,
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: TabHeader(
+        title: t.translate("availability"),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 8.h,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: availability.length,
+              itemBuilder: (context, index) {
+                Availability item = availability[index];
+                return ListItem(
+                  item: item,
+                  onAddTime: () {
+                    Navigator.pushNamed(context, vetAddAvailability);
+                  },
+                );
+              },
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: availability.length,
-                itemBuilder: (context, index) {
-                  Availability item = availability[index];
-                  return ListItem(
-                    item: item,
-                    onAddTime: () {
-                      Navigator.pushNamed(context, vetAddAvailability);
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

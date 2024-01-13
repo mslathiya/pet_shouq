@@ -16,7 +16,6 @@ class AppointmentInfo extends StatelessWidget {
         left: 10.sp,
         right: 10.sp,
         top: 10.sp,
-        bottom: 5.sp,
       ),
       padding: EdgeInsets.symmetric(
         horizontal: 12.w,
@@ -47,19 +46,28 @@ class AppointmentInfo extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(fontSize: 16.sp, height: 1.5),
+                ?.copyWith(fontSize: 14.sp, height: 1.5),
           ),
           const LabelWithIcon(
             asset: AppAssets.icPetPaw,
             value: 'Bella',
+            padding: EdgeInsets.zero,
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           const LabelWithIcon(
             asset: AppAssets.icAppointmentCard,
             value: 'XBM555B1',
+            padding: EdgeInsets.zero,
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           const LabelWithIcon(
             asset: AppAssets.icEmail,
             value: 'roselynfelton@gmail.com',
+            padding: EdgeInsets.zero,
           ),
         ],
       ),

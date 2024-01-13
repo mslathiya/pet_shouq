@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
@@ -26,7 +25,7 @@ class ProfileInfo extends StatelessWidget {
           padding: EdgeInsets.only(
             left: 12.w,
             right: 12.w,
-            bottom: 15.h,
+            bottom: 10.h,
             top: 20.h,
           ),
           decoration: BoxDecoration(
@@ -48,22 +47,13 @@ class ProfileInfo extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.centerRight,
-                child: Material(
-                  child: InkWell(
-                    onTap: onTapEdit,
-                    child: SvgPicture.asset(
-                      AppAssets.icEdit,
-                      height: 40.sp,
-                      width: 40.sp,
-                    ),
-                  ),
-                ),
+                child: EditButton(onPressEdit: onTapEdit),
               ),
               Text(
                 "Deirdre Starnes",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      fontSize: 16.sp,
+                      fontSize: 15.sp,
                     ),
               ),
               SizedBox(
@@ -74,10 +64,11 @@ class ProfileInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 90.w,
+                    width: 70.w,
                     child: const LabelWithIcon(
                       asset: AppAssets.icGender,
                       value: "Male",
+                      padding: EdgeInsets.zero,
                     ),
                   ),
                   SizedBox(
@@ -88,31 +79,35 @@ class ProfileInfo extends StatelessWidget {
                     child: const LabelWithIcon(
                       asset: AppAssets.icBirthday,
                       value: "20-2-1990",
+                      padding: EdgeInsets.zero,
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 4.sp,
+                height: 5.sp,
               ),
               const LabelWithIcon(
                 asset: AppAssets.icEmail,
                 value: "deirdrestarnes@gmail.com",
+                padding: EdgeInsets.zero,
               ),
               SizedBox(
-                height: 4.sp,
+                height: 5.sp,
               ),
               const LabelWithIcon(
                 asset: AppAssets.icPhone,
                 value: "+1 98250 98250 / +1 98255 98255 ",
+                padding: EdgeInsets.zero,
               ),
               SizedBox(
-                height: 4.sp,
+                height: 5.sp,
               ),
               const LabelWithIcon(
                 asset: AppAssets.icLocationPin,
                 value:
                     "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore, karnataka - 560016",
+                padding: EdgeInsets.zero,
               )
             ],
           ),
@@ -131,7 +126,7 @@ class ProfileInfo extends StatelessWidget {
               child: Image.asset(
                 AppAssets.dog,
                 height: 95.h,
-                width: 95.w,
+                width: 95.h,
                 fit: BoxFit.cover,
               ),
             ),

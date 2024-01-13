@@ -99,24 +99,13 @@ class SliverAppBarHeader extends StatelessWidget {
               top: 0,
               bottom: 0,
               child: Container(
-                height: 230,
+                height: 270,
                 decoration: BoxDecoration(
                   color: AppColors.white,
                 ),
               ),
             ),
             const HeaderSlider(),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              child: Container(
-                height: 230.h,
-                decoration: BoxDecoration(
-                  color: AppColors.fontMain.withOpacity(0.3),
-                ),
-              ),
-            ),
             Positioned(
               bottom: 5,
               left: 0,
@@ -166,7 +155,8 @@ class DetailChildView extends StatelessWidget {
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return const DateItem(
+                return DateItem(
+                  index: index,
                   date: "1",
                   day: "Mon",
                   isSelected: false,

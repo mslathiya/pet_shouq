@@ -96,7 +96,7 @@ class AppBarHeader extends StatelessWidget {
               top: 0,
               bottom: 0,
               child: Container(
-                height: 230.h,
+                height: 270,
                 decoration: BoxDecoration(
                   color: AppColors.white,
                 ),

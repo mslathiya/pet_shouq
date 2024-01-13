@@ -22,7 +22,7 @@ class NutritionInfo extends StatelessWidget {
         left: 10.sp,
         right: 10.sp,
         bottom: 10.sp,
-        top: 10.sp,
+        top: 5.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -42,8 +42,8 @@ class NutritionInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 67.w,
-            width: 67.w,
+            height: 65.w,
+            width: 65.w,
             decoration: BoxDecoration(
               color: AppColors.petType,
               borderRadius: BorderRadius.all(
@@ -78,13 +78,18 @@ class NutritionInfo extends StatelessWidget {
                   const LabelWithIcon(
                     asset: AppAssets.icBestProduct,
                     value: 'ABC Pet Foods',
+                    padding: EdgeInsets.zero,
                   ),
                   SizedBox(
-                    width: 5.h,
+                    height: 5.h,
                   ),
                   const LabelWithIcon(
                     asset: AppAssets.icBreedType,
                     value: 'Puppy',
+                    padding: EdgeInsets.zero,
+                  ),
+                  SizedBox(
+                    height: 5.h,
                   ),
                   Wrap(
                     alignment: WrapAlignment.start,
@@ -97,6 +102,7 @@ class NutritionInfo extends StatelessWidget {
                         child: const LabelWithIcon(
                           asset: AppAssets.icDocBag,
                           value: 'Dog',
+                          padding: EdgeInsets.zero,
                         ),
                       ),
                       SizedBox(
@@ -107,6 +113,7 @@ class NutritionInfo extends StatelessWidget {
                         child: const LabelWithIcon(
                           asset: AppAssets.icFoodType,
                           value: 'Dry Kibble',
+                          padding: EdgeInsets.zero,
                         ),
                       )
                     ],

@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
             return supportedLocales.first;
           },
           locale: const Locale('en'),
-          initialRoute: parentDashboard,
+          initialRoute: vetDashboard,
         );
       },
     );

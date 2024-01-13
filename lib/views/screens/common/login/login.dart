@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
                               onTap: () {
                                 Navigator.pushNamed(
                                   context,
-                                  verification,
+                                  parentDashboard,
                                 );
                               },
                               buttonTitle: t.translate("btn_login"),

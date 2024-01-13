@@ -16,43 +16,41 @@ class ParentHome extends StatefulWidget {
 class _ParentHomeState extends State<ParentHome> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: const MainHeader(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 15.h,
-            ),
-            // Slider
-            const TopSlider(),
-            // Slider
-            SizedBox(
-              height: 5.h,
-            ),
-            //Bottom List
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                padding: EdgeInsets.only(
-                  top: 10.sp,
-                  bottom: 15.sp,
-                ),
-                itemBuilder: (_, index) {
-                  return DoctorListItem(
-                    onViewDetail: () {
-                      Navigator.pushNamed(context, doctorDetails);
-                    },
-                    viewType: ViewType.typeList,
-                  );
-                },
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: const MainHeader(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 5.h,
+          ),
+          // Slider
+          const TopSlider(),
+          // Slider
+          SizedBox(
+            height: 5.h,
+          ),
+          //Bottom List
+          Expanded(
+            child: ListView.builder(
+              itemCount: 10,
+              padding: EdgeInsets.only(
+                top: 10.sp,
+                bottom: 15.sp,
               ),
+              itemBuilder: (_, index) {
+                return DoctorListItem(
+                  onViewDetail: () {
+                    Navigator.pushNamed(context, doctorDetails);
+                  },
+                  viewType: ViewType.typeList,
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

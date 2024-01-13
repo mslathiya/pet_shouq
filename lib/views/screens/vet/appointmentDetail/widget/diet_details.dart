@@ -5,7 +5,7 @@ import 'package:pet_shouq/data/models.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
-import 'expandable_box.dart';
+import '../../../../components/components.dart';
 
 class DietDetails extends StatelessWidget {
   const DietDetails({super.key});

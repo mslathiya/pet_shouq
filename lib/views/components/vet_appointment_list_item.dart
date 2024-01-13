@@ -18,7 +18,7 @@ class VetAppointmentListItem extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -56,7 +56,7 @@ class VetAppointmentListItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
-                        ?.copyWith(fontSize: 15.sp, height: 2),
+                        ?.copyWith(fontSize: 14.sp, height: 1.5),
                   ),
                 ),
               ),
@@ -66,8 +66,8 @@ class VetAppointmentListItem extends StatelessWidget {
                   padding: EdgeInsets.only(
                     left: 10.w,
                     right: 10.w,
-                    top: 5.h,
-                    bottom: 5.h,
+                    top: 3.h,
+                    bottom: 3.h,
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -102,18 +102,23 @@ class VetAppointmentListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          LabelWithIcon(
+                          const LabelWithIcon(
                             asset: AppAssets.icPetPaw,
                             value: 'Bella',
+                            padding: EdgeInsets.zero,
                           ),
-                          LabelWithIcon(
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          const LabelWithIcon(
                             asset: AppAssets.icHospital,
                             value: 'Roselyn Felton',
+                            padding: EdgeInsets.zero,
                           ),
                         ],
                       ),
@@ -144,14 +149,18 @@ class VetAppointmentListItem extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
+                  height: 5.h,
+                ),
+                SizedBox(
                   width: 170.sp,
                   child: const LabelWithIcon(
                     asset: AppAssets.icClock,
                     value: '11:00 Am To 11:30 AM',
+                    padding: EdgeInsets.zero,
                   ),
                 ),
                 SizedBox(
-                  height: 5.h,
+                  height: 8.h,
                 ),
               ],
             ),

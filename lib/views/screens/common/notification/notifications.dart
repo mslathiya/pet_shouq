@@ -23,61 +23,63 @@ class _NotificationsState extends State<Notifications> {
         onPressBack: () => Navigator.pop(context),
         showNotification: false,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 8.w,
-                vertical: 10.h,
-              ),
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {},
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      t.translate("mark_read"),
-                      textAlign: TextAlign.left,
-                      style:
-                          Theme.of(context).textTheme.displayMedium?.copyWith(
-                                fontSize: 12.sp,
-                                color: AppColors.secondary,
-                              ),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Icon(
-                      Ionicons.checkmark_circle_outline,
-                      size: 18.sp,
-                      color: AppColors.secondary,
-                    ),
-                  ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.w,
+                  vertical: 10.h,
+                ),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {},
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        t.translate("mark_read"),
+                        textAlign: TextAlign.left,
+                        style:
+                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  fontSize: 12.sp,
+                                  color: AppColors.secondary,
+                                ),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Icon(
+                        Ionicons.checkmark_circle_outline,
+                        size: 18.sp,
+                        color: AppColors.secondary,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 10,
-              padding: EdgeInsets.only(
-                bottom: 15.h,
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: 10,
+                padding: EdgeInsets.only(
+                  bottom: 15.h,
+                ),
+                itemBuilder: (context, index) {
+                  return NotificationListItem(
+                    itemIndex: index,
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                return NotificationListItem(
-                  itemIndex: index,
-                );
-              },
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -4,9 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/config.dart';
 import '../../../../../data/models.dart';
 import '../../../../../theme/theme.dart';
-import 'breed_specification.dart';
+import '../../../../components/components.dart';
 import 'contact_card.dart';
-import 'expandable_box.dart';
 import 'medical_specification.dart';
 
 class MedicalHistory extends StatelessWidget {
@@ -20,7 +19,11 @@ class MedicalHistory extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const MedicalSpecification(),
-        const BreedSpecification(),
+        SingleLabelItem(
+          title: t.translate("breed_marking"),
+          subTitle: "Golden Retriever,\nGolden with white chest",
+          asset: AppAssets.icDog,
+        ),
         const EmergencyContactCard(),
         ExpandableBox(
           infoList: [

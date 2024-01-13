@@ -26,7 +26,7 @@ class MedicalSpecification extends StatelessWidget {
               icon: AppAssets.icCake,
               title: '3 Years',
               textStyle: TextStyle(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
                 fontSize: 13.sp,
               ),
             ),
@@ -41,7 +41,7 @@ class MedicalSpecification extends StatelessWidget {
               icon: AppAssets.icGenderType,
               title: 'Female',
               textStyle: TextStyle(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
                 fontSize: 13.sp,
               ),
             ),
@@ -56,7 +56,7 @@ class MedicalSpecification extends StatelessWidget {
               icon: AppAssets.icPetWeight,
               title: '70 Pounds',
               textStyle: TextStyle(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
                 fontSize: 13.sp,
               ),
             ),

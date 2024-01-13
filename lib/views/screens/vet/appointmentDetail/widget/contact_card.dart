@@ -25,7 +25,7 @@ class EmergencyContactCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                 ),
           ),
           SizedBox(
@@ -37,7 +37,7 @@ class EmergencyContactCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontSize: 14.sp,
+                  fontSize: 13.sp,
                 ),
           ),
           SizedBox(
@@ -47,7 +47,7 @@ class EmergencyContactCard extends StatelessWidget {
             "Dr. Smith at XYZ Animal Hospital\n(555) 123-4567",
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontSize: 13.sp,
+                  fontSize: 12.sp,
                   height: 1.7,
                   color: AppColors.gray,
                 ),
@@ -71,7 +71,7 @@ class EmergencyContactCard extends StatelessWidget {
                       maxLines: 1,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontSize: 14.sp,
+                                fontSize: 13.sp,
                               ),
                     ),
                     SizedBox(
@@ -82,7 +82,7 @@ class EmergencyContactCard extends StatelessWidget {
                       textAlign: TextAlign.left,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontSize: 13.sp,
+                                fontSize: 12.sp,
                                 height: 1.7,
                                 color: AppColors.gray,
                               ),
@@ -94,8 +94,8 @@ class EmergencyContactCard extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: SvgPicture.asset(
                   AppAssets.icInfo,
-                  height: 52.h,
-                  width: 42.w,
+                  height: 45.h,
+                  width: 33.w,
                   colorFilter: ColorFilter.mode(
                     AppColors.white.withOpacity(0.5),
                     BlendMode.srcATop,

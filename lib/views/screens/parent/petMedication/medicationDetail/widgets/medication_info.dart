@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_shouq/config/route.config.dart';
 
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
@@ -21,7 +21,7 @@ class MedicationInfo extends StatelessWidget {
         left: 10.sp,
         right: 10.sp,
         bottom: 10.sp,
-        top: 10.sp,
+        top: 5.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -87,10 +87,18 @@ class MedicationInfo extends StatelessWidget {
                         const LabelWithIcon(
                           asset: AppAssets.icDoctor,
                           value: 'Whiskers',
+                          padding: EdgeInsets.zero,
+                        ),
+                        SizedBox(
+                          height: 5.h,
                         ),
                         const LabelWithIcon(
                           asset: AppAssets.icPetPaw,
                           value: 'Tablet',
+                          padding: EdgeInsets.zero,
+                        ),
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,6 +108,7 @@ class MedicationInfo extends StatelessWidget {
                               child: LabelWithIcon(
                                 asset: AppAssets.icDocBag,
                                 value: 'Dog',
+                                padding: EdgeInsets.zero,
                               ),
                             ),
                             SizedBox(
@@ -109,6 +118,7 @@ class MedicationInfo extends StatelessWidget {
                               child: LabelWithIcon(
                                 asset: AppAssets.icStethoscope,
                                 value: 'Dr.Smith',
+                                padding: EdgeInsets.zero,
                               ),
                             ),
                           ],
@@ -122,15 +132,8 @@ class MedicationInfo extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: Material(
-              child: InkWell(
-                onTap: () {},
-                child: SvgPicture.asset(
-                  AppAssets.icEdit,
-                  height: 40.sp,
-                  width: 40.sp,
-                ),
-              ),
+            child: EditButton(
+              onPressEdit: () => Navigator.pushNamed(context, petAddMedication),
             ),
           )
         ],

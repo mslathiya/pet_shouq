@@ -72,8 +72,6 @@ class SingleLabelItem extends StatelessWidget {
                   Text(
                     subTitle,
                     textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall

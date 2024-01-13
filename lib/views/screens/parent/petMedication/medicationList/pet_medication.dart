@@ -24,52 +24,54 @@ class _PetMedicationState extends State<PetMedication> {
         title: t.translate("pet_medication"),
         onPressBack: () => Navigator.pop(context),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          //Bottom List
-          Expanded(
-            child: ListView.builder(
-              itemCount: 15,
-              padding: EdgeInsets.only(
-                top: 10.sp,
-                bottom: 15.sp,
-              ),
-              itemBuilder: (_, index) {
-                return MedicationListItem(
-                  onViewDetail: () {
-                    Navigator.pushNamed(context, petMedicationDetail);
-                  },
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: ButtonView(
-              onTap: () => Navigator.pushNamed(context, petAddMedication),
-              buttonTitle: t.translate("btn_add_medication"),
-              width: width - 20,
-              leftWidget: Padding(
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            //Bottom List
+            Expanded(
+              child: ListView.builder(
+                itemCount: 15,
                 padding: EdgeInsets.only(
-                  right: 5.w,
+                  top: 10.sp,
+                  bottom: 15.sp,
                 ),
-                child: Icon(
-                  Entypo.plus,
-                  size: 20.sp,
-                  color: AppColors.white,
+                itemBuilder: (_, index) {
+                  return MedicationListItem(
+                    onViewDetail: () {
+                      Navigator.pushNamed(context, petMedicationDetail);
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: ButtonView(
+                onTap: () => Navigator.pushNamed(context, petAddMedication),
+                buttonTitle: t.translate("btn_add_medication"),
+                width: width - 20,
+                buttonStyle: TextStyle(
+                  fontSize: 9.sp,
+                ),
+                leftWidget: Padding(
+                  padding: EdgeInsets.only(
+                    right: 5.w,
+                  ),
+                  child: Icon(
+                    Entypo.plus,
+                    size: 20.sp,
+                    color: AppColors.white,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

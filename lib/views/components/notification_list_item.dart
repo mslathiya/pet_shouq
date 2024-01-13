@@ -34,7 +34,7 @@ class NotificationListItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          fontSize: 16.sp,
+                          fontSize: 15.sp,
                         ),
                   ),
                 )
@@ -49,12 +49,12 @@ class NotificationListItem extends StatelessWidget {
               key: Key(itemIndex.toString()),
               endActionPane: ActionPane(
                 motion: const ScrollMotion(),
-                extentRatio: 0.3,
+                extentRatio: 0.35,
                 children: [
                   CustomSlidableAction(
                     onPressed: (context) => {},
                     child: Container(
-                      width: 50.w,
+                      width: 45.w,
                       height: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
@@ -63,11 +63,11 @@ class NotificationListItem extends StatelessWidget {
                         color: AppColors.deleteBackground,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(13.0),
                         child: SvgPicture.asset(
                           AppAssets.icDelete,
-                          height: 25.sp,
-                          width: 25.sp,
+                          height: 20.sp,
+                          width: 20.sp,
                         ),
                       ),
                     ),
@@ -133,7 +133,7 @@ class NotificationListItem extends StatelessWidget {
                                   style: Theme.of(context)
                                       .textTheme
                                       .displayMedium
-                                      ?.copyWith(fontSize: 15.sp),
+                                      ?.copyWith(fontSize: 14.sp),
                                 ),
                                 SizedBox(
                                   height: 5.h,
@@ -147,7 +147,7 @@ class NotificationListItem extends StatelessWidget {
                                       .textTheme
                                       .headlineSmall
                                       ?.copyWith(
-                                        fontSize: 13.sp,
+                                        fontSize: 12.sp,
                                         color: AppColors.hintColor,
                                       ),
                                 ),

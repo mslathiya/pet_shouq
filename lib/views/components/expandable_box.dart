@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../data/models.dart';
-import '../../../../../theme/theme.dart';
-import '../../../../components/components.dart';
+import '../../data/models.dart';
+import '../../theme/theme.dart';
+import 'info_label.dart';
+import 'shadow_box.dart';
 
 class ExpandableBox extends StatelessWidget {
   const ExpandableBox({
@@ -11,10 +12,12 @@ class ExpandableBox extends StatelessWidget {
     required this.infoList,
     required this.title,
     this.customWidget,
+    this.initiallyExpanded,
   });
   final List<MedicalInfo> infoList;
   final String title;
   final Widget? customWidget;
+  final bool? initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class ExpandableBox extends StatelessWidget {
         child: ExpansionTile(
           childrenPadding: EdgeInsets.symmetric(vertical: 4.sp),
           tilePadding: EdgeInsets.zero,
-          initiallyExpanded: false,
+          initiallyExpanded: initiallyExpanded ?? false,
           collapsedShape: const Border(),
           shape: const Border(),
           iconColor: AppColors.fontMain,
@@ -36,7 +39,7 @@ class ExpandableBox extends StatelessWidget {
             title,
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                 ),
           ),
           expandedAlignment: Alignment.topLeft,
@@ -47,6 +50,7 @@ class ExpandableBox extends StatelessWidget {
                     (e) => InfoLabel(
                       title: e.title,
                       description: e.description,
+                      padding: EdgeInsets.only(bottom: 5.h),
                     ),
                   )
                   .toList(),

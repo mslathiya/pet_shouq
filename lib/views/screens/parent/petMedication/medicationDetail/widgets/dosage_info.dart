@@ -16,7 +16,7 @@ class DosageInfo extends StatelessWidget {
         left: 10.sp,
         right: 10.sp,
         bottom: 10.sp,
-        top: 10.sp,
+        top: 5.sp,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

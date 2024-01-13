@@ -46,21 +46,23 @@ class AppointmentDetails extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
-                        ?.copyWith(fontSize: 16.sp, height: 2),
+                        ?.copyWith(fontSize: 14.sp, height: 2),
                   ),
                   const LabelWithIcon(
                     asset: AppAssets.icHospital,
                     value: 'Rimadyl',
+                    padding: EdgeInsets.zero,
                   ),
                   SizedBox(
-                    height: 3.h,
+                    height: 5.h,
                   ),
                   const LabelWithIcon(
                     asset: AppAssets.icPetPaw,
                     value: 'Max',
+                    padding: EdgeInsets.zero,
                   ),
                   SizedBox(
-                    height: 3.h,
+                    height: 5.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -71,16 +73,18 @@ class AppointmentDetails extends StatelessWidget {
                         child: const LabelWithIcon(
                           asset: AppAssets.icCalendar,
                           value: '04-Jan-2024',
+                          padding: EdgeInsets.zero,
                         ),
                       ),
                       SizedBox(
-                        width: 5.h,
+                        width: 5.w,
                       ),
                       SizedBox(
                         width: 170.sp,
                         child: const LabelWithIcon(
                           asset: AppAssets.icClock,
                           value: '11:00 Am To 11:30 AM',
+                          padding: EdgeInsets.zero,
                         ),
                       )
                     ],
@@ -109,10 +113,10 @@ class AppointmentDetails extends StatelessWidget {
                       onTap: () => _dialogBuilder(context, t),
                       buttonTitle: t.translate("btn_reschedule_appointment"),
                       width: width - 20,
+                      buttonStyle: TextStyle(
+                        fontSize: 7.sp,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15.h,
                   ),
                 ],
               ),

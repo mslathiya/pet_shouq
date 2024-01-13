@@ -106,6 +106,7 @@ class CustomAlertDialog extends StatelessWidget {
                             buttonColor: AppColors.inputBorder,
                             buttonStyle: TextStyle(
                               color: AppColors.hintColor,
+                              fontSize: 7.sp,
                             ),
                           ),
                         )
@@ -124,6 +125,9 @@ class CustomAlertDialog extends StatelessWidget {
                       },
                       buttonTitle: buttonText,
                       width: 120.w,
+                      buttonStyle: TextStyle(
+                        fontSize: 7.sp,
+                      ),
                     ),
                   ),
                 ],

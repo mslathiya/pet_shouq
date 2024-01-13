@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
-import 'expandable_box.dart';
 
 class NutritionFeedingDetail extends StatelessWidget {
   const NutritionFeedingDetail({

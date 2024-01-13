@@ -38,7 +38,7 @@ class NutritionPrice extends StatelessWidget {
             text: TextSpan(
               text: '\$1.50\n',
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    fontSize: 28.sp,
+                    fontSize: 25.sp,
                     fontWeight: FontWeight.w900,
                     color: AppColors.secondary,
                     height: 1.3,
@@ -47,7 +47,7 @@ class NutritionPrice extends StatelessWidget {
                 TextSpan(
                   text: t.translate("per_pound"),
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 13.sp,
+                        fontSize: 12.sp,
                         color: AppColors.secondary,
                       ),
                 ),
@@ -63,6 +63,9 @@ class NutritionPrice extends StatelessWidget {
               onTap: onPress,
               buttonTitle: t.translate("edit_details"),
               width: 180.w,
+              buttonStyle: TextStyle(
+                fontSize: 7.sp,
+              ),
             ),
           ),
         ],

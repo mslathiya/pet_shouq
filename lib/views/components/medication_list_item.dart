@@ -17,13 +17,13 @@ class MedicationListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: 10.sp,
+        vertical: 10.h,
         horizontal: 10.w,
       ),
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -52,7 +52,7 @@ class MedicationListItem extends StatelessWidget {
                 ),
           ),
           SizedBox(
-            height: 3.h,
+            height: 5.h,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,19 +63,18 @@ class MedicationListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    LabelWithIcon(
+                    const LabelWithIcon(
                       asset: AppAssets.icDoctor,
                       value: 'Dr. Roselyn F.',
-                      textStyle: TextStyle(
-                        fontSize: 12.sp,
-                      ),
+                      padding: EdgeInsets.zero,
                     ),
-                    LabelWithIcon(
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    const LabelWithIcon(
                       asset: AppAssets.icPetPaw,
                       value: 'Whiskers',
-                      textStyle: TextStyle(
-                        fontSize: 12.sp,
-                      ),
+                      padding: EdgeInsets.zero,
                     ),
                   ],
                 ),
@@ -105,6 +104,9 @@ class MedicationListItem extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(
+            height: 5.h,
+          ),
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.start,
@@ -113,22 +115,18 @@ class MedicationListItem extends StatelessWidget {
             children: [
               SizedBox(
                 width: 80.w,
-                child: LabelWithIcon(
+                child: const LabelWithIcon(
                   asset: AppAssets.icDocBag,
                   value: 'Dog',
-                  textStyle: TextStyle(
-                    fontSize: 12.sp,
-                  ),
+                  padding: EdgeInsets.zero,
                 ),
               ),
               SizedBox(
                 width: 190.w,
-                child: LabelWithIcon(
+                child: const LabelWithIcon(
                   asset: AppAssets.icCalendar,
                   value: '2023-05-01 To 2023-05-14',
-                  textStyle: TextStyle(
-                    fontSize: 12.sp,
-                  ),
+                  padding: EdgeInsets.zero,
                 ),
               )
             ],

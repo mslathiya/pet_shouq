@@ -48,7 +48,7 @@ class VaccinationDetails extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(fontSize: 16.sp, height: 1.5),
+                ?.copyWith(fontSize: 15.sp, height: 1.5),
           ),
           SizedBox(
             height: 5.h,
@@ -56,38 +56,47 @@ class VaccinationDetails extends StatelessWidget {
           InfoLabel(
             title: t.translate("lbl_species"),
             description: 'Dog',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("vaccination_name"),
             description: 'Rabies',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("vaccination_type"),
             description: 'Core',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("vaccination_date"),
             description: '01-Jan-2024',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("next_due_date"),
             description: '01-Jan-2024',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("next_due_date"),
             description: '01-Jan-2024',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("vaccination_provider"),
             description: 'ABC Animal Clinic',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("vaccination_lot_no"),
             description: '12345',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
             title: t.translate("vaccination_id"),
             description: 'VC-2022-12345',
+            padding: EdgeInsets.only(bottom: 5.h),
           ),
         ],
       ),

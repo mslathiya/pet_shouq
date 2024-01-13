@@ -98,38 +98,43 @@ class AddAvailabilityState extends State<AddAvailability> {
         title: t.translate("add_availability"),
         onPressBack: () => Navigator.pop(context),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 8.h,
-          ),
-          ListTileItem(
-            item: availability,
-            onSelectTime: (childIndex, type) =>
-                openTimePicker(context, childIndex, type),
-            onAddTime: () => addNewTime(),
-            onRemoveTime: (childIndex) => removeTime(childIndex),
-          ),
-          const Spacer(),
-          SizedBox(
-            height: 15.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: ButtonView(
-              onTap: () => Navigator.pop(
-                context,
-              ),
-              buttonTitle: t.translate("btn_save"),
-              width: width - 20,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 8.h,
             ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-        ],
+            ListTileItem(
+              item: availability,
+              onSelectTime: (childIndex, type) =>
+                  openTimePicker(context, childIndex, type),
+              onAddTime: () => addNewTime(),
+              onRemoveTime: (childIndex) => removeTime(childIndex),
+            ),
+            const Spacer(),
+            SizedBox(
+              height: 15.h,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: ButtonView(
+                onTap: () => Navigator.pop(
+                  context,
+                ),
+                buttonTitle: t.translate("btn_save"),
+                width: width - 20,
+                buttonStyle: TextStyle(
+                  fontSize: 8.sp,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -198,8 +203,8 @@ class ListTileItem extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           height: 1.2,
-                          letterSpacing: 0.20,
                           fontWeight: FontWeight.w600,
+                          fontSize: 13.sp,
                         ),
                   ),
                 )
@@ -233,12 +238,12 @@ class ListTileItem extends StatelessWidget {
                                   ? item.startTime
                                   : t.translate("start_time"),
                               suffixIcon: SizedBox(
-                                width: 24.w,
-                                height: 24.h,
+                                width: 20.w,
+                                height: 20.h,
                                 child: Icon(
                                   FontAwesome5Solid.clock,
                                   color: AppColors.hintColor,
-                                  size: 22.sp,
+                                  size: 20.sp,
                                 ),
                               ),
                               onSelectItem: () => onSelectTime(index, 0),
@@ -253,12 +258,12 @@ class ListTileItem extends StatelessWidget {
                                   ? item.endTime
                                   : t.translate("end_time"),
                               suffixIcon: SizedBox(
-                                width: 22.w,
-                                height: 22.h,
+                                width: 20.w,
+                                height: 20.h,
                                 child: Icon(
                                   FontAwesome5Solid.clock,
                                   color: AppColors.hintColor,
-                                  size: 22.sp,
+                                  size: 20.sp,
                                 ),
                               ),
                               onSelectItem: () => onSelectTime(index, 1),
@@ -282,7 +287,7 @@ class ListTileItem extends StatelessWidget {
                                     child: Icon(
                                       Entypo.plus,
                                       color: AppColors.secondary,
-                                      size: 22.sp,
+                                      size: 20.sp,
                                     ),
                                   ),
                                 )

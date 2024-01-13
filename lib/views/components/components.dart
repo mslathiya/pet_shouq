@@ -42,3 +42,4 @@ export 'single_label_item.dart';
 export "shadow_box.dart";
 export "reschedule_appointment.dart";
 export "edit_button.dart";
+export "expandable_box.dart";

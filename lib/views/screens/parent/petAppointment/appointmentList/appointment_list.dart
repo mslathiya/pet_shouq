@@ -21,20 +21,22 @@ class _AppointmentListState extends State<AppointmentList> {
         title: t.translate("screen_appointment_booking"),
         onPressBack: () => Navigator.pop(context),
       ),
-      body: ListView.builder(
-        itemCount: 15,
-        padding: EdgeInsets.only(
-          top: 10.sp,
-          bottom: 15.sp,
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: 15,
+          padding: EdgeInsets.only(
+            top: 10.sp,
+            bottom: 15.sp,
+          ),
+          itemBuilder: (_, index) {
+            return AppointmentListItem(
+              t: t,
+              onViewDetail: () {
+                Navigator.pushNamed(context, petBookingDetails);
+              },
+            );
+          },
         ),
-        itemBuilder: (_, index) {
-          return AppointmentListItem(
-            t: t,
-            onViewDetail: () {
-              Navigator.pushNamed(context, petBookingDetails);
-            },
-          );
-        },
       ),
     );
   }

@@ -28,6 +28,7 @@ class DetailButtons extends StatelessWidget {
             width: width - 20,
             buttonStyle: TextStyle(
               color: AppColors.secondary,
+              fontSize: 7.sp,
             ),
             buttonColor: AppColors.white,
           ),
@@ -49,6 +50,7 @@ class DetailButtons extends StatelessWidget {
                   width: width * .45,
                   buttonStyle: TextStyle(
                     color: AppColors.white,
+                    fontSize: 7.sp,
                   ),
                   buttonColor: AppColors.redColor,
                 ),
@@ -61,6 +63,7 @@ class DetailButtons extends StatelessWidget {
                   width: width * .45,
                   buttonStyle: TextStyle(
                     color: AppColors.white,
+                    fontSize: 7.sp,
                   ),
                   buttonColor: AppColors.greenColor,
                 ),

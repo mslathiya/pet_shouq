@@ -40,7 +40,7 @@ class CalendarHeader extends StatelessWidget {
               textAlign: TextAlign.center,
               headerText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    fontSize: 18.sp,
+                    fontSize: 16.sp,
                     height: 2,
                     color: AppColors.secondary,
                   ),

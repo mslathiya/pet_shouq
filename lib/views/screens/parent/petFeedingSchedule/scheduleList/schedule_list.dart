@@ -53,50 +53,52 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
                             maxWidth: width * 0.95,
                           ),
                           backgroundColor: Colors.transparent,
-                          builder: (context) => Container(
-                            height: 162.h,
-                            width: width * 0.95,
-                            margin: EdgeInsets.all(
-                              10.sp,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10.sp),
+                          builder: (context) => SafeArea(
+                            child: Container(
+                              height: 160.h,
+                              width: width * 0.95,
+                              margin: EdgeInsets.all(
+                                10.sp,
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.fontMain.withOpacity(0.13),
-                                  blurRadius: 5.sp,
-                                  offset: const Offset(0, 0),
-                                )
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SheetMenuItem(
-                                  menuName: t.translate("btn_off_tomorrow"),
-                                  onTapMenu: () => Navigator.pop(context),
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.sp),
                                 ),
-                                Divider(
-                                  height: 1,
-                                  color: AppColors.inputBorder,
-                                ),
-                                SheetMenuItem(
-                                  menuName: t.translate("btn_no_repeat"),
-                                  onTapMenu: () => Navigator.pop(context),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  color: AppColors.inputBorder,
-                                ),
-                                SheetMenuItem(
-                                  menuName: t.translate("btn_cancel"),
-                                  onTapMenu: () => Navigator.pop(context),
-                                )
-                              ],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.fontMain.withOpacity(0.13),
+                                    blurRadius: 5.sp,
+                                    offset: const Offset(0, 0),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SheetMenuItem(
+                                    menuName: t.translate("btn_off_tomorrow"),
+                                    onTapMenu: () => Navigator.pop(context),
+                                  ),
+                                  Divider(
+                                    height: 1,
+                                    color: AppColors.inputBorder,
+                                  ),
+                                  SheetMenuItem(
+                                    menuName: t.translate("btn_no_repeat"),
+                                    onTapMenu: () => Navigator.pop(context),
+                                  ),
+                                  Divider(
+                                    height: 1,
+                                    color: AppColors.inputBorder,
+                                  ),
+                                  SheetMenuItem(
+                                    menuName: t.translate("btn_cancel"),
+                                    onTapMenu: () => Navigator.pop(context),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );

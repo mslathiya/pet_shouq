@@ -71,6 +71,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                             ),
                             buttonTitle: t.translate("btn_submit"),
                             width: width - 20,
+                            buttonStyle: TextStyle(
+                              fontSize: 8.sp,
+                            ),
                           ),
                         ),
                       ],

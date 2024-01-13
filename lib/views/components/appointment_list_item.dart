@@ -21,7 +21,7 @@ class AppointmentListItem extends StatelessWidget {
       margin: EdgeInsets.only(
         left: 10.sp,
         right: 10.sp,
-        bottom: 15.sp,
+        bottom: 10.sp,
       ),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -49,7 +49,7 @@ class AppointmentListItem extends StatelessWidget {
                   padding: EdgeInsets.only(
                     left: 12.w,
                     right: 12.w,
-                    top: 4.h,
+                    top: 2.h,
                   ),
                   child: Text(
                     'HB0053K05',
@@ -59,7 +59,7 @@ class AppointmentListItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
-                        ?.copyWith(fontSize: 16.sp, height: 2),
+                        ?.copyWith(fontSize: 14.sp, height: 2),
                   ),
                 ),
               ),
@@ -69,8 +69,8 @@ class AppointmentListItem extends StatelessWidget {
                   padding: EdgeInsets.only(
                     left: 10.w,
                     right: 10.w,
-                    top: 5.h,
-                    bottom: 5.h,
+                    top: 4.h,
+                    bottom: 4.h,
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -116,13 +116,15 @@ class AppointmentListItem extends StatelessWidget {
                           const LabelWithIcon(
                             asset: AppAssets.icHospital,
                             value: 'Rimadyl',
+                            padding: EdgeInsets.zero,
                           ),
                           SizedBox(
-                            height: 3.h,
+                            height: 5.h,
                           ),
                           const LabelWithIcon(
                             asset: AppAssets.icPetPaw,
                             value: 'Max',
+                            padding: EdgeInsets.zero,
                           ),
                         ],
                       ),
@@ -153,7 +155,7 @@ class AppointmentListItem extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 3.h,
+                  height: 5.h,
                 ),
                 Wrap(
                   alignment: WrapAlignment.start,
@@ -166,6 +168,7 @@ class AppointmentListItem extends StatelessWidget {
                       child: const LabelWithIcon(
                         asset: AppAssets.icCalendar,
                         value: '04-Jan-2024',
+                        padding: EdgeInsets.zero,
                       ),
                     ),
                     SizedBox(
@@ -176,6 +179,7 @@ class AppointmentListItem extends StatelessWidget {
                       child: const LabelWithIcon(
                         asset: AppAssets.icClock,
                         value: '11:00 Am To 11:30 AM',
+                        padding: EdgeInsets.zero,
                       ),
                     )
                   ],

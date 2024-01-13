@@ -120,7 +120,7 @@ class _PasswordFieldState extends State<PasswordField> {
                 onPressed: togglePassword,
                 icon: Icon(
                   showPassword ? FontAwesome.eye : FontAwesome.eye_slash,
-                  size: 22.sp,
+                  size: 20.sp,
                   color: AppColors.hintColor,
                 ),
               ),

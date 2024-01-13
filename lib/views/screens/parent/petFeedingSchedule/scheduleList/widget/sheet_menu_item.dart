@@ -25,7 +25,7 @@ class SheetMenuItem extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .displayMedium
-              ?.copyWith(fontSize: 16.sp, height: 2),
+              ?.copyWith(fontSize: 15.sp, height: 2),
         ),
       ),
     );

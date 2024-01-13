@@ -47,8 +47,8 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
   double _prevAniValue = 0.0;
 
   // these will be our tab icons. You can use whatever you like for the content of your buttons
-  List<String> _tabs = [
-     "vaccination",
+  final List<String> _tabs = [
+    "vaccination",
     "medical_history",
     "medical_details",
     "nutrition_feeding",

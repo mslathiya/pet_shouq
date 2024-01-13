@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/models.dart';
-import 'expandable_box.dart';
+import '../../../../components/components.dart';
 
 class MedicalDetails extends StatelessWidget {
   const MedicalDetails({

@@ -50,7 +50,7 @@ class EventListItem extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .displayMedium
-                  ?.copyWith(fontSize: 15.sp),
+                  ?.copyWith(fontSize: 14.sp),
             ),
             SizedBox(
               height: 5.h,

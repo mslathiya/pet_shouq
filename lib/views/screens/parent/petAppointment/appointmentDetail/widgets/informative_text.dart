@@ -25,16 +25,16 @@ class InformativeText extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .headlineSmall
-              ?.copyWith(fontSize: 14.sp),
+              ?.copyWith(fontSize: 13.sp),
         ),
         SizedBox(
           height: 5.h,
         ),
         Text(
           subHeader,
-          textAlign: TextAlign.left,
+          textAlign: TextAlign.justify,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontSize: 14.sp,
+                fontSize: 12.sp,
                 color: AppColors.hintColor,
               ),
         ),

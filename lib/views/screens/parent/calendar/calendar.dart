@@ -102,7 +102,7 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
                     child: Text(
                       text[0],
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                            fontSize: 15.sp,
+                            fontSize: 14.sp,
                             color: AppColors.secondary,
                           ),
                     ),
@@ -190,7 +190,7 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
           text,
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 fontWeight: FontWeight.w400,
-                fontSize: isSameDay ? 14.sp : 13.sp,
+                fontSize: isSameDay ? 13.sp : 12.sp,
                 color: isSameDay
                     ? AppColors.white
                     : type == 3

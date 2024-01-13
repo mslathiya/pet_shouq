@@ -42,7 +42,7 @@ class ListItem extends StatelessWidget {
             t.translate(item.day),
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontSize: 15.sp,
+                  fontSize: 14.sp,
                 ),
           ),
           expandedAlignment: Alignment.topLeft,
@@ -131,11 +131,11 @@ class ListItem extends StatelessWidget {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(9.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: SvgPicture.asset(
                           AppAssets.icPencil,
-                          height: 26.sp,
-                          width: 26.sp,
+                          height: 22.sp,
+                          width: 22.sp,
                         ),
                       ),
                     ),

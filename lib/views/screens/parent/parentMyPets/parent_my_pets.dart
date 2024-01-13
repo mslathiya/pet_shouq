@@ -49,6 +49,9 @@ class _ParentMyPetsState extends State<ParentMyPets> {
               onTap: () => Navigator.pushNamed(context, addPet),
               buttonTitle: t.translate("btn_add_pet"),
               width: width - 20,
+              buttonStyle: TextStyle(
+                fontSize: 9.sp,
+              ),
               leftWidget: Padding(
                 padding: EdgeInsets.only(
                   right: 5.w,

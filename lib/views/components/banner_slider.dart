@@ -32,11 +32,18 @@ class BannerSlider extends StatelessWidget {
                 ],
               ),
               width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                AppAssets.sampleBanner,
-                height: double.maxFinite,
-                width: double.maxFinite,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    10.sp,
+                  ),
+                ),
+                child: Image.asset(
+                  AppAssets.sampleBanner,
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  fit: BoxFit.cover,
+                ),
               ),
             );
           },

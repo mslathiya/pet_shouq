@@ -129,14 +129,15 @@ class ReScheduleAppointment extends StatelessWidget {
                                   height: 15.h,
                                 ),
                                 SizedBox(
-                                  height: 60.sp,
+                                  height: 55.sp,
                                   child: ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: 7,
                                     physics: const ClampingScrollPhysics(),
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      return const DateItem(
+                                      return DateItem(
+                                        index: index,
                                         date: "1",
                                         day: "Mon",
                                         isSelected: false,

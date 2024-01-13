@@ -10,11 +10,13 @@ class DateItem extends StatelessWidget {
     required this.day,
     required this.isSelected,
     required this.isDisabled,
+    required this.index,
   });
   final String date;
   final String day;
   final bool isSelected;
   final bool isDisabled;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class DateItem extends StatelessWidget {
       height: 55.sp,
       width: 50.sp,
       padding: EdgeInsets.all(9.sp),
-      margin: EdgeInsets.symmetric(horizontal: 5.w),
+      margin: index > 0
+          ? EdgeInsets.symmetric(horizontal: 5.w)
+          : EdgeInsets.only(right: 5.w),
       decoration: BoxDecoration(
         border: Border.all(
           color: isDisabled
