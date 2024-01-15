@@ -35,7 +35,7 @@ class FeedingDetail extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(fontSize: 14.sp),
+                    ?.copyWith(fontSize: 13.sp),
               ),
               SizedBox(
                 height: 5.h,
@@ -44,7 +44,7 @@ class FeedingDetail extends StatelessWidget {
                 "Bella loves playing fetch and enjoys long walks. She dislikes thunderstorms and fireworks and becomes anxious during these events.",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       color: AppColors.hintColor,
                     ),
               ),
@@ -71,7 +71,7 @@ class FeedingDetail extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(fontSize: 14.sp),
+                    ?.copyWith(fontSize: 13.sp),
               ),
               SizedBox(
                 height: 5.h,
@@ -80,7 +80,7 @@ class FeedingDetail extends StatelessWidget {
                 "Bella loves playing fetch and enjoys long walks. She dislikes thunderstorms and fireworks and becomes anxious during these events.",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       color: AppColors.hintColor,
                     ),
               ),
@@ -107,7 +107,7 @@ class FeedingDetail extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(fontSize: 14.sp),
+                    ?.copyWith(fontSize: 13.sp),
               ),
               SizedBox(
                 height: 5.h,
@@ -116,7 +116,7 @@ class FeedingDetail extends StatelessWidget {
                 "Bella loves playing fetch and enjoys long walks. She dislikes thunderstorms and fireworks and becomes anxious during these events.",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       color: AppColors.hintColor,
                     ),
               ),
@@ -143,7 +143,7 @@ class FeedingDetail extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(fontSize: 14.sp),
+                    ?.copyWith(fontSize: 13.sp),
               ),
               SizedBox(
                 height: 5.h,
@@ -152,7 +152,7 @@ class FeedingDetail extends StatelessWidget {
                 "Bella loves playing fetch and enjoys long walks. She dislikes thunderstorms and fireworks and becomes anxious during these events.",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       color: AppColors.hintColor,
                     ),
               ),

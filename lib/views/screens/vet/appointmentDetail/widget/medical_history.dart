@@ -164,8 +164,8 @@ class MedicalHistory extends StatelessWidget {
                 maxLines: 1,
                 style: Theme.of(context)
                     .textTheme
-                    .displayMedium
-                    ?.copyWith(fontSize: 15.sp),
+                    .headlineSmall
+                    ?.copyWith(fontSize: 13.sp),
               ),
               SizedBox(
                 height: 5.h,
@@ -174,7 +174,7 @@ class MedicalHistory extends StatelessWidget {
                 "Bathed monthly, brushed weekly, nails trimmed every 6 weeks",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       color: AppColors.hintColor,
                     ),
               ),
@@ -195,8 +195,8 @@ class MedicalHistory extends StatelessWidget {
                 maxLines: 1,
                 style: Theme.of(context)
                     .textTheme
-                    .displayMedium
-                    ?.copyWith(fontSize: 15.sp),
+                    .headlineSmall
+                    ?.copyWith(fontSize: 13.sp),
               ),
               SizedBox(
                 height: 5.h,
@@ -205,7 +205,7 @@ class MedicalHistory extends StatelessWidget {
                 "Bella loves playing fetch and enjoys long walks. She dislikes thunderstorms and fireworks and becomes anxious during these events.",
                 textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       color: AppColors.hintColor,
                     ),
               ),

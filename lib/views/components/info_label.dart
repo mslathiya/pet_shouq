@@ -50,7 +50,7 @@ class InfoLabel extends StatelessWidget {
                 children: [
                   WidgetSpan(
                     child: SizedBox(
-                      width: 5.w,
+                      width: 2.w,
                     ),
                   ),
                   TextSpan(

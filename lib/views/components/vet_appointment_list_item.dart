@@ -90,81 +90,69 @@ class VetAppointmentListItem extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-              left: 12.w,
-              right: 12.w,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const LabelWithIcon(
-                            asset: AppAssets.icPetPaw,
-                            value: 'Bella',
-                            padding: EdgeInsets.zero,
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          const LabelWithIcon(
-                            asset: AppAssets.icHospital,
-                            value: 'Roselyn Felton',
-                            padding: EdgeInsets.zero,
-                          ),
-                        ],
-                      ),
+              padding: EdgeInsets.only(
+                left: 12.w,
+                right: 12.w,
+                bottom: 10.h,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const LabelWithIcon(
+                          asset: AppAssets.icPetPaw,
+                          value: 'Bella',
+                          padding: EdgeInsets.zero,
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        const LabelWithIcon(
+                          asset: AppAssets.icHospital,
+                          value: 'Roselyn Felton',
+                          padding: EdgeInsets.zero,
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        const LabelWithIcon(
+                          asset: AppAssets.icClock,
+                          value: '11:00 Am To 11:30 AM',
+                          padding: EdgeInsets.zero,
+                        ),
+                      ],
                     ),
-                    Material(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: InkWell(
-                        onTap: onViewDetail,
-                        child: Container(
-                          width: 35.w,
-                          height: 35.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50.sp),
-                            ),
-                            color: AppColors.primary.withOpacity(0.4),
+                  ),
+                  Material(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: InkWell(
+                      onTap: onViewDetail,
+                      child: Container(
+                        width: 35.w,
+                        height: 35.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.sp),
                           ),
-                          child: Icon(
-                            Entypo.chevron_right,
-                            size: 18.sp,
-                            color: AppColors.fontMain,
-                          ),
+                          color: AppColors.primary.withOpacity(0.4),
+                        ),
+                        child: Icon(
+                          Entypo.chevron_right,
+                          size: 18.sp,
+                          color: AppColors.fontMain,
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5.h,
-                ),
-                SizedBox(
-                  width: 170.sp,
-                  child: const LabelWithIcon(
-                    asset: AppAssets.icClock,
-                    value: '11:00 Am To 11:30 AM',
-                    padding: EdgeInsets.zero,
                   ),
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-              ],
-            ),
-          ),
+                ],
+              )),
         ],
       ),
     );

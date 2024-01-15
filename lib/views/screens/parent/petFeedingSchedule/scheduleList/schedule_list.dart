@@ -42,6 +42,7 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
                 ),
                 itemBuilder: (_, index) {
                   return FeedScheduleListItem(
+                    itemIndex: index,
                     onToggleSwitch: (bool isToggled) {
                       if (isToggled) {
                         showModalBottomSheet(

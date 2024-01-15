@@ -43,33 +43,36 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
         title: t.translate("screen_details"),
         onPressBack: () => Navigator.pop(context),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const AppointmentInfo(),
-            SingleLabelItem(
-              title: t.translate("date_time"),
-              subTitle: "01-Jan-2024, 4:00 PM",
-              asset: AppAssets.icCalendar,
-            ),
-            DetailButtons(onScheduleAppointment: () => _dialogBuilder(context)),
-            TabSelector(
-              tabList: _tabList,
-              currentIndex: _currentIndex,
-              onTapMenu: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              t: t,
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            _renderWidgetByIndex(_currentIndex)
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const AppointmentInfo(),
+              SingleLabelItem(
+                title: t.translate("date_time"),
+                subTitle: "01-Jan-2024, 4:00 PM",
+                asset: AppAssets.icCalendar,
+              ),
+              DetailButtons(
+                  onScheduleAppointment: () => _dialogBuilder(context)),
+              TabSelector(
+                tabList: _tabList,
+                currentIndex: _currentIndex,
+                onTapMenu: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                t: t,
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              _renderWidgetByIndex(_currentIndex)
+            ],
+          ),
         ),
       ),
     );

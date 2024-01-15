@@ -41,6 +41,7 @@ class _PetDietState extends State<PetDiet> {
                 ),
                 itemBuilder: (_, index) {
                   return DietListItem(
+                    itemIndex: index,
                     onViewDetail: () {
                       Navigator.pushNamed(context, petDietDetail);
                     },

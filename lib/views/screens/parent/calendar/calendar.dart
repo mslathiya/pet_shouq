@@ -48,7 +48,7 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
     var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: TabHeader(
-        title: t.translate("tab_appointment"),
+        title: t.translate("tab_calendar"),
       ),
       body: SingleChildScrollView(
         child: Column(

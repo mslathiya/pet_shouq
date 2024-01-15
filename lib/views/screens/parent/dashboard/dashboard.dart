@@ -17,7 +17,7 @@ class _DashboardState extends State<Dashboard> {
   int currentIndex = 0;
   List<NavigationBarItem> items = [
     NavigationBarItem(title: "tab_home", icon: AppAssets.icTabOne),
-    NavigationBarItem(title: 'tab_appointment', icon: AppAssets.icTabTwo),
+    NavigationBarItem(title: 'tab_calendar', icon: AppAssets.icTabTwo),
     NavigationBarItem(title: 'tab_pets', icon: AppAssets.icTabThree),
     NavigationBarItem(title: 'tab_profile', icon: AppAssets.icTabFour),
   ];

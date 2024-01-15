@@ -25,12 +25,15 @@ class _TopAskedState extends State<TopAsked> {
       ),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
                 padding: EdgeInsets.only(
                   bottom: 15.h,
+                  top: 15.h,
                 ),
                 itemBuilder: (context, index) {
                   return TopAskedItem(

@@ -44,6 +44,7 @@ class _PetNutritionState extends State<PetNutrition> {
                     onViewDetail: () {
                       Navigator.pushNamed(context, petNutritionDetail);
                     },
+                    itemIndex: index,
                   );
                 },
               ),

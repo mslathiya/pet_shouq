@@ -18,13 +18,13 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 8.w,
+        horizontal: 6.w,
       ),
       child: GestureDetector(
         onTap: onTapMenu,
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: 16.w,
+            horizontal: 15.w,
           ),
           decoration: BoxDecoration(
             color: isSelected ? AppColors.secondary : AppColors.timeSelector,

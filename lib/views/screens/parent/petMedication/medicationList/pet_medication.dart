@@ -44,6 +44,7 @@ class _PetMedicationState extends State<PetMedication> {
                     onViewDetail: () {
                       Navigator.pushNamed(context, petMedicationDetail);
                     },
+                    itemIndex: index,
                   );
                 },
               ),

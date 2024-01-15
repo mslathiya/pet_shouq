@@ -82,7 +82,7 @@ class ProfileMenus extends StatelessWidget {
         MenuItem(
           title: t.translate("screen_faq"),
           iconName: AppAssets.icMostAsked,
-          onPressMenu: () => onTapMenu(privacyPolicy),
+          onPressMenu: () => onTapMenu(topAsked),
         ),
       ],
     );

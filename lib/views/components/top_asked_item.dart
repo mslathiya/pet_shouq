@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pet_shouq/views/components/components.dart';
 
 import '../../theme/theme.dart';
 
@@ -12,46 +13,26 @@ class TopAskedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 5.sp,
-        bottom: 10.sp,
-        left: 10.sp,
-        right: 10.sp,
-      ),
-      padding: EdgeInsets.symmetric(
-        vertical: 5.sp,
-        horizontal: 10.sp,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10.sp),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.fontMain.withOpacity(0.13),
-            blurRadius: 5.sp,
-            offset: const Offset(0, 0),
-          )
-        ],
-      ),
-      child: ListTileTheme(
+    return ShadowBox(
+      isExpanded: true,
+      childWidget: ListTileTheme(
         contentPadding: EdgeInsets.zero,
         minVerticalPadding: 0.0,
         horizontalTitleGap: 0,
         dense: true,
         child: ExpansionTile(
-          childrenPadding: EdgeInsets.symmetric(vertical: 8.sp),
+          childrenPadding: EdgeInsets.symmetric(vertical: 4.sp),
           tilePadding: EdgeInsets.zero,
           initiallyExpanded: false,
           collapsedShape: const Border(),
           shape: const Border(),
           iconColor: AppColors.fontMain,
           title: Text(
-            "Detail page",
+            "Many desktop publishing",
             textAlign: TextAlign.left,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontSize: 14.sp,
+                ),
           ),
           children: [
             Text(
@@ -59,6 +40,7 @@ class TopAskedItem extends StatelessWidget {
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.hintColor,
+                    fontSize: 12.sp,
                   ),
             )
           ],
