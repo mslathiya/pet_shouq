@@ -227,7 +227,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                               ),
                             ),
                             width: 60.w,
-                            height: 48.h,
+                            height: 49.h,
                             padding: EdgeInsets.all(
                               12.sp,
                             ),

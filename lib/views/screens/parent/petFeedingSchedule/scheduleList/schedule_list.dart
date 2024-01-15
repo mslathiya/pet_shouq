@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -21,6 +19,8 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
+    bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
@@ -135,7 +135,7 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
                 ),
               ),
             ),
-            Platform.isAndroid
+            !isNeedSafeArea
                 ? SizedBox(
                     height: 15.h,
                   )

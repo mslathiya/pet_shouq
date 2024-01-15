@@ -18,6 +18,7 @@ class _ParentMyPetsState extends State<ParentMyPets> {
   Widget build(BuildContext context) {
     var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
+    bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
     return Scaffold(
       appBar: TabHeader(
         title: t.translate("tab_pets"),
@@ -64,9 +65,11 @@ class _ParentMyPetsState extends State<ParentMyPets> {
               ),
             ),
           ),
-          SizedBox(
-            height: 15.h,
-          ),
+          !isNeedSafeArea
+              ? SizedBox(
+                  height: 15.h,
+                )
+              : const SizedBox(),
         ],
       ),
     );
