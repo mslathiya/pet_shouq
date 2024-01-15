@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../data/models.dart';
+import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/nutrition_info.dart';

@@ -16,7 +16,7 @@ export "tab_header.dart";
 export "my_pet_item.dart";
 export 'pet_information.dart';
 export 'info_label.dart';
-export "image_picker.dart";
+export 'custom_image_picker.dart';
 export "menu_item.dart";
 export "label_with_icon.dart";
 export "phone_input.dart";

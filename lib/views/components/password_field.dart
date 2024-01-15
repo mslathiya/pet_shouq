@@ -113,7 +113,9 @@ class _PasswordFieldState extends State<PasswordField> {
             contentPadding: const EdgeInsets.all(
               16,
             ),
-            errorStyle: Theme.of(context).textTheme.bodyMedium,
+            errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.redColor,
+                ),
             suffixIcon: Padding(
               padding: EdgeInsets.only(right: 10.w),
               child: IconButton(

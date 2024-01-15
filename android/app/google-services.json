@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "481808332688",
+    "project_id": "petshouq",
+    "storage_bucket": "petshouq.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481808332688:android:fe4c548e174f569986a515",
+        "android_client_info": {
+          "package_name": "com.petshouq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkWSfdsny5Hke-j_5328VorxqKKCnjLko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

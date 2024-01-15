@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../data/models.dart';
+
+import '../../../../../data/model/models.dart';
 import '../../../../components/components.dart';
 
 class MedicalDetails extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../helper/helpers.dart';
+import '../../data/enum/enums.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
 

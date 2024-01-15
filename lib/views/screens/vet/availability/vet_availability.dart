@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
-import '../../../../data/models.dart';
+import '../../../../data/model/models.dart';
 import '../../../components/components.dart';
 import 'widget/list_item.dart';
 

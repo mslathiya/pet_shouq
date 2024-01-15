@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
@@ -70,8 +71,11 @@ class _RegisterState extends State<Register> {
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                ImagePicker(
-                                  onPickImage: () {},
+                                CustomImagePicker(
+                                  onPickImage: () => showImagePicker(
+                                    context,
+                                    t,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -685,6 +689,90 @@ class _RegisterState extends State<Register> {
           );
         },
       ),
+    );
+  }
+
+  void showImagePicker(BuildContext context, ApplicationLocalizations locale) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        height: 130.h,
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.w,
+          vertical: 15.h,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 100.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await ImagePicker().pickImage(source: ImageSource.camera);
+                    },
+                    icon: Icon(
+                      MaterialIcons.camera,
+                      size: 46.sp,
+                      color: AppColors.gray,
+                    ),
+                  ),
+                  Text(
+                    "Camera",
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: AppColors.gray,
+                          fontWeight: FontWeight.w600,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 15.h,
+              ),
+              child: VerticalDivider(color: AppColors.grayFaded),
+            ),
+            SizedBox(
+              width: 100.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await ImagePicker().pickImage(
+                        source: ImageSource.gallery,
+                      );
+                    },
+                    icon: Icon(
+                      MaterialIcons.add_photo_alternate,
+                      size: 46.sp,
+                      color: AppColors.gray,
+                    ),
+                  ),
+                  Text(
+                    "Gallery",
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: AppColors.gray,
+                          fontWeight: FontWeight.w600,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      constraints: BoxConstraints(maxHeight: 180.h),
     );
   }
 }

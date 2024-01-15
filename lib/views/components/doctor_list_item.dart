@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../../helper/helpers.dart';
+import '../../data/enum/enums.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
 

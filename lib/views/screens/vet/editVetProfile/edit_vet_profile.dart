@@ -42,7 +42,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ImagePicker(
+                        CustomImagePicker(
                           onPickImage: () {},
                         ),
                         SizedBox(

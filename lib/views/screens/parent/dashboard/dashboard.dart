@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/config.dart';
-import '../../../../data/models.dart';
+import '../../../../data/enum/enums.dart';
+import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import '../../screens.dart';

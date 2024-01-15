@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
-import '../../../../data/models.dart';
+import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
 import 'widgets/circle_indicator.dart';
 import 'widgets/item_builder.dart';

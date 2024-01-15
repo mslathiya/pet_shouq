@@ -45,7 +45,7 @@ class _AddNewPetState extends State<AddNewPet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ImagePicker(
+                        CustomImagePicker(
                           onPickImage: () {},
                         ),
                         SizedBox(

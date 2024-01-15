@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../theme/theme.dart';
+import 'media_picker_view.dart';
 
-class ImagePicker extends StatelessWidget {
+class CustomImagePicker extends StatelessWidget {
   final VoidCallback onPickImage;
-  const ImagePicker({
+  const CustomImagePicker({
     super.key,
     required this.onPickImage,
   });
@@ -15,7 +16,7 @@ class ImagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPickImage,
+      onTap: () => openImagePicker(context),
       child: Center(
         child: Stack(
           alignment: Alignment.center,
@@ -59,6 +60,13 @@ class ImagePicker extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void openImagePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => const MediaPickerView(),
     );
   }
 }

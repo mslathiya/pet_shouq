@@ -355,5 +355,9 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday",
-    "screen_add_special_notes": "Add Special Needs"
+    "screen_add_special_notes": "Add Special Needs",
+    "dynamic_field_required": "{0} is required",
+    "invalid_email": "Entered email address is not valid",
+    "camera": "Camera",
+    "gallery": "Gallery"
 }

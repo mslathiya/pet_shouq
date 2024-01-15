@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
-import '../../../../helper/helpers.dart';
+import '../../../../data/enum/enums.dart';
 import '../../../components/components.dart';
 import 'widgets/top_slider.dart';
 

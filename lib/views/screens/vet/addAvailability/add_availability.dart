@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../../../config/config.dart';
-import '../../../../data/models.dart';
+import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 

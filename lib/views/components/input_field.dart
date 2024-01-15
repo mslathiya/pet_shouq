@@ -85,7 +85,9 @@ class InputField extends StatelessWidget {
             contentPadding: const EdgeInsets.all(
               16,
             ),
-            errorStyle: Theme.of(context).textTheme.bodyMedium,
+            errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.redColor,
+                ),
             prefixIcon: prefixIcon != null
                 ? Padding(
                     padding: EdgeInsets.only(left: 10.w),

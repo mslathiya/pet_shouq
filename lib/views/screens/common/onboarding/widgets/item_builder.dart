@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../data/models.dart';
+import '../../../../../data/model/models.dart';
 
 class ItemBuilder extends StatelessWidget {
   const ItemBuilder({

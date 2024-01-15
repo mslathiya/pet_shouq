@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../helper/helpers.dart';
+import '../../../../../data/enum/enums.dart';
 import '../../../../components/components.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {

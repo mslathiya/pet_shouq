@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models.dart';
+import '../../data/model/models.dart';
 import '../../theme/theme.dart';
 import 'info_label.dart';
 import 'shadow_box.dart';
