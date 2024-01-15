@@ -8,3 +8,5 @@ export 'notification/notifications.dart';
 export 'contactUs/contact_us.dart';
 export "topAsked/top_asked.dart";
 export 'account/account.dart';
+export 'privacy/privacy_policy.dart';
+export 'terms/terms_condition.dart';

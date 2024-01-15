@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,16 +23,29 @@ class _TopAskedState extends State<TopAsked> {
         onPressBack: () => Navigator.pop(context),
         showNotification: false,
       ),
-      body: ListView.builder(
-        itemCount: 10,
-        padding: EdgeInsets.only(
-          bottom: 15.h,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                padding: EdgeInsets.only(
+                  bottom: 15.h,
+                ),
+                itemBuilder: (context, index) {
+                  return TopAskedItem(
+                    itemIndex: index,
+                  );
+                },
+              ),
+            ),
+            Platform.isAndroid
+                ? SizedBox(
+                    height: 15.h,
+                  )
+                : const SizedBox(),
+          ],
         ),
-        itemBuilder: (context, index) {
-          return TopAskedItem(
-            itemIndex: index,
-          );
-        },
       ),
     );
   }

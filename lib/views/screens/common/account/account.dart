@@ -35,7 +35,7 @@ class _ProfileState extends State<Profile> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: 50.h,
+                height: 70.h,
               ),
               ProfileInfo(
                 onTapEdit: () {

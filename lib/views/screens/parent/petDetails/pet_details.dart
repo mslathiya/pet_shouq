@@ -196,7 +196,7 @@ class PetDetailView extends StatelessWidget {
         MenuItem(
           title: localizations.translate("special_needs"),
           iconName: AppAssets.icSpecialNeeds,
-          onPressMenu: () {},
+          onPressMenu: () => Navigator.pushNamed(context, petSpecialNotes),
         ),
         SizedBox(
           height: 15.h,

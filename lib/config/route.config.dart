@@ -10,6 +10,8 @@ const String changePassword = 'changePassword';
 const String notifications = "notifications";
 const String contactUs = "contactUs";
 const String topAsked = "topAsked";
+const String privacyPolicy = "privacyPolicy";
+const String termsCondition = "termsCondition";
 
 //Specific for parent
 const String editParentProfile = 'editParentProfile';
@@ -39,6 +41,7 @@ const String petAddSchedule = "petAddSchedule";
 //Appointment booking
 const String petAppointment = "petAppointment";
 const String petBookingDetails = "petBookingDetails";
+const String petSpecialNotes = "petSpecialNotes";
 //Specific for parent
 
 //Specific for vet
@@ -88,12 +91,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const TopAsked(),
       );
+    case privacyPolicy:
+      return MaterialPageRoute(
+        builder: (context) => const PrivacyPolicy(),
+      );
+    case termsCondition:
+      return MaterialPageRoute(
+        builder: (context) => const TermsConditions(),
+      );
+
+    /**Specific for parent**/
     case editParentProfile:
       return MaterialPageRoute(
         builder: (context) => const EditParentProfile(),
       );
-
-    /**Specific for parent**/
     case parentDashboard:
       return MaterialPageRoute(
         builder: (context) => const Dashboard(),
@@ -187,6 +198,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case petBookingDetails:
       return MaterialPageRoute(
         builder: (context) => const AppointmentDetails(),
+      );
+
+    case petSpecialNotes:
+      return MaterialPageRoute(
+        builder: (context) => const SpecialNotes(),
       );
     /**Specific for parent**/
 

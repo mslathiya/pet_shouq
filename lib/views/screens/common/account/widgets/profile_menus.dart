@@ -53,12 +53,12 @@ class ProfileMenus extends StatelessWidget {
         MenuItem(
           title: t.translate("screen_privacy_policy"),
           iconName: AppAssets.icPrivacyPolicy,
-          onPressMenu: () {},
+          onPressMenu: () => onTapMenu(privacyPolicy),
         ),
         MenuItem(
           title: t.translate("screen_terms"),
           iconName: AppAssets.icTerms,
-          onPressMenu: () {},
+          onPressMenu: () => onTapMenu(termsCondition),
         ),
         Padding(
           padding: EdgeInsets.only(
@@ -82,7 +82,7 @@ class ProfileMenus extends StatelessWidget {
         MenuItem(
           title: t.translate("screen_faq"),
           iconName: AppAssets.icMostAsked,
-          onPressMenu: () => onTapMenu(topAsked),
+          onPressMenu: () => onTapMenu(privacyPolicy),
         ),
       ],
     );
