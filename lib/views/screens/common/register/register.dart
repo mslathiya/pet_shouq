@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import '../../../../config/config.dart';
+import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widget/radio_widget.dart';
@@ -17,30 +20,26 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  int selectedOption = 1;
-
   @override
   Widget build(BuildContext context) {
-    final safePadding = MediaQuery.of(context).padding.bottom;
-
     double width = MediaQuery.of(context).size.width;
     final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       body: LayoutBuilder(
         builder: (_, constraints) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight,
-                      minWidth: constraints.maxWidth,
-                    ),
-                    child: IntrinsicHeight(
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+                minWidth: constraints.maxWidth,
+              ),
+              child: IntrinsicHeight(
+                child: GetBuilder<RegisterController>(
+                  builder: (controller) {
+                    return Form(
+                      key: controller.formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -61,28 +60,25 @@ class _RegisterState extends State<Register> {
                                   height: 15.h,
                                 ),
                                 RadioWidget(
-                                  selectedOption: selectedOption,
-                                  onSelectOption: ((index) {
-                                    setState(() {
-                                      selectedOption = index;
-                                    });
-                                  }),
+                                  selectedOption: controller.accountType,
+                                  onSelectOption: ((index) =>
+                                      controller.onToggleType(index)),
                                 ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
                                 CustomImagePicker(
-                                  onPickImage: () => showImagePicker(
-                                    context,
-                                    t,
-                                  ),
+                                  imagePath: controller.imagePath,
+                                  onPickImage: (CroppedFile file, String type) {
+                                    controller.onPickImage(file);
+                                  },
                                 ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
                                 InputHeader(
                                   compulsory: true,
-                                  headerLabel: selectedOption == 1
+                                  headerLabel: controller.accountType == 1
                                       ? t.translate("lbl_parent_name")
                                       : t.translate("lbl_veterinarian_name"),
                                 ),
@@ -94,6 +90,19 @@ class _RegisterState extends State<Register> {
                                       child: InputField(
                                         inputHint:
                                             t.translate("hint_first_name"),
+                                        editingController: controller.firstName,
+                                        validator: MultiValidator(
+                                          [
+                                            RequiredValidator(
+                                              errorText: t.translate(
+                                                "dynamic_field_required",
+                                                args: [
+                                                  t.translate("lbl_first_name"),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ).call,
                                       ),
                                     ),
                                     SizedBox(
@@ -103,6 +112,19 @@ class _RegisterState extends State<Register> {
                                       child: InputField(
                                         inputHint:
                                             t.translate("hint_last_name"),
+                                        editingController: controller.lastName,
+                                        validator: MultiValidator(
+                                          [
+                                            RequiredValidator(
+                                              errorText: t.translate(
+                                                "dynamic_field_required",
+                                                args: [
+                                                  t.translate("lbl_last_name"),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ).call,
                                       ),
                                     )
                                   ],
@@ -110,7 +132,18 @@ class _RegisterState extends State<Register> {
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                selectedOption == 2
+                                InputField(
+                                  headerWidget: InputHeader(
+                                    headerLabel:
+                                        t.translate("lbl_display_name"),
+                                  ),
+                                  inputHint: t.translate("hint_display_name"),
+                                  editingController: controller.displayName,
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                controller.accountType == 2
                                     ? Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -119,26 +152,27 @@ class _RegisterState extends State<Register> {
                                         children: [
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
-                                              headerLabel: t.translate(
-                                                  "lbl_display_name"),
-                                            ),
-                                            inputHint: t
-                                                .translate("hint_display_name"),
-                                            compulsory: true,
-                                          ),
-                                          SizedBox(
-                                            height: 15.h,
-                                          ),
-                                          InputField(
-                                            headerWidget: InputHeader(
                                               compulsory: true,
                                               headerLabel: t.translate(
                                                   "veterinarian_special"),
                                             ),
                                             inputHint:
                                                 t.translate("hint_specialty"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.specialty,
+                                            validator: MultiValidator(
+                                              [
+                                                RequiredValidator(
+                                                  errorText: t.translate(
+                                                    "dynamic_field_required",
+                                                    args: [
+                                                      t.translate(
+                                                          "veterinarian_special"),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ).call,
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -152,7 +186,22 @@ class _RegisterState extends State<Register> {
                                     headerLabel: t.translate("lbl_email"),
                                   ),
                                   inputHint: t.translate("hint_email"),
-                                  compulsory: true,
+                                  editingController: controller.email,
+                                  validator: MultiValidator(
+                                    [
+                                      RequiredValidator(
+                                        errorText: t.translate(
+                                          "dynamic_field_required",
+                                          args: [
+                                            t.translate("lbl_email"),
+                                          ],
+                                        ),
+                                      ),
+                                      EmailValidator(
+                                        errorText: t.translate('invalid_email'),
+                                      ),
+                                    ],
+                                  ).call,
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -160,11 +209,29 @@ class _RegisterState extends State<Register> {
                                 PhoneInput(
                                   isCompulsory: true,
                                   headerLabel: t.translate("lbl_parent_phone"),
+                                  countryDialCode: controller.pickedCode != null
+                                      ? controller.pickedCode?.code
+                                      : t.appLocale.countryCode,
+                                  editingController: controller.phoneNumber,
+                                  onCountryChanged: (countryCode) => controller
+                                      .onChangeCountry(countryCode, 1),
+                                  validator: MultiValidator(
+                                    [
+                                      RequiredValidator(
+                                        errorText: t.translate(
+                                          "dynamic_field_required",
+                                          args: [
+                                            t.translate("lbl_parent_phone"),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ).call,
                                 ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                selectedOption == 1
+                                controller.accountType == 1
                                     ? Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -178,27 +245,23 @@ class _RegisterState extends State<Register> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Expanded(
-                                                child: InputField(
+                                                child: SelectorField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel: t.translate(
                                                         "lbl_gender"),
                                                   ),
-                                                  inputHint: t
-                                                      .translate("hint_gender"),
-                                                  suffixIcon: SizedBox(
-                                                    width: 24.w,
-                                                    height: 24.h,
-                                                    child: IconButton(
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Entypo.chevron_down,
-                                                        size: 26.sp,
-                                                        color:
-                                                            AppColors.hintColor,
-                                                      ),
-                                                    ),
+                                                  inputHint:
+                                                      controller.gender != ''
+                                                          ? controller.gender
+                                                          : t.translate(
+                                                              "hint_gender"),
+                                                  suffixIcon: Icon(
+                                                    Entypo.chevron_down,
+                                                    size: 26.sp,
+                                                    color: AppColors.hintColor,
                                                   ),
+                                                  onSelectItem: () => controller
+                                                      .openGenderPicker(),
                                                 ),
                                               ),
                                               SizedBox(
@@ -207,12 +270,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel:
                                                         t.translate("lbl_age"),
                                                   ),
                                                   inputHint:
                                                       t.translate("hint_age"),
+                                                  editingController:
+                                                      controller.age,
                                                 ),
                                               )
                                             ],
@@ -226,11 +290,24 @@ class _RegisterState extends State<Register> {
                                 PasswordField(
                                   headerLabel: t.translate("lbl_password"),
                                   inputHint: t.translate("hint_password"),
+                                  editingController: controller.password,
+                                  validator: MultiValidator(
+                                    [
+                                      RequiredValidator(
+                                        errorText: t.translate(
+                                          "dynamic_field_required",
+                                          args: [
+                                            t.translate("lbl_password"),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ).call,
                                 ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                selectedOption == 1
+                                controller.accountType == 1
                                     ? Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -250,6 +327,8 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             inputHint: t.translate(
                                                 "hint_street_address"),
+                                            editingController:
+                                                controller.addressOne,
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -257,6 +336,8 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             inputHint: t.translate(
                                                 "hint_street_address_two"),
+                                            editingController:
+                                                controller.addressTwo,
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -270,12 +351,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel:
                                                         t.translate("lbl_city"),
                                                   ),
                                                   inputHint:
                                                       t.translate("hint_city"),
+                                                  editingController:
+                                                      controller.city,
                                                 ),
                                               ),
                                               SizedBox(
@@ -284,12 +366,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel: t.translate(
                                                         "lbl_province"),
                                                   ),
                                                   inputHint: t.translate(
                                                       "hint_province"),
+                                                  editingController:
+                                                      controller.province,
                                                 ),
                                               )
                                             ],
@@ -300,18 +383,17 @@ class _RegisterState extends State<Register> {
                                           PhoneInput(
                                             headerLabel: t.translate(
                                                 "lbl_secondary_phone"),
-                                          ),
-                                          SizedBox(
-                                            height: 15.h,
-                                          ),
-                                          InputField(
-                                            headerWidget: InputHeader(
-                                              compulsory: false,
-                                              headerLabel: t.translate(
-                                                  "lbl_display_name"),
-                                            ),
-                                            inputHint: t
-                                                .translate("hint_display_name"),
+                                            countryDialCode: controller
+                                                        .pickedCodeSecondary !=
+                                                    null
+                                                ? controller
+                                                    .pickedCodeSecondary?.code
+                                                : t.appLocale.countryCode,
+                                            editingController:
+                                                controller.alternatePhone,
+                                            onCountryChanged: (countryCode) =>
+                                                controller.onChangeCountry(
+                                                    countryCode, 2),
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -319,12 +401,15 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             isMultiline: true,
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel: t.translate(
-                                                  "lbl_mailing_address"),
+                                                "lbl_mailing_address",
+                                              ),
                                             ),
                                             inputHint: t.translate(
-                                                "hint_mailing_address"),
+                                              "hint_mailing_address",
+                                            ),
+                                            editingController:
+                                                controller.mailingAddress,
                                           ),
                                         ],
                                       )
@@ -336,118 +421,83 @@ class _RegisterState extends State<Register> {
                                         children: [
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel: t.translate(
                                                   "lbl_qualification"),
                                             ),
                                             inputHint: t.translate(
                                                 "hint_qualification"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.qualification,
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel: t.translate(
                                                   "lbl_profile_summary"),
                                             ),
                                             inputHint:
                                                 t.translate("hint_summary"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.profileSummary,
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel:
                                                   t.translate("lbl_license_no"),
                                             ),
                                             inputHint:
                                                 t.translate("hint_license_no"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.licenseNo,
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                child: SelectorField(
-                                                  inputHint: t.translate(
-                                                      "hint_select_date"),
-                                                  headerWidget: InputHeader(
-                                                    compulsory: false,
-                                                    headerLabel: t.translate(
-                                                        "lbl_license_start_date"),
-                                                  ),
-                                                  suffixIcon: SizedBox(
-                                                    width: 24.w,
-                                                    height: 24.h,
-                                                    child: SvgPicture.asset(
-                                                      AppAssets.icCalendar,
-                                                      height: 18.sp,
-                                                      width: 18.sp,
-                                                      colorFilter:
-                                                          ColorFilter.mode(
-                                                        AppColors.hintColor,
-                                                        BlendMode.srcIn,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  onSelectItem: () {},
+                                          SelectorField(
+                                            headerWidget: InputHeader(
+                                              headerLabel: t.translate(
+                                                  "lbl_license_end_date"),
+                                            ),
+                                            inputHint:
+                                                controller.expirationDate != ''
+                                                    ? controller.expirationDate
+                                                    : t.translate(
+                                                        "hint_select_date"),
+                                            suffixIcon: SizedBox(
+                                              width: 24.w,
+                                              height: 24.h,
+                                              child: SvgPicture.asset(
+                                                AppAssets.icCalendar,
+                                                height: 18.sp,
+                                                width: 18.sp,
+                                                colorFilter: ColorFilter.mode(
+                                                  AppColors.hintColor,
+                                                  BlendMode.srcIn,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 10.w,
-                                              ),
-                                              Expanded(
-                                                child: SelectorField(
-                                                  inputHint: t.translate(
-                                                      "hint_select_date"),
-                                                  headerWidget: InputHeader(
-                                                    compulsory: false,
-                                                    headerLabel: t.translate(
-                                                        "lbl_license_end_date"),
-                                                  ),
-                                                  suffixIcon: SizedBox(
-                                                    width: 24.w,
-                                                    height: 24.h,
-                                                    child: SvgPicture.asset(
-                                                      AppAssets.icCalendar,
-                                                      height: 18.sp,
-                                                      width: 18.sp,
-                                                      colorFilter:
-                                                          ColorFilter.mode(
-                                                        AppColors.hintColor,
-                                                        BlendMode.srcIn,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  onSelectItem: () {},
-                                                ),
-                                              )
-                                            ],
+                                            ),
+                                            onSelectItem: () =>
+                                                controller.openDatePicker(),
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
                                           SelectorField(
                                             documentUploader: true,
-                                            inputHint:
-                                                t.translate("lbl_document"),
                                             headerWidget: InputHeader(
                                               compulsory: true,
                                               headerLabel:
                                                   t.translate("hint_document"),
                                             ),
+                                            inputHint: controller.pickedFile !=
+                                                    null
+                                                ? t.translate("file_selected")
+                                                : t.translate("lbl_document"),
                                             suffixIcon: Container(
                                               decoration: BoxDecoration(
                                                 color: AppColors.secondary,
@@ -471,7 +521,8 @@ class _RegisterState extends State<Register> {
                                                 width: 18.sp,
                                               ),
                                             ),
-                                            onSelectItem: () {},
+                                            onSelectItem: () =>
+                                                controller.openFilePicker(),
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -484,46 +535,60 @@ class _RegisterState extends State<Register> {
                                             ),
                                             inputHint:
                                                 t.translate("hint_experience"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.experience,
+                                            validator: MultiValidator(
+                                              [
+                                                RequiredValidator(
+                                                  errorText: t.translate(
+                                                    "dynamic_field_required",
+                                                    args: [
+                                                      t.translate(
+                                                          "lbl_experience"),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ).call,
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel: t.translate(
                                                   "lbl_language_spoken"),
                                             ),
                                             inputHint:
                                                 t.translate("hint_languages"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.spokenLanguages,
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel:
                                                   t.translate("lbl_consent"),
                                             ),
                                             inputHint:
                                                 t.translate("hint_consent"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.consent,
                                           ),
                                           SizedBox(
                                             height: 15.h,
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              compulsory: false,
                                               headerLabel:
                                                   t.translate("lbl_address"),
                                             ),
                                             inputHint:
                                                 t.translate("hint_address"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.address,
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -536,7 +601,20 @@ class _RegisterState extends State<Register> {
                                             ),
                                             inputHint:
                                                 t.translate("hint_location"),
-                                            compulsory: true,
+                                            editingController:
+                                                controller.location,
+                                            validator: MultiValidator(
+                                              [
+                                                RequiredValidator(
+                                                  errorText: t.translate(
+                                                    "dynamic_field_required",
+                                                    args: [
+                                                      t.translate("location"),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ).call,
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -550,12 +628,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel:
                                                         t.translate("lbl_city"),
                                                   ),
                                                   inputHint:
                                                       t.translate("hint_city"),
+                                                  editingController:
+                                                      controller.city,
                                                 ),
                                               ),
                                               SizedBox(
@@ -564,12 +643,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel: t
                                                         .translate("lbl_state"),
                                                   ),
                                                   inputHint:
                                                       t.translate("hint_state"),
+                                                  editingController:
+                                                      controller.province,
                                                 ),
                                               )
                                             ],
@@ -586,12 +666,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel: t.translate(
                                                         "lbl_country"),
                                                   ),
                                                   inputHint: t.translate(
                                                       "hint_country"),
+                                                  editingController:
+                                                      controller.country,
                                                 ),
                                               ),
                                               SizedBox(
@@ -600,12 +681,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    compulsory: false,
                                                     headerLabel:
                                                         t.translate("lbl_zip"),
                                                   ),
                                                   inputHint: t.translate(
                                                       "hint_zip_code"),
+                                                  editingController:
+                                                      controller.zipCode,
                                                 ),
                                               )
                                             ],
@@ -618,10 +700,19 @@ class _RegisterState extends State<Register> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: ButtonView(
-                                    onTap: () => Navigator.pushNamed(
-                                      context,
-                                      verification,
-                                    ),
+                                    onTap: () {
+                                      // if (controller.formKey.currentState!
+                                      //     .validate()) {
+                                      //   Navigator.pushNamed(
+                                      //     context,
+                                      //     verification,
+                                      //   );
+                                      // }
+                                      Navigator.pushNamed(
+                                        context,
+                                        verification,
+                                      );
+                                    },
                                     buttonTitle: t.translate("sign_up"),
                                     width: width - 20,
                                   ),
@@ -678,101 +769,14 @@ class _RegisterState extends State<Register> {
                           )
                         ],
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
-              SizedBox(
-                height: safePadding,
-              )
-            ],
+            ),
           );
         },
       ),
-    );
-  }
-
-  void showImagePicker(BuildContext context, ApplicationLocalizations locale) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
-        height: 130.h,
-        padding: EdgeInsets.symmetric(
-          horizontal: 12.w,
-          vertical: 15.h,
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 100.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                      await ImagePicker().pickImage(source: ImageSource.camera);
-                    },
-                    icon: Icon(
-                      MaterialIcons.camera,
-                      size: 46.sp,
-                      color: AppColors.gray,
-                    ),
-                  ),
-                  Text(
-                    "Camera",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: AppColors.gray,
-                          fontWeight: FontWeight.w600,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 15.h,
-              ),
-              child: VerticalDivider(color: AppColors.grayFaded),
-            ),
-            SizedBox(
-              width: 100.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                      await ImagePicker().pickImage(
-                        source: ImageSource.gallery,
-                      );
-                    },
-                    icon: Icon(
-                      MaterialIcons.add_photo_alternate,
-                      size: 46.sp,
-                      color: AppColors.gray,
-                    ),
-                  ),
-                  Text(
-                    "Gallery",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: AppColors.gray,
-                          fontWeight: FontWeight.w600,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      constraints: BoxConstraints(maxHeight: 180.h),
     );
   }
 }

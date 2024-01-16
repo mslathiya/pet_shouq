@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,22 +8,41 @@ import 'code_picker.dart';
 import 'input_field.dart';
 import 'input_header.dart';
 
-class PhoneInput extends StatelessWidget {
+class PhoneInput extends StatefulWidget {
   final String headerLabel;
   final bool? isCompulsory;
-  const PhoneInput({
-    super.key,
-    required this.headerLabel,
-    this.isCompulsory = false,
-  });
+  final TextEditingController? editingController;
+  final FormFieldValidator<String>? validator;
+  final ValueChanged? onValueChange;
+  final bool? enableInput;
+  final int? maxLength;
+  final Function(CountryCode countryCode)? onCountryChanged;
+  final String? countryDialCode;
 
+  const PhoneInput(
+      {super.key,
+      required this.headerLabel,
+      this.isCompulsory = false,
+      this.editingController,
+      this.validator,
+      this.onValueChange,
+      this.enableInput,
+      this.maxLength,
+      this.onCountryChanged,
+      this.countryDialCode});
+
+  @override
+  State<PhoneInput> createState() => _PhoneInputState();
+}
+
+class _PhoneInputState extends State<PhoneInput> {
   @override
   Widget build(BuildContext context) {
     final t = ApplicationLocalizations.of(context)!;
     return InputField(
       headerWidget: InputHeader(
-        compulsory: isCompulsory!,
-        headerLabel: headerLabel,
+        compulsory: widget.isCompulsory!,
+        headerLabel: widget.headerLabel,
       ),
       inputHint: t.translate("hint_phone"),
       keyboardType: TextInputType.phone,
@@ -31,15 +51,25 @@ class PhoneInput extends StatelessWidget {
         height: 42.h,
         child: Row(
           children: [
-            Expanded(
+            Container(
+              width: 75.w,
+              height: 42.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.sp),
+                  bottomLeft: Radius.circular(10.sp),
+                ),
+              ),
+              margin: const EdgeInsets.only(right: 0),
+              padding: const EdgeInsets.only(left: 5),
               child: Center(
                 child: CodePickerWidget(
                   boxDecoration:
                       BoxDecoration(color: Theme.of(context).cardColor),
-                  flagWidth: 24.sp,
+                  flagWidth: 25,
                   padding: EdgeInsets.zero,
-                  onChanged: (value) {},
-                  initialSelection: t.getLocale(),
+                  onChanged: widget.onCountryChanged,
+                  initialSelection: widget.countryDialCode,
                   textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         height: 1.2,
                         letterSpacing: 0.20,
@@ -55,16 +85,10 @@ class PhoneInput extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: 3.h,
-                bottom: 3.h,
-                right: 5.w,
-              ),
-              child: VerticalDivider(
-                color: AppColors.hintColor,
-                thickness: 1,
-              ),
+            Container(
+              height: 36.h,
+              width: 2,
+              color: Theme.of(context).disabledColor,
             )
           ],
         ),

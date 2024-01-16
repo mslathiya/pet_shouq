@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
@@ -43,7 +44,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomImagePicker(
-                          onPickImage: () {},
+                          onPickImage: (CroppedFile file, String type) {},
                         ),
                         SizedBox(
                           height: 15.h,

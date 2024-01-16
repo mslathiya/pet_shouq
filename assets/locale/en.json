@@ -41,7 +41,9 @@
     "type_parent": "Pet Parents",
     "type_vet": "Vet",
     "lbl_parent_name": "Pet Parent Name",
+    "lbl_first_name": "First Name",
     "hint_first_name": "Enter First Name",
+    "lbl_last_name": "Last Name",
     "hint_last_name": "Enter Last Name",
     "lbl_parent_phone": "Mobile",
     "hint_phone": "Enter number",
@@ -325,7 +327,7 @@
     "lbl_license_no": "License Number",
     "hint_license_no": "Enter License Number",
     "lbl_license_start_date": "License Start Date",
-    "lbl_license_end_date": "Expiration Date",
+    "lbl_license_end_date": "License Expiration Date",
     "lbl_document": "Document",
     "hint_document": "Upload Document",
     "lbl_experience": "Years of Experience",
@@ -359,5 +361,7 @@
     "dynamic_field_required": "{0} is required",
     "invalid_email": "Entered email address is not valid",
     "camera": "Camera",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "file_selected": "File selected successfully",
+    "error_in_request": "Error in request"
 }

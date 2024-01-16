@@ -1,93 +1,97 @@
+import 'package:flutter/foundation.dart';
+
 class AppLog {
-  static const String _DEFAULT_TAG_PREFIX = "PetShouq";
+  static const String _defaultTagPrefix = "PetShouq";
 
   ///use Log.v. Print all Logs
-  static const int VERBOSE = 2;
+  static const int verbose = 2;
 
   ///use Log.d. Print Debug Logs
-  static const int DEBUG = 3;
+  static const int debug = 3;
 
   ///use Log.i. Print Info Logs
-  static const int INFO = 4;
+  static const int info = 4;
 
   ///use Log.w. Print warning logs
-  static const int WARN = 5;
+  static const int warn = 5;
 
   ///use Log.e. Print error logs
-  static const int ERROR = 6;
+  static const int error = 6;
 
   ///use Log.wtf. Print Failure Logs(What a Terrible Failure= WTF)
-  static const int WTF = 7;
+  static const int unknown = 7;
 
   ///SET APP LOG LEVEL, Default ALL
-  static int _currentLogLevel = VERBOSE;
+  static int _currentLogLevel = verbose;
 
   static setLogLevel(int priority) {
     int newPriority = priority;
-    if (newPriority <= VERBOSE) {
-      newPriority = VERBOSE;
-    } else if (newPriority >= WTF) {
-      newPriority = WTF;
+    if (newPriority <= verbose) {
+      newPriority = verbose;
+    } else if (newPriority >= unknown) {
+      newPriority = unknown;
     }
     _currentLogLevel = newPriority;
   }
 
   static int getLogLevel() {
-    AppLog.i("Current Log Level is " + _getPriorityText(_currentLogLevel));
+    AppLog.i("Current Log Level is ${_getPriorityText(_currentLogLevel)}");
     return _currentLogLevel;
   }
 
   static _log(int priority, String tag, String message) {
     if (_currentLogLevel <= priority) {
-      print(_getPriorityText(priority) + tag + ": " + message);
+      if (kDebugMode) {
+        print("${_getPriorityText(priority)}$tag: $message");
+      }
     }
   }
 
   static String _getPriorityText(int priority) {
     switch (priority) {
-      case INFO:
+      case info:
         return "INFOⓘ|";
-      case DEBUG:
+      case debug:
         return "DEBUG|";
-      case ERROR:
+      case error:
         return "ERROR⚠️|️";
-      case WARN:
+      case warn:
         return "WARN⚠️|";
-      case WTF:
+      case unknown:
         return "WTF¯\\_(ツ)_/¯|";
-      case VERBOSE:
+      case verbose:
       default:
         return "";
     }
   }
 
   ///Print general logs
-  static v(String message, {String tag = _DEFAULT_TAG_PREFIX}) {
-    _log(VERBOSE, tag, message);
+  static v(String message, {String tag = _defaultTagPrefix}) {
+    _log(verbose, tag, message);
   }
 
   ///Print info logs
-  static i(String message, {String tag = _DEFAULT_TAG_PREFIX}) {
-    _log(INFO, tag, message);
+  static i(String message, {String tag = _defaultTagPrefix}) {
+    _log(info, tag, message);
   }
 
   ///Print debug logs
-  static d(String message, {String tag = _DEFAULT_TAG_PREFIX}) {
-    _log(DEBUG, tag, message);
+  static d(String message, {String tag = _defaultTagPrefix}) {
+    _log(debug, tag, message);
   }
 
   ///Print warning logs
-  static w(String message, {String tag = _DEFAULT_TAG_PREFIX}) {
-    _log(WARN, tag, message);
+  static w(String message, {String tag = _defaultTagPrefix}) {
+    _log(warn, tag, message);
   }
 
   ///Print error logs
-  static e(String message, {String tag = _DEFAULT_TAG_PREFIX}) {
-    _log(ERROR, tag, message);
+  static e(String message, {String tag = _defaultTagPrefix}) {
+    _log(error, tag, message);
   }
 
   ///Print failure logs
-  static wtf(String message, {String tag = _DEFAULT_TAG_PREFIX}) {
-    _log(WTF, tag, message);
+  static wtf(String message, {String tag = _defaultTagPrefix}) {
+    _log(unknown, tag, message);
   }
 }

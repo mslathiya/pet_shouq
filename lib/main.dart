@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pet_shouq/controller/controllers.dart';
 
 import 'config/config.dart';
 import 'firebase_options.dart';
@@ -39,6 +40,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // Ideal time to initialize
+  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+
   await init();
   runApp(const MyApp());
 }
@@ -53,32 +57,37 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.system,
-          onGenerateRoute: generateRoute,
-          supportedLocales: const [
-            Locale('en'),
-          ],
-          localizationsDelegates: const [
-            ApplicationLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          localeResolutionCallback: (locale, supportedLocales) {
-            for (var supportedLocaleLanguage in supportedLocales) {
-              if (supportedLocaleLanguage.languageCode ==
-                      locale?.languageCode &&
-                  supportedLocaleLanguage.countryCode == locale?.countryCode) {
-                return supportedLocaleLanguage;
-              }
-            }
-            return supportedLocales.first;
+        return GetBuilder<SplashController>(
+          builder: (controller) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.system,
+              onGenerateRoute: generateRoute,
+              supportedLocales: const [
+                Locale('en'),
+              ],
+              localizationsDelegates: const [
+                ApplicationLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (var supportedLocaleLanguage in supportedLocales) {
+                  if (supportedLocaleLanguage.languageCode ==
+                          locale?.languageCode &&
+                      supportedLocaleLanguage.countryCode ==
+                          locale?.countryCode) {
+                    return supportedLocaleLanguage;
+                  }
+                }
+                return supportedLocales.first;
+              },
+              locale: const Locale('en'),
+              initialRoute: login,
+            );
           },
-          locale: const Locale('en'),
-          initialRoute: login,
         );
       },
     );

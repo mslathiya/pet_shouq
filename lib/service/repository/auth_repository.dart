@@ -1,22 +1,57 @@
-import 'package:get/get.dart';
+import 'package:dartz/dartz.dart';
 
+import '../../data/model/models.dart';
+import '../../helper/app_preferences.dart';
 import '../api/api_imports.dart';
+import '../api/failure.dart';
 
-class AuthRepository {
+abstract class AuthRepository {
+  Future<Either<Failure, LoginBean>> loginMember(
+    String email,
+    String password,
+  );
+}
+
+class AuthRepositoryImpl implements AuthRepository {
   final NetworkInfo networkInfo;
   final ApiRepository apiService;
+  final AppPreferences preferences;
 
-  AuthRepository({
+  AuthRepositoryImpl({
     required this.networkInfo,
     required this.apiService,
+    required this.preferences,
   });
 
-  Future<void> loginMember(String email, String password) async {
-    if (!await networkInfo.isConnected) {
-      // apiService.post("uri");
+  @override
+  Future<Either<Failure, LoginBean>> loginMember(
+      String email, String password) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late LoginBean bean;
+        var result = await apiService.post(Endpoints.loginPost, data: {
+          "user_email": email,
+          "password": password,
+        });
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = LoginBean.fromJson(response);
+          if (bean.success == true) {
+            String appToken = bean.data!.token ?? "";
+            await preferences.setUserToken(appToken);
+            await preferences.setUserLogged();
+            await preferences.setUserInfo(loginBeanToJson(bean));
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? "Something goes wrong"));
+          }
+        }
+        return Left(Failure(200, "Something goes wrong"));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
     } else {
-      //no internet error
-      Get.snackbar("title", "message", snackPosition: SnackPosition.BOTTOM);
+      return Left(DataSource.noInternetConnection.getFailure());
     }
   }
 }

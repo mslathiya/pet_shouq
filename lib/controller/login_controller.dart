@@ -1,22 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
+import '../config/config.dart';
+import '../data/model/models.dart';
+import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
+import '../theme/theme.dart';
 
 class LoginController extends GetxController implements GetxService {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final AuthRepository repository;
+  ApplicationLocalizations locale = ApplicationLocalizations.of(Get.context!)!;
+
+  final AuthRepositoryImpl repository;
+  bool isLoading = false;
 
   LoginController({
     required this.repository,
   });
 
   void performLogin() async {
-    String email = emailController.text;
-    String password = passwordController.text;
+    try {
+      String email = emailController.text;
+      String password = passwordController.text;
+      isLoading = true;
+      update();
+      final result = await repository.loginMember(email, password);
 
-    await repository.loginMember(email, password);
+      result.fold<void>((failure) {
+        isLoading = false;
+        update();
+        AppLog.e("performLogin-Fail ${failure.message}");
+        Get.snackbar(
+          locale.translate("error_in_request"),
+          failure.message,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }, (success) {
+        isLoading = false;
+        update();
+        AppLog.e("performLogin-Success $success");
+        Future.delayed(
+          const Duration(milliseconds: 5),
+          () {
+            LoginData? loginData = success.data;
+            if (loginData != null) {
+              List<String> roles = loginData.roleNames ?? [];
+              if (roles[0] == 'pet_parent') {
+                Get.offAndToNamed(parentDashboard);
+              }
+            }
+          },
+        );
+      });
+    } catch (e) {
+      AppLog.e("handle failure on controller");
+    }
   }
 }

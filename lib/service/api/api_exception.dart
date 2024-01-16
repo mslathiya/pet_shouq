@@ -2,62 +2,164 @@ part of "api_imports.dart";
 
 class ApiException implements Exception {
   late String errorMessage;
+  late Failure failure;
 
-  ApiException.fromDioError(DioException dioError) {
-    switch (dioError.type) {
-      case DioExceptionType.cancel:
-        errorMessage = 'Request to the server was cancelled.';
-        break;
-      case DioExceptionType.connectionTimeout:
-        errorMessage = 'Connection timed out.';
-        break;
-      case DioExceptionType.receiveTimeout:
-        errorMessage = 'Receiving timeout occurred.';
-        break;
-      case DioExceptionType.sendTimeout:
-        errorMessage = 'Request send timeout.';
-        break;
-      case DioExceptionType.badResponse:
-        errorMessage = _handleStatusCode(dioError.response?.statusCode);
-        break;
-      case DioExceptionType.unknown:
-        if (dioError.message!.contains('SocketException')) {
-          errorMessage = 'No Internet.';
-          break;
-        }
-        errorMessage = 'Unexpected error occurred.';
-        break;
-      default:
-        errorMessage = 'Something went wrong';
-        break;
+  ApiException.handle(dynamic error) {
+    if (error is DioException) {
+      // dio error so its an error from response of the API or from dio itself
+      failure = _handleError(error);
+    } else {
+      // default error
+      failure = DataSource.defaultError.getFailure();
     }
   }
+}
 
-  String _handleStatusCode(int? statusCode) {
-    switch (statusCode) {
-      case 400:
-        return 'Bad request.';
-      case 401:
-        return 'Authentication failed.';
-      case 403:
-        return 'The authenticated user is not allowed to access the specified API endpoint.';
-      case 404:
-        return 'The requested resource does not exist.';
-      case 405:
-        return 'Method not allowed. Please check the Allow header for the allowed HTTP methods.';
-      case 415:
-        return 'Unsupported media type. The requested content type or version number is invalid.';
-      case 422:
-        return 'Data validation failed.';
-      case 429:
-        return 'Too many requests.';
-      case 500:
-        return 'Internal server error.';
-      default:
-        return 'Oops something went wrong!';
+Failure _handleError(DioException error) {
+  switch (error.type) {
+    case DioExceptionType.connectionTimeout:
+      return DataSource.connectTimeout.getFailure();
+    case DioExceptionType.sendTimeout:
+      return DataSource.sendTimeout.getFailure();
+    case DioExceptionType.receiveTimeout:
+      return DataSource.receiveTimeout.getFailure();
+    case DioExceptionType.badResponse:
+      if (error.response != null &&
+          error.response?.statusCode != null &&
+          error.response?.statusMessage != null) {
+        return Failure(error.response?.statusCode ?? 0,
+            error.response?.data["message"] ?? "");
+      } else {
+        return DataSource.defaultError.getFailure();
+      }
+    case DioExceptionType.cancel:
+      return DataSource.cancel.getFailure();
+    default:
+      return DataSource.defaultError.getFailure();
+  }
+}
+
+enum DataSource {
+  success,
+  noContent,
+  badRequest,
+  forbidden,
+  unAuthorized,
+  notFound,
+  internalServerError,
+  connectTimeout,
+  cancel,
+  receiveTimeout,
+  sendTimeout,
+  cacheError,
+  noInternetConnection,
+  defaultError
+}
+
+extension DataSourceExtension on DataSource {
+  Failure getFailure() {
+    switch (this) {
+      case DataSource.success:
+        return Failure(ResponseCode.success, ResponseMessage.success);
+      case DataSource.noContent:
+        return Failure(ResponseCode.noContent, ResponseMessage.noContent);
+      case DataSource.badRequest:
+        return Failure(ResponseCode.badRequest, ResponseMessage.badRequest);
+      case DataSource.forbidden:
+        return Failure(ResponseCode.forbidden, ResponseMessage.forbidden);
+      case DataSource.unAuthorized:
+        return Failure(ResponseCode.unAuthorized, ResponseMessage.unAuthorized);
+      case DataSource.notFound:
+        return Failure(ResponseCode.notFound, ResponseMessage.notFound);
+      case DataSource.internalServerError:
+        return Failure(ResponseCode.internalServerError,
+            ResponseMessage.internalServerError);
+      case DataSource.connectTimeout:
+        return Failure(
+            ResponseCode.connectTimeout, ResponseMessage.connectTimeout);
+      case DataSource.cancel:
+        return Failure(ResponseCode.cancel, ResponseMessage.cancel);
+      case DataSource.receiveTimeout:
+        return Failure(
+            ResponseCode.receiveTimeout, ResponseMessage.receiveTimeout);
+      case DataSource.sendTimeout:
+        return Failure(ResponseCode.sendTimeout, ResponseMessage.sendTimeout);
+      case DataSource.cacheError:
+        return Failure(ResponseCode.cacheError, ResponseMessage.cacheError);
+      case DataSource.noInternetConnection:
+        return Failure(ResponseCode.noInternetConnection,
+            ResponseMessage.noInternetConnection);
+      case DataSource.defaultError:
+        return Failure(ResponseCode.defaultError, ResponseMessage.defaultError);
     }
   }
+}
 
-  @override
-  String toString() => errorMessage;
+class ResponseCode {
+  static const int success = 200; // success with data
+  static const int noContent = 201; // success with no data (no content)
+  static const int badRequest = 400; // failure, API rejected request
+  static const int unAuthorized = 401; // failure, user is not authorized
+  static const int forbidden = 403; //  failure, API rejected request
+  static const int internalServerError = 500; // failure, crash in server side
+  static const int notFound = 404; // failure, not found
+
+  // local status code
+  static const int connectTimeout = -1;
+  static const int cancel = -2;
+  static const int receiveTimeout = -3;
+  static const int sendTimeout = -4;
+  static const int cacheError = -5;
+  static const int noInternetConnection = -6;
+  static const int defaultError = -7;
+}
+
+class ResponseMessage {
+  static const String success = AppStrings.success; // success with data
+  static const String noContent =
+      AppStrings.success; // success with no data (no content)
+  static const String badRequest =
+      AppStrings.strBadRequestError; // failure, API rejected request
+  static const String unAuthorized =
+      AppStrings.strUnauthorizedError; // failure, user is not authorized
+  static const String forbidden =
+      AppStrings.strForbiddenError; //  failure, API rejected request
+  static const String internalServerError =
+      AppStrings.strInternalServerError; // failure, crash in server side
+  static const String notFound =
+      AppStrings.strNotFoundError; // failure, crash in server side
+
+  // local status code
+  static const String connectTimeout = AppStrings.strTimeoutError;
+  static const String cancel = AppStrings.strDefaultError;
+  static const String receiveTimeout = AppStrings.strTimeoutError;
+  static const String sendTimeout = AppStrings.strTimeoutError;
+  static const String cacheError = AppStrings.strCacheError;
+  static const String noInternetConnection = AppStrings.strNoInternetError;
+  static const String defaultError = AppStrings.strDefaultError;
+}
+
+class ApiInternalStatus {
+  static const int success = 200;
+  static const int failure = 400;
+}
+
+class AppStrings {
+  static const strNoRouteFound = "no_route_found";
+  static const strAppName = "app_name";
+
+  static const String success = "success";
+  // error handler
+  static const String strBadRequestError = "bad_request_error";
+  static const String strNoContent = "no_content";
+  static const String strForbiddenError = "forbidden_error";
+  static const String strUnauthorizedError = "unauthorized_error";
+  static const String strNotFoundError = "not_found_error";
+  static const String strConflictError = "conflict_error";
+  static const String strInternalServerError = "internal_server_error";
+  static const String strUnknownError = "unknown_error";
+  static const String strTimeoutError = "timeout_error";
+  static const String strDefaultError = "default_error";
+  static const String strCacheError = "cache_error";
+  static const String strNoInternetError = "no_internet_error";
 }
