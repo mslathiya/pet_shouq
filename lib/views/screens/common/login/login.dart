@@ -19,7 +19,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -48,8 +47,8 @@ class _LoginState extends State<Login> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 HeaderLabel(
-                                  header: t.translate("welcome_back"),
-                                  subHeader: t.translate('login_with_details'),
+                                  header: "welcome_back".tr,
+                                  subHeader: 'login_with_details'.tr,
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -57,22 +56,20 @@ class _LoginState extends State<Login> {
                                 InputField(
                                   headerWidget: InputHeader(
                                     compulsory: true,
-                                    headerLabel: t.translate("lbl_email"),
+                                    headerLabel: "lbl_email".tr,
                                   ),
-                                  inputHint: t.translate("hint_email"),
+                                  inputHint: "hint_email".tr,
                                   editingController: controller.emailController,
                                   validator: MultiValidator(
                                     [
                                       RequiredValidator(
-                                        errorText: t.translate(
-                                          "dynamic_field_required",
-                                          args: [
-                                            t.translate("lbl_email"),
-                                          ],
+                                        errorText:
+                                            "dynamic_field_required".trParams(
+                                          {"field": "lbl_email".tr},
                                         ),
                                       ),
                                       EmailValidator(
-                                        errorText: t.translate('invalid_email'),
+                                        errorText: 'invalid_email'.tr,
                                       ),
                                     ],
                                   ).call,
@@ -81,18 +78,16 @@ class _LoginState extends State<Login> {
                                   height: 10.h,
                                 ),
                                 PasswordField(
-                                  headerLabel: t.translate("lbl_password"),
-                                  inputHint: t.translate("hint_password"),
+                                  headerLabel: "lbl_password".tr,
+                                  inputHint: "hint_password".tr,
                                   editingController:
                                       controller.passwordController,
                                   validator: MultiValidator(
                                     [
                                       RequiredValidator(
-                                        errorText: t.translate(
-                                          "dynamic_field_required",
-                                          args: [
-                                            t.translate("lbl_password"),
-                                          ],
+                                        errorText:
+                                            "dynamic_field_required".trParams(
+                                          {"field": "lbl_password".tr},
                                         ),
                                       ),
                                     ],
@@ -119,7 +114,7 @@ class _LoginState extends State<Login> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              t.translate("remember_me"),
+                                              "remember_me".tr,
                                               textAlign: TextAlign.left,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -138,7 +133,7 @@ class _LoginState extends State<Login> {
                                       onTap: () => Navigator.pushNamed(
                                           context, forgotPassword),
                                       child: Text(
-                                        t.translate("forgot_password"),
+                                        "forgot_password".tr,
                                         textAlign: TextAlign.center,
                                         style: Theme.of(context)
                                             .textTheme
@@ -170,7 +165,7 @@ class _LoginState extends State<Login> {
                                         controller.performLogin();
                                       }
                                     },
-                                    buttonTitle: t.translate("btn_login"),
+                                    buttonTitle: "btn_login".tr,
                                     width: width - 20,
                                   ),
                                 ),
@@ -186,7 +181,7 @@ class _LoginState extends State<Login> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        t.translate("no_account"),
+                                        "no_account".tr,
                                         textAlign: TextAlign.left,
                                         style: Theme.of(context)
                                             .textTheme
@@ -201,7 +196,7 @@ class _LoginState extends State<Login> {
                                         width: 5.w,
                                       ),
                                       Text(
-                                        t.translate("sign_up"),
+                                        "sign_up".tr,
                                         textAlign: TextAlign.left,
                                         style: Theme.of(context)
                                             .textTheme

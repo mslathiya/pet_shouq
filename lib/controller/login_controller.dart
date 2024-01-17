@@ -7,11 +7,10 @@ import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 
-class LoginController extends GetxController implements GetxService {
+class LoginController extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  ApplicationLocalizations locale = ApplicationLocalizations.of(Get.context!)!;
 
   final AuthRepositoryImpl repository;
   bool isLoading = false;
@@ -33,7 +32,7 @@ class LoginController extends GetxController implements GetxService {
         update();
         AppLog.e("performLogin-Fail ${failure.message}");
         Get.snackbar(
-          locale.translate("error_in_request"),
+          "error_in_request".tr,
           failure.message,
           backgroundColor: AppColors.redColor,
           colorText: AppColors.white,

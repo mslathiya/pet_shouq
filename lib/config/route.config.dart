@@ -2,55 +2,55 @@ import 'package:get/get.dart';
 
 import '../views/screens/screens.dart';
 
-const String intro = 'intro';
-const String login = 'login';
-const String register = 'register';
-const String verification = 'verification';
-const String forgotPassword = 'forgotPassword';
-const String changePassword = 'changePassword';
-const String notifications = "notifications";
-const String contactUs = "contactUs";
-const String topAsked = "topAsked";
-const String privacyPolicy = "privacyPolicy";
-const String termsCondition = "termsCondition";
+const String intro = '/intro';
+const String login = '/login';
+const String register = '/register';
+const String verification = '/verification';
+const String forgotPassword = '/forgotPassword';
+const String changePassword = '/changePassword';
+const String notifications = "/notifications";
+const String contactUs = "/contactUs";
+const String topAsked = "/topAsked";
+const String privacyPolicy = "/privacyPolicy";
+const String termsCondition = "/termsCondition";
 
 //Specific for parent
-const String editParentProfile = 'editParentProfile';
-const String parentDashboard = "parentDashboard";
-const String doctorDetails = 'doctorDetails';
-const String petDetails = 'petDetails';
-const String addPet = 'addPet';
+const String editParentProfile = '/editParentProfile';
+const String parentDashboard = "/parentDashboard";
+const String doctorDetails = '/doctorDetails';
+const String petDetails = '/petDetails';
+const String addPet = '/addPet';
 //medication
-const String petMedication = "petMedication";
-const String petMedicationDetail = "petMedicationDetail";
-const String petAddMedication = "petAddMedication";
+const String petMedication = "/petMedication";
+const String petMedicationDetail = "/petMedicationDetail";
+const String petAddMedication = "/petAddMedication";
 
 //diet
-const String petDiet = "petDiet";
-const String petDietDetail = "petDietDetail";
-const String petAddDiet = "petAddDiet";
+const String petDiet = "/petDiet";
+const String petDietDetail = "/petDietDetail";
+const String petAddDiet = "/petAddDiet";
 
 //nutrition
-const String petNutrition = "petNutrition";
-const String petNutritionDetail = "petNutritionDetail";
-const String petAddNutrition = "petAddNutrition";
+const String petNutrition = "/petNutrition";
+const String petNutritionDetail = "/petNutritionDetail";
+const String petAddNutrition = "/petAddNutrition";
 
 //feeding Schedule
-const String petFeedSchedule = "petFeedSchedule";
-const String petAddSchedule = "petAddSchedule";
+const String petFeedSchedule = "/petFeedSchedule";
+const String petAddSchedule = "/petAddSchedule";
 
 //Appointment booking
-const String petAppointment = "petAppointment";
-const String petBookingDetails = "petBookingDetails";
-const String petSpecialNotes = "petSpecialNotes";
+const String petAppointment = "/petAppointment";
+const String petBookingDetails = "/petBookingDetails";
+const String petSpecialNotes = "/petSpecialNotes";
 //Specific for parent
 
 //Specific for vet
-const String vetDashboard = "vetDashboard";
-const String vetAppointmentDetail = "vetAppointmentDetail";
-const String vetEditProfile = "vetEditProfile";
-const String vetRegister = "vetRegister";
-const String vetAddAvailability = "vetAddAvailability";
+const String vetDashboard = "/vetDashboard";
+const String vetAppointmentDetail = "/vetAppointmentDetail";
+const String vetEditProfile = "/vetEditProfile";
+const String vetRegister = "/vetRegister";
+const String vetAddAvailability = "/vetAddAvailability";
 //Specific for vet
 
 List<GetPage> generateRoute = [

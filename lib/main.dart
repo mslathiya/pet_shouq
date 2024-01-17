@@ -56,7 +56,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() async {
+  void initState() {
     _routing();
     super.initState();
   }
@@ -82,6 +82,9 @@ class _MyAppState extends State<MyApp> {
                     darkTheme: AppTheme.darkTheme,
                     themeMode: ThemeMode.system,
                     getPages: generateRoute,
+                    translations: AppStrings(),
+                    locale: const Locale('en', "US"),
+                    fallbackLocale: const Locale('en', "US"),
                     supportedLocales: const [
                       Locale('en'),
                     ],
@@ -101,8 +104,8 @@ class _MyAppState extends State<MyApp> {
                       }
                       return supportedLocales.first;
                     },
-                    locale: const Locale('en'),
-                    initialRoute: controller.isLoggedIn ? vetDashboard : login,
+                    // initialRoute: controller.isLoggedIn ? vetDashboard : login,
+                    initialRoute: intro,
                   );
           },
         );

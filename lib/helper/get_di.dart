@@ -44,6 +44,12 @@ Future<void> init() async {
 
   //Initialize controllers
   Get.lazyPut(
+    () => SplashController(
+      repository: Get.find(),
+      preferences: Get.find(),
+    ),
+  );
+  Get.lazyPut(
     () => LoginController(
       repository: Get.find(),
     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../data/model/models.dart';
 
@@ -32,7 +33,7 @@ class ItemBuilder extends StatelessWidget {
             height: 35.h,
           ),
           Text(
-            title,
+            title.tr,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   height: 1.2,
                   letterSpacing: 0.20,
@@ -45,7 +46,7 @@ class ItemBuilder extends StatelessWidget {
             height: 10.h,
           ),
           Text(
-            subTitle,
+            subTitle.tr,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   letterSpacing: 0,
                   fontWeight: FontWeight.w400,

@@ -12,7 +12,7 @@ abstract class AuthRepository {
   );
 }
 
-class AuthRepositoryImpl implements AuthRepository {
+class AuthRepositoryImpl extends AuthRepository {
   final NetworkInfo networkInfo;
   final ApiRepository apiService;
   final AppPreferences preferences;

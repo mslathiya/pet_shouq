@@ -1,6 +1,7 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/model/models.dart';
@@ -40,7 +41,6 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
-    final t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -65,14 +65,11 @@ class _OnBoardingState extends State<OnBoarding> {
                       itemBuilder: (context, index) {
                         final item = onboardingList[index];
 
-                        String title = t.translate(item.title);
-                        String subTitle = t.translate(item.content);
-
                         return FadedScaleAnimation(
                           child: ItemBuilder(
                             item: item,
-                            title: title,
-                            subTitle: subTitle,
+                            title: item.title,
+                            subTitle: item.content,
                           ),
                         );
                       },
@@ -113,14 +110,14 @@ class _OnBoardingState extends State<OnBoarding> {
                               Navigator.pushNamed(context, login);
                             },
                             onAnimationEnd: () {
-                              if (_currentPage != onboardingList.length - 1) {
-                                _pageController.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease,
-                                );
-                              } else {
-                                Navigator.pushNamed(context, login);
-                              }
+                              // if (_currentPage != onboardingList.length - 1) {
+                              //   _pageController.nextPage(
+                              //     duration: const Duration(milliseconds: 500),
+                              //     curve: Curves.ease,
+                              //   );
+                              // } else {
+                              //   Navigator.pushNamed(context, login);
+                              // }
                             },
                           )
                         ],
@@ -133,7 +130,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: GestureDetector(
                   onTap: () => Navigator.pushNamed(context, login),
                   child: Text(
-                    t.translate("skip"),
+                    "skip".tr,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           height: 1.2,
                           letterSpacing: 0.20,
