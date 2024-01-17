@@ -214,6 +214,7 @@
     "hint_mineral": "Enter Minerals",
     "hint_omega_three": "Enter Omega-3",
     "hint_omega_six": "Enter Omega-6",
+    "lbl_guideline": "Guidelines",
     "hint_guideline": "Enter Guidelines",
     "hint_lbs": "Enter Lbs",
     "hint_feature": "Enter Special Features",
@@ -355,5 +356,6 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday",
-    "screen_add_special_notes": "Add Special Needs"
+    "screen_add_special_notes": "Add Special Needs",
+    "lbl_diet_time": "Diet Time"
 }

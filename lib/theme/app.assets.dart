@@ -57,6 +57,7 @@ class AppAssets {
   static const icQrCode = "assets/svg/qr_code.svg";
   static const icBookingHistory = "assets/svg/ic_booking_history.svg";
   static const icClock = "assets/svg/ic_clock.svg";
+  static const icClockFaded = "assets/svg/ic_clock_faded.svg";
   static const icHospital = "assets/svg/ic_hospital.svg";
   static const icBirthDate = "assets/svg/ic_birthdate.svg";
   static const icDiscount = "assets/svg/ic_discount.svg";

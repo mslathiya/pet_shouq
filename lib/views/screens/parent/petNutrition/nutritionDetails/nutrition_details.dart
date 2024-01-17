@@ -84,10 +84,6 @@ class NutritionDetails extends StatelessWidget {
                           description: "lorem ipusm",
                         ),
                         MedicalInfo(
-                          title: t.translate("small_breed"),
-                          description: "1/2 to 1 cup per day",
-                        ),
-                        MedicalInfo(
                           title: t.translate("special_feature"),
                           description: "Contains DHA for brain development",
                         ),

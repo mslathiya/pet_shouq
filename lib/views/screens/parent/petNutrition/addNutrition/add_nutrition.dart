@@ -112,52 +112,39 @@ class _AddNutritionState extends State<AddNutrition> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: InputField(
-                                headerWidget: InputHeader(
-                                  compulsory: false,
-                                  headerLabel: t.translate("ingredients"),
+                        InputField(
+                          headerWidget: InputHeader(
+                            compulsory: false,
+                            headerLabel: t.translate("ingredients"),
+                          ),
+                          inputHint: t.translate("hint_ingredients"),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        RichText(
+                          textAlign: TextAlign.left,
+                          text: TextSpan(
+                            text: t.translate("lbl_nutrition_content"),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(fontSize: 14.sp),
+                            children: [
+                              WidgetSpan(
+                                child: SizedBox(
+                                  width: 2.w,
                                 ),
-                                inputHint: t.translate("hint_ingredients"),
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  InputField(
-                                    headerWidget: InputHeader(
-                                      compulsory: false,
-                                      headerLabel:
-                                          t.translate("lbl_nutrition_content"),
-                                    ),
-                                    inputHint:
-                                        t.translate("hint_nutrition_content"),
-                                  ),
-                                  SizedBox(
-                                    height: 2.h,
-                                  ),
-                                  Text(
-                                    t.translate("per_gram", args: ['100']),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall
-                                        ?.copyWith(
-                                            fontSize: 12.sp,
-                                            color: AppColors.hintColor),
-                                  ),
-                                ],
+                              TextSpan(
+                                text: ":",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(fontSize: 12.sp),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 15.h,
@@ -282,32 +269,39 @@ class _AddNutritionState extends State<AddNutrition> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: InputField(
-                                headerWidget: InputHeader(
-                                  compulsory: false,
-                                  headerLabel: t.translate("omega_six"),
+                        InputField(
+                          headerWidget: InputHeader(
+                            compulsory: false,
+                            headerLabel: t.translate("omega_six"),
+                          ),
+                          inputHint: t.translate("hint_omega_six"),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        RichText(
+                          textAlign: TextAlign.left,
+                          text: TextSpan(
+                            text: t.translate("guidelines"),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(fontSize: 14.sp),
+                            children: [
+                              WidgetSpan(
+                                child: SizedBox(
+                                  width: 2.w,
                                 ),
-                                inputHint: t.translate("hint_omega_six"),
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: InputField(
-                                headerWidget: InputHeader(
-                                  compulsory: false,
-                                  headerLabel: t.translate("guidelines"),
-                                ),
-                                inputHint: t.translate("hint_guideline"),
+                              TextSpan(
+                                text: ":",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(fontSize: 12.sp),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 15.h,
@@ -315,19 +309,9 @@ class _AddNutritionState extends State<AddNutrition> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("small_breed"),
+                            headerLabel: t.translate("lbl_guideline"),
                           ),
-                          inputHint: t.translate("hint_lbs"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputField(
-                          headerWidget: InputHeader(
-                            compulsory: false,
-                            headerLabel: t.translate("large_breed"),
-                          ),
-                          inputHint: t.translate("hint_lbs"),
+                          inputHint: t.translate("hint_guideline"),
                         ),
                         SizedBox(
                           height: 15.h,
