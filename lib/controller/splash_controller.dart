@@ -6,13 +6,17 @@ import '../service/repository/repository.dart';
 class SplashController extends GetxController implements GetxService {
   final AuthRepository repository;
   final AppPreferences preferences;
+  bool isLoading = true;
+  bool isLoggedIn = false;
 
   SplashController({
     required this.repository,
     required this.preferences,
   });
 
-  Future<bool> isLoggedIn() async {
-    return preferences.getIsLoggedIn();
+  Future<void> initData() async {
+    isLoading = true;
+    isLoggedIn = await preferences.getIsLoggedIn();
+    isLoading = false;
   }
 }

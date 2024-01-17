@@ -47,8 +47,23 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() async {
+    _routing();
+    super.initState();
+  }
+
+  void _routing() async {
+    await Get.find<SplashController>().initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,34 +74,36 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetBuilder<SplashController>(
           builder: (controller) {
-            return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeMode.system,
-              onGenerateRoute: generateRoute,
-              supportedLocales: const [
-                Locale('en'),
-              ],
-              localizationsDelegates: const [
-                ApplicationLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              localeResolutionCallback: (locale, supportedLocales) {
-                for (var supportedLocaleLanguage in supportedLocales) {
-                  if (supportedLocaleLanguage.languageCode ==
-                          locale?.languageCode &&
-                      supportedLocaleLanguage.countryCode ==
-                          locale?.countryCode) {
-                    return supportedLocaleLanguage;
-                  }
-                }
-                return supportedLocales.first;
-              },
-              locale: const Locale('en'),
-              initialRoute: login,
-            );
+            return controller.isLoading
+                ? const SizedBox()
+                : GetMaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    theme: AppTheme.lightTheme,
+                    darkTheme: AppTheme.darkTheme,
+                    themeMode: ThemeMode.system,
+                    getPages: generateRoute,
+                    supportedLocales: const [
+                      Locale('en'),
+                    ],
+                    localizationsDelegates: const [
+                      ApplicationLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                    ],
+                    localeResolutionCallback: (locale, supportedLocales) {
+                      for (var supportedLocaleLanguage in supportedLocales) {
+                        if (supportedLocaleLanguage.languageCode ==
+                                locale?.languageCode &&
+                            supportedLocaleLanguage.countryCode ==
+                                locale?.countryCode) {
+                          return supportedLocaleLanguage;
+                        }
+                      }
+                      return supportedLocales.first;
+                    },
+                    locale: const Locale('en'),
+                    initialRoute: controller.isLoggedIn ? vetDashboard : login,
+                  );
           },
         );
       },

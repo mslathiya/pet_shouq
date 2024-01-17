@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:pet_shouq/views/screens/screens.dart';
+import 'package:get/get.dart';
+
+import '../views/screens/screens.dart';
 
 const String intro = 'intro';
 const String login = 'login';
@@ -52,179 +53,172 @@ const String vetRegister = "vetRegister";
 const String vetAddAvailability = "vetAddAvailability";
 //Specific for vet
 
-Route<dynamic> generateRoute(RouteSettings settings) {
-  final routeName = settings.name;
-  switch (routeName) {
-    case intro:
-      return MaterialPageRoute(
-        builder: (context) => const OnBoarding(),
-      );
-    case login:
-      return MaterialPageRoute(
-        builder: (context) => const Login(),
-      );
-    case forgotPassword:
-      return MaterialPageRoute(
-        builder: (context) => const ForgotPassword(),
-      );
-    case changePassword:
-      return MaterialPageRoute(
-        builder: (context) => const ChangePassword(),
-      );
-    case register:
-      return MaterialPageRoute(
-        builder: (context) => const Register(),
-      );
-    case verification:
-      return MaterialPageRoute(
-        builder: (context) => const Verification(),
-      );
-    case notifications:
-      return MaterialPageRoute(
-        builder: (context) => const Notifications(),
-      );
-    case contactUs:
-      return MaterialPageRoute(
-        builder: (context) => const ContactUs(),
-      );
-    case topAsked:
-      return MaterialPageRoute(
-        builder: (context) => const TopAsked(),
-      );
-    case privacyPolicy:
-      return MaterialPageRoute(
-        builder: (context) => const PrivacyPolicy(),
-      );
-    case termsCondition:
-      return MaterialPageRoute(
-        builder: (context) => const TermsConditions(),
-      );
+List<GetPage> generateRoute = [
+  GetPage(
+    name: intro,
+    page: () => const OnBoarding(),
+  ),
+  GetPage(
+    name: login,
+    page: () => const Login(),
+  ),
+  GetPage(
+    name: forgotPassword,
+    page: () => const ForgotPassword(),
+  ),
+  GetPage(
+    name: changePassword,
+    page: () => const ChangePassword(),
+  ),
+  GetPage(
+    name: register,
+    page: () => const Register(),
+  ),
+  GetPage(
+    name: verification,
+    page: () => const Verification(),
+  ),
+  GetPage(
+    name: notifications,
+    page: () => const Notifications(),
+  ),
+  GetPage(
+    name: contactUs,
+    page: () => const ContactUs(),
+  ),
+  GetPage(
+    name: topAsked,
+    page: () => const TopAsked(),
+  ),
+  GetPage(
+    name: privacyPolicy,
+    page: () => const PrivacyPolicy(),
+  ),
+  GetPage(
+    name: termsCondition,
+    page: () => const TermsConditions(),
+  ),
 
-    /**Specific for parent**/
-    case editParentProfile:
-      return MaterialPageRoute(
-        builder: (context) => const EditParentProfile(),
-      );
-    case parentDashboard:
-      return MaterialPageRoute(
-        builder: (context) => const Dashboard(),
-      );
-    case doctorDetails:
-      return MaterialPageRoute(
-        builder: (context) => const ClinicDetails(),
-      );
-    case petDetails:
-      return MaterialPageRoute(
-        builder: (context) => const PetDetails(),
-      );
-    case addPet:
-      return MaterialPageRoute(
-        builder: (context) => const AddNewPet(),
-      );
-
-    /**
+  /**Specific for parent**/
+  GetPage(
+    name: editParentProfile,
+    page: () => const EditParentProfile(),
+  ),
+  GetPage(
+    name: parentDashboard,
+    page: () => const Dashboard(),
+  ),
+  GetPage(
+    name: doctorDetails,
+    page: () => const ClinicDetails(),
+  ),
+  GetPage(
+    name: petDetails,
+    page: () => const PetDetails(),
+  ),
+  GetPage(
+    name: addPet,
+    page: () => const AddNewPet(),
+  ),
+  /**
      * 
      * Medication
      * 
      */
-    case petMedication:
-      return MaterialPageRoute(
-        builder: (context) => const PetMedication(),
-      );
-    case petMedicationDetail:
-      return MaterialPageRoute(
-        builder: (context) => const MedicationDetails(),
-      );
-    case petAddMedication:
-      return MaterialPageRoute(
-        builder: (context) => const AddMedication(),
-      );
-    /**
+  GetPage(
+    name: petMedication,
+    page: () => const PetMedication(),
+  ),
+  GetPage(
+    name: petMedicationDetail,
+    page: () => const MedicationDetails(),
+  ),
+  GetPage(
+    name: petAddMedication,
+    page: () => const AddMedication(),
+  ),
+  /**
        * 
        * Diet
        * 
        */
-    case petDiet:
-      return MaterialPageRoute(
-        builder: (context) => const PetDiet(),
-      );
-    case petDietDetail:
-      return MaterialPageRoute(
-        builder: (context) => const DietDetails(),
-      );
-    case petAddDiet:
-      return MaterialPageRoute(
-        builder: (context) => const AddDiet(),
-      );
-    /**
+  GetPage(
+    name: petDiet,
+    page: () => const PetDiet(),
+  ),
+  GetPage(
+    name: petDietDetail,
+    page: () => const DietDetails(),
+  ),
+  GetPage(
+    name: petAddDiet,
+    page: () => const AddDiet(),
+  ),
+  /**
        * 
        * Nutrition
        * 
        */
-    case petNutrition:
-      return MaterialPageRoute(
-        builder: (context) => const PetNutrition(),
-      );
-    case petNutritionDetail:
-      return MaterialPageRoute(
-        builder: (context) => const NutritionDetails(),
-      );
-    case petAddNutrition:
-      return MaterialPageRoute(
-        builder: (context) => const AddNutrition(),
-      );
-    /**
+  GetPage(
+    name: petNutrition,
+    page: () => const PetNutrition(),
+  ),
+  GetPage(
+    name: petNutritionDetail,
+    page: () => const NutritionDetails(),
+  ),
+  GetPage(
+    name: petAddNutrition,
+    page: () => const AddNutrition(),
+  ),
+  /**
        * 
        * Feeding Schedule
        * 
        */
-    case petFeedSchedule:
-      return MaterialPageRoute(
-        builder: (context) => const FeedingSchedule(),
-      );
-    case petAddSchedule:
-      return MaterialPageRoute(
-        builder: (context) => const AddSchedule(),
-      );
-    /**
+  GetPage(
+    name: petFeedSchedule,
+    page: () => const FeedingSchedule(),
+  ),
+  GetPage(
+    name: petAddSchedule,
+    page: () => const AddSchedule(),
+  ),
+  /**
        * 
        * Appointment booking
        * 
        */
-    case petAppointment:
-      return MaterialPageRoute(
-        builder: (context) => const AppointmentList(),
-      );
-    case petBookingDetails:
-      return MaterialPageRoute(
-        builder: (context) => const AppointmentDetails(),
-      );
+  GetPage(
+    name: petAppointment,
+    page: () => const AppointmentList(),
+  ),
+  GetPage(
+    name: petBookingDetails,
+    page: () => const AppointmentDetails(),
+  ),
+  GetPage(
+    name: petSpecialNotes,
+    page: () => const SpecialNotes(),
+  ),
+  /**Specific for parent**/
 
-    case petSpecialNotes:
-      return MaterialPageRoute(
-        builder: (context) => const SpecialNotes(),
-      );
-    /**Specific for parent**/
-
-    /**Specific for vet**/
-    case vetDashboard:
-      return MaterialPageRoute(
-        builder: (context) => const VetDashboard(),
-      );
-    case vetAppointmentDetail:
-      return MaterialPageRoute(
-        builder: (context) => const VetAppointmentDetail(),
-      );
-    case vetEditProfile:
-      return MaterialPageRoute(
-        builder: (context) => const EditVetProfile(),
-      );
-    case vetAddAvailability:
-      return MaterialPageRoute(
-        builder: (context) => const AddAvailability(),
-      );
-    /**Specific for vet**/
-    default:
-      throw ('This route name does not exit');
-  }
-}
+  /**Specific for vet**/
+  GetPage(
+    name: vetDashboard,
+    page: () => const VetDashboard(),
+  ),
+  GetPage(
+    name: vetAppointmentDetail,
+    page: () => const VetAppointmentDetail(),
+  ),
+  GetPage(
+    name: vetEditProfile,
+    page: () => const EditVetProfile(),
+  ),
+  GetPage(
+    name: vetAddAvailability,
+    page: () => const AddAvailability(),
+  ),
+  /**Specific for vet**/
+];
