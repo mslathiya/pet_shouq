@@ -15,8 +15,8 @@ import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 
-class RegisterController extends GetxController implements GetxService {
-  final AuthRepository repository;
+class RegisterController extends GetxController {
+  final AuthRepositoryImpl repository;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 

@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
                       return supportedLocales.first;
                     },
                     // initialRoute: controller.isLoggedIn ? vetDashboard : login,
-                    initialRoute: intro,
+                    initialRoute: login,
                   );
           },
         );

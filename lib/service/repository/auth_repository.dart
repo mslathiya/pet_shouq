@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart' hide FormData;
+import 'package:get/get.dart';
 
 import '../../data/model/models.dart';
 import '../../helper/app_preferences.dart';
@@ -9,6 +11,10 @@ abstract class AuthRepository {
   Future<Either<Failure, LoginBean>> loginMember(
     String email,
     String password,
+  );
+
+  Future<Either<Failure, GeneralBean>> registerParent(
+    FormData formFields,
   );
 }
 
@@ -43,10 +49,38 @@ class AuthRepositoryImpl extends AuthRepository {
             await preferences.setUserInfo(loginBeanToJson(bean));
             return Right(bean);
           } else {
-            return Left(Failure(200, bean.message ?? "Something goes wrong"));
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
           }
         }
-        return Left(Failure(200, "Something goes wrong"));
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, GeneralBean>> registerParent(
+    FormData formFields,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.post(Endpoints.registerPetPost,
+            data: formFields,
+            options: Options(headers: {"Content-Type": "multipart/form-data"}));
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = GeneralBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
         return Left(ApiException.handle(e).failure);
       }
