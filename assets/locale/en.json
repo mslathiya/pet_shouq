@@ -216,6 +216,7 @@
     "hint_mineral": "Enter Minerals",
     "hint_omega_three": "Enter Omega-3",
     "hint_omega_six": "Enter Omega-6",
+    "lbl_guideline": "Guidelines",
     "hint_guideline": "Enter Guidelines",
     "hint_lbs": "Enter Lbs",
     "hint_feature": "Enter Special Features",
@@ -363,5 +364,6 @@
     "camera": "Camera",
     "gallery": "Gallery",
     "file_selected": "File selected successfully",
-    "error_in_request": "Error in request"
+    "error_in_request": "Error in request",
+    "lbl_diet_time": "Diet Time"
 }

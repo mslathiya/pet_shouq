@@ -83,16 +83,6 @@ class _AddMedicationState extends State<AddMedication> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        InputField(
-                          headerWidget: InputHeader(
-                            compulsory: true,
-                            headerLabel: t.translate("lbl_pet_name"),
-                          ),
-                          inputHint: t.translate("hint_pet_name"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
