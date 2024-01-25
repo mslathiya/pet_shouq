@@ -73,5 +73,6 @@ Future<void> init() async {
     () => EditParentProfileController(
       repository: Get.find(),
     ),
+    fenix: true,
   );
 }

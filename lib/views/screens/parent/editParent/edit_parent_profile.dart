@@ -26,7 +26,7 @@ class _EditParentProfileState extends State<EditParentProfile> {
     return Scaffold(
       appBar: HeaderWithBack(
         title: "screen_edit_profile".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(

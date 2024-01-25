@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_cropper/image_cropper.dart';
+import 'package:pet_shouq/helper/helpers.dart';
 import 'package:pet_shouq/helper/string_extensions.dart';
 
 import '../data/model/models.dart';
@@ -168,7 +169,7 @@ class EditParentProfileController extends GetxController {
     isLoading = true;
     update();
 
-    FormData fData = FormData.fromMap({
+    Map<String, dynamic> bodyMap = {
       "parent_fname": firstName.text,
       "parent_lname": lastName.text,
       "user_email": email.text,
@@ -184,13 +185,23 @@ class EditParentProfileController extends GetxController {
       "parent_secondary_contact_country_number": pickedCodeSecondary,
       "parent_display_name": displayName.text,
       "parent_mailing_address": mailingAddress.text,
-      "profile_picture": imagePath != null &&
-          imagePath != '' &&
-          !imagePath.toString().hasValidUrl() &&
-          await MultipartFile.fromFileSync(
+    };
+
+    FormData fData = FormData.fromMap(bodyMap);
+
+    if (imagePath != null &&
+        imagePath != '' &&
+        !imagePath.toString().hasValidUrl()) {
+      AppLog.e("Received ");
+      fData.files.add(
+        MapEntry(
+          "profile_picture",
+          await MultipartFile.fromFile(
             imagePath!,
-          )
-    });
+          ),
+        ),
+      );
+    }
 
     final result = await repository.updateParentProfile(fData);
 
