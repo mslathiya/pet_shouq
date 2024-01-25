@@ -12,18 +12,10 @@ class AuthorizationInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     bool isLoggedIn = await preferences.getIsLoggedIn();
-    if (_needAuthorizationHeader(options) && isLoggedIn) {
+    if (isLoggedIn) {
       String token = await preferences.getAuthToken();
       options.headers['Authorization'] = token;
     }
     super.onRequest(options, handler);
-  }
-
-  bool _needAuthorizationHeader(RequestOptions options) {
-    if (options.method == 'GET') {
-      return false;
-    } else {
-      return true;
-    }
   }
 }

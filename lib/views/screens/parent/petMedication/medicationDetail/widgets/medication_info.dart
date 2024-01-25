@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/config/route.config.dart';
 
+import '../../../../../../config/config.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 

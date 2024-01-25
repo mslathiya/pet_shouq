@@ -1,27 +1,30 @@
 // To parse this JSON data, do
 //
-//     final loginBean = loginBeanFromJson(jsonString);
+//     final userProfileBean = userProfileBeanFromJson(jsonString);
 
 import 'dart:convert';
 
 import 'user_bean.dart';
 
-LoginBean loginBeanFromJson(String str) => LoginBean.fromJson(json.decode(str));
+UserProfileBean userProfileBeanFromJson(String str) =>
+    UserProfileBean.fromJson(json.decode(str));
 
-String loginBeanToJson(LoginBean data) => json.encode(data.toJson());
+String userProfileBeanToJson(UserProfileBean data) =>
+    json.encode(data.toJson());
 
-class LoginBean {
+class UserProfileBean {
   bool? success;
   String? message;
   UserBean? data;
 
-  LoginBean({
+  UserProfileBean({
     this.success,
     this.message,
     this.data,
   });
 
-  factory LoginBean.fromJson(Map<String, dynamic> json) => LoginBean(
+  factory UserProfileBean.fromJson(Map<String, dynamic> json) =>
+      UserProfileBean(
         success: json["success"],
         message: json["message"],
         data: json["data"] == null ? null : UserBean.fromJson(json["data"]),

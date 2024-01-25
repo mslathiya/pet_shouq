@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:pet_shouq/helper/helpers.dart';
+import 'package:pet_shouq/helper/string_extensions.dart';
 
 import '../../theme/theme.dart';
 import 'media_picker_view.dart';
@@ -25,8 +27,6 @@ class CustomImagePicker extends StatefulWidget {
 }
 
 class _CustomImagePickerState extends State<CustomImagePicker> {
-  bool isLocalImage(path) => Uri.tryParse(path)?.hasAbsolutePath ?? false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,15 +46,26 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
                 borderRadius: BorderRadius.all(
                   Radius.elliptical(100.w, 100.w),
                 ),
-                child: widget.imagePath != ''
-                    ? isLocalImage(widget.imagePath)
-                        ? Image.file(
+                child: widget.imagePath != null && widget.imagePath != ''
+                    ? widget.imagePath.toString().hasValidUrl()
+                        ? CachedNetworkImage(
+                            imageUrl: widget.imagePath ?? "",
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            fit: BoxFit.cover,
+                            fadeInDuration: const Duration(milliseconds: 60),
+                            fadeInCurve: Curves.easeIn,
+                            height: 100.w,
+                            width: 100.w,
+                          )
+                        : Image.file(
                             File(widget.imagePath!),
                             height: 100.w,
                             width: 100.w,
                             fit: BoxFit.cover,
                           )
-                        : CachedNetworkImage(imageUrl: widget.imagePath!)
                     : Container(
                         height: 100.w,
                         width: 100.w,

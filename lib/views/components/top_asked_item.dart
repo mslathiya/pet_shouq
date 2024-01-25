@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_shouq/views/components/components.dart';
 
 import '../../theme/theme.dart';
+import 'components.dart';
 
 class TopAskedItem extends StatelessWidget {
   const TopAskedItem({

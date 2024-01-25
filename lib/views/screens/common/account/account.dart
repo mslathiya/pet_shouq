@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/config.dart';
+import '../../../../controller/controllers.dart';
 import '../../../../data/enum/enums.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
@@ -18,6 +20,12 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  @override
+  void initState() {
+    Get.find<AuthController>().getUserProfile();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -40,13 +48,11 @@ class _ProfileState extends State<Profile> {
               ProfileInfo(
                 onTapEdit: () {
                   if (widget.userType == UserType.typeParent) {
-                    Navigator.pushNamed(
-                      context,
+                    Get.toNamed(
                       editParentProfile,
                     );
                   } else {
-                    Navigator.pushNamed(
-                      context,
+                    Get.toNamed(
                       vetEditProfile,
                     );
                   }
@@ -138,7 +144,7 @@ class _ProfileState extends State<Profile> {
           subLabel: t.translate("message_logout"),
           buttonText: t.translate("btn_logout"),
           onPressButton: () {
-            Navigator.pushNamedAndRemoveUntil(context, intro, (_) => false);
+            Get.find<AuthController>().logoutCurrentUser();
           },
           secondaryButtonText: t.translate("btn_cancel"),
           onPressSecondaryButton: () {},

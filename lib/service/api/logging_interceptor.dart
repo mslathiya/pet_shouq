@@ -18,13 +18,17 @@ class LoggerInterceptor extends Interceptor {
     final requestPath = '${options.baseUrl}${options.path}';
     logger.e('${options.method} request => $requestPath');
     logger.d('Error: ${err.error}, Message: ${err.message}');
+    if (err.response?.statusCode == 401) {
+      Get.find<AuthController>().logoutCurrentUser();
+    }
     return super.onError(err, handler);
   }
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final requestPath = '${options.baseUrl}${options.path}';
-    logger.i('${options.method} request => $requestPath');
+    logger.i(
+        '${options.method} request => $requestPath headers => ${options.headers}');
     return super.onRequest(options, handler);
   }
 

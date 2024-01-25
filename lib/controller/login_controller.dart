@@ -6,6 +6,7 @@ import '../data/model/models.dart';
 import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
+import 'controllers.dart';
 
 class LoginController extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -38,18 +39,19 @@ class LoginController extends GetxController {
           colorText: AppColors.white,
           snackPosition: SnackPosition.BOTTOM,
         );
-      }, (success) {
+      }, (success) async {
+        await Get.find<AuthController>().setLoginStatus();
         isLoading = false;
         update();
         AppLog.e("performLogin-Success $success");
         Future.delayed(
-          const Duration(milliseconds: 5),
+          const Duration(seconds: 3),
           () {
-            LoginData? loginData = success.data;
+            UserBean? loginData = success.data;
             if (loginData != null) {
               List<String> roles = loginData.roleNames ?? [];
               if (roles[0] == 'pet_parent') {
-                Get.offAndToNamed(parentDashboard);
+                Get.offNamed(parentDashboard);
               }
             }
           },

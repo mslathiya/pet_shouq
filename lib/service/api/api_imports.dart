@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
-import 'package:pet_shouq/helper/app_preferences.dart';
 
+import '../../controller/controllers.dart';
+import '../../helper/helpers.dart';
 import 'failure.dart';
 
 part "api_client.dart";

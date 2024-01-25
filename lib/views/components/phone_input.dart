@@ -46,6 +46,11 @@ class _PhoneInputState extends State<PhoneInput> {
       ),
       inputHint: t.translate("hint_phone"),
       keyboardType: TextInputType.phone,
+      maxLength: widget.maxLength,
+      editingController: widget.editingController,
+      validator: widget.validator,
+      onValueChange: widget.onValueChange,
+      enableInput: widget.enableInput ?? true,
       prefixIcon: SizedBox(
         width: 90.w,
         height: 42.h,

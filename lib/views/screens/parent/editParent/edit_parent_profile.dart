@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-import '../../../../config/config.dart';
+import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
@@ -20,11 +22,10 @@ class _EditParentProfileState extends State<EditParentProfile> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_edit_profile"),
+        title: "screen_edit_profile".tr,
         onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
@@ -37,195 +38,258 @@ class _EditParentProfileState extends State<EditParentProfile> {
                   minWidth: constraints.maxWidth,
                 ),
                 child: IntrinsicHeight(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 12.w, right: 12.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomImagePicker(
-                          onPickImage: (CroppedFile file, String type) {},
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputHeader(
-                          compulsory: true,
-                          headerLabel: t.translate("lbl_parent_name"),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: InputField(
-                                inputHint: t.translate("hint_first_name"),
+                  child: GetBuilder<EditParentProfileController>(
+                    builder: (controller) {
+                      return Form(
+                        key: controller.formKey,
+                        autovalidateMode: AutovalidateMode.disabled,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 12.w, right: 12.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomImagePicker(
+                                imagePath: controller.imagePath,
+                                onPickImage: (CroppedFile file, String type) {
+                                  controller.onPickImage(file);
+                                },
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: InputField(
-                                inputHint: t.translate("hint_last_name"),
+                              SizedBox(
+                                height: 15.h,
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        PhoneInput(
-                          isCompulsory: true,
-                          headerLabel: t.translate("lbl_parent_phone"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: SelectorField(
-                                inputHint: t.translate("hint_gender"),
-                                headerWidget: InputHeader(
-                                  compulsory: false,
-                                  headerLabel: t.translate("lbl_gender"),
-                                ),
-                                suffixIcon: SizedBox(
-                                  width: 26.w,
-                                  height: 26.h,
-                                  child: Icon(
-                                    Entypo.chevron_down,
-                                    size: 26.sp,
-                                    color: AppColors.hintColor,
+                              InputHeader(
+                                compulsory: true,
+                                headerLabel: "lbl_parent_name".tr,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: InputField(
+                                      inputHint: "hint_first_name".tr,
+                                      editingController: controller.firstName,
+                                      validator: MultiValidator(
+                                        [
+                                          RequiredValidator(
+                                            errorText: "dynamic_field_required"
+                                                .trParams(
+                                              {"field": "lbl_first_name".tr},
+                                            ),
+                                          ),
+                                        ],
+                                      ).call,
+                                    ),
                                   ),
-                                ),
-                                onSelectItem: () {},
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: InputField(
+                                      inputHint: "hint_last_name".tr,
+                                      editingController: controller.lastName,
+                                      validator: MultiValidator(
+                                        [
+                                          RequiredValidator(
+                                            errorText: "dynamic_field_required"
+                                                .trParams(
+                                              {"field": "lbl_last_name".tr},
+                                            ),
+                                          ),
+                                        ],
+                                      ).call,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: InputField(
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              PhoneInput(
+                                isCompulsory: true,
+                                headerLabel: "lbl_parent_phone".tr,
+                                countryDialCode: controller.pickedCode ??
+                                    Get.locale?.countryCode,
+                                editingController: controller.phoneNumber,
+                                onCountryChanged: (countryCode) =>
+                                    controller.onChangeCountry(countryCode, 1),
+                                validator: MultiValidator(
+                                  [
+                                    RequiredValidator(
+                                      errorText:
+                                          "dynamic_field_required".trParams(
+                                        {"field": "lbl_parent_phone".tr},
+                                      ),
+                                    ),
+                                  ],
+                                ).call,
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: SelectorField(
+                                      headerWidget: InputHeader(
+                                        headerLabel: "lbl_gender".tr,
+                                      ),
+                                      inputHint: controller.gender != ''
+                                          ? controller.gender
+                                          : "hint_gender".tr,
+                                      suffixIcon: Icon(
+                                        Entypo.chevron_down,
+                                        size: 26.sp,
+                                        color: AppColors.hintColor,
+                                      ),
+                                      onSelectItem: () =>
+                                          controller.openGenderPicker(),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: InputField(
+                                      headerWidget: InputHeader(
+                                        headerLabel: "lbl_age".tr,
+                                      ),
+                                      inputHint: "hint_age".tr,
+                                      editingController: controller.age,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              InputField(
+                                headerWidget: InputHeader(
+                                  compulsory: true,
+                                  headerLabel: "lbl_email".tr,
+                                ),
+                                inputHint: "hint_email".tr,
+                                editingController: controller.email,
+                                enableInput: false,
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              Text(
+                                "home_address".tr,
+                                textAlign: TextAlign.left,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              InputField(
+                                inputHint: "hint_street_address".tr,
+                                editingController: controller.addressOne,
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              InputField(
+                                inputHint: "hint_street_address_two".tr,
+                                editingController: controller.addressTwo,
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: InputField(
+                                      headerWidget: InputHeader(
+                                        compulsory: false,
+                                        headerLabel: "lbl_city".tr,
+                                      ),
+                                      inputHint: "hint_city".tr,
+                                      editingController: controller.city,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: InputField(
+                                      headerWidget: InputHeader(
+                                        compulsory: false,
+                                        headerLabel: "lbl_province".tr,
+                                      ),
+                                      inputHint: "hint_province".tr,
+                                      editingController: controller.province,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              PhoneInput(
+                                headerLabel: "lbl_secondary_phone".tr,
+                                countryDialCode:
+                                    controller.pickedCodeSecondary ??
+                                        Get.locale?.countryCode,
+                                editingController: controller.alternatePhone,
+                                onCountryChanged: (countryCode) =>
+                                    controller.onChangeCountry(countryCode, 2),
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              InputField(
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel: t.translate("lbl_age"),
+                                  headerLabel: "lbl_display_name".tr,
                                 ),
-                                inputHint: t.translate("hint_age"),
+                                inputHint: "hint_display_name".tr,
+                                editingController: controller.displayName,
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputField(
-                          headerWidget: InputHeader(
-                            compulsory: true,
-                            headerLabel: t.translate("lbl_email"),
-                          ),
-                          inputHint: t.translate("hint_email"),
-                          compulsory: true,
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Text(
-                          t.translate("home_address"),
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputField(
-                          inputHint: t.translate("hint_street_address"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputField(
-                          inputHint: t.translate("hint_street_address_two"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: InputField(
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              InputField(
+                                isMultiline: true,
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel: t.translate("lbl_city"),
+                                  headerLabel: "lbl_mailing_address".tr,
                                 ),
-                                inputHint: t.translate("hint_city"),
+                                inputHint: "hint_mailing_address".tr,
+                                editingController: controller.mailingAddress,
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: InputField(
-                                headerWidget: InputHeader(
-                                  compulsory: false,
-                                  headerLabel: t.translate("lbl_province"),
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: ButtonView(
+                                  isLoading: controller.isLoading,
+                                  onTap: () {
+                                    if (controller.formKey.currentState!
+                                        .validate()) {
+                                      controller.updateParentProfile();
+                                    }
+                                  },
+                                  buttonTitle: "btn_save".tr,
+                                  width: width - 20,
                                 ),
-                                inputHint: t.translate("hint_province"),
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        PhoneInput(
-                          headerLabel: t.translate("lbl_secondary_phone"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputField(
-                          headerWidget: InputHeader(
-                            compulsory: false,
-                            headerLabel: t.translate("lbl_display_name"),
-                          ),
-                          inputHint: t.translate("hint_display_name"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        InputField(
-                          isMultiline: true,
-                          headerWidget: InputHeader(
-                            compulsory: false,
-                            headerLabel: t.translate("lbl_mailing_address"),
-                          ),
-                          inputHint: t.translate("hint_mailing_address"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: ButtonView(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              verification,
-                            ),
-                            buttonTitle: t.translate("btn_save"),
-                            width: width - 20,
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ),
               ),

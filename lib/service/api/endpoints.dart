@@ -13,4 +13,6 @@ class Endpoints {
   static const loginPost = "auth/login";
   static const registerPetPost = "auth/pet-parents/register";
   static const forgotPasswordPost = "password/forgot";
+  static const profileGet = "api/profile";
+  static const updateParentProfilePost = "api/parent/update/profile";
 }

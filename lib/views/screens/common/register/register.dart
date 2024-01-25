@@ -23,7 +23,6 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -52,9 +51,8 @@ class _RegisterState extends State<Register> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 HeaderLabel(
-                                  header: t.translate("create_account"),
-                                  subHeader:
-                                      t.translate('create_account_message'),
+                                  header: "create_account".tr,
+                                  subHeader: 'create_account_message'.tr,
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -79,8 +77,8 @@ class _RegisterState extends State<Register> {
                                 InputHeader(
                                   compulsory: true,
                                   headerLabel: controller.accountType == 1
-                                      ? t.translate("lbl_parent_name")
-                                      : t.translate("lbl_veterinarian_name"),
+                                      ? "lbl_parent_name".tr
+                                      : "lbl_veterinarian_name".tr,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,17 +86,15 @@ class _RegisterState extends State<Register> {
                                   children: [
                                     Expanded(
                                       child: InputField(
-                                        inputHint:
-                                            t.translate("hint_first_name"),
+                                        inputHint: "hint_first_name".tr,
                                         editingController: controller.firstName,
                                         validator: MultiValidator(
                                           [
                                             RequiredValidator(
-                                              errorText: t.translate(
-                                                "dynamic_field_required",
-                                                args: [
-                                                  t.translate("lbl_first_name"),
-                                                ],
+                                              errorText:
+                                                  "dynamic_field_required"
+                                                      .trParams(
+                                                {"field": "lbl_first_name".tr},
                                               ),
                                             ),
                                           ],
@@ -110,17 +106,15 @@ class _RegisterState extends State<Register> {
                                     ),
                                     Expanded(
                                       child: InputField(
-                                        inputHint:
-                                            t.translate("hint_last_name"),
+                                        inputHint: "hint_last_name".tr,
                                         editingController: controller.lastName,
                                         validator: MultiValidator(
                                           [
                                             RequiredValidator(
-                                              errorText: t.translate(
-                                                "dynamic_field_required",
-                                                args: [
-                                                  t.translate("lbl_last_name"),
-                                                ],
+                                              errorText:
+                                                  "dynamic_field_required"
+                                                      .trParams(
+                                                {"field": "lbl_last_name".tr},
                                               ),
                                             ),
                                           ],
@@ -134,10 +128,9 @@ class _RegisterState extends State<Register> {
                                 ),
                                 InputField(
                                   headerWidget: InputHeader(
-                                    headerLabel:
-                                        t.translate("lbl_display_name"),
+                                    headerLabel: "lbl_display_name".tr,
                                   ),
-                                  inputHint: t.translate("hint_display_name"),
+                                  inputHint: "hint_display_name".tr,
                                   editingController: controller.displayName,
                                 ),
                                 SizedBox(
@@ -153,22 +146,23 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             headerWidget: InputHeader(
                                               compulsory: true,
-                                              headerLabel: t.translate(
-                                                  "veterinarian_special"),
+                                              headerLabel:
+                                                  "veterinarian_special".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_specialty"),
+                                            inputHint: "hint_specialty".tr,
                                             editingController:
                                                 controller.specialty,
                                             validator: MultiValidator(
                                               [
                                                 RequiredValidator(
-                                                  errorText: t.translate(
-                                                    "dynamic_field_required",
-                                                    args: [
-                                                      t.translate(
-                                                          "veterinarian_special"),
-                                                    ],
+                                                  errorText:
+                                                      "dynamic_field_required"
+                                                          .trParams(
+                                                    {
+                                                      "field":
+                                                          "veterinarian_special"
+                                                              .tr
+                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -183,22 +177,20 @@ class _RegisterState extends State<Register> {
                                 InputField(
                                   headerWidget: InputHeader(
                                     compulsory: true,
-                                    headerLabel: t.translate("lbl_email"),
+                                    headerLabel: "lbl_email".tr,
                                   ),
-                                  inputHint: t.translate("hint_email"),
+                                  inputHint: "hint_email".tr,
                                   editingController: controller.email,
                                   validator: MultiValidator(
                                     [
                                       RequiredValidator(
-                                        errorText: t.translate(
-                                          "dynamic_field_required",
-                                          args: [
-                                            t.translate("lbl_email"),
-                                          ],
+                                        errorText:
+                                            "dynamic_field_required".trParams(
+                                          {"field": "lbl_email".tr},
                                         ),
                                       ),
                                       EmailValidator(
-                                        errorText: t.translate('invalid_email'),
+                                        errorText: 'invalid_email'.tr,
                                       ),
                                     ],
                                   ).call,
@@ -208,21 +200,19 @@ class _RegisterState extends State<Register> {
                                 ),
                                 PhoneInput(
                                   isCompulsory: true,
-                                  headerLabel: t.translate("lbl_parent_phone"),
+                                  headerLabel: "lbl_parent_phone".tr,
                                   countryDialCode: controller.pickedCode != null
                                       ? controller.pickedCode?.code
-                                      : t.appLocale.countryCode,
+                                      : Get.locale?.countryCode,
                                   editingController: controller.phoneNumber,
                                   onCountryChanged: (countryCode) => controller
                                       .onChangeCountry(countryCode, 1),
                                   validator: MultiValidator(
                                     [
                                       RequiredValidator(
-                                        errorText: t.translate(
-                                          "dynamic_field_required",
-                                          args: [
-                                            t.translate("lbl_parent_phone"),
-                                          ],
+                                        errorText:
+                                            "dynamic_field_required".trParams(
+                                          {"field": "lbl_parent_phone".tr},
                                         ),
                                       ),
                                     ],
@@ -247,14 +237,13 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: SelectorField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel: t.translate(
-                                                        "lbl_gender"),
+                                                    headerLabel:
+                                                        "lbl_gender".tr,
                                                   ),
                                                   inputHint:
                                                       controller.gender != ''
                                                           ? controller.gender
-                                                          : t.translate(
-                                                              "hint_gender"),
+                                                          : "hint_gender".tr,
                                                   suffixIcon: Icon(
                                                     Entypo.chevron_down,
                                                     size: 26.sp,
@@ -270,11 +259,9 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel:
-                                                        t.translate("lbl_age"),
+                                                    headerLabel: "lbl_age".tr,
                                                   ),
-                                                  inputHint:
-                                                      t.translate("hint_age"),
+                                                  inputHint: "hint_age".tr,
                                                   editingController:
                                                       controller.age,
                                                 ),
@@ -288,17 +275,15 @@ class _RegisterState extends State<Register> {
                                       )
                                     : const SizedBox(),
                                 PasswordField(
-                                  headerLabel: t.translate("lbl_password"),
-                                  inputHint: t.translate("hint_password"),
+                                  headerLabel: "lbl_password".tr,
+                                  inputHint: "hint_password".tr,
                                   editingController: controller.password,
                                   validator: MultiValidator(
                                     [
                                       RequiredValidator(
-                                        errorText: t.translate(
-                                          "dynamic_field_required",
-                                          args: [
-                                            t.translate("lbl_password"),
-                                          ],
+                                        errorText:
+                                            "dynamic_field_required".trParams(
+                                          {"field": "lbl_password".tr},
                                         ),
                                       ),
                                     ],
@@ -315,7 +300,7 @@ class _RegisterState extends State<Register> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            t.translate("home_address"),
+                                            "home_address".tr,
                                             textAlign: TextAlign.left,
                                             style: Theme.of(context)
                                                 .textTheme
@@ -325,8 +310,7 @@ class _RegisterState extends State<Register> {
                                             height: 15.h,
                                           ),
                                           InputField(
-                                            inputHint: t.translate(
-                                                "hint_street_address"),
+                                            inputHint: "hint_street_address".tr,
                                             editingController:
                                                 controller.addressOne,
                                           ),
@@ -334,8 +318,8 @@ class _RegisterState extends State<Register> {
                                             height: 15.h,
                                           ),
                                           InputField(
-                                            inputHint: t.translate(
-                                                "hint_street_address_two"),
+                                            inputHint:
+                                                "hint_street_address_two".tr,
                                             editingController:
                                                 controller.addressTwo,
                                           ),
@@ -351,11 +335,9 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel:
-                                                        t.translate("lbl_city"),
+                                                    headerLabel: "lbl_city".tr,
                                                   ),
-                                                  inputHint:
-                                                      t.translate("hint_city"),
+                                                  inputHint: "hint_city".tr,
                                                   editingController:
                                                       controller.city,
                                                 ),
@@ -366,11 +348,10 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel: t.translate(
-                                                        "lbl_province"),
+                                                    headerLabel:
+                                                        "lbl_province".tr,
                                                   ),
-                                                  inputHint: t.translate(
-                                                      "hint_province"),
+                                                  inputHint: "hint_province".tr,
                                                   editingController:
                                                       controller.province,
                                                 ),
@@ -381,14 +362,14 @@ class _RegisterState extends State<Register> {
                                             height: 15.h,
                                           ),
                                           PhoneInput(
-                                            headerLabel: t.translate(
-                                                "lbl_secondary_phone"),
+                                            headerLabel:
+                                                "lbl_secondary_phone".tr,
                                             countryDialCode: controller
                                                         .pickedCodeSecondary !=
                                                     null
                                                 ? controller
                                                     .pickedCodeSecondary?.code
-                                                : t.appLocale.countryCode,
+                                                : Get.locale?.countryCode,
                                             editingController:
                                                 controller.alternatePhone,
                                             onCountryChanged: (countryCode) =>
@@ -401,13 +382,11 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             isMultiline: true,
                                             headerWidget: InputHeader(
-                                              headerLabel: t.translate(
-                                                "lbl_mailing_address",
-                                              ),
+                                              headerLabel:
+                                                  "lbl_mailing_address".tr,
                                             ),
-                                            inputHint: t.translate(
-                                              "hint_mailing_address",
-                                            ),
+                                            inputHint:
+                                                "hint_mailing_address".tr,
                                             editingController:
                                                 controller.mailingAddress,
                                           ),
@@ -421,11 +400,10 @@ class _RegisterState extends State<Register> {
                                         children: [
                                           InputField(
                                             headerWidget: InputHeader(
-                                              headerLabel: t.translate(
-                                                  "lbl_qualification"),
+                                              headerLabel:
+                                                  "lbl_qualification".tr,
                                             ),
-                                            inputHint: t.translate(
-                                                "hint_qualification"),
+                                            inputHint: "hint_qualification".tr,
                                             editingController:
                                                 controller.qualification,
                                           ),
@@ -434,11 +412,10 @@ class _RegisterState extends State<Register> {
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              headerLabel: t.translate(
-                                                  "lbl_profile_summary"),
+                                              headerLabel:
+                                                  "lbl_profile_summary".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_summary"),
+                                            inputHint: "hint_summary".tr,
                                             editingController:
                                                 controller.profileSummary,
                                           ),
@@ -447,11 +424,9 @@ class _RegisterState extends State<Register> {
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              headerLabel:
-                                                  t.translate("lbl_license_no"),
+                                              headerLabel: "lbl_license_no".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_license_no"),
+                                            inputHint: "hint_license_no".tr,
                                             editingController:
                                                 controller.licenseNo,
                                           ),
@@ -460,14 +435,13 @@ class _RegisterState extends State<Register> {
                                           ),
                                           SelectorField(
                                             headerWidget: InputHeader(
-                                              headerLabel: t.translate(
-                                                  "lbl_license_end_date"),
+                                              headerLabel:
+                                                  "lbl_license_end_date".tr,
                                             ),
                                             inputHint:
                                                 controller.expirationDate != ''
                                                     ? controller.expirationDate
-                                                    : t.translate(
-                                                        "hint_select_date"),
+                                                    : "hint_select_date".tr,
                                             suffixIcon: SizedBox(
                                               width: 24.w,
                                               height: 24.h,
@@ -491,13 +465,12 @@ class _RegisterState extends State<Register> {
                                             documentUploader: true,
                                             headerWidget: InputHeader(
                                               compulsory: true,
-                                              headerLabel:
-                                                  t.translate("hint_document"),
+                                              headerLabel: "hint_document".tr,
                                             ),
-                                            inputHint: controller.pickedFile !=
-                                                    null
-                                                ? t.translate("file_selected")
-                                                : t.translate("lbl_document"),
+                                            inputHint:
+                                                controller.pickedFile != null
+                                                    ? "file_selected".tr
+                                                    : "lbl_document".tr,
                                             suffixIcon: Container(
                                               decoration: BoxDecoration(
                                                 color: AppColors.secondary,
@@ -530,22 +503,21 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             headerWidget: InputHeader(
                                               compulsory: true,
-                                              headerLabel:
-                                                  t.translate("lbl_experience"),
+                                              headerLabel: "lbl_experience".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_experience"),
+                                            inputHint: "hint_experience".tr,
                                             editingController:
                                                 controller.experience,
                                             validator: MultiValidator(
                                               [
                                                 RequiredValidator(
-                                                  errorText: t.translate(
-                                                    "dynamic_field_required",
-                                                    args: [
-                                                      t.translate(
-                                                          "lbl_experience"),
-                                                    ],
+                                                  errorText:
+                                                      "dynamic_field_required"
+                                                          .trParams(
+                                                    {
+                                                      "field":
+                                                          "lbl_experience".tr
+                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -556,11 +528,10 @@ class _RegisterState extends State<Register> {
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              headerLabel: t.translate(
-                                                  "lbl_language_spoken"),
+                                              headerLabel:
+                                                  "lbl_language_spoken".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_languages"),
+                                            inputHint: "hint_languages".tr,
                                             editingController:
                                                 controller.spokenLanguages,
                                           ),
@@ -569,11 +540,9 @@ class _RegisterState extends State<Register> {
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              headerLabel:
-                                                  t.translate("lbl_consent"),
+                                              headerLabel: "lbl_consent".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_consent"),
+                                            inputHint: "hint_consent".tr,
                                             editingController:
                                                 controller.consent,
                                           ),
@@ -582,11 +551,9 @@ class _RegisterState extends State<Register> {
                                           ),
                                           InputField(
                                             headerWidget: InputHeader(
-                                              headerLabel:
-                                                  t.translate("lbl_address"),
+                                              headerLabel: "lbl_address".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_address"),
+                                            inputHint: "hint_address".tr,
                                             editingController:
                                                 controller.address,
                                           ),
@@ -596,21 +563,18 @@ class _RegisterState extends State<Register> {
                                           InputField(
                                             headerWidget: InputHeader(
                                               compulsory: true,
-                                              headerLabel:
-                                                  t.translate("location"),
+                                              headerLabel: "location".tr,
                                             ),
-                                            inputHint:
-                                                t.translate("hint_location"),
+                                            inputHint: "hint_location".tr,
                                             editingController:
                                                 controller.location,
                                             validator: MultiValidator(
                                               [
                                                 RequiredValidator(
-                                                  errorText: t.translate(
-                                                    "dynamic_field_required",
-                                                    args: [
-                                                      t.translate("location"),
-                                                    ],
+                                                  errorText:
+                                                      "dynamic_field_required"
+                                                          .trParams(
+                                                    {"field": "location".tr},
                                                   ),
                                                 ),
                                               ],
@@ -628,11 +592,9 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel:
-                                                        t.translate("lbl_city"),
+                                                    headerLabel: "lbl_city".tr,
                                                   ),
-                                                  inputHint:
-                                                      t.translate("hint_city"),
+                                                  inputHint: "hint_city".tr,
                                                   editingController:
                                                       controller.city,
                                                 ),
@@ -643,11 +605,9 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel: t
-                                                        .translate("lbl_state"),
+                                                    headerLabel: "lbl_state".tr,
                                                   ),
-                                                  inputHint:
-                                                      t.translate("hint_state"),
+                                                  inputHint: "hint_state".tr,
                                                   editingController:
                                                       controller.province,
                                                 ),
@@ -666,11 +626,10 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel: t.translate(
-                                                        "lbl_country"),
+                                                    headerLabel:
+                                                        "lbl_country".tr,
                                                   ),
-                                                  inputHint: t.translate(
-                                                      "hint_country"),
+                                                  inputHint: "hint_country".tr,
                                                   editingController:
                                                       controller.country,
                                                 ),
@@ -681,11 +640,9 @@ class _RegisterState extends State<Register> {
                                               Expanded(
                                                 child: InputField(
                                                   headerWidget: InputHeader(
-                                                    headerLabel:
-                                                        t.translate("lbl_zip"),
+                                                    headerLabel: "lbl_zip".tr,
                                                   ),
-                                                  inputHint: t.translate(
-                                                      "hint_zip_code"),
+                                                  inputHint: "hint_zip_code".tr,
                                                   editingController:
                                                       controller.zipCode,
                                                 ),
@@ -701,19 +658,15 @@ class _RegisterState extends State<Register> {
                                   alignment: Alignment.center,
                                   child: ButtonView(
                                     onTap: () {
-                                      // if (controller.formKey.currentState!
-                                      //     .validate()) {
-                                      //   Navigator.pushNamed(
-                                      //     context,
-                                      //     verification,
-                                      //   );
-                                      // }
-                                      Navigator.pushNamed(
-                                        context,
-                                        verification,
-                                      );
+                                      if (controller.formKey.currentState!
+                                          .validate()) {
+                                        Navigator.pushNamed(
+                                          context,
+                                          verification,
+                                        );
+                                      }
                                     },
-                                    buttonTitle: t.translate("sign_up"),
+                                    buttonTitle: "sign_up".tr,
                                     width: width - 20,
                                   ),
                                 ),
@@ -730,7 +683,7 @@ class _RegisterState extends State<Register> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        t.translate("already_account"),
+                                        "already_account".tr,
                                         textAlign: TextAlign.left,
                                         style: Theme.of(context)
                                             .textTheme
@@ -745,7 +698,7 @@ class _RegisterState extends State<Register> {
                                         width: 5.w,
                                       ),
                                       Text(
-                                        t.translate("btn_login"),
+                                        "btn_login".tr,
                                         textAlign: TextAlign.left,
                                         style: Theme.of(context)
                                             .textTheme

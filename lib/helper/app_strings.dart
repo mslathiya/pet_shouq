@@ -377,7 +377,8 @@ class AppStrings extends Translations {
           "file_selected": "File selected successfully",
           "error_in_request": "Error in request",
           "lbl_diet_time": "Diet Time",
-          "something_wrong": "Something goes wrong"
+          "something_wrong": "Something goes wrong",
+          "congratulations": "Congratulations"
         },
       };
 }
