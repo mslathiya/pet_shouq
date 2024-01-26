@@ -10,6 +10,7 @@ class SelectorField extends StatelessWidget {
   final String inputHint;
   final VoidCallback onSelectItem;
   final bool? documentUploader;
+
   const SelectorField({
     super.key,
     this.headerWidget,

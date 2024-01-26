@@ -8,7 +8,7 @@ import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'controllers.dart';
 
-class LoginController extends GetxController {
+class LoginController extends GetxController implements GetxService {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

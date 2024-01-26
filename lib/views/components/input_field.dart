@@ -16,6 +16,7 @@ class InputField extends StatelessWidget {
   final int? maxLength;
   final Widget? headerWidget;
   final bool isMultiline;
+  final String? inputError;
 
   const InputField({
     super.key,
@@ -31,6 +32,7 @@ class InputField extends StatelessWidget {
     this.enableInput,
     this.headerWidget,
     this.isMultiline = false,
+    this.inputError,
   });
 
   @override
@@ -88,6 +90,7 @@ class InputField extends StatelessWidget {
             errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.redColor,
                 ),
+            errorText: inputError,
             prefixIcon: prefixIcon != null
                 ? Padding(
                     padding: EdgeInsets.only(left: 10.w),

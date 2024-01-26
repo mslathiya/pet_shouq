@@ -75,6 +75,7 @@ class AppAssets {
 
   static const typeDog = "assets/images/type_dog.png";
   static const timeContainer = "assets/images/time_container.png";
+  static const noResult = "assets/images/no_result.jpg";
 
   static const sampleBanner = "assets/samples/sample_banner.png";
   static const doctorBanner = "assets/samples/doctor_detail.png";

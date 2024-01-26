@@ -2,23 +2,29 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:intl/intl.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../config/config.dart';
+import '../data/model/models.dart';
 import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 
-class RegisterController extends GetxController {
+class RegisterController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
 
   final TextEditingController _city = TextEditingController();
   final TextEditingController _province = TextEditingController();
@@ -28,7 +34,6 @@ class RegisterController extends GetxController {
   final TextEditingController _lastName = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
-  final TextEditingController _age = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _addressOne = TextEditingController();
   final TextEditingController _addressTwo = TextEditingController();
@@ -51,16 +56,34 @@ class RegisterController extends GetxController {
 
   String? _imagePath = '';
   String _gender = '';
+  String _birthDate = '';
+  String _age = '';
   String _expirationDate = '';
   var _accountType = 1;
-  CountryCode? _pickedCode;
-  CountryCode? _pickedCodeSecondary;
+  String? _pickedCode =
+      CountryCode.fromCountryCode(Get.locale?.countryCode ?? "US").dialCode;
+  String? _pickedCodeSecondary =
+      CountryCode.fromCountryCode(Get.locale?.countryCode ?? "US").dialCode;
   List<String> genders = ["Male", "Female", "LGBTQIA+"];
   File? _pickedFile;
 
+  String? _firstNameError;
+  String? _lastNameError;
+  String? _emailError;
+  String? _phoneNumberError;
+  String? _passwordError;
+
   String? get imagePath => _imagePath;
   String get gender => _gender;
+  String get birthDate => _birthDate;
+  String get age => _age;
   int get accountType => _accountType;
+
+  String? get firstNameError => _firstNameError;
+  String? get lastNameError => _lastNameError;
+  String? get emailError => _emailError;
+  String? get phoneNumberError => _phoneNumberError;
+  String? get passwordError => _passwordError;
 
   TextEditingController get city => _city;
   TextEditingController get province => _province;
@@ -70,7 +93,6 @@ class RegisterController extends GetxController {
   TextEditingController get lastName => _lastName;
   TextEditingController get email => _email;
   TextEditingController get phoneNumber => _phoneNumber;
-  TextEditingController get age => _age;
   TextEditingController get password => _password;
   TextEditingController get addressOne => _addressOne;
   TextEditingController get addressTwo => _addressTwo;
@@ -78,8 +100,8 @@ class RegisterController extends GetxController {
   TextEditingController get displayName => _displayName;
   TextEditingController get mailingAddress => _mailingAddress;
 
-  CountryCode? get pickedCode => _pickedCode;
-  CountryCode? get pickedCodeSecondary => _pickedCodeSecondary;
+  String? get pickedCode => _pickedCode;
+  String? get pickedCodeSecondary => _pickedCodeSecondary;
 
   //Veterinarian
   String get expirationDate => _expirationDate;
@@ -125,9 +147,9 @@ class RegisterController extends GetxController {
 
   void onChangeCountry(CountryCode code, int type) {
     if (type == 1) {
-      _pickedCode = code;
+      _pickedCode = code.dialCode;
     } else {
-      _pickedCodeSecondary = code;
+      _pickedCodeSecondary = code.dialCode;
     }
     update();
   }
@@ -137,20 +159,33 @@ class RegisterController extends GetxController {
     update();
   }
 
-  void openDatePicker() async {
+  void openDatePicker(int pickerType) async {
     final DateTime? picked = await showDatePicker(
       context: Get.context!,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now().subtract(const Duration(days: 0)),
-      lastDate: DateTime(
-        DateTime.now().year + 100,
-        DateTime.now().month,
-        DateTime.now().day,
-      ),
+      firstDate: pickerType == 1
+          ? DateTime.now().subtract(const Duration(days: 0))
+          : DateTime(
+              DateTime.now().year - 60,
+              DateTime.now().month,
+              DateTime.now().day,
+            ),
+      lastDate: pickerType == 1
+          ? DateTime(
+              DateTime.now().year + 100,
+              DateTime.now().month,
+              DateTime.now().day,
+            )
+          : DateTime.now(),
     );
     if (picked != null) {
-      _expirationDate = DateFormat('DD/MM/yyyy').format(picked);
+      if (pickerType == 1) {
+        _expirationDate = DateFormat('DD/MM/yyyy').format(picked);
+      } else {
+        _birthDate = DateFormat('yyyy-MM-dd').format(picked);
+        _age = (DateTime.now().year - picked.year).toString();
+      }
       update();
     }
   }
@@ -216,7 +251,7 @@ class RegisterController extends GetxController {
 
   void sendAuthCode() {
     _auth.verifyPhoneNumber(
-      phoneNumber: '${pickedCode?.dialCode}${phoneNumber.text}',
+      phoneNumber: '$pickedCode${phoneNumber.text}',
       // phoneNumber: "+91 7016155202",
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {},
@@ -231,7 +266,7 @@ class RegisterController extends GetxController {
 
   void resendOtp() async {
     _auth.verifyPhoneNumber(
-      phoneNumber: '${pickedCode?.dialCode}${phoneNumber.text}',
+      phoneNumber: '$pickedCode${phoneNumber.text}',
       // phoneNumber: "+91 7016155202",
       verificationCompleted: (PhoneAuthCredential credential) async {
         await _auth.signInWithCredential(credential);
@@ -310,5 +345,128 @@ class RegisterController extends GetxController {
   ///Use below code for verification concept
   ///
 
-  void registerNewUser() async {}
+  void registerNewUser() async {
+    AppLog.e("Err ${Get.locale?.countryCode}");
+
+    _firstNameError = null;
+    _lastNameError = null;
+    _emailError = null;
+    _phoneNumberError = null;
+    _passwordError = null;
+
+    isLoading = true;
+    update();
+
+    Map<String, dynamic> bodyMap = {
+      "parent_fname": firstName.text,
+      "parent_lname": lastName.text,
+      "user_email": email.text,
+      "password": password.text,
+      "parent_contact_number": phoneNumber.text,
+      "parent_contact_country_code": pickedCode?.replaceAll("+", ""),
+      "parent_sex": gender,
+      "parent_dob": birthDate,
+      "parent_address": addressOne.text,
+      "parent_address_second_line": addressTwo.text,
+      "parent_city": city.text,
+      "parent_state": province.text,
+      "parent_secondary_contact_code": alternatePhone.text,
+      "parent_secondary_contact_country_number":
+          pickedCodeSecondary?.replaceAll("+", ""),
+      "parent_display_name": displayName.text,
+      "parent_mailing_address": mailingAddress.text,
+    };
+
+    FormData fData = FormData.fromMap(bodyMap);
+
+    if (imagePath != null &&
+        imagePath != '' &&
+        !imagePath.toString().hasValidUrl()) {
+      fData.files.add(
+        MapEntry(
+          "profile_picture",
+          await MultipartFile.fromFile(
+            imagePath!,
+          ),
+        ),
+      );
+    }
+
+    final result = await repository.registerParent(fData);
+
+    result.fold<void>(
+      (failure) {
+        String errorMessage = failure.message;
+
+        if (failure.errorData != null) {
+          errorMessage = "error_msg".tr;
+
+          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+
+          if (errorResponse.parentFname != null &&
+              errorResponse.parentFname!.isNotEmpty) {
+            _firstNameError = errorResponse.parentFname!.join("\n");
+          }
+          if (errorResponse.parentLname != null &&
+              errorResponse.parentLname!.isNotEmpty) {
+            _lastNameError = errorResponse.parentLname!.join("\n");
+          }
+
+          if (errorResponse.userEmail != null &&
+              errorResponse.userEmail!.isNotEmpty) {
+            _emailError = errorResponse.userEmail!.join("\n");
+          }
+
+          if (errorResponse.password != null &&
+              errorResponse.password!.isNotEmpty) {
+            _passwordError = errorResponse.password!.join("\n");
+          }
+
+          if (errorResponse.parentContactCountryCode != null &&
+              errorResponse.parentContactCountryCode!.isNotEmpty) {
+            _phoneNumberError =
+                errorResponse.parentContactCountryCode!.join("\n");
+          }
+
+          if (errorResponse.parentContactNumber != null &&
+              errorResponse.parentContactNumber!.isNotEmpty) {
+            _phoneNumberError = errorResponse.parentContactNumber!.join("\n");
+          }
+        }
+
+        isLoading = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          errorMessage,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      },
+      (success) {
+        isLoading = false;
+        update();
+
+        Get.snackbar(
+          "congratulations".tr,
+          success.message ?? "",
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
+          icon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              MaterialIcons.done_all,
+              size: 24.sp,
+              color: AppColors.white,
+            ),
+          ),
+          borderRadius: 5.sp,
+        );
+        Get.offAllNamed(login);
+      },
+    );
+  }
 }

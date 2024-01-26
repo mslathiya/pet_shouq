@@ -48,6 +48,13 @@ Future<void> init() async {
       preferences: Get.find(),
     ),
   );
+  Get.lazyPut(
+    () => PetRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+      preferences: Get.find(),
+    ),
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers
@@ -74,5 +81,10 @@ Future<void> init() async {
       repository: Get.find(),
     ),
     fenix: true,
+  );
+  Get.lazyPut(
+    () => PetController(
+      repository: Get.find(),
+    ),
   );
 }

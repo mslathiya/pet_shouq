@@ -6,3 +6,6 @@ export "login_response_dto.dart";
 export "general_response_dto.dart";
 export 'user_bean.dart';
 export "user_profile_dto.dart";
+export "error_response_dto.dart";
+export "meta_bean.dart";
+export "pet_list_dto.dart";

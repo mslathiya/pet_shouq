@@ -12,6 +12,7 @@ class PasswordField extends StatefulWidget {
   final ValueChanged? onValueChange;
   final Widget? suffixIcon;
   final bool? enableInput;
+  final String? inputError;
 
   const PasswordField({
     super.key,
@@ -22,6 +23,7 @@ class PasswordField extends StatefulWidget {
     this.onValueChange,
     this.suffixIcon,
     this.enableInput,
+    this.inputError,
   });
 
   @override
@@ -116,6 +118,7 @@ class _PasswordFieldState extends State<PasswordField> {
             errorStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.redColor,
                 ),
+            errorText: widget.inputError,
             suffixIcon: Padding(
               padding: EdgeInsets.only(right: 10.w),
               child: IconButton(

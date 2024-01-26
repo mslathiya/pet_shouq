@@ -378,7 +378,13 @@ class AppStrings extends Translations {
           "error_in_request": "Error in request",
           "lbl_diet_time": "Diet Time",
           "something_wrong": "Something goes wrong",
-          "congratulations": "Congratulations"
+          "congratulations": "Congratulations",
+          "years": "Years",
+          "error_msg": "Please check all request field",
+          "delete_item": "Remove selected item?",
+          "delete_item_msg": "Are you sure you want to remove?",
+          "add_pet_msg": "Add new pet by click on below button!",
+          "no_pet_found": "No Pet's found"
         },
       };
 }

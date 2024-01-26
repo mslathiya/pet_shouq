@@ -1,25 +1,38 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:intl/intl.dart';
 
+import '../../data/model/models.dart';
+import '../../helper/helpers.dart';
 import '../../theme/theme.dart';
-import 'pet_information.dart';
+import 'label_with_icon.dart';
 
 class MyPetItem extends StatelessWidget {
   final int itemIndex;
   final VoidCallback onDeletePet;
   final VoidCallback onViewPet;
+  final PetItemBean itemBean;
   const MyPetItem({
     super.key,
     required this.itemIndex,
     required this.onDeletePet,
     required this.onViewPet,
+    required this.itemBean,
   });
 
   @override
   Widget build(BuildContext context) {
+    bool haveImage = false;
+    String imagePath = "";
+    if (itemBean.petProfilePhoto != null) {
+      imagePath = itemBean.fullProfileImageUrl.toString();
+      haveImage = imagePath.hasValidUrl();
+    }
+
     return Container(
       margin: EdgeInsets.only(
         left: 10.sp,
@@ -33,7 +46,7 @@ class MyPetItem extends StatelessWidget {
           extentRatio: 0.35,
           children: [
             CustomSlidableAction(
-              onPressed: (context) => onDeletePet,
+              onPressed: (context) => onDeletePet(),
               child: Container(
                 width: 45.w,
                 height: double.infinity,
@@ -81,18 +94,66 @@ class MyPetItem extends StatelessWidget {
                 tag: "pet$itemIndex",
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
-                    AppAssets.dog,
-                    height: 60.h,
-                    width: 64.w,
-                    fit: BoxFit.cover,
-                  ),
+                  child: !haveImage
+                      ? Image.asset(
+                          AppAssets.dog,
+                          height: 60.h,
+                          width: 64.w,
+                          fit: BoxFit.cover,
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: imagePath,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover,
+                          fadeInDuration: const Duration(milliseconds: 60),
+                          fadeInCurve: Curves.easeIn,
+                          height: 60.h,
+                          width: 64.w,
+                        ),
                 ),
               ),
               SizedBox(
                 width: 6.w,
               ),
-              const PetInformation(),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      itemBean.petName ?? "",
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                fontSize: 14.sp,
+                              ),
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    LabelWithIcon(
+                      asset: AppAssets.icCalendar,
+                      value: itemBean.petDob != null
+                          ? DateFormat("dd/MM/yyyy").format(itemBean.petDob!)
+                          : "",
+                      padding: EdgeInsets.zero,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    LabelWithIcon(
+                      asset: AppAssets.icBreed,
+                      value: itemBean.petBreed ?? "",
+                      padding: EdgeInsets.zero,
+                    ),
+                  ],
+                ),
+              ),
               Material(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),

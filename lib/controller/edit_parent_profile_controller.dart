@@ -6,14 +6,14 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:pet_shouq/helper/helpers.dart';
-import 'package:pet_shouq/helper/string_extensions.dart';
 
 import '../data/model/models.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'controllers.dart';
 
-class EditParentProfileController extends GetxController {
+class EditParentProfileController extends GetxController
+    implements GetxService {
   final AuthRepositoryImpl repository;
 
   bool isLoading = false;

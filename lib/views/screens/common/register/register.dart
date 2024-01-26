@@ -6,24 +6,18 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-import '../../../../config/config.dart';
 import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widget/radio_widget.dart';
 
-class Register extends StatefulWidget {
+class Register extends StatelessWidget {
   const Register({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
-}
-
-class _RegisterState extends State<Register> {
-  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
+    
     return Scaffold(
       body: LayoutBuilder(
         builder: (_, constraints) {
@@ -99,6 +93,7 @@ class _RegisterState extends State<Register> {
                                             ),
                                           ],
                                         ).call,
+                                        inputError: controller.firstNameError,
                                       ),
                                     ),
                                     SizedBox(
@@ -119,6 +114,7 @@ class _RegisterState extends State<Register> {
                                             ),
                                           ],
                                         ).call,
+                                        inputError: controller.lastNameError,
                                       ),
                                     )
                                   ],
@@ -194,6 +190,7 @@ class _RegisterState extends State<Register> {
                                       ),
                                     ],
                                   ).call,
+                                  inputError: controller.emailError,
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -201,9 +198,8 @@ class _RegisterState extends State<Register> {
                                 PhoneInput(
                                   isCompulsory: true,
                                   headerLabel: "lbl_parent_phone".tr,
-                                  countryDialCode: controller.pickedCode != null
-                                      ? controller.pickedCode?.code
-                                      : Get.locale?.countryCode,
+                                  countryDialCode: controller.pickedCode ??
+                                      Get.locale?.countryCode,
                                   editingController: controller.phoneNumber,
                                   onCountryChanged: (countryCode) => controller
                                       .onChangeCountry(countryCode, 1),
@@ -217,6 +213,25 @@ class _RegisterState extends State<Register> {
                                       ),
                                     ],
                                   ).call,
+                                  inputError: controller.phoneNumberError,
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                SelectorField(
+                                  headerWidget: InputHeader(
+                                    headerLabel: "lbl_gender".tr,
+                                  ),
+                                  inputHint: controller.gender != ''
+                                      ? controller.gender
+                                      : "hint_gender".tr,
+                                  suffixIcon: Icon(
+                                    Entypo.chevron_down,
+                                    size: 26.sp,
+                                    color: AppColors.hintColor,
+                                  ),
+                                  onSelectItem: () =>
+                                      controller.openGenderPicker(),
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -235,35 +250,49 @@ class _RegisterState extends State<Register> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Expanded(
+                                                flex: 7,
                                                 child: SelectorField(
                                                   headerWidget: InputHeader(
                                                     headerLabel:
-                                                        "lbl_gender".tr,
+                                                        "lbl_birth_date".tr,
                                                   ),
                                                   inputHint:
-                                                      controller.gender != ''
-                                                          ? controller.gender
-                                                          : "hint_gender".tr,
-                                                  suffixIcon: Icon(
-                                                    Entypo.chevron_down,
-                                                    size: 26.sp,
-                                                    color: AppColors.hintColor,
+                                                      controller.birthDate != ''
+                                                          ? controller.birthDate
+                                                          : "hint_birth_date"
+                                                              .tr,
+                                                  suffixIcon: SizedBox(
+                                                    width: 24.w,
+                                                    height: 24.h,
+                                                    child: SvgPicture.asset(
+                                                      AppAssets.icCalendar,
+                                                      height: 18.sp,
+                                                      width: 18.sp,
+                                                      colorFilter:
+                                                          ColorFilter.mode(
+                                                        AppColors.hintColor,
+                                                        BlendMode.srcIn,
+                                                      ),
+                                                    ),
                                                   ),
                                                   onSelectItem: () => controller
-                                                      .openGenderPicker(),
+                                                      .openDatePicker(2),
                                                 ),
                                               ),
                                               SizedBox(
                                                 width: 10.w,
                                               ),
                                               Expanded(
-                                                child: InputField(
+                                                flex: 3,
+                                                child: SelectorField(
                                                   headerWidget: InputHeader(
                                                     headerLabel: "lbl_age".tr,
                                                   ),
-                                                  inputHint: "hint_age".tr,
-                                                  editingController:
-                                                      controller.age,
+                                                  inputHint: controller.age !=
+                                                          ''
+                                                      ? "${controller.age} ${"years".tr}"
+                                                      : "lbl_age".tr,
+                                                  onSelectItem: () {},
                                                 ),
                                               )
                                             ],
@@ -288,6 +317,7 @@ class _RegisterState extends State<Register> {
                                       ),
                                     ],
                                   ).call,
+                                  inputError: controller.passwordError,
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -365,11 +395,8 @@ class _RegisterState extends State<Register> {
                                             headerLabel:
                                                 "lbl_secondary_phone".tr,
                                             countryDialCode: controller
-                                                        .pickedCodeSecondary !=
-                                                    null
-                                                ? controller
-                                                    .pickedCodeSecondary?.code
-                                                : Get.locale?.countryCode,
+                                                    .pickedCodeSecondary ??
+                                                Get.locale?.countryCode,
                                             editingController:
                                                 controller.alternatePhone,
                                             onCountryChanged: (countryCode) =>
@@ -456,7 +483,7 @@ class _RegisterState extends State<Register> {
                                               ),
                                             ),
                                             onSelectItem: () =>
-                                                controller.openDatePicker(),
+                                                controller.openDatePicker(1),
                                           ),
                                           SizedBox(
                                             height: 15.h,
@@ -657,13 +684,11 @@ class _RegisterState extends State<Register> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: ButtonView(
+                                    isLoading: controller.isLoading,
                                     onTap: () {
                                       if (controller.formKey.currentState!
                                           .validate()) {
-                                        Navigator.pushNamed(
-                                          context,
-                                          verification,
-                                        );
+                                        controller.registerNewUser();
                                       }
                                     },
                                     buttonTitle: "sign_up".tr,

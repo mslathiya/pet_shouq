@@ -18,18 +18,21 @@ class PhoneInput extends StatefulWidget {
   final int? maxLength;
   final Function(CountryCode countryCode)? onCountryChanged;
   final String? countryDialCode;
+  final String? inputError;
 
-  const PhoneInput(
-      {super.key,
-      required this.headerLabel,
-      this.isCompulsory = false,
-      this.editingController,
-      this.validator,
-      this.onValueChange,
-      this.enableInput,
-      this.maxLength,
-      this.onCountryChanged,
-      this.countryDialCode});
+  const PhoneInput({
+    super.key,
+    required this.headerLabel,
+    this.isCompulsory = false,
+    this.editingController,
+    this.validator,
+    this.onValueChange,
+    this.enableInput,
+    this.maxLength,
+    this.onCountryChanged,
+    this.countryDialCode,
+    this.inputError,
+  });
 
   @override
   State<PhoneInput> createState() => _PhoneInputState();
@@ -40,6 +43,7 @@ class _PhoneInputState extends State<PhoneInput> {
   Widget build(BuildContext context) {
     final t = ApplicationLocalizations.of(context)!;
     return InputField(
+      inputError: widget.inputError,
       headerWidget: InputHeader(
         compulsory: widget.isCompulsory!,
         headerLabel: widget.headerLabel,

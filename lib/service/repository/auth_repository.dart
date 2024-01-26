@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide FormData;
+import 'package:pet_shouq/helper/helpers.dart';
 
 import '../../data/model/models.dart';
-import '../../helper/app_preferences.dart';
 import '../api/api_imports.dart';
 import '../api/failure.dart';
 
@@ -90,11 +90,13 @@ class AuthRepositoryImpl extends AuthRepository {
           if (bean.success == true) {
             return Right(bean);
           } else {
+            AppLog.e("Fail ${bean.data}");
             return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
           }
         }
         return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
+        AppLog.e("Print here exception");
         return Left(ApiException.handle(e).failure);
       }
     } else {

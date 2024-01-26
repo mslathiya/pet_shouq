@@ -27,8 +27,10 @@ Failure _handleError(DioException error) {
       if (error.response != null &&
           error.response?.statusCode != null &&
           error.response?.statusMessage != null) {
+        Map<String, dynamic> errorMap = error.response!.data;
         return Failure(error.response?.statusCode ?? 0,
-            error.response?.data["message"] ?? "");
+            error.response?.data["message"] ?? "",
+            errorData: errorMap);
       } else {
         return DataSource.defaultError.getFailure();
       }
@@ -81,7 +83,10 @@ extension DataSourceExtension on DataSource {
         return Failure(ResponseCode.cancel, ResponseMessage.cancel);
       case DataSource.receiveTimeout:
         return Failure(
-            ResponseCode.receiveTimeout, ResponseMessage.receiveTimeout);
+          ResponseCode.receiveTimeout,
+          ResponseMessage.receiveTimeout,
+          errorData: null,
+        );
       case DataSource.sendTimeout:
         return Failure(ResponseCode.sendTimeout, ResponseMessage.sendTimeout);
       case DataSource.cacheError:

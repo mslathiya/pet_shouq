@@ -16,7 +16,10 @@ class ApiClient {
         connectTimeout: Endpoints.connectionTimeout,
         receiveTimeout: Endpoints.receiveTimeout,
         responseType: ResponseType.json,
-        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        headers: {
+          'Content-Type': 'application/json',
+          "Accept": "application/json"
+        },
         // validateStatus: (_) => true,
         validateStatus: (int? status) {
           return status != null;

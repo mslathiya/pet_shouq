@@ -8,14 +8,9 @@ import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   const Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -173,8 +168,7 @@ class _LoginState extends State<Login> {
                                   height: 15.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () =>
-                                      Navigator.pushNamed(context, register),
+                                  onTap: () => Get.toNamed(register),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
