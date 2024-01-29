@@ -55,6 +55,12 @@ Future<void> init() async {
       preferences: Get.find(),
     ),
   );
+  Get.lazyPut(
+    () => NutritionRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers

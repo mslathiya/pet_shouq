@@ -72,6 +72,7 @@ class AppAssets {
   static const icUpload = "assets/svg/ic_upload.svg";
   static const icPencil = "assets/svg/edit_pencil.svg";
   static const icAvailability = "assets/svg/ic_availability.svg";
+  static const editIcon = "assets/svg/edit.svg";
 
   static const typeDog = "assets/images/type_dog.png";
   static const timeContainer = "assets/images/time_container.png";

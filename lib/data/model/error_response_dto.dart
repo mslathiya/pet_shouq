@@ -15,6 +15,8 @@ class ErrorResponseDto {
   List<String>? parentContactCountryCode;
   List<String>? petName;
   List<String>? petDob;
+  List<String>? foodName;
+  Errors? errors;
 
   ErrorResponseDto({
     this.parentFname,
@@ -25,6 +27,8 @@ class ErrorResponseDto {
     this.parentContactCountryCode,
     this.petName,
     this.petDob,
+    this.foodName,
+    this.errors,
   });
 
   factory ErrorResponseDto.fromJson(Map<String, dynamic> json) =>
@@ -54,6 +58,10 @@ class ErrorResponseDto {
         petDob: json["pet_dob"] == null
             ? []
             : List<String>.from(json["pet_dob"]!.map((x) => x)),
+        foodName: json["food_name"] == null
+            ? []
+            : List<String>.from(json["food_name"]!.map((x) => x)),
+        errors: json["errors"] == null ? null : Errors.fromJson(json["errors"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,5 +86,24 @@ class ErrorResponseDto {
             petName == null ? [] : List<dynamic>.from(petName!.map((x) => x)),
         "pet_dob":
             petDob == null ? [] : List<dynamic>.from(petDob!.map((x) => x)),
+        "food_name":
+            foodName == null ? [] : List<dynamic>.from(foodName!.map((x) => x)),
+        "errors": errors?.toJson(),
+      };
+}
+
+class Errors {
+  String? title;
+
+  Errors({
+    this.title,
+  });
+
+  factory Errors.fromJson(Map<String, dynamic> json) => Errors(
+        title: json["title"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
       };
 }

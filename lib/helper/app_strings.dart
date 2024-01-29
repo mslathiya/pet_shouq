@@ -84,6 +84,7 @@ class AppStrings extends Translations {
           "hint_location": "Enter Location",
           "opening_time": "Opening Time",
           "btn_add_pet": "Add Pet",
+          "btn_edit_pet": "Edit Pet",
           "screen_pet_details": "Pet Details",
           "pet_other_details": "Pet Other Details",
           "chip_number": "Microchip Number",
@@ -384,7 +385,10 @@ class AppStrings extends Translations {
           "delete_item": "Remove selected item?",
           "delete_item_msg": "Are you sure you want to remove?",
           "add_pet_msg": "Add new pet by click on below button!",
-          "no_pet_found": "No Pet's found"
+          "no_pet_found": "No Pet's found",
+          "add_nutrition_msg":
+              "Add new nutrition/feeding by click on below button!",
+          "no_nutrition_found": "No nutrition/feeding data found"
         },
       };
 }

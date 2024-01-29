@@ -5,7 +5,6 @@ import 'package:pet_shouq/helper/helpers.dart';
 
 import '../../data/model/models.dart';
 import '../api/api_imports.dart';
-import '../api/failure.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, LoginBean>> loginMember(

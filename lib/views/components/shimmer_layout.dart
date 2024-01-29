@@ -98,7 +98,7 @@ class Shimmer extends StatefulWidget {
             ]);
 
   @override
-  _ShimmerState createState() => _ShimmerState();
+  State<Shimmer> createState() => _ShimmerState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

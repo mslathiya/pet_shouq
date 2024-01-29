@@ -64,4 +64,12 @@ class AuthController extends GetxController implements GetxService {
   void updateProfileData(UserBean bean) {
     userData.value = bean;
   }
+
+  bool handleUnAuthorized(Failure error) {
+    if (error.code == 401) {
+      logoutCurrentUser();
+      return true;
+    }
+    return false;
+  }
 }

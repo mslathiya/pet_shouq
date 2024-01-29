@@ -18,8 +18,10 @@ class ParentMyPets extends StatefulWidget {
 class _ParentMyPetsState extends State<ParentMyPets> {
   @override
   void initState() {
-    Get.find<PetController>().setScrollListener();
-    Get.find<PetController>().getPetList();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<PetController>().setScrollListener();
+      Get.find<PetController>().getPetList();
+    });
     super.initState();
   }
 
@@ -34,29 +36,7 @@ class _ParentMyPetsState extends State<ParentMyPets> {
       body: GetBuilder<PetController>(
         builder: (controller) {
           if (controller.loadingPetList && controller.currentPage == 1) {
-            return Shimmer.fromColors(
-              baseColor: Colors.grey.shade300,
-              highlightColor: Colors.grey.shade100,
-              enabled: true,
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                      .map(
-                        (e) => SizedBox(
-                          height: 75.h,
-                          width: double.infinity,
-                          child: const ContentPlaceholder(
-                            lineType: ContentLineType.threeLines,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            );
+            return const ShimmerListLoading();
           }
           return Stack(
             children: [
@@ -82,8 +62,27 @@ class _ParentMyPetsState extends State<ParentMyPets> {
                               onDeletePet: () => _dialogBuilderDeleteItem(
                                 () => controller.deletePet(item.petId!),
                               ),
-                              onViewPet: () =>
-                                  Navigator.pushNamed(context, petDetails),
+                              onViewPet: () async {
+                                final response =
+                                    await controller.getPetDetails(item.petId!);
+
+                                Get.toNamed(petDetails, arguments: [
+                                  {"index": index},
+                                  {"info": response}
+                                ]);
+                              },
+                              onEditPet: () async {
+                                final response =
+                                    await controller.getPetDetails(item.petId!);
+                                if (response != null) {
+                                  Get.toNamed(addPet, arguments: [
+                                    {
+                                      "mode": "Edit",
+                                    },
+                                    {"info": response}
+                                  ]);
+                                }
+                              },
                             );
                           }
 
@@ -149,51 +148,9 @@ class _ParentMyPetsState extends State<ParentMyPets> {
                 ),
               if (controller.currentPage == 1 &&
                   controller.petListArray.isEmpty)
-                Positioned.fill(
-                  child: SizedBox(
-                    height: 76,
-                    width: 76,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppAssets.noResult,
-                              height: 260.h,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                            Text(
-                              "no_pet_found".tr,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium
-                                  ?.copyWith(
-                                    fontSize: 26.sp,
-                                  ),
-                            ),
-                            SizedBox(
-                              height: 8.h,
-                            ),
-                            Text(
-                              "add_pet_msg".tr,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontSize: 16.sp,
-                                  ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                NoResultList(
+                  header: "no_pet_found".tr,
+                  subHeader: "add_pet_msg".tr,
                 ),
             ],
           );

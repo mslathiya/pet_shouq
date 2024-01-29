@@ -3,7 +3,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 
 import '../../helper/helpers.dart';
-import 'failure.dart';
+import '../../data/model/failure.dart';
 
 part "api_client.dart";
 part "api_exception.dart";

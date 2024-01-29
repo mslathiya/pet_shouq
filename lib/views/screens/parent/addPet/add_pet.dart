@@ -10,8 +10,21 @@ import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
-class AddNewPet extends StatelessWidget {
+class AddNewPet extends StatefulWidget {
   const AddNewPet({super.key});
+
+  @override
+  State<AddNewPet> createState() => _AddNewPetState();
+}
+
+class _AddNewPetState extends State<AddNewPet> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<PetController>().editPetInfo();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +32,9 @@ class AddNewPet extends StatelessWidget {
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: "btn_add_pet".tr,
+        title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
+            ? "btn_edit_pet".tr
+            : "btn_add_pet".tr,
         onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
@@ -90,8 +105,10 @@ class AddNewPet extends StatelessWidget {
                                     color: AppColors.hintColor,
                                   ),
                                 ),
-                                onSelectItem: () =>
-                                    controller.openBreedPicker(),
+                                onSelectItem: () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  controller.openBreedPicker();
+                                },
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -126,7 +143,10 @@ class AddNewPet extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                onSelectItem: () => controller.openDatePicker(),
+                                onSelectItem: () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  controller.openDatePicker();
+                                },
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -189,8 +209,10 @@ class AddNewPet extends StatelessWidget {
                                     color: AppColors.hintColor,
                                   ),
                                 ),
-                                onSelectItem: () =>
-                                    controller.openSpayedPicker(),
+                                onSelectItem: () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  controller.openSpayedPicker();
+                                },
                               ),
                               SizedBox(
                                 height: 15.h,

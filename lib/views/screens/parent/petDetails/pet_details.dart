@@ -1,10 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/config.dart';
+import '../../../../controller/controllers.dart';
+import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
+import '../../../../helper/helpers.dart';
 import 'widgets/pet_detail.dart';
 import 'widgets/pet_info.dart';
 import 'widgets/pet_other_detail.dart';
@@ -17,17 +22,38 @@ class PetDetails extends StatefulWidget {
 }
 
 class _PetDetailsState extends State<PetDetails> {
+  late PetInformation info;
+  late int index;
+
+  @override
+  void initState() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null) {
+      index = argumentData[0]['index'];
+      info = argumentData[1]['info'];
+      setState(() {
+        info;
+        index;
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          AppBarHeader(l: t),
+          AppBarHeader(
+            info: info,
+            index: index,
+          ),
           SliverFillRemaining(
             hasScrollBody: false,
-            child: PetDetailView(localizations: t),
+            child: PetDetailView(
+              info: info,
+            ),
           ),
         ],
       ),
@@ -38,11 +64,21 @@ class _PetDetailsState extends State<PetDetails> {
 class AppBarHeader extends StatelessWidget {
   const AppBarHeader({
     super.key,
-    required this.l,
+    required this.info,
+    required this.index,
   });
-  final ApplicationLocalizations l;
+  final PetInformation info;
+  final int index;
+
   @override
   Widget build(BuildContext context) {
+    bool haveImage = false;
+    String imagePath = "";
+    if (info.petProfilePhoto != null) {
+      imagePath = info.fullProfileImageUrl.toString();
+      haveImage = imagePath.hasValidUrl();
+    }
+
     return SliverAppBar(
       backgroundColor: AppColors.secondary,
       elevation: 0,
@@ -64,7 +100,7 @@ class AppBarHeader extends StatelessWidget {
         ),
       ),
       title: Text(
-        l.translate("screen_detail_page"),
+        "screen_detail_page".tr,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               height: 2,
@@ -103,13 +139,26 @@ class AppBarHeader extends StatelessWidget {
               ),
             ),
             Hero(
-              tag: "pet0",
-              child: Image.asset(
-                AppAssets.dogDetails,
-                height: 270,
-                width: double.maxFinite,
-                fit: BoxFit.cover,
-              ),
+              tag: "pet$index",
+              child: !haveImage
+                  ? Image.asset(
+                      AppAssets.dogDetails,
+                      height: 270,
+                      width: double.maxFinite,
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: imagePath,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      fit: BoxFit.cover,
+                      fadeInDuration: const Duration(milliseconds: 60),
+                      fadeInCurve: Curves.easeIn,
+                      height: 270,
+                      width: double.maxFinite,
+                    ),
             ),
             Positioned(
               left: 0,
@@ -122,11 +171,13 @@ class AppBarHeader extends StatelessWidget {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: PetInfo(),
+              child: PetInfo(
+                info: info,
+              ),
             ),
           ],
         ),
@@ -136,8 +187,9 @@ class AppBarHeader extends StatelessWidget {
 }
 
 class PetDetailView extends StatelessWidget {
-  final ApplicationLocalizations localizations;
-  const PetDetailView({super.key, required this.localizations});
+  const PetDetailView({super.key, required this.info});
+
+  final PetInformation info;
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +197,13 @@ class PetDetailView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const PetDetail(),
+        PetDetail(
+          info: info,
+        ),
         //
-        PetOtherDetails(localizations: localizations),
+        PetOtherDetails(
+          info: info,
+        ),
         //
         Padding(
           padding: EdgeInsets.only(
@@ -156,7 +212,7 @@ class PetDetailView extends StatelessWidget {
             bottom: 12.h,
           ),
           child: Text(
-            localizations.translate("pet_menu"),
+            "pet_menu".tr,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   fontSize: 14.sp,
@@ -164,39 +220,45 @@ class PetDetailView extends StatelessWidget {
           ),
         ),
         MenuItem(
-          title: localizations.translate("medical_history"),
+          title: "medical_history".tr,
           iconName: AppAssets.icMedicalHistory,
           onPressMenu: () {},
         ),
         MenuItem(
-          title: localizations.translate("set_feeding_schedule"),
+          title: "set_feeding_schedule".tr,
           iconName: AppAssets.icFeedingSchedule,
-          onPressMenu: () => Navigator.pushNamed(context, petFeedSchedule),
+          onPressMenu: () => Get.toNamed(petFeedSchedule),
         ),
         MenuItem(
-          title: localizations.translate("diet"),
+          title: "diet".tr,
           iconName: AppAssets.icDiet,
-          onPressMenu: () => Navigator.pushNamed(context, petDiet),
+          onPressMenu: () => Get.toNamed(petDiet),
         ),
         MenuItem(
-          title: localizations.translate("nutrition"),
+          title: "nutrition".tr,
           iconName: AppAssets.icNutrition,
-          onPressMenu: () => Navigator.pushNamed(context, petNutrition),
+          onPressMenu: () {
+            Get.put(NutritionController(
+              repository: Get.find(),
+              petId: info.petId ?? -1,
+            ));
+            Get.toNamed(petNutrition);
+          },
         ),
         MenuItem(
-          title: localizations.translate("medication_details"),
+          title: "medication_details".tr,
           iconName: AppAssets.icMedication,
-          onPressMenu: () => Navigator.pushNamed(context, petMedication),
+          onPressMenu: () => Get.toNamed(petMedication),
         ),
         MenuItem(
-          title: localizations.translate("vaccination"),
+          title: "vaccination".tr,
           iconName: AppAssets.icVaccination,
           onPressMenu: () {},
         ),
         MenuItem(
-          title: localizations.translate("special_needs"),
+          title: "special_needs".tr,
           iconName: AppAssets.icSpecialNeeds,
-          onPressMenu: () => Navigator.pushNamed(context, petSpecialNotes),
+          onPressMenu: () => Get.toNamed(petSpecialNotes),
         ),
         SizedBox(
           height: 15.h,

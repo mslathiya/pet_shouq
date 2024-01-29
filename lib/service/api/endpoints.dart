@@ -21,6 +21,16 @@ class Endpoints {
   /*                                     Pet                                    */
   /* -------------------------------------------------------------------------- */
   static const addPetPost = "api/parent/pet/add";
+  static const editPetPost = "api/parent/pet/update/";
   static const petListGet = "api/parent/pet/list";
   static const removePetDelete = "api/parent/pet/delete/";
+  static const petDetailGet = "api/parent/pet/detail/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                            Pet Nutrition/Feeding                           */
+  /* -------------------------------------------------------------------------- */
+  static const nutritionListGet = "api/parent/pet/nutrition/list/";
+  static const nutritionDetailGet = "api/parent/pet/nutrition/detail/";
+  static const addNutritionPost = "api/parent/pet/nutrition/add";
+  static const removeNutritionDelete = "api/parent/pet/nutrition/delete/";
 }

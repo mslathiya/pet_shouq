@@ -10,11 +10,13 @@ import '../data/model/models.dart';
 import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
+import 'auth_controller.dart';
 
 class PetController extends GetxController implements GetxService {
   PetRepositoryImpl repository;
   bool isLoading = false;
-
+  bool inEditMode = false;
+  int petId = -1;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<String> spayedList = ['Yes', "No"];
 
@@ -241,7 +243,7 @@ class PetController extends GetxController implements GetxService {
       "pet_microchip_number": _chipNumber.text,
       "pet_is_neutered": _isSpayed,
       "pet_pedigree_info_frontside": _pedigreeFront.text,
-      "pet_pedigree_info_backside": _pedigreeBack,
+      "pet_pedigree_info_backside": _pedigreeBack.text,
       "pet_allergies": _allergy.text,
       "pet_takecare_address": _petCareAddress.text,
       "pet_description": _description.text,
@@ -263,36 +265,47 @@ class PetController extends GetxController implements GetxService {
       );
     }
 
-    final result = await repository.addPet(fData);
+    dynamic result;
+
+    if (inEditMode) {
+      result = await repository.editPet(petId, fData);
+    } else {
+      result = await repository.addPet(fData);
+    }
 
     result.fold<void>(
       (failure) {
-        String errorMessage = failure.message;
-
-        if (failure.errorData != null) {
-          errorMessage = "error_msg".tr;
-
-          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
-
-          if (errorResponse.petName != null &&
-              errorResponse.petName!.isNotEmpty) {
-            _petNameError = errorResponse.petName!.join("\n");
-          }
-          if (errorResponse.petDob != null &&
-              errorResponse.petDob!.isNotEmpty) {
-            _birthDateError = errorResponse.petDob!.join("\n");
-          }
-        }
-
         isLoading = false;
         update();
-        Get.snackbar(
-          "error_in_request".tr,
-          errorMessage,
-          backgroundColor: AppColors.redColor,
-          colorText: AppColors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          String errorMessage = failure.message;
+          if (failure.errorData != null) {
+            errorMessage = "error_msg".tr;
+            final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+
+            if (errorResponse.petName != null &&
+                errorResponse.petName!.isNotEmpty) {
+              _petNameError = errorResponse.petName!.join("\n");
+            }
+            if (errorResponse.petDob != null &&
+                errorResponse.petDob!.isNotEmpty) {
+              _birthDateError = errorResponse.petDob!.join("\n");
+            }
+
+            if (errorResponse.errors != null) {
+              errorMessage = errorResponse.errors?.title ?? "";
+            }
+          }
+
+          Get.snackbar(
+            "error_in_request".tr,
+            errorMessage,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
       },
       (success) {
         isLoading = false;
@@ -324,6 +337,35 @@ class PetController extends GetxController implements GetxService {
         );
       },
     );
+  }
+
+  void editPetInfo() async {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null && argumentData[0]['mode'] == "Edit") {
+      PetInformation info = argumentData[1]['info'];
+      petId = info.petId ?? -1;
+      _petName.text = info.petName ?? "";
+      _marking.text = info.petColor ?? "";
+      _weight.text = info.petWeight ?? "";
+      _height.text = info.petHeight ?? "";
+      _chipNumber.text = info.petMicrochipNumber ?? "";
+      _pedigreeFront.text = info.petPedigreeInfoFrontside ?? "";
+      _pedigreeBack.text = info.petPedigreeInfoBackside ?? "";
+      _allergy.text = info.petAllergies ?? "";
+      _description.text = info.petDescription ?? "";
+      _qrCode.text = info.petQrCodeNumber ?? "";
+      _petCareAddress.text = info.petTakecareAddress ?? "";
+
+      if (info.petProfilePhoto != null) {
+        _imagePath = info.fullProfileImageUrl;
+      }
+      _isSpayed = info.petIsNeutered ?? "No";
+      _birthDate = DateFormat('yyyy-MM-dd').format(
+        info.petDob ?? DateTime.now(),
+      );
+      _breed = info.petBreed ?? breedList[0];
+      inEditMode = true;
+    }
   }
 
   /* -------------------------------------------------------------------------- */
@@ -359,6 +401,7 @@ class PetController extends GetxController implements GetxService {
     result.fold<void>((failure) {
       _loadingPetList = false;
       update();
+      Get.find<AuthController>().handleUnAuthorized(failure);
     }, (success) {
       _loadingPetList = false;
       // update();
@@ -387,13 +430,16 @@ class PetController extends GetxController implements GetxService {
       (failure) {
         _removingPet = false;
         update();
-        Get.snackbar(
-          "error_in_request".tr,
-          failure.message,
-          backgroundColor: AppColors.redColor,
-          colorText: AppColors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          Get.snackbar(
+            "error_in_request".tr,
+            failure.message,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
       },
       (success) {
         _removingPet = false;
@@ -401,5 +447,39 @@ class PetController extends GetxController implements GetxService {
         resetRequest();
       },
     );
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                 Pet Details                                */
+  /* -------------------------------------------------------------------------- */
+  Future<PetInformation?> getPetDetails(int petId) async {
+    _removingPet = true;
+    update();
+    final result = await repository.getPetDetails(petId);
+    PetInformation? information;
+    result.fold<void>(
+      (failure) {
+        _removingPet = false;
+        update();
+
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          Get.snackbar(
+            "error_in_request".tr,
+            failure.message,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
+      },
+      (success) {
+        _removingPet = false;
+        update();
+        if (success.success == true) {
+          information = success.data;
+        }
+      },
+    );
+    return information;
   }
 }

@@ -3,21 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
-import '../../config/config.dart';
+import '../../data/model/models.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
 
 class NutritionListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
-  final ApplicationLocalizations t;
+  final VoidCallback onEditItem;
+  final VoidCallback onDeleteItem;
   final int itemIndex;
+  final NutritionBean itemBean;
 
   const NutritionListItem({
     super.key,
     required this.onViewDetail,
-    required this.t,
     required this.itemIndex,
+    required this.itemBean,
+    required this.onEditItem,
+    required this.onDeleteItem,
   });
 
   @override
@@ -32,10 +37,9 @@ class NutritionListItem extends StatelessWidget {
         key: Key(itemIndex.toString()),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
-          extentRatio: 0.35,
           children: [
             CustomSlidableAction(
-              onPressed: (context) => {},
+              onPressed: (context) => onDeleteItem(),
               child: Container(
                 width: 45.w,
                 height: double.infinity,
@@ -51,6 +55,27 @@ class NutritionListItem extends StatelessWidget {
                     AppAssets.icDelete,
                     height: 20.sp,
                     width: 20.sp,
+                  ),
+                ),
+              ),
+            ),
+            CustomSlidableAction(
+              onPressed: (context) => onEditItem(),
+              child: Container(
+                width: 45.w,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10.sp),
+                  ),
+                  color: AppColors.primary,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: SvgPicture.asset(
+                    AppAssets.editIcon,
+                    height: 18.sp,
+                    width: 18.sp,
                   ),
                 ),
               ),
@@ -89,7 +114,7 @@ class NutritionListItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Premium Puppy Chow',
+                          itemBean.nutFoodName ?? "",
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -101,17 +126,17 @@ class NutritionListItem extends StatelessWidget {
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icBestProduct,
-                          value: 'ABC Pet Foods',
+                          value: itemBean.nutBrand ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icBreedType,
-                          value: 'Puppy',
+                          value: itemBean.nutSpecies ?? "",
                           padding: EdgeInsets.zero,
                         ),
                       ],
@@ -124,7 +149,7 @@ class NutritionListItem extends StatelessWidget {
                       RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          text: '\$1.50\n',
+                          text: '\$${itemBean.nutPrice ?? ""}\n',
                           style: Theme.of(context)
                               .textTheme
                               .displayMedium
@@ -135,7 +160,7 @@ class NutritionListItem extends StatelessWidget {
                               ),
                           children: [
                             TextSpan(
-                              text: t.translate("per_pound"),
+                              text: "per_pound".tr,
                               style: Theme.of(context)
                                   .textTheme
                                   .displayMedium
@@ -185,17 +210,17 @@ class NutritionListItem extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 70.sp,
-                    child: const LabelWithIcon(
+                    child: LabelWithIcon(
                       asset: AppAssets.icDocBag,
-                      value: 'Dog',
+                      value: itemBean.nutLifeStage ?? "",
                       padding: EdgeInsets.zero,
                     ),
                   ),
                   SizedBox(
                     width: 170.sp,
-                    child: const LabelWithIcon(
+                    child: LabelWithIcon(
                       asset: AppAssets.icFoodType,
-                      value: 'Dry Kibble',
+                      value: itemBean.nutFoodType ?? "",
                       padding: EdgeInsets.zero,
                     ),
                   )

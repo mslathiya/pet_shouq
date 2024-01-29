@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
+import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
 class PetDetail extends StatelessWidget {
   const PetDetail({
     super.key,
+    required this.info,
   });
+
+  final PetInformation info;
 
   @override
   Widget build(BuildContext context) {
@@ -19,31 +24,31 @@ class PetDetail extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icPetColor,
-              title: 'Brown',
+              title: (info.petColor ?? "").capitalizeFirst ?? "",
             ),
           ),
           SizedBox(
             width: 8.w,
           ),
-          const Expanded(
+          Expanded(
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icPetWeight,
-              title: '11.00 Kg',
+              title: '${info.petWeight ?? ""} kg',
             ),
           ),
           SizedBox(
             width: 8.w,
           ),
-          const Expanded(
+          Expanded(
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icPetHeight,
-              title: '41.00',
+              title: '${info.petHeight ?? ""} cm',
             ),
           )
         ],

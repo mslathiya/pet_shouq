@@ -9,3 +9,8 @@ export "user_profile_dto.dart";
 export "error_response_dto.dart";
 export "meta_bean.dart";
 export "pet_list_dto.dart";
+export 'pet_detail_response_dto.dart';
+export "nutrition_list_dto.dart";
+export 'failure.dart';
+export "pet_info_bean.dart";
+export 'nutrition_detail_response_dto.dart';
