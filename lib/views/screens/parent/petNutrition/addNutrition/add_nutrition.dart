@@ -20,6 +20,14 @@ class _AddNutritionState extends State<AddNutrition> {
   int selectedOption = 1;
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<NutritionController>().editNutritionInfo();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     final t = ApplicationLocalizations.of(context)!;

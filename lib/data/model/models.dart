@@ -14,3 +14,4 @@ export "nutrition_list_dto.dart";
 export 'failure.dart';
 export "pet_info_bean.dart";
 export 'nutrition_detail_response_dto.dart';
+export "medication_list_dto.dart";

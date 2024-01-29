@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/model/models.dart';
@@ -7,8 +8,30 @@ import '../../../../components/components.dart';
 import 'widgets/nutrition_info.dart';
 import 'widgets/nutrition_price.dart';
 
-class NutritionDetails extends StatelessWidget {
+class NutritionDetails extends StatefulWidget {
   const NutritionDetails({super.key});
+
+  @override
+  State<NutritionDetails> createState() => _NutritionDetailsState();
+}
+
+class _NutritionDetailsState extends State<NutritionDetails> {
+  late NutritionData info;
+  late int index;
+
+  @override
+  void initState() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null) {
+      index = argumentData[0]['index'];
+      info = argumentData[1]['info'];
+      setState(() {
+        info;
+        index;
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +55,7 @@ class NutritionDetails extends StatelessWidget {
                     SingleLabelItem(
                       title: t.translate("ingredients"),
                       asset: AppAssets.icRecipe,
-                      subTitle:
-                          'Chicken meal, brown rice, peas, barley, chicken fat, etc.',
+                      subTitle: info.nutIngredients ?? "",
                     ),
                     ExpandableBox(
                       initiallyExpanded: true,
@@ -44,48 +66,47 @@ class NutritionDetails extends StatelessWidget {
                         ),
                         MedicalInfo(
                           title: t.translate("protein"),
-                          description: "28g",
+                          description: info.nutProtein ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("fat"),
-                          description: "12g",
+                          description: info.nutFat ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("carbohydrates"),
-                          description: "48g",
+                          description: info.nutCarbohydrate ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("fiber"),
-                          description: "5g",
+                          description: info.nutFiber ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("calories"),
-                          description: "350 kcal",
+                          description: info.nutCalories ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("vitamins"),
-                          description:
-                              " Vitamin A (10,000 IU),Vitamin C (30mg)",
+                          description: info.nutVitamins ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("minerals"),
-                          description: "Calcium (1.2%), Phosphorus (1%)",
+                          description: info.nutMinerals ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("omega_three"),
-                          description: "0.5g",
+                          description: info.nutOmega3Fatty ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("omega_six"),
-                          description: "2.5g",
+                          description: info.nutOmega6Fatty ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("guidelines"),
-                          description: "lorem ipusm",
+                          description: info.nutFeedingGuidelines ?? "",
                         ),
                         MedicalInfo(
                           title: t.translate("special_feature"),
-                          description: "Contains DHA for brain development",
+                          description: info.nutSpecialFeatures ?? "",
                         ),
                       ],
                       title: t.translate("other_nutrition_detail"),

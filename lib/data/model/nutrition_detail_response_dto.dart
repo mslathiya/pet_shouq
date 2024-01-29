@@ -61,7 +61,7 @@ class NutritionData {
   String? nutSmallBreedPuppy;
   String? nutLargeBreedPuppy;
   String? nutSpecialFeatures;
-  double? nutPrice;
+  String? nutPrice;
   PetItemBean? pet;
 
   NutritionData({
@@ -114,7 +114,7 @@ class NutritionData {
         nutSmallBreedPuppy: json["nut_small_breed_puppy"],
         nutLargeBreedPuppy: json["nut_large_breed_puppy"],
         nutSpecialFeatures: json["nut_special_features"],
-        nutPrice: json["nut_price"]?.toDouble(),
+        nutPrice: json["nut_price"],
         pet: json["pet"] == null ? null : PetItemBean.fromJson(json["pet"]),
       );
 

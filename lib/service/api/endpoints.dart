@@ -33,4 +33,12 @@ class Endpoints {
   static const nutritionDetailGet = "api/parent/pet/nutrition/detail/";
   static const addNutritionPost = "api/parent/pet/nutrition/add";
   static const removeNutritionDelete = "api/parent/pet/nutrition/delete/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Pet Medication                               */
+  /* -------------------------------------------------------------------------- */
+  static const medicationListGet = "api/parent/pet/medication/list/";
+  static const medicationDetailGet = "api/parent/pet/medication/detail/";
+  static const addMedicationPost = "api/parent/pet/medication/add";
+  static const removeMedicationDelete = "api/parent/pet/medication/delete/";
 }

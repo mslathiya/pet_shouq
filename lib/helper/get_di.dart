@@ -61,6 +61,12 @@ Future<void> init() async {
       apiService: Get.find(),
     ),
   );
+  Get.lazyPut(
+    () => MedicationRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers

@@ -4,17 +4,20 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+import '../../data/model/models.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
 
 class MedicationListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
   final int itemIndex;
+  final MedicationBean itemBean;
 
   const MedicationListItem({
     super.key,
     required this.onViewDetail,
     required this.itemIndex,
+    required this.itemBean,
   });
 
   @override

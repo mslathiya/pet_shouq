@@ -4,3 +4,4 @@ export "auth_controller.dart";
 export 'edit_parent_profile_controller.dart';
 export "pet_controller.dart";
 export "nutrition_controller.dart";
+export "medication_controller.dart";

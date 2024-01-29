@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide FormData;
-import 'package:pet_shouq/helper/helpers.dart';
 
 import '../data/model/models.dart';
+import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'auth_controller.dart';
@@ -147,7 +147,7 @@ class NutritionController extends GetxController implements GetxService {
   Future<NutritionData?> getNutritionDetail(int nutritionId) async {
     _removingNutrition = true;
     update();
-    final result = await repository.getNutritionDetail(petId);
+    final result = await repository.getNutritionDetail(nutritionId);
     NutritionData? information;
     result.fold<void>(
       (failure) {
@@ -254,6 +254,31 @@ class NutritionController extends GetxController implements GetxService {
         borderRadius: BorderRadius.circular(10),
       ),
     );
+  }
+
+  void editNutritionInfo() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null && argumentData[0]['mode'] == "Edit") {
+      NutritionData info = argumentData[1]['info'];
+      _nutFoodName.text = info.nutFoodName ?? "";
+      _nutBrand.text = info.nutBrand ?? "";
+      _nutLifeStage.text = info.nutLifeStage ?? "";
+      _nutSpecies.text = info.nutSpecies ?? "";
+      _nutIngredients.text = info.nutIngredients ?? "";
+      _nutProtein.text = info.nutProtein ?? "";
+      _nutFat.text = info.nutFat ?? "";
+      _nutCarbohydrate.text = info.nutCarbohydrate ?? "";
+      _nutFiber.text = info.nutFiber ?? "";
+      _nutCalories.text = info.nutCalories ?? "";
+      _nutVitamins.text = info.nutVitamins ?? "";
+      _nutMinerals.text = info.nutMinerals ?? "";
+      _nutOmegaThreeFatty.text = info.nutOmega3Fatty ?? "";
+      _nutOmegaSixFatty.text = info.nutOmega6Fatty ?? "";
+      _nutFeedingGuidelines.text = info.nutFeedingGuidelines ?? "";
+      _nutSpecialFeatures.text = info.nutSpecialFeatures ?? "";
+      _nutPrice.text = info.nutPrice.toString();
+      _nutFoodType = info.nutFoodType ?? "";
+    }
   }
 
   void saveNutritionInfo() async {
