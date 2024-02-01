@@ -372,7 +372,7 @@ class PetController extends GetxController implements GetxService {
   /*                                   Get Pet                                  */
   /* -------------------------------------------------------------------------- */
 
-  void resetRequest() {
+  Future<void> resetRequest() async {
     _loadingPetList = true;
     _currentPage = 1;
     getPetList();
@@ -389,7 +389,7 @@ class PetController extends GetxController implements GetxService {
     });
   }
 
-  void getPetList() async {
+  Future<void> getPetList() async {
     _loadingPetList = true;
     update();
     final requestParams = {

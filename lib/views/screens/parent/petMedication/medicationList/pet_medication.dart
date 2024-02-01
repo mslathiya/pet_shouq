@@ -39,37 +39,41 @@ class _PetMedicationState extends State<PetMedication> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: ListView.builder(
-                        controller: controller.controller,
-                        itemCount: controller.medicationListArray.length + 1,
-                        padding: EdgeInsets.only(
-                          top: 15.h,
-                          bottom: 15.h,
-                        ),
-                        itemBuilder: (context, index) {
-                          if (index < controller.medicationListArray.length) {
-                            final item = controller.medicationListArray[index];
-                            return MedicationListItem(
-                              itemBean: item,
-                              onViewDetail: () {
-                                Navigator.pushNamed(
-                                    context, petMedicationDetail);
-                              },
-                              itemIndex: index,
-                            );
-                          }
+                      child: RefreshIndicator(
+                        onRefresh: () => controller.getMedicationList(),
+                        child: ListView.builder(
+                          controller: controller.controller,
+                          itemCount: controller.medicationListArray.length + 1,
+                          padding: EdgeInsets.only(
+                            top: 15.h,
+                            bottom: 15.h,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (index < controller.medicationListArray.length) {
+                              final item =
+                                  controller.medicationListArray[index];
+                              return MedicationListItem(
+                                itemBean: item,
+                                onViewDetail: () {
+                                  Navigator.pushNamed(
+                                      context, petMedicationDetail);
+                                },
+                                itemIndex: index,
+                              );
+                            }
 
-                          return Visibility(
-                            child: controller.haveMoreResult
-                                ? const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  )
-                                : const SizedBox(),
-                          );
-                        },
+                            return Visibility(
+                              child: controller.haveMoreResult
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            );
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -122,8 +126,8 @@ class _PetMedicationState extends State<PetMedication> {
               if (controller.currentPage == 1 &&
                   controller.medicationListArray.isEmpty)
                 NoResultList(
-                  header: "no_nutrition_found".tr,
-                  subHeader: "add_nutrition_msg".tr,
+                  header: "no_medication_found".tr,
+                  subHeader: "add_medication_msg".tr,
                 ),
             ],
           );

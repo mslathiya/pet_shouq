@@ -1,13 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 
 class NutritionInfo extends StatelessWidget {
   const NutritionInfo({
     super.key,
+    required this.info,
   });
+  final NutritionData info;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +70,7 @@ class NutritionInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Premium Puppy Chow',
+                    info.nutFoodName ?? "",
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -75,17 +79,17 @@ class NutritionInfo extends StatelessWidget {
                         .headlineMedium
                         ?.copyWith(fontSize: 14.sp),
                   ),
-                  const LabelWithIcon(
+                  LabelWithIcon(
                     asset: AppAssets.icBestProduct,
-                    value: 'ABC Pet Foods',
+                    value: info.nutBrand ?? "",
                     padding: EdgeInsets.zero,
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  const LabelWithIcon(
+                  LabelWithIcon(
                     asset: AppAssets.icBreedType,
-                    value: 'Puppy',
+                    value: info.nutFoodName ?? "",
                     padding: EdgeInsets.zero,
                   ),
                   SizedBox(
@@ -99,9 +103,9 @@ class NutritionInfo extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 70.sp,
-                        child: const LabelWithIcon(
+                        child: LabelWithIcon(
                           asset: AppAssets.icDocBag,
-                          value: 'Dog',
+                          value: info.nutLifeStage ?? "",
                           padding: EdgeInsets.zero,
                         ),
                       ),
@@ -110,9 +114,9 @@ class NutritionInfo extends StatelessWidget {
                       ),
                       SizedBox(
                         width: 160.sp,
-                        child: const LabelWithIcon(
+                        child: LabelWithIcon(
                           asset: AppAssets.icFoodType,
-                          value: 'Dry Kibble',
+                          value: info.nutFoodType ?? "",
                           padding: EdgeInsets.zero,
                         ),
                       )

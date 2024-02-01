@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
+import '../../../../controller/controllers.dart';
 import '../../../components/components.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -15,12 +17,11 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_change_password"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_change_password".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -38,45 +39,94 @@ class _ChangePasswordState extends State<ChangePassword> {
                       right: 12.w,
                       top: 15.h,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        PasswordField(
-                          headerLabel: t.translate("lbl_old_password"),
-                          inputHint: t.translate("hint_old_password"),
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        PasswordField(
-                          headerLabel: t.translate("lbl_new_password"),
-                          inputHint: t.translate("hint_new_password"),
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        PasswordField(
-                          headerLabel: t.translate("lbl_confirm_password"),
-                          inputHint: t.translate("hint_confirm_password"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: ButtonView(
-                            onTap: () => Navigator.pop(
-                              context,
+                    child: GetBuilder<AuthController>(
+                      builder: (controller) => Form(
+                        key: controller.formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            PasswordField(
+                              headerLabel: "lbl_old_password".tr,
+                              inputHint: "hint_old_password".tr,
+                              editingController: controller.oldPassword,
+                              validator: MultiValidator(
+                                [
+                                  RequiredValidator(
+                                    errorText:
+                                        "dynamic_field_required".trParams(
+                                      {"field": "lbl_old_password".tr},
+                                    ),
+                                  ),
+                                ],
+                              ).call,
+                              inputError: controller.oldPasswordError,
                             ),
-                            buttonTitle: t.translate("btn_submit"),
-                            width: width - 20,
-                            buttonStyle: TextStyle(
-                              fontSize: 8.sp,
+                            SizedBox(
+                              height: 10.h,
                             ),
-                          ),
+                            PasswordField(
+                              headerLabel: "lbl_new_password".tr,
+                              inputHint: "hint_new_password".tr,
+                              editingController: controller.newPassword,
+                              validator: MultiValidator(
+                                [
+                                  RequiredValidator(
+                                    errorText:
+                                        "dynamic_field_required".trParams(
+                                      {"field": "lbl_new_password".tr},
+                                    ),
+                                  ),
+                                ],
+                              ).call,
+                              inputError: controller.newPasswordError,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            PasswordField(
+                              headerLabel: "lbl_confirm_password".tr,
+                              inputHint: "hint_confirm_password".tr,
+                              editingController: controller.confirmPassword,
+                              validator: (String? value) {
+                                if (value == null) {
+                                  return null;
+                                }
+                                if (value.isEmpty) {
+                                  return "dynamic_field_required".trParams(
+                                    {"field": "lbl_confirm_password".tr},
+                                  );
+                                } else if (value.trim() !=
+                                    controller.newPassword.text) {
+                                  return "password_not_matched".tr;
+                                }
+                                return null;
+                              },
+                              inputError: controller.confirmPasswordError,
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ButtonView(
+                                isLoading: controller.isLoading,
+                                onTap: () {
+                                  if (controller.formKey.currentState!
+                                      .validate()) {
+                                    controller.changePassword();
+                                  }
+                                },
+                                buttonTitle: "btn_submit".tr,
+                                width: width - 20,
+                                buttonStyle: TextStyle(
+                                  fontSize: 8.sp,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

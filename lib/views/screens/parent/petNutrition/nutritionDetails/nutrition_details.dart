@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
@@ -35,10 +36,9 @@ class _NutritionDetailsState extends State<NutritionDetails> {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_nutrition_details"),
+        title: "screen_nutrition_details".tr,
         onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
@@ -51,9 +51,16 @@ class _NutritionDetailsState extends State<NutritionDetails> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const NutritionInfo(),
+                    NutritionInfo(
+                      info: info,
+                    ),
                     SingleLabelItem(
-                      title: t.translate("ingredients"),
+                      margins: EdgeInsets.only(
+                        left: 10.w,
+                        right: 10.w,
+                        bottom: 10.h,
+                      ),
+                      title: "ingredients".tr,
                       asset: AppAssets.icRecipe,
                       subTitle: info.nutIngredients ?? "",
                     ),
@@ -61,66 +68,68 @@ class _NutritionDetailsState extends State<NutritionDetails> {
                       initiallyExpanded: true,
                       infoList: [
                         MedicalInfo(
-                          title: t.translate("nutrition_content"),
+                          title: "nutrition_content".tr,
                           description: "20g",
                         ),
                         MedicalInfo(
-                          title: t.translate("protein"),
+                          title: "protein".tr,
                           description: info.nutProtein ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("fat"),
+                          title: "fat".tr,
                           description: info.nutFat ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("carbohydrates"),
+                          title: "carbohydrates".tr,
                           description: info.nutCarbohydrate ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("fiber"),
+                          title: "fiber".tr,
                           description: info.nutFiber ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("calories"),
+                          title: "calories".tr,
                           description: info.nutCalories ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("vitamins"),
+                          title: "vitamins".tr,
                           description: info.nutVitamins ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("minerals"),
+                          title: "minerals".tr,
                           description: info.nutMinerals ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("omega_three"),
+                          title: "omega_three".tr,
                           description: info.nutOmega3Fatty ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("omega_six"),
+                          title: "omega_six".tr,
                           description: info.nutOmega6Fatty ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("guidelines"),
+                          title: "guidelines".tr,
                           description: info.nutFeedingGuidelines ?? "",
                         ),
                         MedicalInfo(
-                          title: t.translate("special_feature"),
+                          title: "special_feature".tr,
                           description: info.nutSpecialFeatures ?? "",
                         ),
                       ],
-                      title: t.translate("other_nutrition_detail"),
+                      title: "other_nutrition_detail".tr,
                     ),
                   ],
                 ),
               ),
             ),
             NutritionPrice(
-              t: t,
-              onPress: () => Navigator.pushNamed(
-                context,
-                petAddNutrition,
-              ),
+              info: info,
+              onPress: () => Get.offNamed(petAddNutrition, arguments: [
+                {
+                  "mode": "Edit",
+                },
+                {"info": info}
+              ]),
             )
           ],
         ),

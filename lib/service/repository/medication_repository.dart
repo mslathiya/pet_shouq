@@ -14,11 +14,15 @@ abstract class MedicationRepository {
   Future<Either<Failure, GeneralBean>> addMedication(
     FormData formFields,
   );
+  Future<Either<Failure, GeneralBean>> updateMedication(
+    int medicationId,
+    FormData formFields,
+  );
   Future<Either<Failure, NutritionDetailResponseBean>> getMedicationDetail(
-    int petId,
+    int medicationId,
   );
   Future<Either<Failure, GeneralBean>> removeMedication(
-    int petId,
+    int medicationId,
   );
 }
 
@@ -45,6 +49,62 @@ class MedicationRepositoryImpl extends MedicationRepository {
           var response = result.data;
 
           bean = MedicationListResponseBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(422, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(422, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, NutritionDetailResponseBean>> getMedicationDetail(
+      int medicationId) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late NutritionDetailResponseBean bean;
+        var result = await apiService.get(
+          "${Endpoints.medicationDetailGet}$medicationId",
+        );
+        if (result.statusCode == 200) {
+          var response = result.data;
+
+          bean = NutritionDetailResponseBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(422, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(422, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, GeneralBean>> removeMedication(
+      int medicationId) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.delete(
+          "${Endpoints.removeMedicationDelete}$medicationId",
+        );
+        if (result.statusCode == 200) {
+          var response = result.data;
+
+          bean = GeneralBean.fromJson(response);
           if (bean.success == true) {
             return Right(bean);
           } else {
@@ -88,52 +148,25 @@ class MedicationRepositoryImpl extends MedicationRepository {
   }
 
   @override
-  Future<Either<Failure, NutritionDetailResponseBean>> getMedicationDetail(
-      int petId) async {
-    if (await networkInfo.isConnected) {
-      try {
-        late NutritionDetailResponseBean bean;
-        var result = await apiService.get(
-          "${Endpoints.medicationDetailGet}$petId",
-        );
-        if (result.statusCode == 200) {
-          var response = result.data;
-
-          bean = NutritionDetailResponseBean.fromJson(response);
-          if (bean.success == true) {
-            return Right(bean);
-          } else {
-            return Left(Failure(422, bean.message ?? 'something_wrong'.tr));
-          }
-        }
-        return Left(Failure(422, 'something_wrong'.tr));
-      } catch (e) {
-        return Left(ApiException.handle(e).failure);
-      }
-    } else {
-      return Left(DataSource.noInternetConnection.getFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, GeneralBean>> removeMedication(int petId) async {
+  Future<Either<Failure, GeneralBean>> updateMedication(
+      int medicationId, FormData formFields) async {
     if (await networkInfo.isConnected) {
       try {
         late GeneralBean bean;
-        var result = await apiService.delete(
-          "${Endpoints.removeMedicationDelete}$petId",
-        );
+        var result = await apiService.post(
+            '${Endpoints.updateMedicationPost}$medicationId',
+            data: formFields,
+            options: Options(headers: {"Content-Type": "multipart/form-data"}));
         if (result.statusCode == 200) {
           var response = result.data;
-
           bean = GeneralBean.fromJson(response);
           if (bean.success == true) {
             return Right(bean);
           } else {
-            return Left(Failure(422, bean.message ?? 'something_wrong'.tr));
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
           }
         }
-        return Left(Failure(422, 'something_wrong'.tr));
+        return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
         return Left(ApiException.handle(e).failure);
       }

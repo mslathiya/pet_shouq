@@ -14,6 +14,10 @@ abstract class NutritionRepository {
   Future<Either<Failure, GeneralBean>> addNutrition(
     FormData formFields,
   );
+  Future<Either<Failure, GeneralBean>> editNutrition(
+    int petId,
+    FormData formFields,
+  );
   Future<Either<Failure, NutritionDetailResponseBean>> getNutritionDetail(
     int petId,
   );
@@ -133,6 +137,34 @@ class NutritionRepositoryImpl extends NutritionRepository {
           }
         }
         return Left(Failure(422, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, GeneralBean>> editNutrition(
+      int petId, FormData formFields) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.post(
+            '${Endpoints.updateNutritionPost}$petId',
+            data: formFields,
+            options: Options(headers: {"Content-Type": "multipart/form-data"}));
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = GeneralBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
         return Left(ApiException.handle(e).failure);
       }

@@ -17,6 +17,7 @@ class Endpoints {
   static const forgotPasswordPost = "password/forgot";
   static const profileGet = "api/profile";
   static const updateParentProfilePost = "api/parent/update/profile";
+  static const changePasswordPost = "api/change-password";
   /* -------------------------------------------------------------------------- */
   /*                                     Pet                                    */
   /* -------------------------------------------------------------------------- */
@@ -32,6 +33,7 @@ class Endpoints {
   static const nutritionListGet = "api/parent/pet/nutrition/list/";
   static const nutritionDetailGet = "api/parent/pet/nutrition/detail/";
   static const addNutritionPost = "api/parent/pet/nutrition/add";
+  static const updateNutritionPost = "api/parent/pet/nutrition/update/";
   static const removeNutritionDelete = "api/parent/pet/nutrition/delete/";
 
   /* -------------------------------------------------------------------------- */
@@ -40,5 +42,6 @@ class Endpoints {
   static const medicationListGet = "api/parent/pet/medication/list/";
   static const medicationDetailGet = "api/parent/pet/medication/detail/";
   static const addMedicationPost = "api/parent/pet/medication/add";
+  static const updateMedicationPost = "api/parent/pet/medication/update/";
   static const removeMedicationDelete = "api/parent/pet/medication/delete/";
 }

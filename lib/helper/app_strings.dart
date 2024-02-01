@@ -388,7 +388,10 @@ class AppStrings extends Translations {
           "no_pet_found": "No Pet's found",
           "add_nutrition_msg":
               "Add new nutrition/feeding by click on below button!",
-          "no_nutrition_found": "No nutrition/feeding data found"
+          "no_nutrition_found": "No nutrition/feeding data found",
+          "add_medication_msg": "Add new medication by click on below button!",
+          "no_medication_found": "No medication data found",
+          "password_not_matched": "Password is not matched"
         },
       };
 }

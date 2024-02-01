@@ -46,57 +46,60 @@ class _ParentMyPetsState extends State<ParentMyPets> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: ListView.builder(
-                        controller: controller.controller,
-                        itemCount: controller.petListArray.length + 1,
-                        padding: EdgeInsets.only(
-                          top: 15.h,
-                          bottom: 15.h,
-                        ),
-                        itemBuilder: (context, index) {
-                          if (index < controller.petListArray.length) {
-                            final item = controller.petListArray[index];
-                            return MyPetItem(
-                              itemBean: item,
-                              itemIndex: index,
-                              onDeletePet: () => _dialogBuilderDeleteItem(
-                                () => controller.deletePet(item.petId!),
-                              ),
-                              onViewPet: () async {
-                                final response =
-                                    await controller.getPetDetails(item.petId!);
+                      child: RefreshIndicator(
+                        onRefresh: () => controller.resetRequest(),
+                        child: ListView.builder(
+                          controller: controller.controller,
+                          itemCount: controller.petListArray.length + 1,
+                          padding: EdgeInsets.only(
+                            top: 15.h,
+                            bottom: 15.h,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (index < controller.petListArray.length) {
+                              final item = controller.petListArray[index];
+                              return MyPetItem(
+                                itemBean: item,
+                                itemIndex: index,
+                                onDeletePet: () => _dialogBuilderDeleteItem(
+                                  () => controller.deletePet(item.petId!),
+                                ),
+                                onViewPet: () async {
+                                  final response = await controller
+                                      .getPetDetails(item.petId!);
 
-                                Get.toNamed(petDetails, arguments: [
-                                  {"index": index},
-                                  {"info": response}
-                                ]);
-                              },
-                              onEditPet: () async {
-                                final response =
-                                    await controller.getPetDetails(item.petId!);
-                                if (response != null) {
-                                  Get.toNamed(addPet, arguments: [
-                                    {
-                                      "mode": "Edit",
-                                    },
+                                  Get.toNamed(petDetails, arguments: [
+                                    {"index": index},
                                     {"info": response}
                                   ]);
-                                }
-                              },
-                            );
-                          }
+                                },
+                                onEditPet: () async {
+                                  final response = await controller
+                                      .getPetDetails(item.petId!);
+                                  if (response != null) {
+                                    Get.toNamed(addPet, arguments: [
+                                      {
+                                        "mode": "Edit",
+                                      },
+                                      {"info": response}
+                                    ]);
+                                  }
+                                },
+                              );
+                            }
 
-                          return Visibility(
-                            child: controller.haveMoreResult
-                                ? const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  )
-                                : const SizedBox(),
-                          );
-                        },
+                            return Visibility(
+                              child: controller.haveMoreResult
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            );
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(

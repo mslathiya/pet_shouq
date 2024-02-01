@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_cropper/image_cropper.dart';
+import 'package:intl/intl.dart';
 import 'package:pet_shouq/helper/helpers.dart';
 
 import '../data/model/models.dart';
@@ -26,7 +27,6 @@ class EditParentProfileController extends GetxController
   final TextEditingController _lastName = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
-  final TextEditingController _age = TextEditingController();
   final TextEditingController _addressOne = TextEditingController();
   final TextEditingController _addressTwo = TextEditingController();
   final TextEditingController _alternatePhone = TextEditingController();
@@ -37,6 +37,8 @@ class EditParentProfileController extends GetxController
   String _gender = '';
   String? _pickedCode;
   String? _pickedCodeSecondary;
+  String _birthDate = '';
+  String _age = '';
 
   List<String> genders = ["Male", "Female", "LGBTQIA+"];
 
@@ -44,6 +46,8 @@ class EditParentProfileController extends GetxController
   String get gender => _gender;
   String? get pickedCode => _pickedCode;
   String? get pickedCodeSecondary => _pickedCodeSecondary;
+  String get birthDate => _birthDate;
+  String get age => _age;
 
   TextEditingController get city => _city;
   TextEditingController get province => _province;
@@ -53,7 +57,6 @@ class EditParentProfileController extends GetxController
   TextEditingController get lastName => _lastName;
   TextEditingController get email => _email;
   TextEditingController get phoneNumber => _phoneNumber;
-  TextEditingController get age => _age;
   TextEditingController get addressOne => _addressOne;
   TextEditingController get addressTwo => _addressTwo;
   TextEditingController get alternatePhone => _alternatePhone;
@@ -66,13 +69,24 @@ class EditParentProfileController extends GetxController
 
   @override
   void onInit() {
+    updateInfo();
+    super.onInit();
+  }
+
+  void updateInfo() {
     UserBean data = Get.find<AuthController>().userData.value;
     Parent? uParent = data.parent;
+
+    DateTime bDate = uParent?.parentDob ?? DateTime.now();
+
     _firstName.text = uParent?.parentFname ?? "";
     _lastName.text = uParent?.parentLname ?? "";
     _email.text = data.userEmail ?? "";
     _phoneNumber.text = uParent?.parentContactNumber ?? "";
-    _age.text = uParent?.parentAge.toString() ?? "";
+    _birthDate = DateFormat('yyyy-MM-dd').format(
+      bDate,
+    );
+    _age = (DateTime.now().year - bDate.year).toString();
     _addressOne.text = uParent?.parentAddress ?? "";
     _addressTwo.text = uParent?.parentAddressSecondLine ?? "";
     _displayName.text = uParent?.parentDisplayName ?? "";
@@ -87,7 +101,7 @@ class EditParentProfileController extends GetxController
         _pickedCode = code.startsWith("+") ? code : "+$code";
       }
       String? codeSecondary = uParent.parentSecondaryContactCountryCode ?? "";
-      if (codeSecondary != null && codeSecondary != '') {
+      if (codeSecondary != '') {
         _pickedCodeSecondary =
             codeSecondary.startsWith("+") ? codeSecondary : "+$code";
       }
@@ -96,7 +110,6 @@ class EditParentProfileController extends GetxController
     if (data.profilePicture != null && data.profilePicture != '') {
       _imagePath = data.fullProfileImageUrl ?? "";
     }
-    super.onInit();
   }
 
   void onPickImage(CroppedFile file) {
@@ -165,6 +178,25 @@ class EditParentProfileController extends GetxController
     );
   }
 
+  void openDatePicker() async {
+    final DateTime? picked = await showDatePicker(
+      context: Get.context!,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(
+        DateTime.now().year - 60,
+        DateTime.now().month,
+        DateTime.now().day,
+      ),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      _birthDate = DateFormat('yyyy-MM-dd').format(picked);
+      _age = (DateTime.now().year - picked.year).toString();
+      update();
+    }
+  }
+
   void updateParentProfile() async {
     isLoading = true;
     update();
@@ -176,7 +208,7 @@ class EditParentProfileController extends GetxController
       "parent_contact_number": phoneNumber.text,
       "parent_contact_country_code": pickedCode,
       "parent_sex": gender,
-      "parent_age": age.text,
+      "parent_dob": birthDate,
       "parent_address": addressOne.text,
       "parent_address_second_line": addressTwo.text,
       "parent_city": city.text,
@@ -192,7 +224,6 @@ class EditParentProfileController extends GetxController
     if (imagePath != null &&
         imagePath != '' &&
         !imagePath.toString().hasValidUrl()) {
-      AppLog.e("Received ");
       fData.files.add(
         MapEntry(
           "profile_picture",
@@ -205,44 +236,44 @@ class EditParentProfileController extends GetxController
 
     final result = await repository.updateParentProfile(fData);
 
-    result.fold<void>((failure) {
-      isLoading = false;
-      update();
-      Get.snackbar(
-        "error_in_request".tr,
-        failure.message,
-        backgroundColor: AppColors.redColor,
-        colorText: AppColors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }, (success) {
-      isLoading = false;
-      update();
+    result.fold<void>(
+      (failure) {
+        isLoading = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          failure.message,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      },
+      (success) {
+        isLoading = false;
+        update();
 
-      Get.snackbar(
-        "congratulations".tr,
-        success.message ?? "",
-        backgroundColor: AppColors.greenColor,
-        colorText: AppColors.white,
-        snackPosition: SnackPosition.BOTTOM,
-        padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
-        icon: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            MaterialIcons.done_all,
-            size: 24.sp,
-            color: AppColors.white,
+        Get.snackbar(
+          "congratulations".tr,
+          success.message ?? "",
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
+          icon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              MaterialIcons.done_all,
+              size: 24.sp,
+              color: AppColors.white,
+            ),
           ),
-        ),
-        borderRadius: 5.sp,
-      );
-      if (success.data != null) {
-        Get.find<AuthController>().updateProfileData(success.data!);
-      }
-      Future.delayed(
-        const Duration(seconds: 3),
-        () {},
-      );
-    });
+          borderRadius: 5.sp,
+        );
+        if (success.data != null) {
+          Get.find<AuthController>().updateProfileData(success.data!);
+        }
+        Get.back(closeOverlays: true);
+      },
+    );
   }
 }

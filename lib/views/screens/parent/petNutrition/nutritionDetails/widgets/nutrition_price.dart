@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../../config/config.dart';
+import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 
 class NutritionPrice extends StatelessWidget {
   const NutritionPrice({
     super.key,
-    required this.t,
     required this.onPress,
+    required this.info,
   });
 
   final VoidCallback onPress;
-
-  final ApplicationLocalizations t;
-
+  final NutritionData info;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +35,7 @@ class NutritionPrice extends StatelessWidget {
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-              text: '\$1.50\n',
+              text: '\$${info.nutPrice}\n',
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
                     fontSize: 25.sp,
                     fontWeight: FontWeight.w900,
@@ -45,7 +44,7 @@ class NutritionPrice extends StatelessWidget {
                   ),
               children: [
                 TextSpan(
-                  text: t.translate("per_pound"),
+                  text: "per_pound".tr,
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
                         fontSize: 12.sp,
                         color: AppColors.secondary,
@@ -61,7 +60,7 @@ class NutritionPrice extends StatelessWidget {
             alignment: Alignment.center,
             child: ButtonView(
               onTap: onPress,
-              buttonTitle: t.translate("edit_details"),
+              buttonTitle: "edit_details".tr,
               width: 180.w,
               buttonStyle: TextStyle(
                 fontSize: 7.sp,

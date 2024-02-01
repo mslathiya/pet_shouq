@@ -21,6 +21,10 @@ abstract class AuthRepository {
   Future<Either<Failure, UserProfileBean>> updateParentProfile(
     FormData formFields,
   );
+
+  Future<Either<Failure, ChangePasswordResponseBean>> changePassword(
+    FormData formFields,
+  );
 }
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -157,6 +161,36 @@ class AuthRepositoryImpl extends AuthRepository {
         }
         return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
+        e.printError();
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ChangePasswordResponseBean>> changePassword(
+      FormData formFields) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late ChangePasswordResponseBean bean;
+        var result = await apiService.post(
+          Endpoints.changePasswordPost,
+          data: formFields,
+        );
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = ChangePasswordResponseBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        e.printError();
         return Left(ApiException.handle(e).failure);
       }
     } else {

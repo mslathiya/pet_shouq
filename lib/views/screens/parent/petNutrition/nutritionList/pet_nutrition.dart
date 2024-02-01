@@ -39,57 +39,60 @@ class _PetNutritionState extends State<PetNutrition> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: ListView.builder(
-                        controller: controller.controller,
-                        itemCount: controller.nutritionListArray.length + 1,
-                        padding: EdgeInsets.only(
-                          top: 15.h,
-                          bottom: 15.h,
-                        ),
-                        itemBuilder: (context, index) {
-                          if (index < controller.nutritionListArray.length) {
-                            final item = controller.nutritionListArray[index];
-                            return NutritionListItem(
-                              itemBean: item,
-                              itemIndex: index,
-                              onEditItem: () async {
-                                final response = await controller
-                                    .getNutritionDetail(item.nutId!);
-                                if (response != null) {
-                                  Get.toNamed(petAddNutrition, arguments: [
-                                    {
-                                      "mode": "Edit",
-                                    },
+                      child: RefreshIndicator(
+                        onRefresh: () => controller.getNutritionList(),
+                        child: ListView.builder(
+                          controller: controller.controller,
+                          itemCount: controller.nutritionListArray.length + 1,
+                          padding: EdgeInsets.only(
+                            top: 15.h,
+                            bottom: 15.h,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (index < controller.nutritionListArray.length) {
+                              final item = controller.nutritionListArray[index];
+                              return NutritionListItem(
+                                itemBean: item,
+                                itemIndex: index,
+                                onEditItem: () async {
+                                  final response = await controller
+                                      .getNutritionDetail(item.nutId!);
+                                  if (response != null) {
+                                    Get.toNamed(petAddNutrition, arguments: [
+                                      {
+                                        "mode": "Edit",
+                                      },
+                                      {"info": response}
+                                    ]);
+                                  }
+                                },
+                                onDeleteItem: () => _dialogBuilderDeleteItem(
+                                  () => controller.deleteNutrition(item.nutId!),
+                                ),
+                                onViewDetail: () async {
+                                  final response = await controller
+                                      .getNutritionDetail(item.nutId!);
+
+                                  Get.toNamed(petNutritionDetail, arguments: [
+                                    {"index": index},
                                     {"info": response}
                                   ]);
-                                }
-                              },
-                              onDeleteItem: () => _dialogBuilderDeleteItem(
-                                () => controller.deleteNutrition(item.nutId!),
-                              ),
-                              onViewDetail: () async {
-                                final response = await controller
-                                    .getNutritionDetail(item.nutId!);
+                                },
+                              );
+                            }
 
-                                Get.toNamed(petNutritionDetail, arguments: [
-                                  {"index": index},
-                                  {"info": response}
-                                ]);
-                              },
+                            return Visibility(
+                              child: controller.haveMoreResult
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    )
+                                  : const SizedBox(),
                             );
-                          }
-
-                          return Visibility(
-                            child: controller.haveMoreResult
-                                ? const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  )
-                                : const SizedBox(),
-                          );
-                        },
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(

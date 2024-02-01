@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,11 @@ class EditParentProfile extends StatefulWidget {
 }
 
 class _EditParentProfileState extends State<EditParentProfile> {
-  int selectedOption = 1;
+  @override
+  void initState() {
+    Get.find<EditParentProfileController>().updateInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,37 +133,67 @@ class _EditParentProfileState extends State<EditParentProfile> {
                               SizedBox(
                                 height: 15.h,
                               ),
+                              SelectorField(
+                                headerWidget: InputHeader(
+                                  headerLabel: "lbl_gender".tr,
+                                ),
+                                inputHint: controller.gender != ''
+                                    ? controller.gender
+                                    : "hint_gender".tr,
+                                suffixIcon: Icon(
+                                  Entypo.chevron_down,
+                                  size: 26.sp,
+                                  color: AppColors.hintColor,
+                                ),
+                                onSelectItem: () =>
+                                    controller.openGenderPicker(),
+                              ),
+                              SizedBox(
+                                height: 15.h,
+                              ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Expanded(
+                                    flex: 7,
                                     child: SelectorField(
                                       headerWidget: InputHeader(
-                                        headerLabel: "lbl_gender".tr,
+                                        headerLabel: "lbl_birth_date".tr,
                                       ),
-                                      inputHint: controller.gender != ''
-                                          ? controller.gender
-                                          : "hint_gender".tr,
-                                      suffixIcon: Icon(
-                                        Entypo.chevron_down,
-                                        size: 26.sp,
-                                        color: AppColors.hintColor,
+                                      inputHint: controller.birthDate != ''
+                                          ? controller.birthDate
+                                          : "hint_birth_date".tr,
+                                      suffixIcon: SizedBox(
+                                        width: 24.w,
+                                        height: 24.h,
+                                        child: SvgPicture.asset(
+                                          AppAssets.icCalendar,
+                                          height: 18.sp,
+                                          width: 18.sp,
+                                          colorFilter: ColorFilter.mode(
+                                            AppColors.hintColor,
+                                            BlendMode.srcIn,
+                                          ),
+                                        ),
                                       ),
                                       onSelectItem: () =>
-                                          controller.openGenderPicker(),
+                                          controller.openDatePicker(),
                                     ),
                                   ),
                                   SizedBox(
                                     width: 10.w,
                                   ),
                                   Expanded(
-                                    child: InputField(
+                                    flex: 3,
+                                    child: SelectorField(
                                       headerWidget: InputHeader(
                                         headerLabel: "lbl_age".tr,
                                       ),
-                                      inputHint: "hint_age".tr,
-                                      editingController: controller.age,
+                                      inputHint: controller.age != ''
+                                          ? "${controller.age} ${"years".tr}"
+                                          : "lbl_age".tr,
+                                      onSelectItem: () {},
                                     ),
                                   )
                                 ],

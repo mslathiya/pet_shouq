@@ -13,6 +13,7 @@ import 'auth_controller.dart';
 class NutritionController extends GetxController implements GetxService {
   final NutritionRepositoryImpl repository;
   final int petId;
+  int nutritionId = -1;
   bool inEditMode = false;
   bool isLoading = false;
   /* -------------------------------------------------------------------------- */
@@ -103,7 +104,7 @@ class NutritionController extends GetxController implements GetxService {
     });
   }
 
-  void getNutritionList() async {
+  Future<void> getNutritionList() async {
     _loadingNutrition = true;
     _currentPage = 1;
     update();
@@ -259,7 +260,9 @@ class NutritionController extends GetxController implements GetxService {
   void editNutritionInfo() {
     dynamic argumentData = Get.arguments;
     if (argumentData != null && argumentData[0]['mode'] == "Edit") {
+      inEditMode = true;
       NutritionData info = argumentData[1]['info'];
+      nutritionId = info.nutId!;
       _nutFoodName.text = info.nutFoodName ?? "";
       _nutBrand.text = info.nutBrand ?? "";
       _nutLifeStage.text = info.nutLifeStage ?? "";
@@ -312,7 +315,7 @@ class NutritionController extends GetxController implements GetxService {
     dynamic result;
 
     if (inEditMode) {
-      // result = await repository.editPet(petId, fData);
+      result = await repository.editNutrition(nutritionId, fData);
     } else {
       result = await repository.addNutrition(fData);
     }

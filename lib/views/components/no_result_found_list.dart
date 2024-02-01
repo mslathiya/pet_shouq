@@ -22,7 +22,7 @@ class NoResultList extends StatelessWidget {
         width: 76,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +37,7 @@ class NoResultList extends StatelessWidget {
                   header,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 26.sp,
+                        fontSize: 23.sp,
                       ),
                 ),
                 SizedBox(
@@ -48,7 +48,7 @@ class NoResultList extends StatelessWidget {
                     subHeader ?? "",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                   )
               ],

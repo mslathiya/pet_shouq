@@ -30,11 +30,9 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    var t = ApplicationLocalizations.of(context)!;
-
     return Scaffold(
       appBar: TabHeader(
-        title: t.translate("tab_profile"),
+        title: "tab_profile".tr,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -62,7 +60,7 @@ class _ProfileState extends State<Profile> {
                   ? Column(
                       children: [
                         SingleLabelItem(
-                          title: t.translate("specialization"),
+                          title: "specialization".tr,
                           subTitle: "Surgery, Dermatology, Nutrition",
                           asset: AppAssets.icDoctor,
                         ),
@@ -91,8 +89,8 @@ class _ProfileState extends State<Profile> {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: () => _dialogBuilderLogout(context, t),
-                        buttonTitle: t.translate("btn_logout"),
+                        onTap: _dialogBuilderLogout,
+                        buttonTitle: "btn_logout".tr,
                         width: width * .45,
                         buttonStyle: TextStyle(
                           fontSize: 8.sp,
@@ -105,8 +103,8 @@ class _ProfileState extends State<Profile> {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: () => _dialogBuilderDeleteAccount(context, t),
-                        buttonTitle: t.translate("btn_delete_account"),
+                        onTap: _dialogBuilderDeleteAccount,
+                        buttonTitle: "btn_delete_account".tr,
                         width: width * .45,
                         buttonColor: AppColors.deleteButton,
                         buttonStyle: TextStyle(
@@ -129,10 +127,8 @@ class _ProfileState extends State<Profile> {
   }
 
   // Delete account
-  Future<void> _dialogBuilderLogout(
-      BuildContext context, ApplicationLocalizations t) {
-    return showGeneralDialog<void>(
-      context: context,
+  _dialogBuilderLogout() {
+    Get.generalDialog(
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),
@@ -140,13 +136,13 @@ class _ProfileState extends State<Profile> {
       pageBuilder: (context, animation, secondaryAnimation) {
         return CustomAlertDialog(
           topIcon: AppAssets.icLogout,
-          label: t.translate("btn_logout"),
-          subLabel: t.translate("message_logout"),
-          buttonText: t.translate("btn_logout"),
+          label: "btn_logout".tr,
+          subLabel: "message_logout".tr,
+          buttonText: "btn_logout".tr,
           onPressButton: () {
             Get.find<AuthController>().logoutCurrentUser();
           },
-          secondaryButtonText: t.translate("btn_cancel"),
+          secondaryButtonText: "btn_cancel".tr,
           onPressSecondaryButton: () {},
         );
       },
@@ -170,10 +166,8 @@ class _ProfileState extends State<Profile> {
   }
 
   //Delete Account
-  Future<void> _dialogBuilderDeleteAccount(
-      BuildContext context, ApplicationLocalizations t) {
-    return showGeneralDialog<void>(
-      context: context,
+  _dialogBuilderDeleteAccount() {
+    Get.generalDialog(
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),
@@ -181,13 +175,13 @@ class _ProfileState extends State<Profile> {
       pageBuilder: (context, animation, secondaryAnimation) {
         return CustomAlertDialog(
           topIcon: AppAssets.icDeleteAccount,
-          label: t.translate("account_deletion"),
-          subLabel: t.translate("account_deletion_message"),
-          buttonText: t.translate("btn_delete"),
+          label: "account_deletion".tr,
+          subLabel: "account_deletion_message".tr,
+          buttonText: "btn_delete".tr,
           onPressButton: () {
             Navigator.pushNamedAndRemoveUntil(context, intro, (_) => false);
           },
-          secondaryButtonText: t.translate("btn_cancel"),
+          secondaryButtonText: "btn_cancel".tr,
           onPressSecondaryButton: () {},
         );
       },

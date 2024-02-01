@@ -10,11 +10,13 @@ class SingleLabelItem extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.asset,
+    this.margins,
   });
 
   final String title;
   final String subTitle;
   final String asset;
+  final EdgeInsets? margins;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,10 @@ class SingleLabelItem extends StatelessWidget {
       padding: EdgeInsets.all(
         10.sp,
       ),
-      margin: EdgeInsets.all(
-        10.sp,
-      ),
+      margin: margins ??
+          EdgeInsets.all(
+            10.sp,
+          ),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.all(
