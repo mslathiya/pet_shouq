@@ -17,6 +17,9 @@ class AuthController extends GetxController implements GetxService {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _loadingForgotPassword = false;
+  bool get loadingForgotPassword => _loadingForgotPassword;
+
   bool _gettingProfile = false;
   bool get gettingProfile => _gettingProfile;
 
@@ -45,6 +48,14 @@ class AuthController extends GetxController implements GetxService {
   String? get oldPasswordError => _oldPasswordError;
   String? get newPasswordError => _newPasswordError;
   String? get confirmPasswordError => _confirmPasswordError;
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Forgot password                              */
+  /* -------------------------------------------------------------------------- */
+  String? _emailAddressError;
+  final TextEditingController _emailAddress = TextEditingController();
+  TextEditingController get emailAddress => _emailAddress;
+  String? get emailAddressError => _emailAddressError;
 
   AuthController({
     required this.repository,
@@ -168,6 +179,88 @@ class AuthController extends GetxController implements GetxService {
       },
       (success) {
         _isLoading = false;
+        update();
+
+        Get.snackbar(
+          "congratulations".tr,
+          success.message ?? "",
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
+          icon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              MaterialIcons.done_all,
+              size: 24.sp,
+              color: AppColors.white,
+            ),
+          ),
+          borderRadius: 5.sp,
+        );
+        Future.delayed(
+          const Duration(seconds: 2),
+          () {
+            Get.back(
+              closeOverlays: true,
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void forgotPassword() async {
+    _emailAddressError = null;
+
+    _loadingForgotPassword = true;
+    update();
+
+    Map<String, dynamic> bodyMap = {
+      "user_email": _emailAddress.text,
+    };
+
+    FormData fData = FormData.fromMap(bodyMap);
+
+    final result = await repository.forgotPassword(fData);
+
+    result.fold<void>(
+      (failure) {
+        String errorMessage = failure.message;
+
+        if (failure.errorData != null) {
+          errorMessage = "error_msg".tr;
+
+          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+
+          if (errorResponse.oldPassword != null &&
+              errorResponse.oldPassword!.isNotEmpty) {
+            _oldPasswordError = errorResponse.oldPassword!.join("\n");
+          }
+          if (errorResponse.password != null &&
+              errorResponse.password!.isNotEmpty) {
+            _newPasswordError = errorResponse.password!.join("\n");
+          }
+
+          if (errorResponse.passwordConfirmation != null &&
+              errorResponse.passwordConfirmation!.isNotEmpty) {
+            _confirmPasswordError =
+                errorResponse.passwordConfirmation!.join("\n");
+          }
+        }
+
+        _loadingForgotPassword = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          errorMessage,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      },
+      (success) {
+        _loadingForgotPassword = false;
         update();
 
         Get.snackbar(

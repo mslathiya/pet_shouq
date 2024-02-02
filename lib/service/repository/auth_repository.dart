@@ -17,6 +17,10 @@ abstract class AuthRepository {
     FormData formFields,
   );
 
+  Future<Either<Failure, GeneralBean>> forgotPassword(
+    FormData formFields,
+  );
+
   Future<Either<Failure, UserProfileBean>> getProfile();
 
   Future<Either<Failure, UserProfileBean>> updateParentProfile(
@@ -104,7 +108,6 @@ class AuthRepositoryImpl extends AuthRepository {
         }
         return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
-        AppLog.e("Print here exception");
         return Left(ApiException.handle(e).failure);
       }
     } else {
@@ -196,6 +199,35 @@ class AuthRepositoryImpl extends AuthRepository {
         return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
         e.printError();
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, GeneralBean>> forgotPassword(
+      FormData formFields) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.post(
+          Endpoints.forgotPasswordPost,
+          data: formFields,
+        );
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = GeneralBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            AppLog.e("Fail ${bean.data}");
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
         return Left(ApiException.handle(e).failure);
       }
     } else {

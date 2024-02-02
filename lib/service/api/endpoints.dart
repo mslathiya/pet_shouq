@@ -18,6 +18,7 @@ class Endpoints {
   static const profileGet = "api/profile";
   static const updateParentProfilePost = "api/parent/update/profile";
   static const changePasswordPost = "api/change-password";
+
   /* -------------------------------------------------------------------------- */
   /*                                     Pet                                    */
   /* -------------------------------------------------------------------------- */
