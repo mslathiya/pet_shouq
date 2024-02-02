@@ -23,6 +23,7 @@ class _PetDietState extends State<PetDiet> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
+        withSearch: true,
         title: t.translate("screen_diet_log"),
         onPressBack: () => Navigator.pop(context),
       ),

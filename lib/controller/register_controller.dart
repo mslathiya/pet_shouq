@@ -22,7 +22,8 @@ import '../theme/theme.dart';
 class RegisterController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _registerKey = GlobalKey<FormState>();
+  List<String> genders = ["Male", "Female", "LGBTQIA+"];
 
   bool isLoading = false;
 
@@ -55,17 +56,22 @@ class RegisterController extends GetxController implements GetxService {
   final TextEditingController _zipCode = TextEditingController();
 
   String? _imagePath = '';
-  String _gender = '';
-  String _birthDate = '';
-  String _age = '';
+  String _gender = 'Male';
+  String _birthDate = DateFormat('yyyy-MM-dd').format(
+    DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day - 1,
+    ),
+  );
+  String _age = "0";
   String _expirationDate = '';
+  File? _pickedFile;
   var _accountType = 1;
   String? _pickedCode =
       CountryCode.fromCountryCode(Get.locale?.countryCode ?? "US").dialCode;
   String? _pickedCodeSecondary =
       CountryCode.fromCountryCode(Get.locale?.countryCode ?? "US").dialCode;
-  List<String> genders = ["Male", "Female", "LGBTQIA+"];
-  File? _pickedFile;
 
   String? _firstNameError;
   String? _lastNameError;
@@ -88,7 +94,7 @@ class RegisterController extends GetxController implements GetxService {
   TextEditingController get city => _city;
   TextEditingController get province => _province;
 
-  GlobalKey<FormState> get formKey => _formKey;
+  GlobalKey<FormState> get registerKey => _registerKey;
   TextEditingController get firstName => _firstName;
   TextEditingController get lastName => _lastName;
   TextEditingController get email => _email;
@@ -136,8 +142,10 @@ class RegisterController extends GetxController implements GetxService {
   });
 
   void onToggleType(int index) {
-    _accountType = index;
-    update();
+    if (index == 0) {
+      _accountType = index;
+      update();
+    }
   }
 
   void onPickImage(CroppedFile file) {
@@ -163,9 +171,13 @@ class RegisterController extends GetxController implements GetxService {
     final DateTime? picked = await showDatePicker(
       context: Get.context!,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      initialDate: DateTime.now(),
+      initialDate: DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day - 1,
+      ),
       firstDate: pickerType == 1
-          ? DateTime.now().subtract(const Duration(days: 0))
+          ? DateTime.now().subtract(const Duration(days: 1))
           : DateTime(
               DateTime.now().year - 60,
               DateTime.now().month,
@@ -177,7 +189,11 @@ class RegisterController extends GetxController implements GetxService {
               DateTime.now().month,
               DateTime.now().day,
             )
-          : DateTime.now(),
+          : DateTime(
+              DateTime.now().year,
+              DateTime.now().month,
+              DateTime.now().day - 1,
+            ),
     );
     if (picked != null) {
       if (pickerType == 1) {
@@ -346,8 +362,6 @@ class RegisterController extends GetxController implements GetxService {
   ///
 
   void registerNewUser() async {
-    AppLog.e("Err ${Get.locale?.countryCode}");
-
     _firstNameError = null;
     _lastNameError = null;
     _emailError = null;
@@ -379,9 +393,7 @@ class RegisterController extends GetxController implements GetxService {
 
     FormData fData = FormData.fromMap(bodyMap);
 
-    if (imagePath != null &&
-        imagePath != '' &&
-        !imagePath.toString().hasValidUrl()) {
+    if (imagePath != null && imagePath != '') {
       fData.files.add(
         MapEntry(
           "profile_picture",
@@ -465,7 +477,10 @@ class RegisterController extends GetxController implements GetxService {
           ),
           borderRadius: 5.sp,
         );
-        Get.offAllNamed(login);
+        _registerKey.currentState!.reset();
+        Future.delayed(const Duration(seconds: 3), () {
+          Get.offAllNamed(login);
+        });
       },
     );
   }

@@ -132,7 +132,7 @@ class DietListItem extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(50.sp),
                       ),
-                      color: AppColors.primary.withOpacity(0.4),
+                      color: AppColors.primary,
                     ),
                     child: Icon(
                       Entypo.chevron_right,

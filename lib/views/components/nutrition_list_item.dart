@@ -11,7 +11,6 @@ import 'label_with_icon.dart';
 
 class NutritionListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
-  final VoidCallback onEditItem;
   final VoidCallback onDeleteItem;
   final int itemIndex;
   final NutritionBean itemBean;
@@ -21,7 +20,6 @@ class NutritionListItem extends StatelessWidget {
     required this.onViewDetail,
     required this.itemIndex,
     required this.itemBean,
-    required this.onEditItem,
     required this.onDeleteItem,
   });
 
@@ -37,6 +35,7 @@ class NutritionListItem extends StatelessWidget {
         key: Key(itemIndex.toString()),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
+          extentRatio: 0.35,
           children: [
             CustomSlidableAction(
               onPressed: (context) => onDeleteItem(),
@@ -59,27 +58,6 @@ class NutritionListItem extends StatelessWidget {
                 ),
               ),
             ),
-            CustomSlidableAction(
-              onPressed: (context) => onEditItem(),
-              child: Container(
-                width: 45.w,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.sp),
-                  ),
-                  color: AppColors.primary,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: SvgPicture.asset(
-                    AppAssets.editIcon,
-                    height: 18.sp,
-                    width: 18.sp,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
         child: Container(
@@ -188,7 +166,7 @@ class NutritionListItem extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(50.sp),
                               ),
-                              color: AppColors.primary.withOpacity(0.4),
+                              color: AppColors.primary,
                             ),
                             child: Icon(
                               Entypo.chevron_right,

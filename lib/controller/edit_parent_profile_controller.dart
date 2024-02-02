@@ -6,11 +6,11 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:intl/intl.dart';
-import 'package:pet_shouq/helper/helpers.dart';
 
 import '../data/model/models.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
+import "../helper/helpers.dart";
 import 'controllers.dart';
 
 class EditParentProfileController extends GetxController
@@ -19,7 +19,7 @@ class EditParentProfileController extends GetxController
 
   bool isLoading = false;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _editParentProfileFormKey = GlobalKey<FormState>();
 
   final TextEditingController _city = TextEditingController();
   final TextEditingController _province = TextEditingController();
@@ -52,7 +52,8 @@ class EditParentProfileController extends GetxController
   TextEditingController get city => _city;
   TextEditingController get province => _province;
 
-  GlobalKey<FormState> get formKey => _formKey;
+  GlobalKey<FormState> get editParentProfileFormKey =>
+      _editParentProfileFormKey;
   TextEditingController get firstName => _firstName;
   TextEditingController get lastName => _lastName;
   TextEditingController get email => _email;

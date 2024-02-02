@@ -9,12 +9,14 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback onPressBack;
   final bool? showNotification;
+  final bool? withSearch;
 
   const HeaderWithBack({
     super.key,
     required this.title,
     required this.onPressBack,
     this.showNotification = true,
+    this.withSearch = false,
   });
 
   @override
@@ -44,6 +46,22 @@ class HeaderWithBack extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: showNotification == true
           ? [
+              withSearch == true
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          AppAssets.icSearch,
+                          height: 25.sp,
+                          width: 25.sp,
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
               NotificationWidget(
                 iconColor: AppColors.fontMain,
               ),

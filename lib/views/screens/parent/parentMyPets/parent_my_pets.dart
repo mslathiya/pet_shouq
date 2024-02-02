@@ -31,6 +31,7 @@ class _ParentMyPetsState extends State<ParentMyPets> {
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
     return Scaffold(
       appBar: TabHeader(
+        withSearch: true,
         title: "tab_pets".tr,
       ),
       body: GetBuilder<PetController>(
@@ -116,11 +117,11 @@ class _ParentMyPetsState extends State<ParentMyPets> {
                         ),
                         leftWidget: Padding(
                           padding: EdgeInsets.only(
-                            right: 5.w,
+                            right: 2.w,
                           ),
                           child: Icon(
                             Entypo.plus,
-                            size: 20.sp,
+                            size: 12.sp,
                             color: AppColors.white,
                           ),
                         ),

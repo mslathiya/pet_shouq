@@ -43,6 +43,9 @@ class ClinicInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 10.h,
+          ),
           Text(
             'Rimadyl',
             textAlign: TextAlign.left,
@@ -62,7 +65,7 @@ class ClinicInfo extends StatelessWidget {
             padding: EdgeInsets.zero,
           ),
           SizedBox(
-            height: 5.h,
+            height: 10.h,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,42 +73,29 @@ class ClinicInfo extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppAssets.icLocationPin,
-                height: 22.sp,
-                width: 22.sp,
+                height: 16.sp,
+                width: 16.sp,
               ),
               SizedBox(
                 width: 5.w,
               ),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      localizations.translate("location"),
-                      textAlign: TextAlign.left,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style:
-                          Theme.of(context).textTheme.displayMedium?.copyWith(
-                                fontSize: 14.sp,
-                              ),
-                    ),
-                    Text(
-                      'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore, karnataka - 560016',
-                      textAlign: TextAlign.left,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(fontSize: 12.sp),
-                    )
-                  ],
+                child: Text(
+                  'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore, karnataka - 560016',
+                  textAlign: TextAlign.left,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontSize: 12.sp),
                 ),
               )
             ],
-          )
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
         ],
       ),
     );

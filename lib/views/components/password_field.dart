@@ -124,7 +124,9 @@ class _PasswordFieldState extends State<PasswordField> {
               child: IconButton(
                 onPressed: togglePassword,
                 icon: Icon(
-                  showPassword ? FontAwesome.eye : FontAwesome.eye_slash,
+                  showPassword
+                      ? FontAwesome5Regular.eye
+                      : FontAwesome5Regular.eye_slash,
                   size: 20.sp,
                   color: AppColors.hintColor,
                 ),

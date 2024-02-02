@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/model/models.dart';
 
 const String keyUserLoggedIn = "keyUserLoggedIn";
+const String keyRememberLoggedIn = "keyRememberLoggedIn";
 const String keyUserToken = "keyUserToken";
 const String keyUserInfo = "keyUserInfo";
 const String keyUserType = "keyUserType";
@@ -16,6 +17,10 @@ class AppPreferences {
   //Login
   Future<void> setUserLogged() async {
     preferences.setBool(keyUserLoggedIn, true);
+  }
+
+  Future<void> setRememberLogin(bool status) async {
+    preferences.setBool(keyRememberLoggedIn, status);
   }
 
   Future<void> setUserToken(String token) async {
@@ -32,6 +37,10 @@ class AppPreferences {
 
   Future<bool> getIsLoggedIn() async {
     return preferences.getBool(keyUserLoggedIn) ?? false;
+  }
+
+  Future<bool> getRememberLogin() async {
+    return preferences.getBool(keyRememberLoggedIn) ?? false;
   }
 
   Future<String> getAuthToken() async {

@@ -21,6 +21,7 @@ class _NotificationsState extends State<Notifications> {
     var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
+        withSearch: true,
         title: t.translate("screen_notifications"),
         onPressBack: () => Navigator.pop(context),
         showNotification: false,

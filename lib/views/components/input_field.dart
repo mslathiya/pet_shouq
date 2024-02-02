@@ -44,7 +44,7 @@ class InputField extends StatelessWidget {
         headerWidget != null ? headerWidget! : const SizedBox(),
         TextFormField(
           cursorWidth: 2,
-          maxLength: maxLength,
+          maxLength: isMultiline ? null : maxLength,
           controller: editingController,
           showCursor: true,
           validator: validator,

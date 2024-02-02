@@ -3,9 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
-import 'package:pet_shouq/controller/controllers.dart';
 
-import '../../../../../config/config.dart';
+import '../../../../../controller/controllers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -17,8 +16,6 @@ class AddNutrition extends StatefulWidget {
 }
 
 class _AddNutritionState extends State<AddNutrition> {
-  int selectedOption = 1;
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -30,11 +27,10 @@ class _AddNutritionState extends State<AddNutrition> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
-
+    bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_nutrition_feeding"),
+        title: "screen_nutrition_feeding".tr,
         onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
@@ -59,9 +55,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             InputField(
                               headerWidget: InputHeader(
                                 compulsory: true,
-                                headerLabel: t.translate("lbl_food_name"),
+                                headerLabel: "lbl_food_name".tr,
                               ),
-                              inputHint: t.translate("hint_food_name"),
+                              inputHint: "hint_food_name".tr,
                               editingController: controller.nutFoodName,
                               validator: MultiValidator(
                                 [
@@ -80,9 +76,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("lbl_brand"),
+                                headerLabel: "lbl_brand".tr,
                               ),
-                              inputHint: t.translate("hint_brand"),
+                              inputHint: "hint_brand".tr,
                               editingController: controller.nutBrand,
                             ),
                             SizedBox(
@@ -90,10 +86,10 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             SelectorField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("lbl_food_type"),
+                                headerLabel: "lbl_food_type".tr,
                               ),
-                              inputHint: controller.nutFoodType ??
-                                  t.translate("hint_food_type"),
+                              inputHint:
+                                  controller.nutFoodType ?? "hint_food_type".tr,
                               suffixIcon: SizedBox(
                                 width: 26.w,
                                 height: 26.h,
@@ -116,10 +112,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel:
-                                          t.translate("lbl_life_stage"),
+                                      headerLabel: "lbl_life_stage".tr,
                                     ),
-                                    inputHint: t.translate("hint_life_stage"),
+                                    inputHint: "hint_life_stage".tr,
                                     editingController: controller.nutLifeStage,
                                   ),
                                 ),
@@ -129,9 +124,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("lbl_species"),
+                                      headerLabel: "lbl_species".tr,
                                     ),
-                                    inputHint: t.translate("hint_species"),
+                                    inputHint: "hint_species".tr,
                                     editingController: controller.nutSpecies,
                                   ),
                                 )
@@ -142,9 +137,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("ingredients"),
+                                headerLabel: "ingredients".tr,
                               ),
-                              inputHint: t.translate("hint_ingredients"),
+                              inputHint: "hint_ingredients".tr,
                               editingController: controller.nutIngredients,
                             ),
                             SizedBox(
@@ -153,7 +148,7 @@ class _AddNutritionState extends State<AddNutrition> {
                             RichText(
                               textAlign: TextAlign.left,
                               text: TextSpan(
-                                text: t.translate("lbl_nutrition_content"),
+                                text: "lbl_nutrition_content".tr,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -184,9 +179,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("protein"),
+                                      headerLabel: "protein".tr,
                                     ),
-                                    inputHint: t.translate("hint_protein"),
+                                    inputHint: "hint_protein".tr,
                                     editingController: controller.nutProtein,
                                   ),
                                 ),
@@ -196,9 +191,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("fat"),
+                                      headerLabel: "fat".tr,
                                     ),
-                                    inputHint: t.translate("hint_fat"),
+                                    inputHint: "hint_fat".tr,
                                     editingController: controller.nutFat,
                                   ),
                                 )
@@ -214,10 +209,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("carbohydrates"),
+                                      headerLabel: "carbohydrates".tr,
                                     ),
-                                    inputHint:
-                                        t.translate("hint_carbohydrates"),
+                                    inputHint: "hint_carbohydrates".tr,
                                     editingController:
                                         controller.nutCarbohydrate,
                                   ),
@@ -228,9 +222,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("fiber"),
+                                      headerLabel: "fiber".tr,
                                     ),
-                                    inputHint: t.translate("hint_fiber"),
+                                    inputHint: "hint_fiber".tr,
                                     editingController: controller.nutFiber,
                                   ),
                                 )
@@ -246,9 +240,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("calories"),
+                                      headerLabel: "calories".tr,
                                     ),
-                                    inputHint: t.translate("hint_calories"),
+                                    inputHint: "hint_calories".tr,
                                     editingController: controller.nutCalories,
                                   ),
                                 ),
@@ -258,9 +252,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("vitamins"),
+                                      headerLabel: "vitamins".tr,
                                     ),
-                                    inputHint: t.translate("hint_vitamins"),
+                                    inputHint: "hint_vitamins".tr,
                                     editingController: controller.nutVitamins,
                                   ),
                                 )
@@ -276,9 +270,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("minerals"),
+                                      headerLabel: "minerals".tr,
                                     ),
-                                    inputHint: t.translate("hint_mineral"),
+                                    inputHint: "hint_mineral".tr,
                                     editingController: controller.nutMinerals,
                                   ),
                                 ),
@@ -288,9 +282,9 @@ class _AddNutritionState extends State<AddNutrition> {
                                 Expanded(
                                   child: InputField(
                                     headerWidget: InputHeader(
-                                      headerLabel: t.translate("omega_three"),
+                                      headerLabel: "omega_three".tr,
                                     ),
-                                    inputHint: t.translate("hint_omega_three"),
+                                    inputHint: "hint_omega_three".tr,
                                     editingController:
                                         controller.nutOmegaThreeFatty,
                                   ),
@@ -302,9 +296,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("omega_six"),
+                                headerLabel: "omega_six".tr,
                               ),
-                              inputHint: t.translate("hint_omega_six"),
+                              inputHint: "hint_omega_six".tr,
                               editingController: controller.nutOmegaSixFatty,
                             ),
                             SizedBox(
@@ -313,7 +307,7 @@ class _AddNutritionState extends State<AddNutrition> {
                             RichText(
                               textAlign: TextAlign.left,
                               text: TextSpan(
-                                text: t.translate("guidelines"),
+                                text: "guidelines".tr,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
@@ -339,9 +333,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("lbl_guideline"),
+                                headerLabel: "lbl_guideline".tr,
                               ),
-                              inputHint: t.translate("hint_guideline"),
+                              inputHint: "hint_guideline".tr,
                               editingController:
                                   controller.nutFeedingGuidelines,
                             ),
@@ -350,9 +344,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("special_feature"),
+                                headerLabel: "special_feature".tr,
                               ),
-                              inputHint: t.translate("hint_feature"),
+                              inputHint: "hint_feature".tr,
                               editingController: controller.nutSpecialFeatures,
                             ),
                             SizedBox(
@@ -360,9 +354,9 @@ class _AddNutritionState extends State<AddNutrition> {
                             ),
                             InputField(
                               headerWidget: InputHeader(
-                                headerLabel: t.translate("lbl_price"),
+                                headerLabel: "lbl_price".tr,
                               ),
-                              inputHint: t.translate("hint_price"),
+                              inputHint: "hint_price".tr,
                               editingController: controller.nutPrice,
                               keyboardType: TextInputType.number,
                             ),
@@ -379,13 +373,18 @@ class _AddNutritionState extends State<AddNutrition> {
                                     controller.saveNutritionInfo();
                                   }
                                 },
-                                buttonTitle: t.translate("btn_submit"),
+                                buttonTitle: "btn_submit".tr,
                                 width: width - 20,
                                 buttonStyle: TextStyle(
                                   fontSize: 8.sp,
                                 ),
                               ),
                             ),
+                            !isNeedSafeArea
+                                ? SizedBox(
+                                    height: 15.h,
+                                  )
+                                : const SizedBox(),
                           ],
                         ),
                       ),

@@ -61,7 +61,7 @@ class CustomAlertDialog extends StatelessWidget {
                   label,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 16.sp,
+                        fontSize: 18.sp,
                       ),
                 ),
               ),
@@ -131,7 +131,10 @@ class CustomAlertDialog extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
             ],
           ),
         ),

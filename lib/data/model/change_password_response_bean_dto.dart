@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:pet_shouq/data/model/user_bean.dart';
+import 'user_bean.dart';
 
 ChangePasswordResponseBean changePasswordResponseBeanFromJson(String str) =>
     ChangePasswordResponseBean.fromJson(json.decode(str));

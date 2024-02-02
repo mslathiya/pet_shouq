@@ -14,7 +14,11 @@ class AuthController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
   final AppPreferences preferences;
 
-  bool isLoading = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  bool _gettingProfile = false;
+  bool get gettingProfile => _gettingProfile;
 
   final RxBool _isLoggedIn = false.obs;
   late RxBool isLoggedIn = _isLoggedIn;
@@ -56,9 +60,12 @@ class AuthController extends GetxController implements GetxService {
 
   Future<String> getLoginType() async {
     bool loggedIn = await preferences.getIsLoggedIn();
+    bool rememberLogin = await preferences.getRememberLogin();
     if (loggedIn) {
-      _userData.value = await preferences.getUserData();
-      return await preferences.getUserType();
+      if (rememberLogin) {
+        _userData.value = await preferences.getUserData();
+        return await preferences.getUserType();
+      }
     }
     return "";
   }
@@ -75,12 +82,18 @@ class AuthController extends GetxController implements GetxService {
   }
 
   void getUserProfile() async {
+    _gettingProfile = true;
+    update();
     final result = await repository.getProfile();
     result.fold<void>(
       (failure) {
+        _gettingProfile = false;
+        update();
         AppLog.e("Error ${failure.code}");
       },
       (success) {
+        _gettingProfile = false;
+        update();
         if (success.data != null) {
           _userData.value = success.data!;
         }
@@ -105,7 +118,7 @@ class AuthController extends GetxController implements GetxService {
     _newPasswordError = null;
     _confirmPasswordError = null;
 
-    isLoading = true;
+    _isLoading = true;
     update();
 
     Map<String, dynamic> bodyMap = {
@@ -143,7 +156,7 @@ class AuthController extends GetxController implements GetxService {
           }
         }
 
-        isLoading = false;
+        _isLoading = false;
         update();
         Get.snackbar(
           "error_in_request".tr,
@@ -154,7 +167,7 @@ class AuthController extends GetxController implements GetxService {
         );
       },
       (success) {
-        isLoading = false;
+        _isLoading = false;
         update();
 
         Get.snackbar(

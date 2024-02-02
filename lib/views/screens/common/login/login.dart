@@ -28,7 +28,7 @@ class Login extends StatelessWidget {
                 child: GetBuilder<LoginController>(
                   builder: (controller) {
                     return Form(
-                      key: controller.formKey,
+                      key: controller.loginFormKey,
                       autovalidateMode: AutovalidateMode.disabled,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,8 +103,9 @@ class Login extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Checkbox(
-                                            value: true,
-                                            onChanged: (value) {},
+                                            value: controller.rememberMe,
+                                            onChanged: (value) =>
+                                                controller.updateRememberMe(),
                                             activeColor: AppColors.secondary,
                                           ),
                                           Expanded(
@@ -151,11 +152,9 @@ class Login extends StatelessWidget {
                                   child: ButtonView(
                                     isLoading: controller.isLoading,
                                     onTap: () {
-                                      // Navigator.pushNamed(
-                                      //   context,
-                                      //   parentDashboard,
-                                      // );
-                                      if (controller.formKey.currentState!
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                      if (controller.loginFormKey.currentState!
                                           .validate()) {
                                         controller.performLogin();
                                       }
@@ -168,7 +167,11 @@ class Login extends StatelessWidget {
                                   height: 15.h,
                                 ),
                                 GestureDetector(
-                                  onTap: () => Get.toNamed(register),
+                                  onTap: () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    Get.toNamed(register);
+                                  },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:

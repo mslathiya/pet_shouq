@@ -308,6 +308,7 @@ class PetController extends GetxController implements GetxService {
         }
       },
       (success) {
+        resetFieldData();
         isLoading = false;
         update();
 
@@ -337,6 +338,34 @@ class PetController extends GetxController implements GetxService {
         );
       },
     );
+  }
+
+  void resetFieldData() {
+    _petName.clear();
+    _marking.clear();
+    _weight.clear();
+    _height.clear();
+    _chipNumber.clear();
+    _pedigreeFront.clear();
+    _pedigreeBack.clear();
+    _allergy.clear();
+    _description.clear();
+    _qrCode.clear();
+    _petCareAddress.clear();
+
+    _imagePath = '';
+    _isSpayed = "No";
+    _birthDate = DateFormat('yyyy-MM-dd').format(
+      DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day - 1,
+      ),
+    );
+    _breed = breedList[0];
+    _petNameError = null;
+    _birthDateError = null;
+    _differentAddress = false;
   }
 
   void editPetInfo() async {

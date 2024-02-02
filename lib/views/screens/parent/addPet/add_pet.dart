@@ -290,6 +290,7 @@ class _AddNewPetState extends State<AddNewPet> {
                                           height: 15.h,
                                         ),
                                         InputField(
+                                          maxLength: 1000,
                                           isMultiline: true,
                                           headerWidget: InputHeader(
                                             headerLabel: "lbl_address".tr,
@@ -305,6 +306,7 @@ class _AddNewPetState extends State<AddNewPet> {
                                 height: 15.h,
                               ),
                               InputField(
+                                maxLength: 1000,
                                 isMultiline: true,
                                 headerWidget: InputHeader(
                                   headerLabel: "lbl_description".tr,

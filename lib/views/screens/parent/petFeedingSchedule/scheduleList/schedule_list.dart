@@ -24,6 +24,7 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
+        withSearch: true,
         title: t.translate("screen_feeding_schedule"),
         onPressBack: () => Navigator.pop(context),
       ),

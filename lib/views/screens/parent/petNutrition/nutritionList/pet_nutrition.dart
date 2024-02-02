@@ -23,6 +23,7 @@ class _PetNutritionState extends State<PetNutrition> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
+        withSearch: true,
         title: "nutrition_feeding".tr,
         onPressBack: () => Navigator.pop(context),
       ),
@@ -54,18 +55,6 @@ class _PetNutritionState extends State<PetNutrition> {
                               return NutritionListItem(
                                 itemBean: item,
                                 itemIndex: index,
-                                onEditItem: () async {
-                                  final response = await controller
-                                      .getNutritionDetail(item.nutId!);
-                                  if (response != null) {
-                                    Get.toNamed(petAddNutrition, arguments: [
-                                      {
-                                        "mode": "Edit",
-                                      },
-                                      {"info": response}
-                                    ]);
-                                  }
-                                },
                                 onDeleteItem: () => _dialogBuilderDeleteItem(
                                   () => controller.deleteNutrition(item.nutId!),
                                 ),

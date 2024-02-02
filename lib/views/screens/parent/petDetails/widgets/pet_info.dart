@@ -11,8 +11,9 @@ class PetInfo extends StatelessWidget {
   const PetInfo({
     super.key,
     required this.info,
+    required this.onPressEdit,
   });
-
+  final VoidCallback onPressEdit;
   final PetInformation info;
 
   @override
@@ -37,7 +38,7 @@ class PetInfo extends StatelessWidget {
                       ),
                 ),
                 SizedBox(
-                  height: 5.h,
+                  height: 10.h,
                 ),
                 LabelWithIcon(
                   asset: AppAssets.icCalendar,
@@ -47,7 +48,7 @@ class PetInfo extends StatelessWidget {
                   padding: EdgeInsets.zero,
                 ),
                 SizedBox(
-                  height: 5.h,
+                  height: 10.h,
                 ),
                 LabelWithIcon(
                   asset: AppAssets.icBreed,
@@ -58,7 +59,7 @@ class PetInfo extends StatelessWidget {
             ),
           ),
           EditButton(
-            onPressEdit: () {},
+            onPressEdit: onPressEdit,
           ),
         ],
       ),

@@ -46,7 +46,7 @@ class _EditParentProfileState extends State<EditParentProfile> {
                   child: GetBuilder<EditParentProfileController>(
                     builder: (controller) {
                       return Form(
-                        key: controller.formKey,
+                        key: controller.editParentProfileFormKey,
                         autovalidateMode: AutovalidateMode.disabled,
                         child: Padding(
                           padding: EdgeInsets.only(left: 12.w, right: 12.w),
@@ -292,6 +292,7 @@ class _EditParentProfileState extends State<EditParentProfile> {
                                 height: 15.h,
                               ),
                               InputField(
+                                maxLength: 1000,
                                 isMultiline: true,
                                 headerWidget: InputHeader(
                                   compulsory: false,
@@ -308,7 +309,8 @@ class _EditParentProfileState extends State<EditParentProfile> {
                                 child: ButtonView(
                                   isLoading: controller.isLoading,
                                   onTap: () {
-                                    if (controller.formKey.currentState!
+                                    if (controller
+                                        .editParentProfileFormKey.currentState!
                                         .validate()) {
                                       controller.updateParentProfile();
                                     }

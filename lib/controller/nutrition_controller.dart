@@ -351,6 +351,7 @@ class NutritionController extends GetxController implements GetxService {
         }
       },
       (success) {
+        resetFieldData();
         isLoading = false;
         update();
 
@@ -380,5 +381,28 @@ class NutritionController extends GetxController implements GetxService {
         );
       },
     );
+  }
+
+  void resetFieldData() {
+    _nutFoodType = 'Dry Kibble';
+    _foodNameError = null;
+
+    _nutFoodName.clear();
+    _nutBrand.clear();
+    _nutLifeStage.clear();
+    _nutSpecies.clear();
+    _nutIngredients.clear();
+    _nutProtein.clear();
+    _nutFat.clear();
+    _nutCarbohydrate.clear();
+    _nutFiber.clear();
+    _nutCalories.clear();
+    _nutVitamins.clear();
+    _nutMinerals.clear();
+    _nutOmegaThreeFatty.clear();
+    _nutOmegaSixFatty.clear();
+    _nutFeedingGuidelines.clear();
+    _nutSpecialFeatures.clear();
+    _nutPrice.clear();
   }
 }

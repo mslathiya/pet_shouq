@@ -37,7 +37,7 @@ class DateItem extends StatelessWidget {
           width: 1,
         ),
         borderRadius: BorderRadius.all(
-          Radius.circular(10.sp),
+          Radius.circular(14.sp),
         ),
         color: isDisabled
             ? AppColors.disableFieldColor
@@ -69,7 +69,7 @@ class DateItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontSize: 12.sp,
+                  fontSize: 13.sp,
                   color: isDisabled
                       ? AppColors.disableFieldText
                       : isSelected

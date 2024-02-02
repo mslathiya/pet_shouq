@@ -70,6 +70,9 @@ class _ProfileState extends State<Profile> {
                       ],
                     )
                   : const SizedBox(),
+              SizedBox(
+                height: 10.h,
+              ),
               ProfileMenus(
                 onTapMenu: (menuName) => Navigator.pushNamed(
                   context,

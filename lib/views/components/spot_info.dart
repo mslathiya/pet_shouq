@@ -21,7 +21,7 @@ class SpotInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.sp),
+      padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 12.sp),
       decoration: BoxDecoration(
         color: boxColor ?? AppColors.primary,
         borderRadius: BorderRadius.circular(10.sp),
@@ -32,11 +32,11 @@ class SpotInfo extends StatelessWidget {
         children: [
           SvgPicture.asset(
             icon,
-            height: 28.sp,
-            width: 28.sp,
+            height: 32.sp,
+            width: 32.sp,
           ),
           SizedBox(
-            height: 10.h,
+            height: 12.h,
           ),
           Text(
             title,

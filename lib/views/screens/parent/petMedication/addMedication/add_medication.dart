@@ -17,11 +17,10 @@ class AddMedication extends StatefulWidget {
 }
 
 class _AddMedicationState extends State<AddMedication> {
-  int selectedOption = 1;
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
 
     return Scaffold(
       appBar: HeaderWithBack(
@@ -261,6 +260,7 @@ class _AddMedicationState extends State<AddMedication> {
                                 height: 15.h,
                               ),
                               InputField(
+                                maxLength: 1000,
                                 isMultiline: true,
                                 headerWidget: InputHeader(
                                   headerLabel: "special_notes".tr,
@@ -287,6 +287,11 @@ class _AddMedicationState extends State<AddMedication> {
                                   ),
                                 ),
                               ),
+                              !isNeedSafeArea
+                                  ? SizedBox(
+                                      height: 15.h,
+                                    )
+                                  : const SizedBox(),
                             ],
                           ),
                         );

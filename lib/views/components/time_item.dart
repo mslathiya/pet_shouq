@@ -30,7 +30,7 @@ class TimeItem extends StatelessWidget {
           width: 1,
         ),
         borderRadius: BorderRadius.all(
-          Radius.circular(10.sp),
+          Radius.circular(18.sp),
         ),
         color: isDisabled
             ? AppColors.disableFieldColor
@@ -50,7 +50,7 @@ class TimeItem extends StatelessWidget {
                     : isSelected
                         ? AppColors.white
                         : AppColors.hintColor,
-                fontSize: 12.sp,
+                fontSize: 13.sp,
               ),
         ),
       ),

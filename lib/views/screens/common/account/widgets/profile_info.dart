@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pet_shouq/helper/helpers.dart';
 
 import '../../../../../controller/controllers.dart';
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
+import '../../../../../helper/helpers.dart';
 
 class ProfileInfo extends StatelessWidget {
   final VoidCallback onTapEdit;
@@ -19,6 +19,7 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     final AuthController authController = Get.find();
     return Obx(() {
       UserBean userData = authController.userData.value;
@@ -62,79 +63,206 @@ class ProfileInfo extends StatelessWidget {
                 )
               ],
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: EditButton(onPressEdit: onTapEdit),
-                ),
-                Text(
-                  userData.userName ?? "",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 15.sp,
+            child: authController.gettingProfile
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: SizedBox(
+                          height: 36.sp,
+                          width: 36.sp,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey.shade300,
+                            highlightColor: Colors.grey.shade100,
+                            enabled: true,
+                            child: Container(
+                              width: double.infinity,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
-                ),
-                SizedBox(
-                  height: 8.sp,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 70.w,
-                      child: LabelWithIcon(
-                        asset: AppAssets.icGender,
-                        value: parentData?.parentSex ?? "",
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      SizedBox(
+                        height: 25,
+                        width: width * 0.8,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          enabled: true,
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            height: 25,
+                            width: 70.w,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey.shade300,
+                              highlightColor: Colors.grey.shade100,
+                              enabled: true,
+                              child: Container(
+                                width: double.infinity,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8.sp,
+                          ),
+                          SizedBox(
+                            height: 25,
+                            width: 120.w,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey.shade300,
+                              highlightColor: Colors.grey.shade100,
+                              enabled: true,
+                              child: Container(
+                                width: double.infinity,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      SizedBox(
+                        height: 25,
+                        width: width * 0.6,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          enabled: true,
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      SizedBox(
+                        height: 25,
+                        width: width * 0.7,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          enabled: true,
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      SizedBox(
+                        height: 25,
+                        width: width * 0.45,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          enabled: true,
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: EditButton(onPressEdit: onTapEdit),
+                      ),
+                      Text(
+                        userData.userName ?? "",
+                        textAlign: TextAlign.center,
+                        style:
+                            Theme.of(context).textTheme.displayLarge?.copyWith(
+                                  fontSize: 15.sp,
+                                ),
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 70.w,
+                            child: LabelWithIcon(
+                              asset: AppAssets.icGender,
+                              value: parentData?.parentSex ?? "",
+                              padding: EdgeInsets.zero,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8.sp,
+                          ),
+                          SizedBox(
+                            width: 120.w,
+                            child: LabelWithIcon(
+                              asset: AppAssets.icBirthday,
+                              value: parentData?.parentDob != null
+                                  ? DateFormat("dd/MM/yyyy")
+                                      .format(parentData!.parentDob!)
+                                  : "-",
+                              padding: EdgeInsets.zero,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      LabelWithIcon(
+                        asset: AppAssets.icEmail,
+                        value: userData.userEmail ?? "",
                         padding: EdgeInsets.zero,
                       ),
-                    ),
-                    SizedBox(
-                      width: 8.sp,
-                    ),
-                    SizedBox(
-                      width: 120.w,
-                      child: LabelWithIcon(
-                        asset: AppAssets.icBirthday,
-                        value: parentData?.parentDob != null
-                            ? DateFormat("dd/MM/yyyy")
-                                .format(parentData!.parentDob!)
-                            : "-",
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      LabelWithIcon(
+                        asset: AppAssets.icPhone,
+                        value: "$primaryPhone / $secondaryPhone",
                         padding: EdgeInsets.zero,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5.sp,
-                ),
-                LabelWithIcon(
-                  asset: AppAssets.icEmail,
-                  value: userData.userEmail ?? "",
-                  padding: EdgeInsets.zero,
-                ),
-                SizedBox(
-                  height: 5.sp,
-                ),
-                LabelWithIcon(
-                  asset: AppAssets.icPhone,
-                  value: "$primaryPhone / $secondaryPhone",
-                  padding: EdgeInsets.zero,
-                ),
-                SizedBox(
-                  height: 5.sp,
-                ),
-                LabelWithIcon(
-                  asset: AppAssets.icLocationPin,
-                  value:
-                      "${parentData?.parentAddress ?? ""} ${parentData?.parentAddressSecondLine ?? ""}",
-                  padding: EdgeInsets.zero,
-                )
-              ],
-            ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      LabelWithIcon(
+                        asset: AppAssets.icLocationPin,
+                        value:
+                            "${parentData?.parentAddress ?? ""} ${parentData?.parentAddressSecondLine ?? ""}",
+                        padding: EdgeInsets.zero,
+                      )
+                    ],
+                  ),
           ),
           Positioned.fill(
             top: -50,

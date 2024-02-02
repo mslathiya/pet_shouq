@@ -115,12 +115,12 @@ class MyPetItem extends StatelessWidget {
               Hero(
                 tag: "pet$itemIndex",
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(10.sp),
                   child: !haveImage
                       ? Image.asset(
-                          AppAssets.dog,
-                          height: 60.h,
-                          width: 64.w,
+                          AppAssets.appLogo,
+                          height: 70.w,
+                          width: 70.w,
                           fit: BoxFit.cover,
                         )
                       : CachedNetworkImage(
@@ -132,8 +132,8 @@ class MyPetItem extends StatelessWidget {
                           fit: BoxFit.cover,
                           fadeInDuration: const Duration(milliseconds: 60),
                           fadeInCurve: Curves.easeIn,
-                          height: 60.h,
-                          width: 64.w,
+                          height: 70.w,
+                          width: 70.w,
                         ),
                 ),
               ),
@@ -156,7 +156,7 @@ class MyPetItem extends StatelessWidget {
                               ),
                     ),
                     SizedBox(
-                      height: 5.h,
+                      height: 8.h,
                     ),
                     LabelWithIcon(
                       asset: AppAssets.icCalendar,
@@ -166,7 +166,7 @@ class MyPetItem extends StatelessWidget {
                       padding: EdgeInsets.zero,
                     ),
                     SizedBox(
-                      height: 5.h,
+                      height: 8.h,
                     ),
                     LabelWithIcon(
                       asset: AppAssets.icBreed,
@@ -189,7 +189,7 @@ class MyPetItem extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(50.sp),
                       ),
-                      color: AppColors.primary.withOpacity(0.4),
+                      color: AppColors.primary,
                     ),
                     child: Icon(
                       Entypo.chevron_right,

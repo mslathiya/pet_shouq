@@ -17,7 +17,7 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    
+
     return Scaffold(
       body: LayoutBuilder(
         builder: (_, constraints) {
@@ -31,7 +31,7 @@ class Register extends StatelessWidget {
                 child: GetBuilder<RegisterController>(
                   builder: (controller) {
                     return Form(
-                      key: controller.formKey,
+                      key: controller.registerKey,
                       autovalidateMode: AutovalidateMode.disabled,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,8 +230,11 @@ class Register extends StatelessWidget {
                                     size: 26.sp,
                                     color: AppColors.hintColor,
                                   ),
-                                  onSelectItem: () =>
-                                      controller.openGenderPicker(),
+                                  onSelectItem: () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    controller.openGenderPicker();
+                                  },
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -307,16 +310,21 @@ class Register extends StatelessWidget {
                                   headerLabel: "lbl_password".tr,
                                   inputHint: "hint_password".tr,
                                   editingController: controller.password,
-                                  validator: MultiValidator(
-                                    [
-                                      RequiredValidator(
-                                        errorText:
-                                            "dynamic_field_required".trParams(
-                                          {"field": "lbl_password".tr},
-                                        ),
-                                      ),
-                                    ],
-                                  ).call,
+                                  validator: (String? value) {
+                                    if (value == null) {
+                                      return null;
+                                    }
+                                    RegExp regex = RegExp(
+                                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                                    if (value.isEmpty) {
+                                      return "dynamic_field_required".trParams(
+                                        {"field": "lbl_confirm_password".tr},
+                                      );
+                                    } else if (!regex.hasMatch(value.trim())) {
+                                      return "password_week".tr;
+                                    }
+                                    return null;
+                                  },
                                   inputError: controller.passwordError,
                                 ),
                                 SizedBox(
@@ -407,6 +415,7 @@ class Register extends StatelessWidget {
                                             height: 15.h,
                                           ),
                                           InputField(
+                                            maxLength: 1000,
                                             isMultiline: true,
                                             headerWidget: InputHeader(
                                               headerLabel:
@@ -686,7 +695,7 @@ class Register extends StatelessWidget {
                                   child: ButtonView(
                                     isLoading: controller.isLoading,
                                     onTap: () {
-                                      if (controller.formKey.currentState!
+                                      if (controller.registerKey.currentState!
                                           .validate()) {
                                         controller.registerNewUser();
                                       }

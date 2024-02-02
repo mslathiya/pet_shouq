@@ -340,6 +340,7 @@ class MedicationController extends GetxController implements GetxService {
         }
       },
       (success) {
+        resetFieldData();
         isLoading = false;
         update();
 
@@ -369,5 +370,27 @@ class MedicationController extends GetxController implements GetxService {
         );
       },
     );
+  }
+
+  void resetFieldData() {
+    _mediType = "Liquid";
+    _mediStartDate = DateFormat('yyyy-MM-dd').format(
+      DateTime.now(),
+    );
+    _mediEndDate = DateFormat('yyyy-MM-dd').format(
+      DateTime.now(),
+    );
+    _mediNameError = null;
+
+    _mediName.clear();
+    _mediPreVeterinarian.clear();
+    _mediPetSpecies.clear();
+    _mediDosage.clear();
+    _mediFrequency.clear();
+    _mediDuration.clear();
+    _mediReasonPrescription.clear();
+    _mediAdminInstruction.clear();
+    _mediRefills.clear();
+    _mediSpecialNotes.clear();
   }
 }

@@ -23,6 +23,7 @@ class _PetMedicationState extends State<PetMedication> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
+        withSearch: true,
         title: "pet_medication".tr,
         onPressBack: () => Navigator.pop(context),
       ),

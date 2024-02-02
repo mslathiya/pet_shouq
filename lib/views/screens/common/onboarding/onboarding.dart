@@ -107,17 +107,17 @@ class _OnBoardingState extends State<OnBoarding> {
                               );
                             },
                             onPressSkip: () {
-                              Navigator.pushNamed(context, login);
+                              Get.toNamed(login);
                             },
                             onAnimationEnd: () {
-                              // if (_currentPage != onboardingList.length - 1) {
-                              //   _pageController.nextPage(
-                              //     duration: const Duration(milliseconds: 500),
-                              //     curve: Curves.ease,
-                              //   );
-                              // } else {
-                              //   Navigator.pushNamed(context, login);
-                              // }
+                              if (_currentPage != onboardingList.length - 1) {
+                                _pageController.nextPage(
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              } else {
+                                Get.toNamed(login);
+                              }
                             },
                           )
                         ],
@@ -128,7 +128,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 right: 15,
                 top: 10,
                 child: GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, login),
+                  onTap: () => Get.toNamed(login),
                   child: Text(
                     "skip".tr,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(

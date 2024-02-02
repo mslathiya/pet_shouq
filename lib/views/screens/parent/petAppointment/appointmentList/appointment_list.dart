@@ -18,6 +18,7 @@ class _AppointmentListState extends State<AppointmentList> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
+        withSearch: true,
         title: t.translate("screen_appointment_booking"),
         onPressBack: () => Navigator.pop(context),
       ),

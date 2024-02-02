@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide FormData;
-import 'package:pet_shouq/helper/helpers.dart';
 
 import '../../data/model/models.dart';
 import '../api/api_imports.dart';
+import "../../helper/helpers.dart";
 
 abstract class AuthRepository {
   Future<Either<Failure, LoginBean>> loginMember(
     String email,
     String password,
+    bool rememberLogin,
   );
 
   Future<Either<Failure, GeneralBean>> registerParent(
@@ -40,7 +41,10 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<Either<Failure, LoginBean>> loginMember(
-      String email, String password) async {
+    String email,
+    String password,
+    bool rememberLogin,
+  ) async {
     if (await networkInfo.isConnected) {
       try {
         late LoginBean bean;
@@ -57,6 +61,7 @@ class AuthRepositoryImpl extends AuthRepository {
               String appToken = data.token ?? "";
               await preferences.setUserToken(appToken);
               await preferences.setUserLogged();
+              await preferences.setRememberLogin(rememberLogin);
               await preferences.setUserInfo(userBeanToJson(data));
               if (data.roleNames!.isNotEmpty) {
                 String roleName = data.roleNames![0];

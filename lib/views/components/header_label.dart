@@ -30,6 +30,7 @@ class HeaderLabel extends StatelessWidget {
           textAlign: TextAlign.left,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.w400,
+                fontSize: 14.sp,
               ),
         ),
       ],
