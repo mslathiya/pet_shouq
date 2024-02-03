@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../../config/config.dart';
+import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 
 class OtherDetails extends StatelessWidget {
   const OtherDetails({
     super.key,
-    required this.t,
+    this.itemBean,
   });
 
-  final ApplicationLocalizations t;
+  final DietDetailBean? itemBean;
 
   @override
   Widget build(BuildContext context) {
@@ -43,23 +44,23 @@ class OtherDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           InfoLabel(
-            title: t.translate("food_type"),
-            description: 'Small dog treat',
+            title: "food_type".tr,
+            description: itemBean?.dietFoodName ?? "",
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("portion_size"),
-            description: '2 treats',
+            title: "portion_size".tr,
+            description: itemBean?.dietPortionSize ?? "",
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("special_instruction"),
-            description: 'Given as a reward for good behavior',
+            title: "special_instruction".tr,
+            description: itemBean?.dietSpecialInstructions ?? "",
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("weight"),
-            description: '45.2 pounds',
+            title: "weight".tr,
+            description: itemBean?.dietWeight ?? "",
             padding: EdgeInsets.only(bottom: 5.h),
           ),
         ],

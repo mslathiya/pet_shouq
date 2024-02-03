@@ -124,12 +124,15 @@ class _NutritionDetailsState extends State<NutritionDetails> {
             ),
             NutritionPrice(
               info: info,
-              onPress: () => Get.offNamed(petAddNutrition, arguments: [
-                {
-                  "mode": "Edit",
-                },
-                {"info": info}
-              ]),
+              onPress: () => Get.offNamed(
+                petAddNutrition,
+                arguments: [
+                  {
+                    "mode": "Edit",
+                  },
+                  {"info": info}
+                ],
+              ),
             )
           ],
         ),

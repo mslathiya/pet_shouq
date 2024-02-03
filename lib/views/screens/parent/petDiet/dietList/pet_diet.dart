@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../controller/controllers.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -55,11 +56,25 @@ class _PetDietState extends State<PetDiet> {
                               final item = controller.dietLogListArray[index];
                               return DietListItem(
                                 itemIndex: index,
-                                onViewDetail: () {
-                                  Navigator.pushNamed(context, petDietDetail);
+                                onViewDetail: () async {
+                                  final response = await controller
+                                      .getDietDetail(item.dietId!);
+
+                                  Get.toNamed(petDietDetail, arguments: [
+                                    {"index": index},
+                                    {"info": response}
+                                  ]);
                                 },
                                 info: item,
-                                onDeleteLog: () {},
+                                onDeleteLog: () {
+                                  CommonHelper.dialogBuilderDeleteItem(
+                                    title: "delete_item".tr,
+                                    subTitle: "delete_item_msg".tr,
+                                    onPressOkay: () {
+                                      controller.deleteDietLog(item.dietId!);
+                                    },
+                                  );
+                                },
                               );
                             }
 

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../controller/controllers.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -55,9 +56,15 @@ class _PetNutritionState extends State<PetNutrition> {
                               return NutritionListItem(
                                 itemBean: item,
                                 itemIndex: index,
-                                onDeleteItem: () => _dialogBuilderDeleteItem(
-                                  () => controller.deleteNutrition(item.nutId!),
-                                ),
+                                onDeleteItem: () {
+                                  CommonHelper.dialogBuilderDeleteItem(
+                                    title: "delete_item".tr,
+                                    subTitle: "delete_item_msg".tr,
+                                    onPressOkay: () {
+                                      controller.deleteNutrition(item.nutId!);
+                                    },
+                                  );
+                                },
                                 onViewDetail: () async {
                                   final response = await controller
                                       .getNutritionDetail(item.nutId!);
@@ -141,42 +148,6 @@ class _PetNutritionState extends State<PetNutrition> {
           );
         },
       ),
-    );
-  }
-
-  void _dialogBuilderDeleteItem(VoidCallback onPressOkay) {
-    Get.generalDialog(
-      barrierLabel: "Barrier",
-      barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: const Duration(milliseconds: 700),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return CustomAlertDialog(
-          topIcon: AppAssets.icDeleteAccount,
-          label: "delete_item".tr,
-          subLabel: "delete_item_msg".tr,
-          buttonText: "btn_delete".tr,
-          onPressButton: onPressOkay,
-          secondaryButtonText: "btn_cancel".tr,
-          onPressSecondaryButton: () {},
-        );
-      },
-      transitionBuilder: (_, anim, __, child) {
-        Tween<Offset> tween;
-        if (anim.status == AnimationStatus.reverse) {
-          tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        } else {
-          tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
-        }
-
-        return SlideTransition(
-          position: tween.animate(anim),
-          child: FadeTransition(
-            opacity: anim,
-            child: child,
-          ),
-        );
-      },
     );
   }
 }

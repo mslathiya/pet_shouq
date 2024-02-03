@@ -131,10 +131,10 @@ class DietLogController extends GetxController implements GetxService {
     });
   }
 
-  Future<DietDetailBean?> getDietDetail(int nutritionId) async {
+  Future<DietDetailBean?> getDietDetail(int dietId) async {
     _removingDietLog = true;
     update();
-    final result = await repository.getDietLogDetail(petId);
+    final result = await repository.getDietLogDetail(dietId);
     DietDetailBean? information;
     result.fold<void>(
       (failure) {
@@ -192,6 +192,31 @@ class DietLogController extends GetxController implements GetxService {
   /* -------------------------------------------------------------------------- */
   /*                               Add/Edit module                              */
   /* -------------------------------------------------------------------------- */
+
+  void editDietLog() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null && argumentData[0]['mode'] == "Edit") {
+      inEditMode = true;
+      DietDetailBean info = argumentData[1]['info'];
+      dietId = info.dietId!;
+
+      _foodName.text = info.dietFoodName ?? "";
+      _portionSize.text = info.dietPortionSize ?? "";
+      _specialInstructions.text = info.dietSpecialInstructions ?? "";
+      _weight.text = info.dietWeight ?? "";
+
+      _date = DateFormat('hh:mm:ss').format(
+        info.dietDate ?? DateTime.now(),
+      );
+      _time = DateFormat('hh:mm:ss').format(
+        info.dietDate ?? DateTime.now(),
+      );
+      _water = info.dietWater ?? "Yes";
+
+      _foodNameError = null;
+      _waterError = null;
+    }
+  }
 
   void openDatePicker() async {
     final DateTime? picked = await showDatePicker(
@@ -256,6 +281,7 @@ class DietLogController extends GetxController implements GetxService {
                   onTap: () {
                     Get.back();
                     _water = e;
+                    update();
                   },
                   behavior: HitTestBehavior.opaque,
                   child: Padding(
@@ -382,9 +408,10 @@ class DietLogController extends GetxController implements GetxService {
     _date = DateFormat('yyyy-MM-dd').format(
       DateTime.now(),
     );
-    _time = DateFormat('yyyy-MM-dd').format(
+    _time = DateFormat('hh:mm:ss').format(
       DateTime.now(),
     );
+
     _water = "Yes";
 
     _foodNameError = null;

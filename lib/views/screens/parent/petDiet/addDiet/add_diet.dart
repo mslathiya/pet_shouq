@@ -17,7 +17,13 @@ class AddDiet extends StatefulWidget {
 }
 
 class _AddDietState extends State<AddDiet> {
-  int selectedOption = 1;
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<DietLogController>().editDietLog();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,18 +148,10 @@ class _AddDietState extends State<AddDiet> {
                                     headerLabel: "date".tr,
                                   ),
                                   inputHint: controller.water ?? "lbl_water".tr,
-                                  suffixIcon: SizedBox(
-                                    width: 20.w,
-                                    height: 20.h,
-                                    child: SvgPicture.asset(
-                                      AppAssets.icCalendar,
-                                      height: 18.sp,
-                                      width: 18.sp,
-                                      colorFilter: ColorFilter.mode(
-                                        AppColors.hintColor,
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
+                                  suffixIcon: Icon(
+                                    Entypo.chevron_down,
+                                    size: 26.sp,
+                                    color: AppColors.hintColor,
                                   ),
                                   onSelectItem: () =>
                                       controller.selectWithWater(),

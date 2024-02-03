@@ -1,15 +1,35 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../config/config.dart';
+import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
+import "../../../../../../helper/helpers.dart";
 
-class DietInfo extends StatelessWidget {
-  const DietInfo({super.key});
+class PetInfo extends StatelessWidget {
+  const PetInfo({super.key, required this.itemBean});
+  final DietDetailBean? itemBean;
 
   @override
   Widget build(BuildContext context) {
+    if (itemBean == null) {
+      return const SizedBox();
+    }
+
+    bool haveImage = false;
+    String imagePath = "";
+
+    PetItemBean bean = itemBean!.pet!;
+
+    if (bean.petProfilePhoto != null) {
+      imagePath = bean.fullProfileImageUrl.toString();
+      haveImage = imagePath.hasValidUrl();
+    }
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 10.sp,
@@ -43,22 +63,27 @@ class DietInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 65.w,
-                  width: 65.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.petType,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.sp),
-                    ),
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      AppAssets.typeDog,
-                      height: 36.sp,
-                      width: 36.sp,
-                    ),
-                  ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.sp),
+                  child: !haveImage
+                      ? Image.asset(
+                          AppAssets.launcherIcon,
+                          height: 70.w,
+                          width: 70.w,
+                          fit: BoxFit.cover,
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: imagePath,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover,
+                          fadeInDuration: const Duration(milliseconds: 60),
+                          fadeInCurve: Curves.easeIn,
+                          height: 70.w,
+                          width: 70.w,
+                        ),
                 ),
                 Expanded(
                   child: Padding(
@@ -70,7 +95,7 @@ class DietInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Rimadyl',
+                          itemBean?.dietFoodName ?? "",
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -82,17 +107,20 @@ class DietInfo extends StatelessWidget {
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icCalendar,
-                          value: '2023-10-15',
+                          value: itemBean!.dietDate != null
+                              ? DateFormat("dd/MM/yyyy")
+                                  .format(itemBean!.dietDate!)
+                              : "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icWaterGlass,
-                          value: 'Yes',
+                          value: itemBean!.dietWater ?? "",
                           padding: EdgeInsets.zero,
                         ),
                       ],
@@ -103,7 +131,15 @@ class DietInfo extends StatelessWidget {
             ),
           ),
           EditButton(
-            onPressEdit: () => Navigator.pushNamed(context, petAddDiet),
+            onPressEdit: () => Get.offNamed(
+              petAddDiet,
+              arguments: [
+                {
+                  "mode": "Edit",
+                },
+                {"info": itemBean}
+              ],
+            ),
           ),
         ],
       ),
