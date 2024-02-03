@@ -260,6 +260,7 @@ class AuthController extends GetxController implements GetxService {
         );
       },
       (success) {
+        resetOldData();
         _loadingForgotPassword = false;
         update();
 
@@ -290,5 +291,14 @@ class AuthController extends GetxController implements GetxService {
         );
       },
     );
+  }
+
+  void resetOldData() {
+    _oldPasswordError = null;
+    _newPasswordError = null;
+    _confirmPasswordError = null;
+    _oldPassword.clear();
+    _newPassword.clear();
+    _confirmPassword.clear();
   }
 }

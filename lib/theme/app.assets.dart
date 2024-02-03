@@ -6,6 +6,7 @@ class AppAssets {
   static const headerView = "assets/images/header_bg.png";
   static const appLogo = "assets/images/app_logo.png";
   static const appLogoCircle = "assets/images/logo_circle.png";
+  static const launcherIcon = "assets/images/launcher_icon.png";
   static const arrowRight = "assets/svg/arrow_right.svg";
   static const passwordShied = "assets/svg/ic_pwd_shield.svg";
   static const arrowLeft = "assets/svg/arrow_left.svg";
@@ -73,6 +74,7 @@ class AppAssets {
   static const icPencil = "assets/svg/edit_pencil.svg";
   static const icAvailability = "assets/svg/ic_availability.svg";
   static const editIcon = "assets/svg/edit.svg";
+  static const icViewDetails = "assets/svg/ic_view_detail.svg";
 
   static const typeDog = "assets/images/type_dog.png";
   static const timeContainer = "assets/images/time_container.png";

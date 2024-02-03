@@ -172,8 +172,8 @@ class AppStrings extends Translations {
           "portion_size": "Portion Size",
           "special_instruction": "Special Instructions",
           "weight": "Weight",
-          "lbl_food_type": "Food Type",
-          "hint_food_type": "Select Food Type",
+          "lbl_food_type": "Food Name",
+          "hint_food_type": "Enter Food Name",
           "date": "Date",
           "time": "Time",
           "lbl_meal_time": "Meal Time",
@@ -393,7 +393,9 @@ class AppStrings extends Translations {
           "no_medication_found": "No medication data found",
           "password_not_matched": "Password is not matched",
           "password_week":
-              "Password must contain one special later and 8 character long"
+              "Password must contain one special later and 8 character long",
+          "add_diet_msg": "Add new diet log by click on below button!",
+          "no_diet_found": "No diet log data found",
         },
       };
 }

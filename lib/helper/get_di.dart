@@ -67,6 +67,12 @@ Future<void> init() async {
       apiService: Get.find(),
     ),
   );
+  Get.lazyPut(
+    () => DietLogRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers

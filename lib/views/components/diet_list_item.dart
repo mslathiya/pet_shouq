@@ -2,18 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:intl/intl.dart';
 
+import '../../data/model/models.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
+import 'view_button.dart';
 
 class DietListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
+  final VoidCallback onDeleteLog;
   final int itemIndex;
+  final DietLogInfo info;
   const DietListItem({
     super.key,
     required this.onViewDetail,
     required this.itemIndex,
+    required this.info,
+    required this.onDeleteLog,
   });
 
   @override
@@ -31,7 +37,7 @@ class DietListItem extends StatelessWidget {
           extentRatio: 0.35,
           children: [
             CustomSlidableAction(
-              onPressed: (context) => {},
+              onPressed: (context) => onDeleteLog(),
               child: Container(
                 width: 45.w,
                 height: double.infinity,
@@ -81,7 +87,7 @@ class DietListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Dry dog food (Brand X)',
+                      info.dietFoodName ?? "",
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -100,17 +106,20 @@ class DietListItem extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: 110.sp,
-                          child: const LabelWithIcon(
+                          child: LabelWithIcon(
                             asset: AppAssets.icCalendar,
-                            value: '2023-10-15',
+                            value: info.dietDate != null
+                                ? DateFormat("dd/MM/yyyy")
+                                    .format(info.dietDate!)
+                                : "",
                             padding: EdgeInsets.zero,
                           ),
                         ),
                         SizedBox(
                           width: 100.sp,
-                          child: const LabelWithIcon(
+                          child: LabelWithIcon(
                             asset: AppAssets.icWaterGlass,
-                            value: 'Yes',
+                            value: info.dietWater ?? "",
                             padding: EdgeInsets.zero,
                           ),
                         )
@@ -119,29 +128,7 @@ class DietListItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Material(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: InkWell(
-                  onTap: onViewDetail,
-                  child: Container(
-                    width: 35.w,
-                    height: 35.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50.sp),
-                      ),
-                      color: AppColors.primary,
-                    ),
-                    child: Icon(
-                      Entypo.chevron_right,
-                      size: 18.sp,
-                      color: AppColors.fontMain,
-                    ),
-                  ),
-                ),
-              ),
+              ViewButton(onPressView: onViewDetail),
             ],
           ),
         ),

@@ -45,4 +45,13 @@ class Endpoints {
   static const addMedicationPost = "api/parent/pet/medication/add";
   static const updateMedicationPost = "api/parent/pet/medication/update/";
   static const removeMedicationDelete = "api/parent/pet/medication/delete/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                                Pet Diet Log                                */
+  /* -------------------------------------------------------------------------- */
+  static const dietListGet = "api/parent/pet/diet-log/list/";
+  static const dietDetailGet = "api/parent/pet/diet-log/detail/";
+  static const addDietPost = "api/parent/pet/diet-log/add";
+  static const updateDietPost = "api/parent/pet/diet-log/update/";
+  static const removeDietDelete = "api/parent/pet/diet-log/delete/";
 }

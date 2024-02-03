@@ -22,6 +22,8 @@ class ErrorResponseDto {
   List<String>? mediEndDate;
   List<String>? oldPassword;
   List<String>? passwordConfirmation;
+  List<String>? dietWater;
+  List<String>? dietFoodName;
   Errors? errors;
 
   ErrorResponseDto({
@@ -40,6 +42,8 @@ class ErrorResponseDto {
     this.mediEndDate,
     this.oldPassword,
     this.passwordConfirmation,
+    this.dietWater,
+    this.dietFoodName,
     this.errors,
   });
 
@@ -91,6 +95,12 @@ class ErrorResponseDto {
         passwordConfirmation: json["password_confirmation"] == null
             ? []
             : List<String>.from(json["password_confirmation"]!.map((x) => x)),
+        dietWater: json["diet_water"] == null
+            ? []
+            : List<String>.from(json["diet_water"]!.map((x) => x)),
+        dietFoodName: json["diet_food_name"] == null
+            ? []
+            : List<String>.from(json["diet_food_name"]!.map((x) => x)),
         errors: json["errors"] == null ? null : Errors.fromJson(json["errors"]),
       );
 
@@ -133,6 +143,12 @@ class ErrorResponseDto {
         "password_confirmation": passwordConfirmation == null
             ? []
             : List<dynamic>.from(passwordConfirmation!.map((x) => x)),
+        "diet_water": dietWater == null
+            ? []
+            : List<dynamic>.from(dietWater!.map((x) => x)),
+        "diet_food_name": dietFoodName == null
+            ? []
+            : List<dynamic>.from(dietFoodName!.map((x) => x)),
         "errors": errors?.toJson(),
       };
 }

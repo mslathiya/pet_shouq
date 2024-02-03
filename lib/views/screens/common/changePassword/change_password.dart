@@ -15,6 +15,12 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
   @override
+  void initState() {
+    Get.find<AuthController>().resetOldData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
