@@ -25,7 +25,7 @@ class _PetMedicationState extends State<PetMedication> {
       appBar: HeaderWithBack(
         withSearch: true,
         title: "pet_medication".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: GetBuilder<MedicationController>(
         builder: (controller) {
@@ -56,8 +56,7 @@ class _PetMedicationState extends State<PetMedication> {
                               return MedicationListItem(
                                 itemBean: item,
                                 onViewDetail: () {
-                                  Navigator.pushNamed(
-                                      context, petMedicationDetail);
+                                  Get.toNamed(petMedicationDetail);
                                 },
                                 itemIndex: index,
                               );

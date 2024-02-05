@@ -126,8 +126,7 @@ class Login extends StatelessWidget {
                                       ),
                                     ),
                                     GestureDetector(
-                                      onTap: () => Navigator.pushNamed(
-                                          context, forgotPassword),
+                                      onTap: () => Get.to(forgotPassword),
                                       child: Text(
                                         "forgot_password".tr,
                                         textAlign: TextAlign.center,

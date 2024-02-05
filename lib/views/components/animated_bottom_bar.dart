@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-import '../../config/config.dart';
 import '../../data/model/models.dart';
 import '../../theme/theme.dart';
 
@@ -11,13 +11,12 @@ class AnimatedBottomBar extends StatefulWidget {
   final List<NavigationBarItem> itemList;
   int currentIndex;
   final ValueChanged<int> onTapMenu;
-  final ApplicationLocalizations localizations;
+
   AnimatedBottomBar({
     super.key,
     required this.itemList,
     this.currentIndex = 0,
     required this.onTapMenu,
-    required this.localizations,
   });
 
   @override
@@ -73,7 +72,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
 
   Widget _buildText(String label) {
     return Text(
-      widget.localizations.translate(label),
+      label.tr,
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.displayMedium?.copyWith(
             height: 2,

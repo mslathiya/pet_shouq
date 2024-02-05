@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widget/appointment_header.dart';
@@ -35,13 +35,11 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
-        title: t.translate("screen_details"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_details".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -51,12 +49,13 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
             children: [
               const AppointmentInfo(),
               SingleLabelItem(
-                title: t.translate("date_time"),
+                title: "date_time".tr,
                 subTitle: "01-Jan-2024, 4:00 PM",
                 asset: AppAssets.icCalendar,
               ),
               DetailButtons(
-                  onScheduleAppointment: () => _dialogBuilder(context)),
+                onScheduleAppointment: _dialogBuilder,
+              ),
               TabSelector(
                 tabList: _tabList,
                 currentIndex: _currentIndex,
@@ -65,7 +64,6 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
                     _currentIndex = index;
                   });
                 },
-                t: t,
               ),
               SizedBox(
                 height: 15.h,
@@ -78,9 +76,8 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
     );
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
-    return showGeneralDialog<void>(
-      context: context,
+  void _dialogBuilder() {
+    Get.generalDialog(
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),

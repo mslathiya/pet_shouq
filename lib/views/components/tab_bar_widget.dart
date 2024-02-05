@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../config/config.dart';
 import '../../theme/theme.dart';
 
 class TabWidget extends StatefulWidget {
@@ -129,7 +129,6 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return SizedBox(
       height: 48.h,
       // this generates our tabs buttons
@@ -175,7 +174,7 @@ class _TabWidgetState extends State<TabWidget> with TickerProviderStateMixin {
                   ),
                   child: Center(
                     child: Text(
-                      t.translate(_tabs[index]),
+                      _tabs[index].tr,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,

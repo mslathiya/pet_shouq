@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -12,95 +12,94 @@ class NutritionFeedingDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return ExpandableBox(
-      title: t.translate("nutrition_feeding_details"),
+      title: "nutrition_feeding_details".tr,
       infoList: const [],
       customWidget: Column(
         children: [
           InfoLabel(
-            title: t.translate("lbl_food_name"),
+            title: "lbl_food_name".tr,
             description: "Premium Puppy Chow",
           ),
           InfoLabel(
-            title: t.translate("lbl_brand"),
+            title: "lbl_brand".tr,
             description: "ABC Pet Foods",
           ),
           InfoLabel(
-            title: t.translate("food_type"),
+            title: "food_type".tr,
             description: "Dry Kibble",
           ),
           InfoLabel(
-            title: t.translate("lbl_life_stage"),
+            title: "lbl_life_stage".tr,
             description: "Puppy",
           ),
           InfoLabel(
-            title: t.translate("lbl_species"),
+            title: "lbl_species".tr,
             description: "Dog",
           ),
           InfoLabel(
-            title: t.translate("ingredients"),
+            title: "ingredients".tr,
             description:
                 "Chicken meal, brown rice, peas, barley, chicken fat, etc.",
           ),
           InfoLabel(
-            title: t.translate("nutrition_content"),
+            title: "nutrition_content".tr,
             description: "50g",
           ),
           InfoLabel(
-            title: t.translate("protein"),
+            title: "protein".tr,
             description: "28g",
           ),
           InfoLabel(
-            title: t.translate("fat"),
+            title: "fat".tr,
             description: "12g",
           ),
           InfoLabel(
-            title: t.translate("carbohydrates"),
+            title: "carbohydrates".tr,
             description: "48g",
           ),
           InfoLabel(
-            title: t.translate("fiber"),
+            title: "fiber".tr,
             description: "5g",
           ),
           InfoLabel(
-            title: t.translate("calories"),
+            title: "calories".tr,
             description: "350 kcal",
           ),
           InfoLabel(
-            title: t.translate("vitamins"),
+            title: "vitamins".tr,
             description: "Vitamin A (10,000 IU), Vitamin C (30mg)",
           ),
           InfoLabel(
-            title: t.translate("minerals"),
+            title: "minerals".tr,
             description: "Calcium (1.2%),Phosphorus (1%)",
           ),
           InfoLabel(
-            title: t.translate("omega_three"),
+            title: "omega_three".tr,
             description: "0.5g",
           ),
           InfoLabel(
-            title: t.translate("omega_six"),
+            title: "omega_six".tr,
             description: "2.5g",
           ),
           InfoLabel(
-            title: t.translate("guidelines"),
+            title: "guidelines".tr,
             description: "Lorem ipsum",
           ),
           InfoLabel(
-            title: t.translate("small_breed"),
+            title: "small_breed".tr,
             description: "1/2 to 1 cup per day",
           ),
           InfoLabel(
-            title: t.translate("large_breed"),
+            title: "large_breed".tr,
             description: "2 to 3 cups per day",
           ),
           InfoLabel(
-            title: t.translate("special_feature"),
+            title: "special_feature".tr,
             description: "Contains DHA for brain development",
           ),
           InfoLabel(
-            title: t.translate("special_feature"),
+            title: "special_feature".tr,
             description: "Contains DHA for brain development",
             customRight: RichText(
               textAlign: TextAlign.right,
@@ -117,7 +116,7 @@ class NutritionFeedingDetail extends StatelessWidget {
                     child: SizedBox(width: 4.w),
                   ),
                   TextSpan(
-                    text: t.translate("per_pound"),
+                    text: "per_pound".tr,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: AppColors.gray,
                           fontSize: 13.sp,

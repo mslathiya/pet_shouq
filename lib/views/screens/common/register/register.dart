@@ -5,8 +5,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:pet_shouq/config/route.config.dart';
 
+import '../../../../config/config.dart';
 import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
@@ -743,6 +743,8 @@ class _RegisterState extends State<Register> {
                                       onTap: () {
                                         if (controller.registerKey.currentState!
                                             .validate()) {
+                                          FocusManager.instance.primaryFocus!
+                                              .unfocus();
                                           // controller.registerNewUser();
                                           Get.toNamed(verification);
                                         }

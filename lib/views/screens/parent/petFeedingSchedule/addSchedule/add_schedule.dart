@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/day_view.dart';
@@ -28,12 +28,12 @@ class _AddScheduleState extends State<AddSchedule> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
+
     double idealSize = width / 7 - 12.w;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_add_feed_schedule"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_add_feed_schedule".tr,
+        onPressBack: () => Get.back(),
       ),
       body: LayoutBuilder(
         builder: (_, constraints) {
@@ -130,7 +130,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                   activeTab = 1;
                                 })
                               },
-                              buttonTitle: t.translate("type_single"),
+                              buttonTitle: "type_single".tr,
                               width: width * 0.44,
                               buttonColor: activeTab == 2
                                   ? AppColors.timeSelector
@@ -151,7 +151,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                   activeTab = 2;
                                 })
                               },
-                              buttonTitle: t.translate("type_multiple"),
+                              buttonTitle: "type_multiple".tr,
                               width: width * 0.44,
                               buttonColor: activeTab == 1
                                   ? AppColors.timeSelector
@@ -204,7 +204,7 @@ class _AddScheduleState extends State<AddSchedule> {
                                   title: RichText(
                                     textAlign: TextAlign.left,
                                     text: TextSpan(
-                                      text: t.translate("repeat"),
+                                      text: "repeat".tr,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineMedium
@@ -289,9 +289,9 @@ class _AddScheduleState extends State<AddSchedule> {
                       InputField(
                         headerWidget: InputHeader(
                           compulsory: true,
-                          headerLabel: t.translate("lbl_title"),
+                          headerLabel: "lbl_title".tr,
                         ),
-                        inputHint: t.translate("hint_title"),
+                        inputHint: "hint_title".tr,
                       ),
                       SizedBox(
                         height: 15.h,
@@ -299,9 +299,9 @@ class _AddScheduleState extends State<AddSchedule> {
                       InputField(
                         headerWidget: InputHeader(
                           compulsory: false,
-                          headerLabel: t.translate("lbl_note"),
+                          headerLabel: "lbl_note".tr,
                         ),
-                        inputHint: t.translate("hint_note"),
+                        inputHint: "hint_note".tr,
                         isMultiline: true,
                       ),
                       SizedBox(
@@ -310,10 +310,8 @@ class _AddScheduleState extends State<AddSchedule> {
                       Align(
                         alignment: Alignment.center,
                         child: ButtonView(
-                          onTap: () => Navigator.pop(
-                            context,
-                          ),
-                          buttonTitle: t.translate("btn_save"),
+                          onTap: () => Get.back(),
+                          buttonTitle: "btn_save".tr,
                           width: width - 20,
                           buttonStyle: TextStyle(
                             fontSize: 8.sp,

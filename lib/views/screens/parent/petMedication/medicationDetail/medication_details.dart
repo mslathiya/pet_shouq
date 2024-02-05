@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/dosage_info.dart';
@@ -12,11 +12,10 @@ class MedicationDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("medication_details"),
-        onPressBack: () => Navigator.pop(context),
+        title: "medication_details".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -25,21 +24,21 @@ class MedicationDetails extends StatelessWidget {
           children: [
             const MedicationInfo(),
             SingleLabelItem(
-              title: t.translate("date_nutrition"),
+              title: "date_nutrition".tr,
               subTitle: "2023-05-01 To  2023-05-14 / 14 days",
               asset: AppAssets.icCalendar,
             ),
             const DosageInfo(),
             OtherSpecification(
-              title: t.translate("prescription_reason"),
+              title: "prescription_reason".tr,
               description: "Osteoarthritis pain",
             ),
             OtherSpecification(
-              title: t.translate("administrative_info"),
+              title: "administrative_info".tr,
               description: "Administer with food",
             ),
             OtherSpecification(
-              title: t.translate("special_notes"),
+              title: "special_notes".tr,
               description: "Watch for any signs of gastrointestinal upset.",
             ),
           ],

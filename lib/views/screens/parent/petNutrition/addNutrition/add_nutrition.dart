@@ -33,7 +33,7 @@ class _AddNutritionState extends State<AddNutrition> {
         title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
             ? "edit_screen_nutrition_feeding".tr
             : "screen_nutrition_feeding".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -113,8 +113,10 @@ class _AddNutritionState extends State<AddNutrition> {
                                   color: AppColors.hintColor,
                                 ),
                               ),
-                              onSelectItem: () =>
-                                  controller.onSelectNutritionType(),
+                              onSelectItem: () {
+                                FocusManager.instance.primaryFocus!.unfocus();
+                                controller.onSelectNutritionType();
+                              },
                             ),
                             SizedBox(
                               height: 15.h,
@@ -417,6 +419,8 @@ class _AddNutritionState extends State<AddNutrition> {
                                 onTap: () {
                                   if (controller.formKey.currentState!
                                       .validate()) {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
                                     controller.saveNutritionInfo();
                                   }
                                 },

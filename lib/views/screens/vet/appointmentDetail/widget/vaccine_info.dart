@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -12,7 +12,6 @@ class VaccinationDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.only(
         left: 10.sp,
@@ -41,7 +40,7 @@ class VaccinationDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            t.translate("pet_vaccination_detail"),
+            "pet_vaccination_detail".tr,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -54,47 +53,47 @@ class VaccinationDetails extends StatelessWidget {
             height: 5.h,
           ),
           InfoLabel(
-            title: t.translate("lbl_species"),
+            title: "lbl_species".tr,
             description: 'Dog',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("vaccination_name"),
+            title: "vaccination_name".tr,
             description: 'Rabies',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("vaccination_type"),
+            title: "vaccination_type".tr,
             description: 'Core',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("vaccination_date"),
+            title: "vaccination_date".tr,
             description: '01-Jan-2024',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("next_due_date"),
+            title: "next_due_date".tr,
             description: '01-Jan-2024',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("next_due_date"),
+            title: "next_due_date".tr,
             description: '01-Jan-2024',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("vaccination_provider"),
+            title: "vaccination_provider".tr,
             description: 'ABC Animal Clinic',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("vaccination_lot_no"),
+            title: "vaccination_lot_no".tr,
             description: '12345',
             padding: EdgeInsets.only(bottom: 5.h),
           ),
           InfoLabel(
-            title: t.translate("vaccination_id"),
+            title: "vaccination_id".tr,
             description: 'VC-2022-12345',
             padding: EdgeInsets.only(bottom: 5.h),
           ),

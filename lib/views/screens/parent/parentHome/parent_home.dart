@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/enum/enums.dart';
@@ -43,7 +44,7 @@ class _ParentHomeState extends State<ParentHome> {
               itemBuilder: (_, index) {
                 return DoctorListItem(
                   onViewDetail: () {
-                    Navigator.pushNamed(context, doctorDetails);
+                    Get.to(doctorDetails);
                   },
                   viewType: ViewType.typeList,
                 );

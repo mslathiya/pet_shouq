@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../components/components.dart';
 
 class HeaderView extends StatelessWidget {
@@ -11,7 +11,6 @@ class HeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tr = ApplicationLocalizations.of(context)!;
     return Column(
       children: [
         SizedBox(
@@ -24,7 +23,7 @@ class HeaderView extends StatelessWidget {
           height: 10.h,
         ),
         Text(
-          tr.translate('current_appointment'),
+          'current_appointment'.tr,
           textAlign: TextAlign.left,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,

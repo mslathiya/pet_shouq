@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../components/components.dart';
 
 class TermsConditions extends StatelessWidget {
@@ -10,11 +10,10 @@ class TermsConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_terms"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_terms".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

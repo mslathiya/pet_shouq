@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
 class ScheduleWidget extends StatelessWidget {
   const ScheduleWidget({
     super.key,
-    required this.localizations,
   });
-
-  final ApplicationLocalizations localizations;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +39,7 @@ class ScheduleWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            localizations.translate("opening_time"),
+            "opening_time".tr,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,

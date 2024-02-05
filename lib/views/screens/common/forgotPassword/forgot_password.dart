@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
-import '../../../../theme/theme.dart';
+import '../../../../helper/helpers.dart';
 import '../../../components/components.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -16,7 +16,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -40,8 +39,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           HeaderLabel(
-                            header: t.translate("forgot_password"),
-                            subHeader: t.translate('forgot_password_text'),
+                            header: "forgot_password".tr,
+                            subHeader: 'forgot_password_text'.tr,
                           ),
                           SizedBox(
                             height: 15.h,
@@ -49,9 +48,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           InputField(
                             headerWidget: InputHeader(
                               compulsory: true,
-                              headerLabel: t.translate("lbl_email"),
+                              headerLabel: "lbl_email".tr,
                             ),
-                            inputHint: t.translate("hint_email"),
+                            inputHint: "hint_email".tr,
                           ),
                           SizedBox(
                             height: 25.h,
@@ -60,9 +59,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             alignment: Alignment.center,
                             child: ButtonView(
                               onTap: () {
-                                _dialogBuilder(context, t);
+                                CommonHelper.dialogBuilderDeleteItem(
+                                  title: "reset_link_sent".tr,
+                                  subTitle: "reset_link_message".tr,
+                                  onPressOkay: () {
+                                    Get.back();
+                                  },
+                                );
                               },
-                              buttonTitle: t.translate("btn_send"),
+                              buttonTitle: "btn_send".tr,
                               width: width - 20,
                             ),
                           ),
@@ -76,49 +81,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           );
         },
       ),
-    );
-  }
-
-  Future<void> _dialogBuilder(
-      BuildContext context, ApplicationLocalizations t) {
-    return showGeneralDialog<void>(
-      context: context,
-      barrierLabel: "Barrier",
-      barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: const Duration(milliseconds: 700),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return CustomAlertDialog(
-          topIcon: AppAssets.passwordShied,
-          label: t.translate("reset_link_sent"),
-          subLabel: t.translate("reset_link_message"),
-          buttonText: t.translate("btn_okay"),
-          onPressButton: () {
-            Future.delayed(
-              const Duration(milliseconds: 500),
-              () {
-                Navigator.pop(context);
-              },
-            );
-          },
-        );
-      },
-      transitionBuilder: (_, anim, __, child) {
-        Tween<Offset> tween;
-        if (anim.status == AnimationStatus.reverse) {
-          tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        } else {
-          tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
-        }
-
-        return SlideTransition(
-          position: tween.animate(anim),
-          child: FadeTransition(
-            opacity: anim,
-            child: child,
-          ),
-        );
-      },
     );
   }
 }

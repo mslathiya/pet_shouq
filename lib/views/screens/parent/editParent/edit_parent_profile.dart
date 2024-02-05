@@ -146,8 +146,10 @@ class _EditParentProfileState extends State<EditParentProfile> {
                                   size: 26.sp,
                                   color: AppColors.hintColor,
                                 ),
-                                onSelectItem: () =>
-                                    controller.openGenderPicker(),
+                                onSelectItem: () {
+                                  FocusManager.instance.primaryFocus!.unfocus();
+                                  controller.openGenderPicker();
+                                },
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -178,8 +180,11 @@ class _EditParentProfileState extends State<EditParentProfile> {
                                           ),
                                         ),
                                       ),
-                                      onSelectItem: () =>
-                                          controller.openDatePicker(),
+                                      onSelectItem: () {
+                                        FocusManager.instance.primaryFocus!
+                                            .unfocus();
+                                        controller.openDatePicker();
+                                      },
                                     ),
                                   ),
                                   SizedBox(
@@ -313,6 +318,8 @@ class _EditParentProfileState extends State<EditParentProfile> {
                                     if (controller
                                         .editParentProfileFormKey.currentState!
                                         .validate()) {
+                                      FocusManager.instance.primaryFocus!
+                                          .unfocus();
                                       controller.updateParentProfile();
                                     }
                                   },

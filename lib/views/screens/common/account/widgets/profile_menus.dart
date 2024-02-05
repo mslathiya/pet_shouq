@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/enum/enums.dart';
@@ -14,7 +15,6 @@ class ProfileMenus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -26,7 +26,7 @@ class ProfileMenus extends StatelessWidget {
             bottom: 10.h,
           ),
           child: Text(
-            t.translate("account"),
+            "account".tr,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   fontSize: 16.sp,
@@ -35,28 +35,28 @@ class ProfileMenus extends StatelessWidget {
         ),
         userType == UserType.typeParent
             ? MenuItem(
-                title: t.translate("screen_booking_history"),
+                title: "screen_booking_history".tr,
                 iconName: AppAssets.icBookingHistory,
                 onPressMenu: () => onTapMenu(petAppointment),
               )
             : const SizedBox(),
         MenuItem(
-          title: t.translate("screen_change_password"),
+          title: "screen_change_password".tr,
           iconName: AppAssets.icChangePassword,
           onPressMenu: () => onTapMenu(changePassword),
         ),
         MenuItem(
-          title: t.translate("screen_notifications"),
+          title: "screen_notifications".tr,
           iconName: AppAssets.icNotification,
           onPressMenu: () => onTapMenu(notifications),
         ),
         MenuItem(
-          title: t.translate("screen_privacy_policy"),
+          title: "screen_privacy_policy".tr,
           iconName: AppAssets.icPrivacyPolicy,
           onPressMenu: () => onTapMenu(privacyPolicy),
         ),
         MenuItem(
-          title: t.translate("screen_terms"),
+          title: "screen_terms".tr,
           iconName: AppAssets.icTerms,
           onPressMenu: () => onTapMenu(termsCondition),
         ),
@@ -67,7 +67,7 @@ class ProfileMenus extends StatelessWidget {
             bottom: 10.h,
           ),
           child: Text(
-            t.translate("help"),
+            "help".tr,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   fontSize: 16.sp,
@@ -75,12 +75,12 @@ class ProfileMenus extends StatelessWidget {
           ),
         ),
         MenuItem(
-          title: t.translate("screen_contact_us"),
+          title: "screen_contact_us".tr,
           iconName: AppAssets.icContactUs,
           onPressMenu: () => onTapMenu(contactUs),
         ),
         MenuItem(
-          title: t.translate("screen_faq"),
+          title: "screen_faq".tr,
           iconName: AppAssets.icMostAsked,
           onPressMenu: () => onTapMenu(topAsked),
         ),

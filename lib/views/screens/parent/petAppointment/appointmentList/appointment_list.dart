@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../components/components.dart';
@@ -14,13 +15,12 @@ class AppointmentList extends StatefulWidget {
 class _AppointmentListState extends State<AppointmentList> {
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
         withSearch: true,
-        title: t.translate("screen_appointment_booking"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_appointment_booking".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: ListView.builder(
@@ -31,9 +31,8 @@ class _AppointmentListState extends State<AppointmentList> {
           ),
           itemBuilder: (_, index) {
             return AppointmentListItem(
-              t: t,
               onViewDetail: () {
-                Navigator.pushNamed(context, petBookingDetails);
+                Get.toNamed(petBookingDetails);
               },
             );
           },

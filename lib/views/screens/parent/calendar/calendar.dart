@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../../config/config.dart';
 import '../../../../data/enum/enums.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
@@ -45,10 +45,9 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: TabHeader(
-        title: t.translate("tab_calendar"),
+        title: "tab_calendar".tr,
       ),
       body: SingleChildScrollView(
         child: Column(

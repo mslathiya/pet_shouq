@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
@@ -12,7 +12,6 @@ class DietDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -76,27 +75,27 @@ class DietDetails extends StatelessWidget {
           title: "7:00 Am",
           infoList: [
             MedicalInfo(
-              title: t.translate("food_type"),
+              title: "food_type".tr,
               description: "Dry dog food (Brand X)",
             ),
             MedicalInfo(
-              title: t.translate("portion_size"),
+              title: "portion_size".tr,
               description: "1.5 cups",
             ),
             MedicalInfo(
-              title: t.translate("lbl_brand"),
+              title: "lbl_brand".tr,
               description: "Dry Kibble",
             ),
             MedicalInfo(
-              title: t.translate("special_instruction"),
+              title: "special_instruction".tr,
               description: "No special instructions",
             ),
             MedicalInfo(
-              title: t.translate("lbl_water"),
+              title: "lbl_water".tr,
               description: "Yes",
             ),
             MedicalInfo(
-              title: t.translate("weight"),
+              title: "weight".tr,
               description: "45.2 pounds",
             )
           ],

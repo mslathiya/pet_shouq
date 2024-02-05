@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 import '../../../../config/config.dart';
@@ -20,12 +21,11 @@ class _EditVetProfileState extends State<EditVetProfile> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_edit_profile"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_edit_profile".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -51,7 +51,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         ),
                         InputHeader(
                           compulsory: true,
-                          headerLabel: t.translate("lbl_veterinarian_name"),
+                          headerLabel: "lbl_veterinarian_name".tr,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +59,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                           children: [
                             Expanded(
                               child: InputField(
-                                inputHint: t.translate("hint_first_name"),
+                                inputHint: "hint_first_name".tr,
                               ),
                             ),
                             SizedBox(
@@ -67,7 +67,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                             ),
                             Expanded(
                               child: InputField(
-                                inputHint: t.translate("hint_last_name"),
+                                inputHint: "hint_last_name".tr,
                               ),
                             )
                           ],
@@ -78,9 +78,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_display_name"),
+                            headerLabel: "lbl_display_name".tr,
                           ),
-                          inputHint: t.translate("hint_display_name"),
+                          inputHint: "hint_display_name".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -89,9 +89,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("veterinarian_special"),
+                            headerLabel: "veterinarian_special".tr,
                           ),
-                          inputHint: t.translate("hint_specialty"),
+                          inputHint: "hint_specialty".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -100,9 +100,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("lbl_email"),
+                            headerLabel: "lbl_email".tr,
                           ),
-                          inputHint: t.translate("hint_email"),
+                          inputHint: "hint_email".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -110,7 +110,7 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         ),
                         PhoneInput(
                           isCompulsory: true,
-                          headerLabel: t.translate("lbl_parent_phone"),
+                          headerLabel: "lbl_parent_phone".tr,
                         ),
                         SizedBox(
                           height: 15.h,
@@ -118,9 +118,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_qualification"),
+                            headerLabel: "lbl_qualification".tr,
                           ),
-                          inputHint: t.translate("hint_qualification"),
+                          inputHint: "hint_qualification".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -129,9 +129,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_profile_summary"),
+                            headerLabel: "lbl_profile_summary".tr,
                           ),
-                          inputHint: t.translate("hint_summary"),
+                          inputHint: "hint_summary".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -140,9 +140,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_license_no"),
+                            headerLabel: "lbl_license_no".tr,
                           ),
-                          inputHint: t.translate("hint_license_no"),
+                          inputHint: "hint_license_no".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -154,11 +154,10 @@ class _EditVetProfileState extends State<EditVetProfile> {
                           children: [
                             Expanded(
                               child: SelectorField(
-                                inputHint: t.translate("hint_select_date"),
+                                inputHint: "hint_select_date".tr,
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel:
-                                      t.translate("lbl_license_start_date"),
+                                  headerLabel: "lbl_license_start_date".tr,
                                 ),
                                 suffixIcon: SizedBox(
                                   width: 24.w,
@@ -181,11 +180,10 @@ class _EditVetProfileState extends State<EditVetProfile> {
                             ),
                             Expanded(
                               child: SelectorField(
-                                inputHint: t.translate("hint_select_date"),
+                                inputHint: "hint_select_date".tr,
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel:
-                                      t.translate("lbl_license_end_date"),
+                                  headerLabel: "lbl_license_end_date".tr,
                                 ),
                                 suffixIcon: SizedBox(
                                   width: 24.w,
@@ -210,10 +208,10 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         ),
                         SelectorField(
                           documentUploader: true,
-                          inputHint: t.translate("lbl_document"),
+                          inputHint: "lbl_document".tr,
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("hint_document"),
+                            headerLabel: "hint_document".tr,
                           ),
                           suffixIcon: Container(
                             decoration: BoxDecoration(
@@ -246,9 +244,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("lbl_experience"),
+                            headerLabel: "lbl_experience".tr,
                           ),
-                          inputHint: t.translate("hint_experience"),
+                          inputHint: "hint_experience".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -257,9 +255,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_language_spoken"),
+                            headerLabel: "lbl_language_spoken".tr,
                           ),
-                          inputHint: t.translate("hint_languages"),
+                          inputHint: "hint_languages".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -268,9 +266,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_consent"),
+                            headerLabel: "lbl_consent".tr,
                           ),
-                          inputHint: t.translate("hint_consent"),
+                          inputHint: "hint_consent".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -279,9 +277,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: false,
-                            headerLabel: t.translate("lbl_address"),
+                            headerLabel: "lbl_address".tr,
                           ),
-                          inputHint: t.translate("hint_address"),
+                          inputHint: "hint_address".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -290,9 +288,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("location"),
+                            headerLabel: "location".tr,
                           ),
-                          inputHint: t.translate("hint_location"),
+                          inputHint: "hint_location".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -306,9 +304,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                               child: InputField(
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel: t.translate("lbl_city"),
+                                  headerLabel: "lbl_city".tr,
                                 ),
-                                inputHint: t.translate("hint_city"),
+                                inputHint: "hint_city".tr,
                               ),
                             ),
                             SizedBox(
@@ -318,9 +316,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                               child: InputField(
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel: t.translate("lbl_state"),
+                                  headerLabel: "lbl_state".tr,
                                 ),
-                                inputHint: t.translate("hint_state"),
+                                inputHint: "hint_state".tr,
                               ),
                             )
                           ],
@@ -336,9 +334,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                               child: InputField(
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel: t.translate("lbl_country"),
+                                  headerLabel: "lbl_country".tr,
                                 ),
-                                inputHint: t.translate("hint_country"),
+                                inputHint: "hint_country".tr,
                               ),
                             ),
                             SizedBox(
@@ -348,9 +346,9 @@ class _EditVetProfileState extends State<EditVetProfile> {
                               child: InputField(
                                 headerWidget: InputHeader(
                                   compulsory: false,
-                                  headerLabel: t.translate("lbl_zip"),
+                                  headerLabel: "lbl_zip".tr,
                                 ),
-                                inputHint: t.translate("hint_zip_code"),
+                                inputHint: "hint_zip_code".tr,
                               ),
                             )
                           ],
@@ -361,11 +359,10 @@ class _EditVetProfileState extends State<EditVetProfile> {
                         Align(
                           alignment: Alignment.center,
                           child: ButtonView(
-                            onTap: () => Navigator.pushNamed(
-                              context,
+                            onTap: () => Get.toNamed(
                               verification,
                             ),
-                            buttonTitle: t.translate("btn_save"),
+                            buttonTitle: "btn_save".tr,
                             width: width - 20,
                           ),
                         ),

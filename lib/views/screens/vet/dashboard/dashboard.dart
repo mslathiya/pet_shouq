@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/config.dart';
 import '../../../../data/enum/enums.dart';
 import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
@@ -55,8 +54,6 @@ class _VetDashboardState extends State<VetDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final t = ApplicationLocalizations.of(context)!;
-
     return Scaffold(
       body: _mainWrapperBody(),
       resizeToAvoidBottomInset: true,
@@ -71,7 +68,6 @@ class _VetDashboardState extends State<VetDashboard> {
               curve: Curves.fastLinearToSlowEaseIn,
             );
           },
-          localizations: t,
         ),
       ),
     );

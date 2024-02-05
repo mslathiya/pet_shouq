@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../config/config.dart';
 import '../../theme/theme.dart';
 
 class MediaPickerView extends StatelessWidget {
@@ -13,7 +13,6 @@ class MediaPickerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = ApplicationLocalizations.of(context)!;
     return Container(
       height: 130.h,
       padding: EdgeInsets.symmetric(
@@ -39,7 +38,7 @@ class MediaPickerView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  locale.translate("camera"),
+                  "camera".tr,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         color: AppColors.gray,
                         fontWeight: FontWeight.w600,
@@ -70,7 +69,7 @@ class MediaPickerView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  locale.translate("gallery"),
+                  "gallery".tr,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         color: AppColors.gray,
                         fontWeight: FontWeight.w600,
@@ -86,7 +85,7 @@ class MediaPickerView extends StatelessWidget {
   }
 
   void openImageFromCamera(BuildContext context) async {
-    Navigator.pop(context);
+    Get.back();
     var response = await ImagePicker().pickImage(
       source: ImageSource.camera,
       imageQuality: 70,
@@ -100,7 +99,7 @@ class MediaPickerView extends StatelessWidget {
   }
 
   void openImageFromGallery(BuildContext context) async {
-    Navigator.pop(context);
+    Get.back();
     var response = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 70,

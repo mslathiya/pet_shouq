@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widgets/booking_view.dart';
@@ -19,16 +19,15 @@ class ClinicDetails extends StatefulWidget {
 class _ClinicDetailsState extends State<ClinicDetails> {
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: true,
       body: CustomScrollView(
         shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         slivers: [
-          SliverAppBarHeader(localizations: t),
+          SliverAppBarHeader(),
           SliverFillRemaining(
-            child: DetailChildView(localizations: t),
+            child: DetailChildView(),
           ),
         ],
       ),
@@ -39,10 +38,7 @@ class _ClinicDetailsState extends State<ClinicDetails> {
 class SliverAppBarHeader extends StatelessWidget {
   const SliverAppBarHeader({
     super.key,
-    required this.localizations,
   });
-
-  final ApplicationLocalizations localizations;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +50,7 @@ class SliverAppBarHeader extends StatelessWidget {
       stretch: true,
       expandedHeight: 300,
       leading: InkWell(
-        onTap: () => Navigator.pop(context),
+        onTap: () => Get.back(),
         child: Padding(
           padding: EdgeInsets.only(
             left: 12.sp,
@@ -67,7 +63,7 @@ class SliverAppBarHeader extends StatelessWidget {
         ),
       ),
       title: Text(
-        localizations.translate("screen_detail_page"),
+        "screen_detail_page".tr,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               height: 2,
@@ -106,11 +102,11 @@ class SliverAppBarHeader extends StatelessWidget {
               ),
             ),
             const HeaderSlider(),
-            Positioned(
+            const Positioned(
               bottom: 5,
               left: 0,
               right: 0,
-              child: ClinicInfo(localizations: localizations),
+              child: ClinicInfo(),
             ),
           ],
         ),
@@ -120,9 +116,8 @@ class SliverAppBarHeader extends StatelessWidget {
 }
 
 class DetailChildView extends StatelessWidget {
-  const DetailChildView({super.key, required this.localizations});
+  const DetailChildView({super.key});
 
-  final ApplicationLocalizations localizations;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -138,7 +133,7 @@ class DetailChildView extends StatelessWidget {
             height: 5.h,
           ),
           InputHeader(
-            headerLabel: localizations.translate("date"),
+            headerLabel: "date".tr,
             compulsory: true,
             headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
                   fontSize: 14.sp,
@@ -169,7 +164,7 @@ class DetailChildView extends StatelessWidget {
             height: 15.h,
           ),
           InputHeader(
-            headerLabel: localizations.translate("time"),
+            headerLabel: "time".tr,
             compulsory: true,
             headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
                   fontSize: 14.sp,
@@ -203,8 +198,8 @@ class DetailChildView extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: ButtonView(
-              onTap: () => _dialogBuilder(context, localizations),
-              buttonTitle: localizations.translate("btn_book_now"),
+              onTap: _dialogBuilder,
+              buttonTitle: "btn_book_now".tr,
               width: width - 40,
               buttonStyle: TextStyle(
                 fontSize: 7.sp,
@@ -216,16 +211,14 @@ class DetailChildView extends StatelessWidget {
     );
   }
 
-  Future<void> _dialogBuilder(
-      BuildContext context, ApplicationLocalizations t) {
-    return showGeneralDialog<void>(
-      context: context,
+  void _dialogBuilder() {
+    Get.generalDialog(
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 700),
       pageBuilder: (_, __, ___) {
-        double height = MediaQuery.of(context).size.height;
+        double height = MediaQuery.of(Get.context!).size.height;
         return PopScope(
           canPop: false,
           onPopInvoked: (didPop) {},
@@ -233,9 +226,7 @@ class DetailChildView extends StatelessWidget {
             child: Container(
               height: height * .6,
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: AppointmentBookingView(
-                t: t,
-              ),
+              child: const AppointmentBookingView(),
             ),
           ),
         );

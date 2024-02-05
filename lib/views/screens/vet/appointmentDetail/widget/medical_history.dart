@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
@@ -13,14 +13,13 @@ class MedicalHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const MedicalSpecification(),
         SingleLabelItem(
-          title: t.translate("breed_marking"),
+          title: "breed_marking".tr,
           subTitle: "Golden Retriever,\nGolden with white chest",
           asset: AppAssets.icDog,
         ),
@@ -36,129 +35,129 @@ class MedicalHistory extends StatelessWidget {
               description: " Last administered\non 2023-05-10",
             )
           ],
-          title: t.translate("vaccination_record"),
+          title: "vaccination_record".tr,
         ),
         ExpandableBox(
-          title: t.translate("medications"),
+          title: "medications".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("lbl_medication_name"),
+              title: "lbl_medication_name".tr,
               description: "Heartgard",
             ),
             MedicalInfo(
-              title: t.translate("lbl_dosage"),
+              title: "lbl_dosage".tr,
               description: "68 mcg",
             ),
             MedicalInfo(
-              title: t.translate("lbl_frequency"),
+              title: "lbl_frequency".tr,
               description: "Monthly",
             ),
             MedicalInfo(
-              title: t.translate("hint_prescription_reason"),
+              title: "hint_prescription_reason".tr,
               description: "Heartworm prevention",
             ),
             MedicalInfo(
-              title: t.translate("old_illness"),
+              title: "old_illness".tr,
               description:
                   "December 2022,Gastrointestinal infection, treated with antibiotics",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("allergies"),
+          title: "allergies".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("food_allergies"),
+              title: "food_allergies".tr,
               description: "Allergic to chicken-based dog food",
             ),
             MedicalInfo(
-              title: t.translate("medication_allergy"),
+              title: "medication_allergy".tr,
               description: "Allergic to penicillin",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("dietary_info"),
+          title: "dietary_info".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("dog_food"),
+              title: "dog_food".tr,
               description: "Brand X Adult Dog Food",
             ),
             MedicalInfo(
-              title: t.translate("feeding_schedule"),
+              title: "feeding_schedule".tr,
               description: "Twice a day (1.5 cups per meal)",
             ),
             MedicalInfo(
-              title: t.translate("dietary_restriction"),
+              title: "dietary_restriction".tr,
               description: "No table scraps,limited treats",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("parasite_control"),
+          title: "parasite_control".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("dog_food"),
+              title: "dog_food".tr,
               description: "Brand X Adult Dog Food",
             ),
             MedicalInfo(
-              title: t.translate("flea_tick_control"),
+              title: "flea_tick_control".tr,
               description: "Frontline Plus, last applied on 2023-04-01",
             ),
             MedicalInfo(
-              title: t.translate("heartworm_prevention"),
+              title: "heartworm_prevention".tr,
               description: " Heartgard, last administered on 2023-05-01",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("dental_care"),
+          title: "dental_care".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("dental_cleaning"),
+              title: "dental_cleaning".tr,
               description: "Last dental cleaning on 2023-03-20, no extractions",
             ),
             MedicalInfo(
-              title: t.translate("dental_issues"),
+              title: "dental_issues".tr,
               description: "Mild tartar buildup",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("vet_visits"),
+          title: "vet_visits".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("last_visit"),
+              title: "last_visit".tr,
               description: "2023-08-15 (Annual check-up)",
             ),
             MedicalInfo(
-              title: t.translate("reason"),
+              title: "reason".tr,
               description: "Routine check-up, vaccinations updated",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("behavior_training"),
+          title: "behavior_training".tr,
           infoList: [
             MedicalInfo(
-              title: t.translate("behavior_note"),
+              title: "behavior_note".tr,
               description: "Bella has separation anxiety.",
             ),
             MedicalInfo(
-              title: t.translate("training_progress"),
+              title: "training_progress".tr,
               description: "Completed basic obedience training in 2022.",
             ),
           ],
         ),
         ExpandableBox(
-          title: t.translate("grooming_hygiene"),
+          title: "grooming_hygiene".tr,
           infoList: const [],
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                t.translate("grooming_needs"),
+                "grooming_needs".tr,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -182,14 +181,14 @@ class MedicalHistory extends StatelessWidget {
           ),
         ),
         ExpandableBox(
-          title: t.translate("miscellaneous_note"),
+          title: "miscellaneous_note".tr,
           infoList: const [],
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                t.translate("miscellaneous"),
+                "miscellaneous".tr,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,

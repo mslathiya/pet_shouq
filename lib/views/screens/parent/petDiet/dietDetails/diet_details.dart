@@ -39,7 +39,7 @@ class _DietDetailsState extends State<DietDetails> {
     return Scaffold(
       appBar: HeaderWithBack(
         title: "screen_diet_log_details".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: SingleChildScrollView(
         child: SafeArea(

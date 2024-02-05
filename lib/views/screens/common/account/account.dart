@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../config/config.dart';
 import '../../../../controller/controllers.dart';
 import '../../../../data/enum/enums.dart';
+import '../../../../helper/helpers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widgets/profile_info.dart';
@@ -74,8 +75,7 @@ class _ProfileState extends State<Profile> {
                 height: 10.h,
               ),
               ProfileMenus(
-                onTapMenu: (menuName) => Navigator.pushNamed(
-                  context,
+                onTapMenu: (menuName) => Get.toNamed(
                   menuName,
                 ),
                 userType: widget.userType,
@@ -92,7 +92,15 @@ class _ProfileState extends State<Profile> {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: _dialogBuilderLogout,
+                        onTap: () {
+                          CommonHelper.dialogBuilderDeleteItem(
+                            title: "btn_logout".tr,
+                            subTitle: "message_logout".tr,
+                            onPressOkay: () {
+                              Get.find<AuthController>().logoutCurrentUser();
+                            },
+                          );
+                        },
                         buttonTitle: "btn_logout".tr,
                         width: width * .45,
                         buttonStyle: TextStyle(
@@ -106,7 +114,15 @@ class _ProfileState extends State<Profile> {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: _dialogBuilderDeleteAccount,
+                        onTap: () {
+                          CommonHelper.dialogBuilderDeleteItem(
+                            title: "account_deletion".tr,
+                            subTitle: "account_deletion_message".tr,
+                            onPressOkay: () {
+                              Get.find<AuthController>().logoutCurrentUser();
+                            },
+                          );
+                        },
                         buttonTitle: "btn_delete_account".tr,
                         width: width * .45,
                         buttonColor: AppColors.deleteButton,
@@ -126,84 +142,6 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-    );
-  }
-
-  // Delete account
-  _dialogBuilderLogout() {
-    Get.generalDialog(
-      barrierLabel: "Barrier",
-      barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: const Duration(milliseconds: 700),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return CustomAlertDialog(
-          topIcon: AppAssets.icLogout,
-          label: "btn_logout".tr,
-          subLabel: "message_logout".tr,
-          buttonText: "btn_logout".tr,
-          onPressButton: () {
-            Get.find<AuthController>().logoutCurrentUser();
-          },
-          secondaryButtonText: "btn_cancel".tr,
-          onPressSecondaryButton: () {},
-        );
-      },
-      transitionBuilder: (_, anim, __, child) {
-        Tween<Offset> tween;
-        if (anim.status == AnimationStatus.reverse) {
-          tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        } else {
-          tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
-        }
-
-        return SlideTransition(
-          position: tween.animate(anim),
-          child: FadeTransition(
-            opacity: anim,
-            child: child,
-          ),
-        );
-      },
-    );
-  }
-
-  //Delete Account
-  _dialogBuilderDeleteAccount() {
-    Get.generalDialog(
-      barrierLabel: "Barrier",
-      barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: const Duration(milliseconds: 700),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return CustomAlertDialog(
-          topIcon: AppAssets.icDeleteAccount,
-          label: "account_deletion".tr,
-          subLabel: "account_deletion_message".tr,
-          buttonText: "btn_delete".tr,
-          onPressButton: () {
-            Navigator.pushNamedAndRemoveUntil(context, intro, (_) => false);
-          },
-          secondaryButtonText: "btn_cancel".tr,
-          onPressSecondaryButton: () {},
-        );
-      },
-      transitionBuilder: (_, anim, __, child) {
-        Tween<Offset> tween;
-        if (anim.status == AnimationStatus.reverse) {
-          tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        } else {
-          tween = Tween(begin: const Offset(1, 0), end: Offset.zero);
-        }
-
-        return SlideTransition(
-          position: tween.animate(anim),
-          child: FadeTransition(
-            opacity: anim,
-            child: child,
-          ),
-        );
-      },
     );
   }
 }

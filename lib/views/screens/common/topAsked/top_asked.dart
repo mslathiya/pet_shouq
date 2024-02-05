@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../components/components.dart';
 
 class TopAsked extends StatefulWidget {
@@ -16,11 +16,10 @@ class TopAsked extends StatefulWidget {
 class _TopAskedState extends State<TopAsked> {
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_faq"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_faq".tr,
+        onPressBack: () => Get.back(),
         showNotification: false,
       ),
       body: SafeArea(

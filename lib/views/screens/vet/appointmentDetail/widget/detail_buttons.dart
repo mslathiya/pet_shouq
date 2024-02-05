@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -12,7 +12,6 @@ class DetailButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
     return Column(
       children: [
@@ -24,7 +23,7 @@ class DetailButtons extends StatelessWidget {
           child: ButtonView(
             isBordered: true,
             onTap: onScheduleAppointment,
-            buttonTitle: t.translate("btn_reschedule_appointment"),
+            buttonTitle: "btn_reschedule_appointment".tr,
             width: width - 20,
             buttonStyle: TextStyle(
               color: AppColors.secondary,
@@ -46,7 +45,7 @@ class DetailButtons extends StatelessWidget {
                 alignment: Alignment.center,
                 child: ButtonView(
                   onTap: () => {},
-                  buttonTitle: t.translate("btn_reject"),
+                  buttonTitle: "btn_reject".tr,
                   width: width * .45,
                   buttonStyle: TextStyle(
                     color: AppColors.white,
@@ -59,7 +58,7 @@ class DetailButtons extends StatelessWidget {
                 alignment: Alignment.center,
                 child: ButtonView(
                   onTap: () => {},
-                  buttonTitle: t.translate("btn_accept"),
+                  buttonTitle: "btn_accept".tr,
                   width: width * .45,
                   buttonStyle: TextStyle(
                     color: AppColors.white,

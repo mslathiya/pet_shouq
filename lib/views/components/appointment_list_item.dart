@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../../config/config.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
 
 class AppointmentListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
-  final ApplicationLocalizations t;
   const AppointmentListItem({
     super.key,
     required this.onViewDetail,
-    required this.t,
   });
 
   @override

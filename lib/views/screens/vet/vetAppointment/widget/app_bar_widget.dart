@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../data/enum/enums.dart';
 import '../../../../components/components.dart';
 
@@ -11,9 +11,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tr = ApplicationLocalizations.of(context)!;
     if (type == AppointmentType.typeAll) {
-      return TabHeader(title: tr.translate("screen_appointments"));
+      return TabHeader(title: "screen_appointments".tr);
     }
     return const MainHeader();
   }

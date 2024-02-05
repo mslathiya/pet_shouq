@@ -27,7 +27,7 @@ class _AddMedicationState extends State<AddMedication> {
         title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
             ? "screen_update_medication".tr
             : "screen_add_medication".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -87,8 +87,10 @@ class _AddMedicationState extends State<AddMedication> {
                                     color: AppColors.hintColor,
                                   ),
                                 ),
-                                onSelectItem: () =>
-                                    controller.selectMedicationType(),
+                                onSelectItem: () {
+                                  FocusManager.instance.primaryFocus!.unfocus();
+                                  controller.selectMedicationType();
+                                },
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -214,8 +216,11 @@ class _AddMedicationState extends State<AddMedication> {
                                           ),
                                         ),
                                       ),
-                                      onSelectItem: () =>
-                                          controller.openDatePicker(1),
+                                      onSelectItem: () {
+                                        FocusManager.instance.primaryFocus!
+                                            .unfocus();
+                                        controller.openDatePicker(1);
+                                      },
                                     ),
                                   ),
                                   SizedBox(
@@ -242,8 +247,11 @@ class _AddMedicationState extends State<AddMedication> {
                                           ),
                                         ),
                                       ),
-                                      onSelectItem: () =>
-                                          controller.openDatePicker(2),
+                                      onSelectItem: () {
+                                        FocusManager.instance.primaryFocus!
+                                            .unfocus();
+                                        controller.openDatePicker(2);
+                                      },
                                     ),
                                   )
                                 ],
@@ -279,6 +287,8 @@ class _AddMedicationState extends State<AddMedication> {
                                   onTap: () {
                                     if (controller.formKey.currentState!
                                         .validate()) {
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
                                       controller.saveMedicationInfo();
                                     }
                                   },

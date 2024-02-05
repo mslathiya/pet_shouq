@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../config/config.dart';
 import '../../../../../../theme/theme.dart';
@@ -133,7 +134,7 @@ class MedicationInfo extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: EditButton(
-              onPressEdit: () => Navigator.pushNamed(context, petAddMedication),
+              onPressEdit: () => Get.offNamed(petAddMedication),
             ),
           )
         ],

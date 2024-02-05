@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../components/components.dart';
 
 class ContactUs extends StatefulWidget {
@@ -15,12 +15,11 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final t = ApplicationLocalizations.of(context)!;
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_contact_us"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_contact_us".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -45,9 +44,9 @@ class _ContactUsState extends State<ContactUs> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("lbl_name"),
+                            headerLabel: "lbl_name".tr,
                           ),
-                          inputHint: t.translate("hint_name"),
+                          inputHint: "hint_name".tr,
                         ),
                         SizedBox(
                           height: 15.h,
@@ -55,9 +54,9 @@ class _ContactUsState extends State<ContactUs> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("lbl_email"),
+                            headerLabel: "lbl_email".tr,
                           ),
-                          inputHint: t.translate("hint_email"),
+                          inputHint: "hint_email".tr,
                           compulsory: true,
                         ),
                         SizedBox(
@@ -65,7 +64,7 @@ class _ContactUsState extends State<ContactUs> {
                         ),
                         PhoneInput(
                           isCompulsory: true,
-                          headerLabel: t.translate("lbl_phone_number"),
+                          headerLabel: "lbl_phone_number".tr,
                         ),
                         SizedBox(
                           height: 15.h,
@@ -73,9 +72,9 @@ class _ContactUsState extends State<ContactUs> {
                         InputField(
                           headerWidget: InputHeader(
                             compulsory: true,
-                            headerLabel: t.translate("lbl_message"),
+                            headerLabel: "lbl_message".tr,
                           ),
-                          inputHint: t.translate("hint_message"),
+                          inputHint: "hint_message".tr,
                           isMultiline: true,
                         ),
                         SizedBox(
@@ -84,10 +83,8 @@ class _ContactUsState extends State<ContactUs> {
                         Align(
                           alignment: Alignment.center,
                           child: ButtonView(
-                            onTap: () => Navigator.pop(
-                              context,
-                            ),
-                            buttonTitle: t.translate("btn_submit"),
+                            onTap: () => Get.back(),
+                            buttonTitle: "btn_submit".tr,
                             width: width - 20,
                           ),
                         ),

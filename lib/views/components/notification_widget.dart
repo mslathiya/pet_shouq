@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../config/config.dart';
 import '../../theme/theme.dart';
@@ -15,7 +16,7 @@ class NotificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, notifications),
+      onTap: () => Get.toNamed(notifications),
       behavior: HitTestBehavior.opaque,
       child: Stack(
         alignment: Alignment.center,

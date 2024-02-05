@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
@@ -17,7 +18,6 @@ class FeedingSchedule extends StatefulWidget {
 class _FeedingScheduleState extends State<FeedingSchedule> {
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
 
@@ -25,8 +25,8 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
         withSearch: true,
-        title: t.translate("screen_feeding_schedule"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_feeding_schedule".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: Column(
@@ -82,24 +82,24 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SheetMenuItem(
-                                    menuName: t.translate("btn_off_tomorrow"),
-                                    onTapMenu: () => Navigator.pop(context),
+                                    menuName: "btn_off_tomorrow".tr,
+                                    onTapMenu: () => Get.back(),
                                   ),
                                   Divider(
                                     height: 1,
                                     color: AppColors.inputBorder,
                                   ),
                                   SheetMenuItem(
-                                    menuName: t.translate("btn_no_repeat"),
-                                    onTapMenu: () => Navigator.pop(context),
+                                    menuName: "btn_no_repeat".tr,
+                                    onTapMenu: () => Get.back(),
                                   ),
                                   Divider(
                                     height: 1,
                                     color: AppColors.inputBorder,
                                   ),
                                   SheetMenuItem(
-                                    menuName: t.translate("btn_cancel"),
-                                    onTapMenu: () => Navigator.pop(context),
+                                    menuName: "btn_cancel".tr,
+                                    onTapMenu: () => Get.back(),
                                   )
                                 ],
                               ),
@@ -118,8 +118,8 @@ class _FeedingScheduleState extends State<FeedingSchedule> {
             Align(
               alignment: Alignment.center,
               child: ButtonView(
-                onTap: () => Navigator.pushNamed(context, petAddSchedule),
-                buttonTitle: t.translate("screen_add_feed_schedule"),
+                onTap: () => Get.toNamed(petAddSchedule),
+                buttonTitle: "screen_add_feed_schedule".tr,
                 width: width - 20,
                 buttonStyle: TextStyle(
                   fontSize: 9.sp,

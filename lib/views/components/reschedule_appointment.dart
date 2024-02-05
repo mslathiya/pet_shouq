@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
-import '../../config/config.dart';
 import '../../theme/theme.dart';
 import 'button_view.dart';
 import 'date_item.dart';
@@ -16,7 +16,6 @@ class ReScheduleAppointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
     return PopScope(
       canPop: false,
@@ -44,7 +43,7 @@ class ReScheduleAppointment extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  t.translate("btn_reschedule_appointment"),
+                  "btn_reschedule_appointment".tr,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
@@ -80,11 +79,9 @@ class ReScheduleAppointment extends StatelessWidget {
                                     ? SelectorField(
                                         headerWidget: InputHeader(
                                           compulsory: true,
-                                          headerLabel:
-                                              t.translate("lbl_doctor_name"),
+                                          headerLabel: "lbl_doctor_name".tr,
                                         ),
-                                        inputHint:
-                                            t.translate("hint_doctor_name"),
+                                        inputHint: "hint_doctor_name".tr,
                                         suffixIcon: SizedBox(
                                           width: 26.w,
                                           height: 26.h,
@@ -104,7 +101,7 @@ class ReScheduleAppointment extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: t.translate("date"),
+                                        text: "date".tr,
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayMedium
@@ -153,7 +150,7 @@ class ReScheduleAppointment extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: t.translate("time"),
+                                        text: "time".tr,
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayMedium
@@ -220,8 +217,8 @@ class ReScheduleAppointment extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: () => Navigator.pop(context),
-                        buttonTitle: t.translate("btn_cancel"),
+                        onTap: () => Get.back(),
+                        buttonTitle: "btn_cancel".tr,
                         width: width * .41,
                         buttonStyle: TextStyle(
                           color: AppColors.hintColor,
@@ -232,8 +229,8 @@ class ReScheduleAppointment extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: ButtonView(
-                        onTap: () => Navigator.pop(context),
-                        buttonTitle: t.translate("btn_reschedule"),
+                        onTap: () => Get.back(),
+                        buttonTitle: "btn_reschedule".tr,
                         width: width * .41,
                       ),
                     )

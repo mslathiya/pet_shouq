@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
@@ -18,12 +18,11 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Scaffold(
       appBar: HeaderWithBack(
         withSearch: true,
-        title: t.translate("screen_notifications"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_notifications".tr,
+        onPressBack: () => Get.back(),
         showNotification: false,
       ),
       body: SafeArea(
@@ -46,7 +45,7 @@ class _NotificationsState extends State<Notifications> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        t.translate("mark_read"),
+                        "mark_read".tr,
                         textAlign: TextAlign.left,
                         style:
                             Theme.of(context).textTheme.displayMedium?.copyWith(

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
 class AppointmentBookingView extends StatelessWidget {
   const AppointmentBookingView({
     super.key,
-    required this.t,
   });
-
-  final ApplicationLocalizations t;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +29,7 @@ class AppointmentBookingView extends StatelessWidget {
             ),
           ),
           child: Text(
-            t.translate("btn_reschedule_appointment"),
+            "btn_reschedule_appointment".tr,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -67,9 +64,9 @@ class AppointmentBookingView extends StatelessWidget {
                             SelectorField(
                               headerWidget: InputHeader(
                                 compulsory: true,
-                                headerLabel: t.translate("lbl_dog_name"),
+                                headerLabel: "lbl_dog_name".tr,
                               ),
-                              inputHint: t.translate("hint_dog_name"),
+                              inputHint: "hint_dog_name".tr,
                               suffixIcon: SizedBox(
                                 width: 26.w,
                                 height: 26.h,
@@ -87,9 +84,9 @@ class AppointmentBookingView extends StatelessWidget {
                             InputField(
                               headerWidget: InputHeader(
                                 compulsory: true,
-                                headerLabel: t.translate("disease"),
+                                headerLabel: "disease".tr,
                               ),
-                              inputHint: t.translate("hint_disease"),
+                              inputHint: "hint_disease".tr,
                             ),
                             SizedBox(
                               height: 15.h,
@@ -97,9 +94,9 @@ class AppointmentBookingView extends StatelessWidget {
                             InputField(
                               headerWidget: InputHeader(
                                 compulsory: false,
-                                headerLabel: t.translate("special_notes"),
+                                headerLabel: "special_notes".tr,
                               ),
-                              inputHint: t.translate("hint_special_note"),
+                              inputHint: "hint_special_note".tr,
                               isMultiline: true,
                             ),
                             SizedBox(
@@ -117,8 +114,8 @@ class AppointmentBookingView extends StatelessWidget {
                                   Align(
                                     alignment: Alignment.center,
                                     child: ButtonView(
-                                      onTap: () => Navigator.pop(context),
-                                      buttonTitle: t.translate("btn_cancel"),
+                                      onTap: () => Get.back(),
+                                      buttonTitle: "btn_cancel".tr,
                                       width: width * .43,
                                       buttonStyle: TextStyle(
                                         color: AppColors.hintColor,
@@ -130,9 +127,8 @@ class AppointmentBookingView extends StatelessWidget {
                                   Align(
                                     alignment: Alignment.center,
                                     child: ButtonView(
-                                      onTap: () => Navigator.pop(context),
-                                      buttonTitle:
-                                          t.translate("btn_confirm_booking"),
+                                      onTap: () => Get.back(),
+                                      buttonTitle: "btn_confirm_booking".tr,
                                       width: width * .43,
                                       buttonStyle: TextStyle(
                                         fontSize: 7.sp,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -13,14 +13,13 @@ class EmergencyContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return ShadowBox(
       childWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            t.translate("emergency_info"),
+            "emergency_info".tr,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -32,7 +31,7 @@ class EmergencyContactCard extends StatelessWidget {
             height: 10.h,
           ),
           Text(
-            t.translate("primary_doc"),
+            "primary_doc".tr,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -65,7 +64,7 @@ class EmergencyContactCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      t.translate("primary_hospital"),
+                      "primary_hospital".tr,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,

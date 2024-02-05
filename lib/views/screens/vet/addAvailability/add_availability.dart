@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
@@ -89,14 +89,13 @@ class AddAvailabilityState extends State<AddAvailability> {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
-        title: t.translate("add_availability"),
-        onPressBack: () => Navigator.pop(context),
+        title: "add_availability".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: Column(
@@ -120,10 +119,8 @@ class AddAvailabilityState extends State<AddAvailability> {
             Align(
               alignment: Alignment.center,
               child: ButtonView(
-                onTap: () => Navigator.pop(
-                  context,
-                ),
-                buttonTitle: t.translate("btn_save"),
+                onTap: () => Get.back(),
+                buttonTitle: "btn_save".tr,
                 width: width - 20,
                 buttonStyle: TextStyle(
                   fontSize: 8.sp,
@@ -156,8 +153,6 @@ class ListTileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
-
     return ShadowBox(
       withPadding: false,
       isExpanded: true,
@@ -176,7 +171,7 @@ class ListTileItem extends StatelessWidget {
           shape: const Border(),
           iconColor: AppColors.fontMain,
           title: Text(
-            t.translate(item.day),
+            item.day.tr,
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontSize: 15.sp,
@@ -199,7 +194,7 @@ class ListTileItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    t.translate("closed"),
+                    "closed".tr,
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           height: 1.2,
@@ -236,7 +231,7 @@ class ListTileItem extends StatelessWidget {
                             child: SelectorField(
                               inputHint: item.startTime != ''
                                   ? item.startTime
-                                  : t.translate("start_time"),
+                                  : "start_time".tr,
                               suffixIcon: SizedBox(
                                 width: 20.w,
                                 height: 20.h,
@@ -256,7 +251,7 @@ class ListTileItem extends StatelessWidget {
                             child: SelectorField(
                               inputHint: item.endTime != ''
                                   ? item.endTime
-                                  : t.translate("end_time"),
+                                  : "end_time".tr,
                               suffixIcon: SizedBox(
                                 width: 20.w,
                                 height: 20.h,
@@ -315,7 +310,7 @@ class ListTileItem extends StatelessWidget {
                                       width: 5.w,
                                     ),
                                     Text(
-                                      t.translate("remove"),
+                                      "remove".tr,
                                       textAlign: TextAlign.left,
                                       style: Theme.of(context)
                                           .textTheme

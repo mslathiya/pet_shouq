@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
@@ -14,13 +14,12 @@ class SpecialNotes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("special_needs"),
-        onPressBack: () => Navigator.pop(context),
+        title: "special_needs".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: Column(
@@ -45,8 +44,8 @@ class SpecialNotes extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: ButtonView(
-                onTap: () => Navigator.pushNamed(context, petAddSchedule),
-                buttonTitle: t.translate("screen_add_special_notes"),
+                onTap: () => {},
+                buttonTitle: "screen_add_special_notes".tr,
                 width: width - 20,
                 buttonStyle: TextStyle(
                   fontSize: 9.sp,

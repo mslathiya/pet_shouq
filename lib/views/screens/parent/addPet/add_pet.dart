@@ -35,7 +35,7 @@ class _AddNewPetState extends State<AddNewPet> {
         title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
             ? "btn_edit_pet".tr
             : "btn_add_pet".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -346,6 +346,8 @@ class _AddNewPetState extends State<AddNewPet> {
                                   onTap: () {
                                     if (controller.formKey.currentState!
                                         .validate()) {
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
                                       controller.savePetData();
                                     }
                                   },

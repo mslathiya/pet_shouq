@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../config/config.dart';
+import 'package:get/get.dart';
 
 import '../../../../../data/model/models.dart';
 import '../../../../components/components.dart';
@@ -12,60 +11,59 @@ class MedicalDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return ExpandableBox(
-      title: t.translate("pet_medication_details"),
+      title: "pet_medication_details".tr,
       infoList: [
         MedicalInfo(
-          title: t.translate("lbl_medication_name"),
+          title: "lbl_medication_name".tr,
           description: "Rimadyl",
         ),
         MedicalInfo(
-          title: t.translate("lbl_medication_type"),
+          title: "lbl_medication_type".tr,
           description: "Tablet",
         ),
         MedicalInfo(
-          title: t.translate("lbl_veterinarian"),
+          title: "lbl_veterinarian".tr,
           description: "Dr. Smith",
         ),
         MedicalInfo(
-          title: t.translate("lbl_species"),
+          title: "lbl_species".tr,
           description: "Dog",
         ),
         MedicalInfo(
-          title: t.translate("lbl_dosage"),
+          title: "lbl_dosage".tr,
           description: "25mg",
         ),
         MedicalInfo(
-          title: t.translate("lbl_frequency"),
+          title: "lbl_frequency".tr,
           description: "Once daily",
         ),
         MedicalInfo(
-          title: t.translate("lbl_duration"),
+          title: "lbl_duration".tr,
           description: "14 days",
         ),
         MedicalInfo(
-          title: t.translate("prescription_reason"),
+          title: "prescription_reason".tr,
           description: "Osteoarthritis pain",
         ),
         MedicalInfo(
-          title: t.translate("administrative_info"),
+          title: "administrative_info".tr,
           description: "Administer with food",
         ),
         MedicalInfo(
-          title: t.translate("lbl_start_date"),
+          title: "lbl_start_date".tr,
           description: "01-Jan-2024",
         ),
         MedicalInfo(
-          title: t.translate("lbl_end_date"),
+          title: "lbl_end_date".tr,
           description: "15-Jan-2024",
         ),
         MedicalInfo(
-          title: t.translate("lbl_refills"),
+          title: "lbl_refills".tr,
           description: "None",
         ),
         MedicalInfo(
-          title: t.translate("special_notes"),
+          title: "special_notes".tr,
           description: "Watch for any signs of gastrointestinal upset.",
         ),
       ],

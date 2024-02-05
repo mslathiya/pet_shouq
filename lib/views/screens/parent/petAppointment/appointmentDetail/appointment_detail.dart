@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/header_slider.dart';
@@ -12,13 +12,12 @@ class AppointmentDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: t.translate("screen_details"),
-        onPressBack: () => Navigator.pop(context),
+        title: "screen_details".tr,
+        onPressBack: () => Get.back(),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -93,14 +92,14 @@ class AppointmentDetails extends StatelessWidget {
                     height: 10.h,
                   ),
                   InformativeText(
-                    header: t.translate("disease"),
+                    header: "disease".tr,
                     subHeader: "External parasites (ticks, fleas and mange)",
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
                   InformativeText(
-                    header: t.translate("special_notes"),
+                    header: "special_notes".tr,
                     subHeader:
                         "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, ",
                   ),
@@ -110,8 +109,8 @@ class AppointmentDetails extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: ButtonView(
-                      onTap: () => _dialogBuilder(context, t),
-                      buttonTitle: t.translate("btn_reschedule_appointment"),
+                      onTap: _dialogBuilder,
+                      buttonTitle: "btn_reschedule_appointment".tr,
                       width: width - 20,
                       buttonStyle: TextStyle(
                         fontSize: 7.sp,
@@ -127,10 +126,8 @@ class AppointmentDetails extends StatelessWidget {
     );
   }
 
-  Future<void> _dialogBuilder(
-      BuildContext context, ApplicationLocalizations t) {
-    return showGeneralDialog<void>(
-      context: context,
+  void _dialogBuilder() {
+    Get.generalDialog(
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),

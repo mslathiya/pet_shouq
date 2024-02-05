@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
@@ -19,8 +19,6 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
-
     return ShadowBox(
       withPadding: false,
       isExpanded: true,
@@ -39,7 +37,7 @@ class ListItem extends StatelessWidget {
           shape: const Border(),
           iconColor: AppColors.fontMain,
           title: Text(
-            t.translate(item.day),
+            item.day.tr,
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontSize: 14.sp,

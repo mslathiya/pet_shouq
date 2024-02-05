@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../theme/theme.dart';
 import 'button_view.dart';
@@ -98,7 +99,7 @@ class CustomAlertDialog extends StatelessWidget {
                           alignment: Alignment.center,
                           child: ButtonView(
                             onTap: () {
-                              Navigator.of(context).pop();
+                              Get.back();
                               onPressSecondaryButton!();
                             },
                             buttonTitle: secondaryButtonText!,
@@ -120,7 +121,7 @@ class CustomAlertDialog extends StatelessWidget {
                     alignment: Alignment.center,
                     child: ButtonView(
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Get.back();
                         onPressButton();
                       },
                       buttonTitle: buttonText,

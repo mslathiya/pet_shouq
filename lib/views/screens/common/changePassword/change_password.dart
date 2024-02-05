@@ -120,6 +120,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 onTap: () {
                                   if (controller.formKey.currentState!
                                       .validate()) {
+                                    FocusManager.instance.primaryFocus!
+                                        .unfocus();
                                     controller.changePassword();
                                   }
                                 },

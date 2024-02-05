@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/model/models.dart';
@@ -68,12 +69,10 @@ class VetAvailabilityState extends State<VetAvailability> {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: TabHeader(
-        title: t.translate("availability"),
+        title: "availability".tr,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +89,7 @@ class VetAvailabilityState extends State<VetAvailability> {
                 return ListItem(
                   item: item,
                   onAddTime: () {
-                    Navigator.pushNamed(context, vetAddAvailability);
+                    Get.toNamed(vetAddAvailability);
                   },
                 );
               },

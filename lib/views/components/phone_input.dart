@@ -1,8 +1,8 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../config/config.dart';
 import '../../theme/theme.dart';
 import 'code_picker.dart';
 import 'input_field.dart';
@@ -41,14 +41,13 @@ class PhoneInput extends StatefulWidget {
 class _PhoneInputState extends State<PhoneInput> {
   @override
   Widget build(BuildContext context) {
-    final t = ApplicationLocalizations.of(context)!;
     return InputField(
       inputError: widget.inputError,
       headerWidget: InputHeader(
         compulsory: widget.isCompulsory!,
         headerLabel: widget.headerLabel,
       ),
-      inputHint: t.translate("hint_phone"),
+      inputHint: "hint_phone".tr,
       keyboardType: TextInputType.phone,
       maxLength: widget.maxLength,
       editingController: widget.editingController,

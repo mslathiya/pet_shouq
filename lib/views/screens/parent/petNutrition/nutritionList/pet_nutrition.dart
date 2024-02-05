@@ -26,7 +26,7 @@ class _PetNutritionState extends State<PetNutrition> {
       appBar: HeaderWithBack(
         withSearch: true,
         title: "nutrition_feeding".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: GetBuilder<NutritionController>(
         builder: (controller) {

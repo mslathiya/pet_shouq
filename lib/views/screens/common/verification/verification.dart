@@ -199,6 +199,15 @@ class _VerificationState extends State<Verification> {
                                         isLoading: controller.isLoading,
                                         onTap: () {
                                           if (authCode.length < 6) {
+                                            Get.snackbar(
+                                              "short_auth_code".tr,
+                                              "short_auth_code_msg".tr,
+                                              backgroundColor:
+                                                  AppColors.redColor,
+                                              colorText: AppColors.white,
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                            );
                                           } else {
                                             controller.onCodeSubmit(authCode);
                                           }

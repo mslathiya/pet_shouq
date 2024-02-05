@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-import '../../config/config.dart';
 import '../../theme/theme.dart';
 import 'notification_widget.dart';
 
@@ -11,7 +11,6 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return SafeArea(
       child: Container(
         padding: EdgeInsets.only(
@@ -30,7 +29,7 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
                   Row(
                     children: [
                       Text(
-                        t.translate("location"),
+                        "location".tr,
                         textAlign: TextAlign.left,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.hintColor,

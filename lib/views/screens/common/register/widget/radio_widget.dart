@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 
 class RadioWidget extends StatelessWidget {
@@ -15,7 +15,6 @@ class RadioWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = ApplicationLocalizations.of(context)!;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -39,7 +38,7 @@ class RadioWidget extends StatelessWidget {
               width: 5.w,
             ),
             Text(
-              t.translate("type_parent"),
+              "type_parent".tr,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: selectedOption == 2
                         ? AppColors.hintColor
@@ -70,7 +69,7 @@ class RadioWidget extends StatelessWidget {
               width: 5.w,
             ),
             Text(
-              t.translate("type_vet"),
+              "type_vet".tr,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: selectedOption == 1
                         ? AppColors.hintColor

@@ -334,8 +334,7 @@ class PetController extends GetxController implements GetxService {
         Future.delayed(
           const Duration(seconds: 3),
           () {
-            // Get.back(closeOverlays: true);
-            Get.close(2);
+            Get.back(closeOverlays: true);
             resetRequest();
           },
         );

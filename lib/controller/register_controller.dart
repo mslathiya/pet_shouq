@@ -455,8 +455,8 @@ class RegisterController extends GetxController implements GetxService {
     _phoneNumberError = null;
     _passwordError = null;
 
-    // isLoading = true;
-    // update();
+    isLoading = true;
+    update();
 
     Map<String, dynamic> bodyMap = {
       "parent_fname": firstName.text,

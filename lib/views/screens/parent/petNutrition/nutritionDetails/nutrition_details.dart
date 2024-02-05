@@ -39,7 +39,7 @@ class _NutritionDetailsState extends State<NutritionDetails> {
     return Scaffold(
       appBar: HeaderWithBack(
         title: "screen_nutrition_details".tr,
-        onPressBack: () => Navigator.pop(context),
+        onPressBack: () => Get.back(),
       ),
       body: SafeArea(
         child: Column(

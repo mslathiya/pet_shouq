@@ -189,6 +189,7 @@ class AppStrings extends Translations {
           "screen_diet_log": "Pet Diet Log",
           "screen_diet_log_details": "Pet Diet Log Details",
           "screen_add_diet_log": "Add Pet Diet Log",
+          "screen_update_diet_log": "Update Pet Diet Log",
           "nutrition_feeding": "Pet Nutrition & Feeding",
           "screen_nutrition_details": "Nutrition Details",
           "screen_nutrition_feeding": "Add Pet Nutrition & Feeding",
@@ -403,6 +404,9 @@ class AppStrings extends Translations {
           "common_auth_error": "Error while verifying your self.",
           "code_sent": "Auth code sent",
           "code_sent_msg": "Auth code sent successfully",
+          "short_auth_code": "Auth code is not valid",
+          "short_auth_code_msg":
+              "Auth code is not complete. Please add completely"
         },
       };
 }

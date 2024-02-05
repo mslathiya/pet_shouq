@@ -87,7 +87,7 @@ class AppBarHeader extends StatelessWidget {
       stretch: true,
       expandedHeight: 320,
       leading: InkWell(
-        onTap: () => Navigator.pop(context),
+        onTap: () => Get.back(),
         child: Padding(
           padding: EdgeInsets.only(
             left: 12.sp,
@@ -178,7 +178,7 @@ class AppBarHeader extends StatelessWidget {
               child: PetInfo(
                 info: info,
                 onPressEdit: () {
-                  Get.toNamed(addPet, arguments: [
+                  Get.offNamed(addPet, arguments: [
                     {
                       "mode": "Edit",
                     },

@@ -137,6 +137,7 @@ class _CodePickerWidgetState extends State<CodePickerWidget> {
     elements = getCountryList();
     if (widget.countryList != null && widget.countryList!.isNotEmpty) {
       if (widget.initialSelection != null) {
+        
         selectedItem = elements!.firstWhere(
             (e) =>
                 (e.code!.toUpperCase() ==

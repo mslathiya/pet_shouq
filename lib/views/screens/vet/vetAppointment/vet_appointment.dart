@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/enum/enums.dart';
@@ -34,7 +35,6 @@ class _VetAppointmentState extends State<VetAppointment>
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -55,7 +55,6 @@ class _VetAppointmentState extends State<VetAppointment>
                         _currentIndex = index;
                       });
                     },
-                    t: t,
                   ),
             Expanded(
               child: ListView.builder(
@@ -66,8 +65,7 @@ class _VetAppointmentState extends State<VetAppointment>
                 ),
                 itemBuilder: (_, index) {
                   return VetAppointmentListItem(
-                    onViewDetail: () => Navigator.pushNamed(
-                      context,
+                    onViewDetail: () => Get.toNamed(
                       vetAppointmentDetail,
                     ),
                   );

@@ -31,8 +31,10 @@ class _AddDietState extends State<AddDiet> {
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: "screen_add_diet_log".tr,
-        onPressBack: () => Navigator.pop(context),
+        title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
+            ? "screen_update_diet_log".tr
+            : "screen_add_diet_log".tr,
+        onPressBack: () => Get.back(),
       ),
       body: LayoutBuilder(
         builder: (_, constraints) {
@@ -191,6 +193,7 @@ class _AddDietState extends State<AddDiet> {
                               onTap: () {
                                 if (controller.dietAddEditKey.currentState!
                                     .validate()) {
+                                  FocusManager.instance.primaryFocus?.unfocus();
                                   controller.saveDietInfo();
                                 }
                               },

@@ -105,12 +105,15 @@ class EditParentProfileController extends GetxController
       if (codeSecondary != '') {
         _pickedCodeSecondary =
             codeSecondary.startsWith("+") ? codeSecondary : "+$code";
+
+        // final codeData = CountryCode.fromDialCode(_pickedCodeSecondary!);
       }
       _gender = uParent.parentSex ?? "";
     }
     if (data.profilePicture != null && data.profilePicture != '') {
       _imagePath = data.fullProfileImageUrl ?? "";
     }
+    update();
   }
 
   void onPickImage(CroppedFile file) {

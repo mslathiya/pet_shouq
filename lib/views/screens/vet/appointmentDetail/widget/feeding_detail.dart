@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../../config/config.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -10,13 +10,12 @@ class FeedingDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = ApplicationLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ExpandableBox(
-          title: t.translate("morning_feeding"),
+          title: "morning_feeding".tr,
           infoList: const [],
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,11 +23,11 @@ class FeedingDetail extends StatelessWidget {
             children: [
               InfoLabel(
                 allPadding: false,
-                title: t.translate("time"),
+                title: "time".tr,
                 description: "1:00 Pm",
               ),
               Text(
-                t.translate("example"),
+                "example".tr,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -52,7 +51,7 @@ class FeedingDetail extends StatelessWidget {
           ),
         ),
         ExpandableBox(
-          title: t.translate("afternoon_feeding"),
+          title: "afternoon_feeding".tr,
           infoList: const [],
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,11 +59,11 @@ class FeedingDetail extends StatelessWidget {
             children: [
               InfoLabel(
                 allPadding: false,
-                title: t.translate("time"),
+                title: "time".tr,
                 description: "6:00 Pm",
               ),
               Text(
-                t.translate("example"),
+                "example".tr,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -88,7 +87,7 @@ class FeedingDetail extends StatelessWidget {
           ),
         ),
         ExpandableBox(
-          title: t.translate("evening_feeding"),
+          title: "evening_feeding".tr,
           infoList: const [],
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,11 +95,11 @@ class FeedingDetail extends StatelessWidget {
             children: [
               InfoLabel(
                 allPadding: false,
-                title: t.translate("time"),
+                title: "time".tr,
                 description: "6:00 Pm",
               ),
               Text(
-                t.translate("example"),
+                "example".tr,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -124,7 +123,7 @@ class FeedingDetail extends StatelessWidget {
           ),
         ),
         ExpandableBox(
-          title: t.translate("bedtime_snack"),
+          title: "bedtime_snack".tr,
           infoList: const [],
           customWidget: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,11 +131,11 @@ class FeedingDetail extends StatelessWidget {
             children: [
               InfoLabel(
                 allPadding: false,
-                title: t.translate("time"),
+                title: "time".tr,
                 description: "6:00 Pm",
               ),
               Text(
-                t.translate("example"),
+                "example".tr,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
