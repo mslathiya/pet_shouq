@@ -129,6 +129,7 @@ class _EditParentProfileState extends State<EditParentProfile> {
                                     ),
                                   ],
                                 ).call,
+                                enableInput: false,
                               ),
                               SizedBox(
                                 height: 15.h,

@@ -81,6 +81,7 @@ class _MyAppState extends State<MyApp> {
         return Obx(
           () => GetMaterialApp(
             debugShowCheckedModeBanner: false,
+            popGesture: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.system,

@@ -90,6 +90,7 @@ class AuthController extends GetxController implements GetxService {
   Future<void> setLoginStatus() async {
     _userData.value = await preferences.getUserData();
     isLoggedIn.value = true;
+    update();
   }
 
   void getUserProfile() async {

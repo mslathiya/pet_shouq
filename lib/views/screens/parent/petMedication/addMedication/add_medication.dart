@@ -24,7 +24,9 @@ class _AddMedicationState extends State<AddMedication> {
 
     return Scaffold(
       appBar: HeaderWithBack(
-        title: "screen_add_medication".tr,
+        title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
+            ? "screen_update_medication".tr
+            : "screen_add_medication".tr,
         onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(

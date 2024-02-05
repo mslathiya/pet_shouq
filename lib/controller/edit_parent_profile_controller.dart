@@ -207,15 +207,15 @@ class EditParentProfileController extends GetxController
       "parent_lname": lastName.text,
       "user_email": email.text,
       "parent_contact_number": phoneNumber.text,
-      "parent_contact_country_code": pickedCode,
+      "parent_contact_country_code": pickedCode?.replaceAll("+", ""),
       "parent_sex": gender,
       "parent_dob": birthDate,
       "parent_address": addressOne.text,
       "parent_address_second_line": addressTwo.text,
       "parent_city": city.text,
       "parent_state": province.text,
-      "parent_secondary_contact_code": alternatePhone.text,
-      "parent_secondary_contact_country_number": pickedCodeSecondary,
+      "parent_secondary_contact_code": pickedCodeSecondary?.replaceAll("+", ""),
+      "parent_secondary_contact_country_number": alternatePhone.text,
       "parent_display_name": displayName.text,
       "parent_mailing_address": mailingAddress.text,
     };
@@ -270,10 +270,13 @@ class EditParentProfileController extends GetxController
           ),
           borderRadius: 5.sp,
         );
-        if (success.data != null) {
-          Get.find<AuthController>().updateProfileData(success.data!);
-        }
-        Get.back(closeOverlays: true);
+
+        Future.delayed(const Duration(seconds: 2), () {
+          if (success.data != null) {
+            Get.find<AuthController>().updateProfileData(success.data!);
+          }
+          Get.back(closeOverlays: true);
+        });
       },
     );
   }

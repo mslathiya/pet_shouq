@@ -194,6 +194,8 @@ class DietLogController extends GetxController implements GetxService {
   /* -------------------------------------------------------------------------- */
 
   void editDietLog() {
+    resetFieldData();
+
     dynamic argumentData = Get.arguments;
     if (argumentData != null && argumentData[0]['mode'] == "Edit") {
       inEditMode = true;
@@ -205,7 +207,7 @@ class DietLogController extends GetxController implements GetxService {
       _specialInstructions.text = info.dietSpecialInstructions ?? "";
       _weight.text = info.dietWeight ?? "";
 
-      _date = DateFormat('hh:mm:ss').format(
+      _date = DateFormat('yyyy-MM-dd').format(
         info.dietDate ?? DateTime.now(),
       );
       _time = DateFormat('hh:mm:ss').format(
@@ -216,6 +218,7 @@ class DietLogController extends GetxController implements GetxService {
       _foodNameError = null;
       _waterError = null;
     }
+    update();
   }
 
   void openDatePicker() async {
@@ -331,7 +334,7 @@ class DietLogController extends GetxController implements GetxService {
     dynamic result;
 
     if (inEditMode) {
-      result = await repository.updateDietLog(petId, fData);
+      result = await repository.updateDietLog(dietId, fData);
     } else {
       result = await repository.addDietLog(fData);
     }
@@ -405,6 +408,8 @@ class DietLogController extends GetxController implements GetxService {
   }
 
   void resetFieldData() {
+    inEditMode = false;
+
     _date = DateFormat('yyyy-MM-dd').format(
       DateTime.now(),
     );

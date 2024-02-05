@@ -258,6 +258,7 @@ class NutritionController extends GetxController implements GetxService {
   }
 
   void editNutritionInfo() {
+    resetFieldData();
     dynamic argumentData = Get.arguments;
     if (argumentData != null && argumentData[0]['mode'] == "Edit") {
       inEditMode = true;
@@ -282,6 +283,7 @@ class NutritionController extends GetxController implements GetxService {
       _nutPrice.text = info.nutPrice.toString();
       _nutFoodType = info.nutFoodType ?? "";
     }
+    update();
   }
 
   void saveNutritionInfo() async {
@@ -386,7 +388,7 @@ class NutritionController extends GetxController implements GetxService {
   void resetFieldData() {
     _nutFoodType = 'Dry Kibble';
     _foodNameError = null;
-
+    inEditMode = false;
     _nutFoodName.clear();
     _nutBrand.clear();
     _nutLifeStage.clear();

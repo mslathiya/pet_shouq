@@ -91,6 +91,7 @@ class InputField extends StatelessWidget {
                   color: AppColors.redColor,
                 ),
             errorText: inputError,
+            errorMaxLines: 5,
             prefixIcon: prefixIcon != null
                 ? Padding(
                     padding: EdgeInsets.only(left: 10.w),

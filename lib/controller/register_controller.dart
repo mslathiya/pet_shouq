@@ -22,10 +22,14 @@ import '../theme/theme.dart';
 class RegisterController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GlobalKey<FormState> _registerKey = GlobalKey<FormState>();
-  List<String> genders = ["Male", "Female", "LGBTQIA+"];
+  GlobalKey<FormState> _registerKey = GlobalKey<FormState>();
+  List<String> genders = [
+    "Male",
+    "Female",
+  ];
 
   bool isLoading = false;
+  bool _resendingAuth = false;
 
   final TextEditingController _city = TextEditingController();
   final TextEditingController _province = TextEditingController();
@@ -68,10 +72,9 @@ class RegisterController extends GetxController implements GetxService {
   String _expirationDate = '';
   File? _pickedFile;
   var _accountType = 1;
-  String? _pickedCode =
-      CountryCode.fromCountryCode(Get.locale?.countryCode ?? "US").dialCode;
-  String? _pickedCodeSecondary =
-      CountryCode.fromCountryCode(Get.locale?.countryCode ?? "US").dialCode;
+
+  String? _pickedCode = CountryCode.fromCountryCode("AE").dialCode;
+  String? _pickedCodeSecondary = CountryCode.fromCountryCode("AE").dialCode;
 
   String? _firstNameError;
   String? _lastNameError;
@@ -90,6 +93,7 @@ class RegisterController extends GetxController implements GetxService {
   String? get emailError => _emailError;
   String? get phoneNumberError => _phoneNumberError;
   String? get passwordError => _passwordError;
+  bool get resendingAuth => _resendingAuth;
 
   TextEditingController get city => _city;
   TextEditingController get province => _province;
@@ -261,41 +265,95 @@ class RegisterController extends GetxController implements GetxService {
     }
   }
 
+  Future<void> validatePhoneNumber() async {
+    _phoneNumberError = null;
+    String fullNumber = '$pickedCode ${phoneNumber.text}';
+    bool isValid = await CommonHelper.isPhoneValid(fullNumber);
+    if (!isValid) {
+      _phoneNumberError = "phone_not_valid".tr;
+    } else {
+      _phoneNumberError = null;
+    }
+    update();
+  }
+
   ///
   ///Use below code for verification concept
   ///
 
+  String phoneNumberWithCode() {
+    return '$pickedCode ${CommonHelper.parseNumber('$pickedCode ${phoneNumber.text}')}';
+  }
+
   void sendAuthCode() {
+    _resendingAuth = true;
+    update();
+    stopTimer();
     _auth.verifyPhoneNumber(
-      phoneNumber: '$pickedCode${phoneNumber.text}',
-      // phoneNumber: "+91 7016155202",
+      phoneNumber: '$pickedCode ${phoneNumber.text}',
+      // phoneNumber: "+91 9978986902",
       verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
+      verificationFailed: (FirebaseAuthException e) {
+        _resendingAuth = false;
+        update();
+      },
       codeSent: (String verificationId, int? resendToken) {
+        _resendingAuth = false;
+        update();
         firebaseVerificationId = verificationId;
         isOtpSent.value = true;
         startTimer();
+        Get.snackbar(
+          "code_sent".tr,
+          "code_sent_msg".tr,
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 
   void resendOtp() async {
+    _resendingAuth = true;
+    update();
     _auth.verifyPhoneNumber(
-      phoneNumber: '$pickedCode${phoneNumber.text}',
+      phoneNumber: '$pickedCode ${phoneNumber.text}',
       // phoneNumber: "+91 7016155202",
       verificationCompleted: (PhoneAuthCredential credential) async {
         await _auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
+        _resendingAuth = false;
+        update();
+
+        e.printInfo();
         if (e.code == 'invalid-phone-number') {
           AppLog.e('The provided phone number is not valid.');
         }
+        Get.snackbar(
+          "code_sent".tr,
+          "code_sent_msg".tr,
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       },
       codeSent: (String verificationId, int? resendToken) {
+        _resendingAuth = false;
+        update();
+        remainSeconds = 120;
         firebaseVerificationId = verificationId;
         isOtpSent.value = true;
         startTimer();
+        Get.snackbar(
+          "code_sent".tr,
+          "code_sent_msg".tr,
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
@@ -303,6 +361,8 @@ class RegisterController extends GetxController implements GetxService {
 
   void onCodeSubmit(String authCode) async {
     try {
+      isLoading = true;
+      update();
       // Create a PhoneAuthCredential with the code
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: firebaseVerificationId,
@@ -310,10 +370,41 @@ class RegisterController extends GetxController implements GetxService {
       );
       // Sign the user in (or link) with the credential
       var response = await _auth.signInWithCredential(credential);
-      if (response.user != null) {}
+      if (response.user != null) {
+        stopTimer();
+        registerNewUser();
+        AppLog.e("Verification success!");
+      } else {
+        isLoading = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          "common_auth_error".tr,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } on FirebaseAuthException catch (e) {
+      isLoading = false;
+      update();
       if (e.code == 'invalid-verification-code') {
         AppLog.e('The provided code is not valid.');
+        Get.snackbar(
+          "error_in_request".tr,
+          "auth_code_invalid".tr,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          "error_in_request".tr,
+          "common_auth_error".tr,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       }
       AppLog.e("Error ${e.toString()}");
       AppLog.e("Code ${e.code}");
@@ -326,6 +417,7 @@ class RegisterController extends GetxController implements GetxService {
     _timer = Timer.periodic(duration, (Timer timer) {
       if (remainSeconds == 0) {
         timer.cancel();
+        update();
       } else {
         int minutes = remainSeconds ~/ 60;
         int seconds = remainSeconds % 60;
@@ -352,11 +444,6 @@ class RegisterController extends GetxController implements GetxService {
     update();
   }
 
-  /// is Timer Active?
-  bool isTimerRuning() {
-    return _timer == null ? false : _timer!.isActive;
-  }
-
   ///
   ///Use below code for verification concept
   ///
@@ -368,8 +455,8 @@ class RegisterController extends GetxController implements GetxService {
     _phoneNumberError = null;
     _passwordError = null;
 
-    isLoading = true;
-    update();
+    // isLoading = true;
+    // update();
 
     Map<String, dynamic> bodyMap = {
       "parent_fname": firstName.text,
@@ -384,9 +471,8 @@ class RegisterController extends GetxController implements GetxService {
       "parent_address_second_line": addressTwo.text,
       "parent_city": city.text,
       "parent_state": province.text,
-      "parent_secondary_contact_code": alternatePhone.text,
-      "parent_secondary_contact_country_number":
-          pickedCodeSecondary?.replaceAll("+", ""),
+      "parent_secondary_contact_code": pickedCodeSecondary?.replaceAll("+", ""),
+      "parent_secondary_contact_country_number": alternatePhone.text,
       "parent_display_name": displayName.text,
       "parent_mailing_address": mailingAddress.text,
     };
@@ -457,6 +543,7 @@ class RegisterController extends GetxController implements GetxService {
         );
       },
       (success) {
+        resetFields();
         isLoading = false;
         update();
 
@@ -483,5 +570,57 @@ class RegisterController extends GetxController implements GetxService {
         });
       },
     );
+  }
+
+  void resetFields() {
+    _city.clear();
+    _province.clear();
+
+    //use for parent
+    _firstName.clear();
+    _lastName.clear();
+    _email.clear();
+    _phoneNumber.clear();
+    _password.clear();
+    _addressOne.clear();
+    _addressTwo.clear();
+    _alternatePhone.clear();
+    _displayName.clear();
+    _mailingAddress.clear();
+
+    //use for veterinarian
+    _specialty.clear();
+    _qualification.clear();
+    _profileSummary.clear();
+    _licenseNo.clear();
+    _experience.clear();
+    _spokenLanguages.clear();
+    _consent.clear();
+    _address.clear();
+    _location.clear();
+    _country.clear();
+    _zipCode.clear();
+
+    _imagePath = '';
+    _gender = 'Male';
+    _birthDate = DateFormat('yyyy-MM-dd').format(
+      DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day - 1,
+      ),
+    );
+    _age = "0";
+    _expirationDate = '';
+    _pickedFile;
+    _accountType = 1;
+    _pickedCode = CountryCode.fromCountryCode("AE").dialCode;
+    _pickedCodeSecondary = CountryCode.fromCountryCode("AE").dialCode;
+
+    _firstNameError = null;
+    _lastNameError = null;
+    _emailError = null;
+    _phoneNumberError = null;
+    _passwordError = null;
   }
 }

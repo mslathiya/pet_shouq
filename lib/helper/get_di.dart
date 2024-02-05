@@ -47,6 +47,7 @@ Future<void> init() async {
       apiService: Get.find(),
       preferences: Get.find(),
     ),
+    fenix: true,
   );
   Get.lazyPut(
     () => PetRepositoryImpl(
@@ -54,24 +55,28 @@ Future<void> init() async {
       apiService: Get.find(),
       preferences: Get.find(),
     ),
+    fenix: true,
   );
   Get.lazyPut(
     () => NutritionRepositoryImpl(
       networkInfo: Get.find(),
       apiService: Get.find(),
     ),
+    fenix: true,
   );
   Get.lazyPut(
     () => MedicationRepositoryImpl(
       networkInfo: Get.find(),
       apiService: Get.find(),
     ),
+    fenix: true,
   );
   Get.lazyPut(
     () => DietLogRepositoryImpl(
       networkInfo: Get.find(),
       apiService: Get.find(),
     ),
+    fenix: true,
   );
 
   /* -------------------------------------------------------------------------- */

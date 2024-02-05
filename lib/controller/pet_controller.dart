@@ -250,6 +250,8 @@ class PetController extends GetxController implements GetxService {
       "pet_qr_code_number": _qrCode.text,
     };
 
+    AppLog.e("bodyMap ${bodyMap.toString()}");
+
     FormData fData = FormData.fromMap(bodyMap);
 
     if (imagePath != null &&
@@ -332,7 +334,8 @@ class PetController extends GetxController implements GetxService {
         Future.delayed(
           const Duration(seconds: 3),
           () {
-            Get.back(closeOverlays: true);
+            // Get.back(closeOverlays: true);
+            Get.close(2);
             resetRequest();
           },
         );
@@ -352,7 +355,7 @@ class PetController extends GetxController implements GetxService {
     _description.clear();
     _qrCode.clear();
     _petCareAddress.clear();
-
+    inEditMode = false;
     _imagePath = '';
     _isSpayed = "No";
     _birthDate = DateFormat('yyyy-MM-dd').format(
@@ -369,6 +372,7 @@ class PetController extends GetxController implements GetxService {
   }
 
   void editPetInfo() async {
+    resetFieldData();
     dynamic argumentData = Get.arguments;
     if (argumentData != null && argumentData[0]['mode'] == "Edit") {
       PetInformation info = argumentData[1]['info'];
@@ -395,6 +399,7 @@ class PetController extends GetxController implements GetxService {
       _breed = info.petBreed ?? breedList[0];
       inEditMode = true;
     }
+    update();
   }
 
   /* -------------------------------------------------------------------------- */

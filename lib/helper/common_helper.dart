@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 import '../theme/theme.dart';
 import '../views/components/components.dart';
@@ -45,5 +46,23 @@ class CommonHelper {
         );
       },
     );
+  }
+
+  static Future<bool> isPhoneValid(String phoneNumber) async {
+    try {
+      final phone = PhoneNumber.parse(phoneNumber);
+      return phone.isValid();
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static String parseNumber(String phoneNumber) {
+    try {
+      final phone = PhoneNumber.parse(phoneNumber);
+      return phone.formatNsn();
+    } catch (_) {
+      return phoneNumber;
+    }
   }
 }

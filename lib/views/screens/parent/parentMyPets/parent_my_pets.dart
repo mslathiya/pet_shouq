@@ -74,18 +74,6 @@ class _ParentMyPetsState extends State<ParentMyPets> {
                                     {"info": response}
                                   ]);
                                 },
-                                onEditPet: () async {
-                                  final response = await controller
-                                      .getPetDetails(item.petId!);
-                                  if (response != null) {
-                                    Get.toNamed(addPet, arguments: [
-                                      {
-                                        "mode": "Edit",
-                                      },
-                                      {"info": response}
-                                    ]);
-                                  }
-                                },
                               );
                             }
 

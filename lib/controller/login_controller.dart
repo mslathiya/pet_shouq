@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 import '../config/config.dart';
@@ -10,7 +12,7 @@ import 'controllers.dart';
 class LoginController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
 
-  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -19,7 +21,7 @@ class LoginController extends GetxController implements GetxService {
   TextEditingController get passwordController => _passwordController;
 
   bool _isLoading = false;
-  bool _rememberMe = false;
+  bool _rememberMe = true;
 
   bool get isLoading => _isLoading;
   bool get rememberMe => _rememberMe;
@@ -52,17 +54,45 @@ class LoginController extends GetxController implements GetxService {
       );
     }, (success) async {
       await Get.find<AuthController>().setLoginStatus();
+      resetData();
       _isLoading = false;
       update();
+
+      Get.snackbar(
+        "congratulations".tr,
+        success.message ?? "",
+        backgroundColor: AppColors.greenColor,
+        colorText: AppColors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
+        icon: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            MaterialIcons.done_all,
+            size: 24.sp,
+            color: AppColors.white,
+          ),
+        ),
+        borderRadius: 5.sp,
+      );
+
       Future.delayed(const Duration(seconds: 2), () {
         UserBean? loginData = success.data;
         if (loginData != null) {
           List<String> roles = loginData.roleNames ?? [];
           if (roles[0] == 'pet_parent') {
-            Get.offNamed(parentDashboard);
+            Get.offAllNamed(parentDashboard);
           }
         }
       });
     });
+  }
+
+  void resetData() {
+    _emailController.clear();
+    _passwordController.clear();
+
+    _isLoading = false;
+    _rememberMe = true;
   }
 }

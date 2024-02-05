@@ -119,6 +119,7 @@ class _PasswordFieldState extends State<PasswordField> {
                   color: AppColors.redColor,
                 ),
             errorText: widget.inputError,
+            errorMaxLines: 5,
             suffixIcon: Padding(
               padding: EdgeInsets.only(right: 10.w),
               child: IconButton(

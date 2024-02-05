@@ -38,7 +38,9 @@ class PetDetail extends StatelessWidget {
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icPetWeight,
-              title: '${info.petWeight ?? ""} kg',
+              title: double.parse(info.petWeight.toString()) > 0
+                  ? '${info.petWeight ?? ""} kg'
+                  : "",
             ),
           ),
           SizedBox(
@@ -48,7 +50,9 @@ class PetDetail extends StatelessWidget {
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icPetHeight,
-              title: '${info.petHeight ?? ""} cm',
+              title: double.parse(info.petHeight.toString()) > 0
+                  ? '${info.petHeight ?? ""} cm'
+                  : "",
             ),
           )
         ],

@@ -92,7 +92,10 @@ class _AddDietState extends State<AddDiet> {
                                 ),
                               ),
                             ),
-                            onSelectItem: () => controller.openDatePicker(),
+                            onSelectItem: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              controller.openDatePicker();
+                            },
                           ),
                           SizedBox(
                             height: 15.h,
@@ -112,7 +115,10 @@ class _AddDietState extends State<AddDiet> {
                                 size: 20.sp,
                               ),
                             ),
-                            onSelectItem: () => controller.openTimePicker(),
+                            onSelectItem: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              controller.openTimePicker();
+                            },
                           ),
                           SizedBox(
                             height: 15.h,
@@ -145,7 +151,7 @@ class _AddDietState extends State<AddDiet> {
                                 child: SelectorField(
                                   headerWidget: InputHeader(
                                     compulsory: true,
-                                    headerLabel: "date".tr,
+                                    headerLabel: "lbl_water".tr,
                                   ),
                                   inputHint: controller.water ?? "lbl_water".tr,
                                   suffixIcon: Icon(
@@ -153,8 +159,11 @@ class _AddDietState extends State<AddDiet> {
                                     size: 26.sp,
                                     color: AppColors.hintColor,
                                   ),
-                                  onSelectItem: () =>
-                                      controller.selectWithWater(),
+                                  onSelectItem: () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    controller.selectWithWater();
+                                  },
                                 ),
                               ),
                               SizedBox(

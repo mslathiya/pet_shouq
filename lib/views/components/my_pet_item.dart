@@ -14,14 +14,12 @@ import 'label_with_icon.dart';
 class MyPetItem extends StatelessWidget {
   final int itemIndex;
   final VoidCallback onDeletePet;
-  final VoidCallback onEditPet;
   final VoidCallback onViewPet;
   final PetItemBean itemBean;
   const MyPetItem({
     super.key,
     required this.itemIndex,
     required this.onDeletePet,
-    required this.onEditPet,
     required this.onViewPet,
     required this.itemBean,
   });
@@ -45,6 +43,7 @@ class MyPetItem extends StatelessWidget {
         key: Key(itemIndex.toString()),
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
+          extentRatio: 0.35,
           children: [
             CustomSlidableAction(
               onPressed: (context) => onDeletePet(),
@@ -67,27 +66,6 @@ class MyPetItem extends StatelessWidget {
                 ),
               ),
             ),
-            CustomSlidableAction(
-              onPressed: (context) => onEditPet(),
-              child: Container(
-                width: 45.w,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.sp),
-                  ),
-                  color: AppColors.primary,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: SvgPicture.asset(
-                    AppAssets.editIcon,
-                    height: 18.sp,
-                    width: 18.sp,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
         child: Container(

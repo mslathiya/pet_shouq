@@ -168,6 +168,7 @@ class AppStrings extends Translations {
           "hint_refills": "Enter Refills",
           "hint_special_note": "Enter Special Notes",
           "screen_add_medication": "Add Pet Medication",
+          "screen_update_medication": "Update Pet Medication",
           "food_type": "Food Type",
           "portion_size": "Portion Size",
           "special_instruction": "Special Instructions",
@@ -191,6 +192,7 @@ class AppStrings extends Translations {
           "nutrition_feeding": "Pet Nutrition & Feeding",
           "screen_nutrition_details": "Nutrition Details",
           "screen_nutrition_feeding": "Add Pet Nutrition & Feeding",
+          "edit_screen_nutrition_feeding": "Update Pet Nutrition & Feeding",
           "per_pound": "Per Pound",
           "ingredients": "Ingredients",
           "other_nutrition_detail": "Nutrition & Feeding Other Details",
@@ -396,6 +398,11 @@ class AppStrings extends Translations {
               "Password must contain one special later and 8 character long",
           "add_diet_msg": "Add new diet log by click on below button!",
           "no_diet_found": "No diet log data found",
+          "phone_not_valid": "Entered phone number not belongs to country",
+          "auth_code_invalid": "The provided code is not valid.",
+          "common_auth_error": "Error while verifying your self.",
+          "code_sent": "Auth code sent",
+          "code_sent_msg": "Auth code sent successfully",
         },
       };
 }

@@ -208,11 +208,9 @@ class PetDetailView extends StatelessWidget {
         PetDetail(
           info: info,
         ),
-        //
         PetOtherDetails(
           info: info,
         ),
-        //
         Padding(
           padding: EdgeInsets.only(
             left: 12.w,

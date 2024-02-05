@@ -30,7 +30,9 @@ class _AddNutritionState extends State<AddNutrition> {
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
     return Scaffold(
       appBar: HeaderWithBack(
-        title: "screen_nutrition_feeding".tr,
+        title: Get.arguments != null && Get.arguments[0]['mode'] == "Edit"
+            ? "edit_screen_nutrition_feeding".tr
+            : "screen_nutrition_feeding".tr,
         onPressBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
@@ -77,8 +79,19 @@ class _AddNutritionState extends State<AddNutrition> {
                             InputField(
                               headerWidget: InputHeader(
                                 headerLabel: "lbl_brand".tr,
+                                compulsory: true,
                               ),
                               inputHint: "hint_brand".tr,
+                              validator: MultiValidator(
+                                [
+                                  RequiredValidator(
+                                    errorText:
+                                        "dynamic_field_required".trParams(
+                                      {"field": "lbl_brand".tr},
+                                    ),
+                                  ),
+                                ],
+                              ).call,
                               editingController: controller.nutBrand,
                             ),
                             SizedBox(
@@ -87,6 +100,7 @@ class _AddNutritionState extends State<AddNutrition> {
                             SelectorField(
                               headerWidget: InputHeader(
                                 headerLabel: "lbl_food_type".tr,
+                                compulsory: true,
                               ),
                               inputHint:
                                   controller.nutFoodType ?? "hint_food_type".tr,
@@ -113,9 +127,20 @@ class _AddNutritionState extends State<AddNutrition> {
                                   child: InputField(
                                     headerWidget: InputHeader(
                                       headerLabel: "lbl_life_stage".tr,
+                                      compulsory: true,
                                     ),
                                     inputHint: "hint_life_stage".tr,
                                     editingController: controller.nutLifeStage,
+                                    validator: MultiValidator(
+                                      [
+                                        RequiredValidator(
+                                          errorText:
+                                              "dynamic_field_required".trParams(
+                                            {"field": "lbl_life_stage".tr},
+                                          ),
+                                        ),
+                                      ],
+                                    ).call,
                                   ),
                                 ),
                                 SizedBox(
@@ -125,9 +150,20 @@ class _AddNutritionState extends State<AddNutrition> {
                                   child: InputField(
                                     headerWidget: InputHeader(
                                       headerLabel: "lbl_species".tr,
+                                      compulsory: true,
                                     ),
                                     inputHint: "hint_species".tr,
                                     editingController: controller.nutSpecies,
+                                    validator: MultiValidator(
+                                      [
+                                        RequiredValidator(
+                                          errorText:
+                                              "dynamic_field_required".trParams(
+                                            {"field": "lbl_species".tr},
+                                          ),
+                                        ),
+                                      ],
+                                    ).call,
                                   ),
                                 )
                               ],
@@ -355,10 +391,21 @@ class _AddNutritionState extends State<AddNutrition> {
                             InputField(
                               headerWidget: InputHeader(
                                 headerLabel: "lbl_price".tr,
+                                compulsory: true,
                               ),
                               inputHint: "hint_price".tr,
                               editingController: controller.nutPrice,
                               keyboardType: TextInputType.number,
+                              validator: MultiValidator(
+                                [
+                                  RequiredValidator(
+                                    errorText:
+                                        "dynamic_field_required".trParams(
+                                      {"field": "lbl_price".tr},
+                                    ),
+                                  ),
+                                ],
+                              ).call,
                             ),
                             SizedBox(
                               height: 15.h,

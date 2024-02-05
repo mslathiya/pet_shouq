@@ -26,7 +26,7 @@ class LabelWithIcon extends StatelessWidget {
               vertical: 3.h,
             ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
@@ -50,10 +50,11 @@ class LabelWithIcon extends StatelessWidget {
                   .headlineSmall
                   ?.copyWith(
                     fontSize: 12.sp,
+                    height: 1.2,
                   )
                   .merge(textStyle),
             ),
-          )
+          ),
         ],
       ),
     );
