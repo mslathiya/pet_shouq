@@ -174,6 +174,7 @@ class _AddNutritionState extends State<AddNutrition> {
                               height: 15.h,
                             ),
                             InputField(
+                              maxLength: 200,
                               headerWidget: InputHeader(
                                 headerLabel: "ingredients".tr,
                               ),
@@ -370,6 +371,7 @@ class _AddNutritionState extends State<AddNutrition> {
                               height: 15.h,
                             ),
                             InputField(
+                              maxLength: 200,
                               headerWidget: InputHeader(
                                 headerLabel: "lbl_guideline".tr,
                               ),
@@ -381,6 +383,7 @@ class _AddNutritionState extends State<AddNutrition> {
                               height: 15.h,
                             ),
                             InputField(
+                              maxLength: 200,
                               headerWidget: InputHeader(
                                 headerLabel: "special_feature".tr,
                               ),
@@ -391,6 +394,7 @@ class _AddNutritionState extends State<AddNutrition> {
                               height: 15.h,
                             ),
                             InputField(
+                              maxLength: 9,
                               headerWidget: InputHeader(
                                 headerLabel: "lbl_price".tr,
                                 compulsory: true,

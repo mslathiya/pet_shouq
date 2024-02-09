@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import '../../../../../../config/config.dart';
 import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
-import "../../../../../../helper/helpers.dart";
 
 class PetInfo extends StatelessWidget {
   const PetInfo({super.key, required this.itemBean});
@@ -20,15 +18,7 @@ class PetInfo extends StatelessWidget {
       return const SizedBox();
     }
 
-    bool haveImage = false;
-    String imagePath = "";
-
     PetItemBean bean = itemBean!.pet!;
-
-    if (bean.petProfilePhoto != null) {
-      imagePath = bean.fullProfileImageUrl.toString();
-      haveImage = imagePath.hasValidUrl();
-    }
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -63,28 +53,8 @@ class PetInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.sp),
-                  child: !haveImage
-                      ? Image.asset(
-                          AppAssets.launcherIcon,
-                          height: 70.w,
-                          width: 70.w,
-                          fit: BoxFit.cover,
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: imagePath,
-                          placeholder: (context, url) => const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          fit: BoxFit.cover,
-                          fadeInDuration: const Duration(milliseconds: 60),
-                          fadeInCurve: Curves.easeIn,
-                          height: 70.w,
-                          width: 70.w,
-                        ),
+                PetImage(
+                  itemBean: bean,
                 ),
                 Expanded(
                   child: Padding(

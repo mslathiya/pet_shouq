@@ -44,9 +44,7 @@ class DietLogController extends GetxController implements GetxService {
   String _date = DateFormat('yyyy-MM-dd').format(
     DateTime.now(),
   );
-  String _time = DateFormat('hh:mm:ss').format(
-    DateTime.now(),
-  );
+  DateTime _time = DateTime.now();
   String _water = "Yes";
 
   String? _foodNameError;
@@ -64,7 +62,9 @@ class DietLogController extends GetxController implements GetxService {
 
   String? get water => _water;
   String? get date => _date;
-  String? get time => _time;
+  String? get time => DateFormat.jm().format(
+        _time,
+      );
   String? get foodNameError => _foodNameError;
   String? get waterError => _waterError;
 
@@ -74,12 +74,6 @@ class DietLogController extends GetxController implements GetxService {
     required this.repository,
     required this.petId,
   });
-
-  @override
-  void onInit() {
-    getDietLogList();
-    super.onInit();
-  }
 
   void setScrollListener() {
     controller.addListener(() {
@@ -93,9 +87,8 @@ class DietLogController extends GetxController implements GetxService {
   }
 
   Future<void> getDietLogList() async {
-    _loadingDietLog = true;
     _currentPage = 1;
-    update();
+    _dietLogListArray.clear();
     getDietLog();
   }
 
@@ -210,9 +203,8 @@ class DietLogController extends GetxController implements GetxService {
       _date = DateFormat('yyyy-MM-dd').format(
         info.dietDate ?? DateTime.now(),
       );
-      _time = DateFormat('hh:mm:ss').format(
-        info.dietDate ?? DateTime.now(),
-      );
+
+      _time = DateTime.parse("$_date ${info.dietTime ?? ""}");
       _water = info.dietWater ?? "Yes";
 
       _foodNameError = null;
@@ -261,7 +253,9 @@ class DietLogController extends GetxController implements GetxService {
       },
     );
     if (picked != null) {
-      _time = "${picked.hour}:${picked.minute}:00";
+      _time = DateTime.parse(
+          "$_date ${picked.hour < 10 ? "0${picked.hour}" : picked.hour}:${picked.minute < 10 ? "0${picked.minute}" : picked.minute}:00");
+
       update();
     }
   }
@@ -315,6 +309,9 @@ class DietLogController extends GetxController implements GetxService {
   }
 
   void saveDietInfo() async {
+    if (isLoading) {
+      return;
+    }
     isLoading = true;
     update();
 
@@ -322,7 +319,9 @@ class DietLogController extends GetxController implements GetxService {
       "pet_id": petId,
       "diet_food_name": _foodName.text,
       "diet_date": _date,
-      "diet_time": _time,
+      "diet_time": DateFormat("hh:mm:ss").format(
+        _time,
+      ),
       "diet_portion_size": _portionSize.text,
       "diet_special_instructions": _specialInstructions.text,
       "diet_water": _water,
@@ -413,9 +412,7 @@ class DietLogController extends GetxController implements GetxService {
     _date = DateFormat('yyyy-MM-dd').format(
       DateTime.now(),
     );
-    _time = DateFormat('hh:mm:ss').format(
-      DateTime.now(),
-    );
+    _time = DateTime.now();
 
     _water = "Yes";
 

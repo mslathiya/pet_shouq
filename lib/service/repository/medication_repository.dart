@@ -18,7 +18,7 @@ abstract class MedicationRepository {
     int medicationId,
     FormData formFields,
   );
-  Future<Either<Failure, NutritionDetailResponseBean>> getMedicationDetail(
+  Future<Either<Failure, MedicationDetailResponseBean>> getMedicationDetail(
     int medicationId,
   );
   Future<Either<Failure, GeneralBean>> removeMedication(
@@ -65,18 +65,18 @@ class MedicationRepositoryImpl extends MedicationRepository {
   }
 
   @override
-  Future<Either<Failure, NutritionDetailResponseBean>> getMedicationDetail(
+  Future<Either<Failure, MedicationDetailResponseBean>> getMedicationDetail(
       int medicationId) async {
     if (await networkInfo.isConnected) {
       try {
-        late NutritionDetailResponseBean bean;
+        late MedicationDetailResponseBean bean;
         var result = await apiService.get(
           "${Endpoints.medicationDetailGet}$medicationId",
         );
         if (result.statusCode == 200) {
           var response = result.data;
 
-          bean = NutritionDetailResponseBean.fromJson(response);
+          bean = MedicationDetailResponseBean.fromJson(response);
           if (bean.success == true) {
             return Right(bean);
           } else {
@@ -126,9 +126,10 @@ class MedicationRepositoryImpl extends MedicationRepository {
     if (await networkInfo.isConnected) {
       try {
         late GeneralBean bean;
-        var result = await apiService.post(Endpoints.addMedicationPost,
-            data: formFields,
-            options: Options(headers: {"Content-Type": "multipart/form-data"}));
+        var result = await apiService.post(
+          Endpoints.addMedicationPost,
+          data: formFields,
+        );
         if (result.statusCode == 200) {
           var response = result.data;
           bean = GeneralBean.fromJson(response);
@@ -154,9 +155,9 @@ class MedicationRepositoryImpl extends MedicationRepository {
       try {
         late GeneralBean bean;
         var result = await apiService.post(
-            '${Endpoints.updateMedicationPost}$medicationId',
-            data: formFields,
-            options: Options(headers: {"Content-Type": "multipart/form-data"}));
+          '${Endpoints.updateMedicationPost}$medicationId',
+          data: formFields,
+        );
         if (result.statusCode == 200) {
           var response = result.data;
           bean = GeneralBean.fromJson(response);

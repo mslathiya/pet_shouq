@@ -18,6 +18,15 @@ class PetNutrition extends StatefulWidget {
 
 class _PetNutritionState extends State<PetNutrition> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<NutritionController>().setScrollListener();
+      Get.find<NutritionController>().getNutritionList();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
@@ -34,6 +43,8 @@ class _PetNutritionState extends State<PetNutrition> {
             return const ShimmerListLoading();
           }
           return Stack(
+            clipBehavior: Clip.none,
+            fit: StackFit.expand,
             children: [
               Positioned.fill(
                 child: Column(
@@ -44,6 +55,7 @@ class _PetNutritionState extends State<PetNutrition> {
                       child: RefreshIndicator(
                         onRefresh: () => controller.getNutritionList(),
                         child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
                           controller: controller.controller,
                           itemCount: controller.nutritionListArray.length + 1,
                           padding: EdgeInsets.only(
@@ -149,5 +161,11 @@ class _PetNutritionState extends State<PetNutrition> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Get.find<NutritionController>().disposeController();
+    super.dispose();
   }
 }

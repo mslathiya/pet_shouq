@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
@@ -83,7 +84,7 @@ class _DietDetailsState extends State<DietDetails> {
                               height: 5.h,
                             ),
                             Text(
-                              info.dietTime ?? "",
+                              formatTime(info),
                               textAlign: TextAlign.left,
                               style: Theme.of(context)
                                   .textTheme
@@ -108,5 +109,10 @@ class _DietDetailsState extends State<DietDetails> {
         ),
       ),
     );
+  }
+
+  String formatTime(DietDetailBean bean) {
+    String dietDate = DateFormat("yyyy-mm-dd").format(bean.dietDate!);
+    return DateFormat.jm().format(DateTime.parse("$dietDate ${bean.dietTime}"));
   }
 }

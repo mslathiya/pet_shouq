@@ -22,7 +22,7 @@ import '../theme/theme.dart';
 class RegisterController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  GlobalKey<FormState> _registerKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _registerKey = GlobalKey<FormState>();
   List<String> genders = [
     "Male",
     "Female",
@@ -286,6 +286,9 @@ class RegisterController extends GetxController implements GetxService {
   }
 
   void sendAuthCode() {
+    if (_resendingAuth) {
+      return;
+    }
     _resendingAuth = true;
     update();
     stopTimer();
@@ -360,6 +363,9 @@ class RegisterController extends GetxController implements GetxService {
   }
 
   void onCodeSubmit(String authCode) async {
+    if (isLoading) {
+      return;
+    }
     try {
       isLoading = true;
       update();

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:intl/intl.dart';
 
 import '../../data/model/models.dart';
 import '../../theme/theme.dart';
@@ -10,6 +11,7 @@ import 'label_with_icon.dart';
 
 class MedicationListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
+  final VoidCallback onDeleteItem;
   final int itemIndex;
   final MedicationBean itemBean;
 
@@ -18,6 +20,7 @@ class MedicationListItem extends StatelessWidget {
     required this.onViewDetail,
     required this.itemIndex,
     required this.itemBean,
+    required this.onDeleteItem,
   });
 
   @override
@@ -35,7 +38,7 @@ class MedicationListItem extends StatelessWidget {
           extentRatio: 0.35,
           children: [
             CustomSlidableAction(
-              onPressed: (context) => {},
+              onPressed: (context) => onDeleteItem(),
               child: Container(
                 width: 45.w,
                 height: double.infinity,
@@ -80,7 +83,7 @@ class MedicationListItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Rimadyl',
+                itemBean.mediName ?? "",
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -100,17 +103,17 @@ class MedicationListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icDoctor,
-                          value: 'Dr. Roselyn F.',
+                          value: itemBean.mediPreVeterinarian ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icPetPaw,
-                          value: 'Whiskers',
+                          value: itemBean.mediPetSpecies ?? "",
                           padding: EdgeInsets.zero,
                         ),
                       ],
@@ -160,9 +163,10 @@ class MedicationListItem extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 190.w,
-                    child: const LabelWithIcon(
+                    child: LabelWithIcon(
                       asset: AppAssets.icCalendar,
-                      value: '2023-05-01 To 2023-05-14',
+                      value:
+                          '${DateFormat("yyyy-MM-dd").format(itemBean.mediStartDate ?? DateTime.now())} To ${DateFormat("yyyy-MM-dd").format(itemBean.mediEndDate ?? DateTime.now())}',
                       padding: EdgeInsets.zero,
                     ),
                   )

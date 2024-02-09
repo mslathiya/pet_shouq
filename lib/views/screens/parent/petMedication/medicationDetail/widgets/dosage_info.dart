@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 
 class DosageInfo extends StatelessWidget {
   const DosageInfo({
     super.key,
+    required this.info,
   });
+  final MedicationInfo info;
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +25,28 @@ class DosageInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icCalendarRemainder,
-              title: 'Once daily',
+              title: info.mediDuration ?? "",
             ),
           ),
           Expanded(
             flex: 1,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: const SpotInfo(
+              child: SpotInfo(
                 icon: AppAssets.icDosage,
-                title: ' 25mg',
+                title: info.mediDosage ?? "",
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 1,
             child: SpotInfo(
               icon: AppAssets.icDosageLiquid,
-              title: 'None',
+              title: info.mediFrequency ?? "",
             ),
           )
         ],

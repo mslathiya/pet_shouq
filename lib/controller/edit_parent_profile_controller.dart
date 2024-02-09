@@ -202,6 +202,9 @@ class EditParentProfileController extends GetxController
   }
 
   void updateParentProfile() async {
+    if (isLoading) {
+      return;
+    }
     isLoading = true;
     update();
 

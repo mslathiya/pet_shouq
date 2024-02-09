@@ -18,3 +18,4 @@ export 'medication_list_bean.dart';
 export 'change_password_response_bean.dart';
 export 'diet_log_list_response_bean.dart';
 export "diet_detail_response_bean.dart";
+export "medication_detail_response_bean.dart";

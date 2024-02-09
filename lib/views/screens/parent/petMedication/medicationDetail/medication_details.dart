@@ -1,14 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/dosage_info.dart';
-import 'widgets/medication_info.dart';
+import 'widgets/pet_info.dart';
 import 'widgets/other_specification.dart';
 
-class MedicationDetails extends StatelessWidget {
+class MedicationDetails extends StatefulWidget {
   const MedicationDetails({super.key});
+
+  @override
+  State<MedicationDetails> createState() => _MedicationDetailsState();
+}
+
+class _MedicationDetailsState extends State<MedicationDetails> {
+  late MedicationInfo info;
+  late int index;
+
+  @override
+  void initState() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null) {
+      index = argumentData[0]['index'];
+      info = argumentData[1]['info'];
+      setState(() {
+        info;
+        index;
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +46,29 @@ class MedicationDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const MedicationInfo(),
+            PetInfo(
+              info: info,
+            ),
             SingleLabelItem(
               title: "date_nutrition".tr,
-              subTitle: "2023-05-01 To  2023-05-14 / 14 days",
+              subTitle:
+                  "${DateFormat("yyyy-MM-dd").format(info.mediStartDate ?? DateTime.now())} To ${DateFormat("yyyy-MM-dd").format(info.mediEndDate ?? DateTime.now())} / ${info.mediEndDate?.difference(info.mediStartDate ?? DateTime.now()).inDays} days",
               asset: AppAssets.icCalendar,
             ),
-            const DosageInfo(),
+            DosageInfo(
+              info: info,
+            ),
             OtherSpecification(
               title: "prescription_reason".tr,
-              description: "Osteoarthritis pain",
+              description: info.mediReasonPrescription ?? "",
             ),
             OtherSpecification(
               title: "administrative_info".tr,
-              description: "Administer with food",
+              description: info.mediAdminInstruction ?? "",
             ),
             OtherSpecification(
               title: "special_notes".tr,
-              description: "Watch for any signs of gastrointestinal upset.",
+              description: info.mediSpecialNotes ?? "",
             ),
           ],
         ),

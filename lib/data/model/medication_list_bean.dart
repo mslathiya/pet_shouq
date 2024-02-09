@@ -69,6 +69,7 @@ class MedicationBean {
   DateTime? mediStartDate;
   DateTime? mediEndDate;
   String? mediPetSpecies;
+  String? mediName;
 
   MedicationBean({
     this.mediId,
@@ -76,6 +77,7 @@ class MedicationBean {
     this.mediStartDate,
     this.mediEndDate,
     this.mediPetSpecies,
+    this.mediName,
   });
 
   factory MedicationBean.fromJson(Map<String, dynamic> json) => MedicationBean(
@@ -88,6 +90,7 @@ class MedicationBean {
             ? null
             : DateTime.parse(json["medi_end_date"]),
         mediPetSpecies: json["medi_pet_species"],
+        mediName: json["medi_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -98,5 +101,6 @@ class MedicationBean {
         "medi_end_date":
             "${mediEndDate!.year.toString().padLeft(4, '0')}-${mediEndDate!.month.toString().padLeft(2, '0')}-${mediEndDate!.day.toString().padLeft(2, '0')}",
         "medi_pet_species": mediPetSpecies,
+        "medi_name": mediName,
       };
 }

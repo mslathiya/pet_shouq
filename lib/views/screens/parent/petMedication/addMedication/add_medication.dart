@@ -284,6 +284,7 @@ class _AddMedicationState extends State<AddMedication> {
                               Align(
                                 alignment: Alignment.center,
                                 child: ButtonView(
+                                  isLoading: controller.isLoading,
                                   onTap: () {
                                     if (controller.formKey.currentState!
                                         .validate()) {

@@ -65,4 +65,8 @@ class CommonHelper {
       return phoneNumber;
     }
   }
+
+  static bool isNotEmpty(String? field) {
+    return field != null && field != '';
+  }
 }

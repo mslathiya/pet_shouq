@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,6 +14,8 @@ class NutritionInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PetItemBean bean = info.pet!;
+
     double width = MediaQuery.of(context).size.width;
     return Container(
       width: width,
@@ -45,22 +46,8 @@ class NutritionInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            height: 65.w,
-            width: 65.w,
-            decoration: BoxDecoration(
-              color: AppColors.petType,
-              borderRadius: BorderRadius.all(
-                Radius.circular(15.sp),
-              ),
-            ),
-            child: Center(
-              child: Image.asset(
-                AppAssets.typeDog,
-                height: 36.sp,
-                width: 36.sp,
-              ),
-            ),
+          PetImage(
+            itemBean: bean,
           ),
           Expanded(
             child: Padding(

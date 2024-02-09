@@ -3,16 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../config/config.dart';
+import '../../../../../../data/model/models.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 
-class MedicationInfo extends StatelessWidget {
-  const MedicationInfo({
+class PetInfo extends StatelessWidget {
+  const PetInfo({
     super.key,
+    required this.info,
   });
+  final MedicationInfo info;
 
   @override
   Widget build(BuildContext context) {
+    PetItemBean bean = info.pet!;
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 10.sp,
@@ -46,22 +51,8 @@ class MedicationInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 67.w,
-                  width: 67.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.petType,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.sp),
-                    ),
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      AppAssets.typeDog,
-                      height: 36.sp,
-                      width: 36.sp,
-                    ),
-                  ),
+                PetImage(
+                  itemBean: bean,
                 ),
                 Expanded(
                   child: Padding(
@@ -73,7 +64,7 @@ class MedicationInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Rimadyl',
+                          info.mediName ?? "",
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -105,20 +96,20 @@ class MedicationInfo extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Flexible(
+                            Flexible(
                               child: LabelWithIcon(
                                 asset: AppAssets.icDocBag,
-                                value: 'Dog',
+                                value: info.mediPetSpecies ?? "",
                                 padding: EdgeInsets.zero,
                               ),
                             ),
                             SizedBox(
                               width: 5.h,
                             ),
-                            const Flexible(
+                            Flexible(
                               child: LabelWithIcon(
                                 asset: AppAssets.icStethoscope,
-                                value: 'Dr.Smith',
+                                value: info.mediPreVeterinarian ?? "",
                                 padding: EdgeInsets.zero,
                               ),
                             ),

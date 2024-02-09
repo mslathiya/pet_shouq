@@ -5,7 +5,6 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide FormData;
 
 import '../data/model/models.dart';
-import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'auth_controller.dart';
@@ -87,12 +86,6 @@ class NutritionController extends GetxController implements GetxService {
     required this.petId,
   });
 
-  @override
-  void onInit() {
-    getNutritionList();
-    super.onInit();
-  }
-
   void setScrollListener() {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.position.pixels) {
@@ -104,10 +97,13 @@ class NutritionController extends GetxController implements GetxService {
     });
   }
 
+  void disposeController() {
+    controller.removeListener(() {});
+  }
+
   Future<void> getNutritionList() async {
-    _loadingNutrition = true;
     _currentPage = 1;
-    update();
+    _nutritionListArray.clear();
     getNutrition();
   }
 
@@ -132,8 +128,6 @@ class NutritionController extends GetxController implements GetxService {
           haveMoreResult = meta.haveMoreRecords ?? false;
         }
         final arrayList = success.data?.data ?? [];
-
-        AppLog.e("arrayList ${success.data?.data}");
         if (currentPage == 1) {
           _nutritionListArray.clear();
           _nutritionListArray.addAll(arrayList);
@@ -177,6 +171,9 @@ class NutritionController extends GetxController implements GetxService {
   }
 
   void deleteNutrition(int petId) async {
+    if (_removingNutrition) {
+      return;
+    }
     _removingNutrition = true;
     update();
     final result = await repository.removeNutrition(petId);
@@ -287,6 +284,9 @@ class NutritionController extends GetxController implements GetxService {
   }
 
   void saveNutritionInfo() async {
+    if (isLoading) {
+      return;
+    }
     isLoading = true;
     update();
 

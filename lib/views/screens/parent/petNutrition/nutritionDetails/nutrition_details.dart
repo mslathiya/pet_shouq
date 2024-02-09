@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/model/models.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/nutrition_info.dart';
@@ -54,67 +55,80 @@ class _NutritionDetailsState extends State<NutritionDetails> {
                     NutritionInfo(
                       info: info,
                     ),
-                    SingleLabelItem(
-                      margins: EdgeInsets.only(
-                        left: 10.w,
-                        right: 10.w,
-                        bottom: 10.h,
+                    if (CommonHelper.isNotEmpty(info.nutIngredients))
+                      SingleLabelItem(
+                        margins: EdgeInsets.only(
+                          left: 10.w,
+                          right: 10.w,
+                          bottom: 10.h,
+                        ),
+                        title: "ingredients".tr,
+                        asset: AppAssets.icRecipe,
+                        subTitle: info.nutIngredients ?? "",
                       ),
-                      title: "ingredients".tr,
-                      asset: AppAssets.icRecipe,
-                      subTitle: info.nutIngredients ?? "",
-                    ),
                     ExpandableBox(
                       initiallyExpanded: true,
                       infoList: [
-                        MedicalInfo(
-                          title: "nutrition_content".tr,
-                          description: "20g",
-                        ),
-                        MedicalInfo(
-                          title: "protein".tr,
-                          description: info.nutProtein ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "fat".tr,
-                          description: info.nutFat ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "carbohydrates".tr,
-                          description: info.nutCarbohydrate ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "fiber".tr,
-                          description: info.nutFiber ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "calories".tr,
-                          description: info.nutCalories ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "vitamins".tr,
-                          description: info.nutVitamins ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "minerals".tr,
-                          description: info.nutMinerals ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "omega_three".tr,
-                          description: info.nutOmega3Fatty ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "omega_six".tr,
-                          description: info.nutOmega6Fatty ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "guidelines".tr,
-                          description: info.nutFeedingGuidelines ?? "",
-                        ),
-                        MedicalInfo(
-                          title: "special_feature".tr,
-                          description: info.nutSpecialFeatures ?? "",
-                        ),
+                        if (CommonHelper.isNotEmpty(info.nutNutritionalContent))
+                          MedicalInfo(
+                            title: "nutrition_content".tr,
+                            description: info.nutNutritionalContent ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutProtein))
+                          MedicalInfo(
+                            title: "protein".tr,
+                            description: info.nutProtein ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutFat))
+                          MedicalInfo(
+                            title: "fat".tr,
+                            description: info.nutFat ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutCarbohydrate))
+                          MedicalInfo(
+                            title: "carbohydrates".tr,
+                            description: info.nutCarbohydrate ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutFiber))
+                          MedicalInfo(
+                            title: "fiber".tr,
+                            description: info.nutFiber ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutCalories))
+                          MedicalInfo(
+                            title: "calories".tr,
+                            description: info.nutCalories ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutVitamins))
+                          MedicalInfo(
+                            title: "vitamins".tr,
+                            description: info.nutVitamins ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutMinerals))
+                          MedicalInfo(
+                            title: "minerals".tr,
+                            description: info.nutMinerals ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutOmega3Fatty))
+                          MedicalInfo(
+                            title: "omega_three".tr,
+                            description: info.nutOmega3Fatty ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutOmega6Fatty))
+                          MedicalInfo(
+                            title: "omega_six".tr,
+                            description: info.nutOmega6Fatty ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutFeedingGuidelines))
+                          MedicalInfo(
+                            title: "guidelines".tr,
+                            description: info.nutFeedingGuidelines ?? "",
+                          ),
+                        if (CommonHelper.isNotEmpty(info.nutSpecialFeatures))
+                          MedicalInfo(
+                            title: "special_feature".tr,
+                            description: info.nutSpecialFeatures ?? "",
+                          ),
                       ],
                       title: "other_nutrition_detail".tr,
                     ),

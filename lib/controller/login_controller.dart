@@ -12,7 +12,7 @@ import 'controllers.dart';
 class LoginController extends GetxController implements GetxService {
   final AuthRepositoryImpl repository;
 
-  GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -36,6 +36,9 @@ class LoginController extends GetxController implements GetxService {
   }
 
   void performLogin() async {
+    if (_isLoading) {
+      return;
+    }
     String email = _emailController.text;
     String password = _passwordController.text;
     _isLoading = true;

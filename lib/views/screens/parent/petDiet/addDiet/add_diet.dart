@@ -136,6 +136,7 @@ class _AddDietState extends State<AddDiet> {
                             height: 15.h,
                           ),
                           InputField(
+                            maxLength: 200,
                             headerWidget: InputHeader(
                               headerLabel: "lbl_special_instruction".tr,
                             ),

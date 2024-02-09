@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../data/model/models.dart';
+import '../../../../../../helper/helpers.dart';
 import '../../../../../../theme/theme.dart';
 import '../../../../../components/components.dart';
 
@@ -43,26 +44,30 @@ class OtherDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          InfoLabel(
-            title: "food_type".tr,
-            description: itemBean?.dietFoodName ?? "",
-            padding: EdgeInsets.only(bottom: 5.h),
-          ),
-          InfoLabel(
-            title: "portion_size".tr,
-            description: itemBean?.dietPortionSize ?? "",
-            padding: EdgeInsets.only(bottom: 5.h),
-          ),
-          InfoLabel(
-            title: "special_instruction".tr,
-            description: itemBean?.dietSpecialInstructions ?? "",
-            padding: EdgeInsets.only(bottom: 5.h),
-          ),
-          InfoLabel(
-            title: "weight".tr,
-            description: itemBean?.dietWeight ?? "",
-            padding: EdgeInsets.only(bottom: 5.h),
-          ),
+          if (CommonHelper.isNotEmpty(itemBean?.dietFoodName))
+            InfoLabel(
+              title: "lbl_food_type".tr,
+              description: itemBean?.dietFoodName ?? "",
+              padding: EdgeInsets.only(bottom: 5.h),
+            ),
+          if (CommonHelper.isNotEmpty(itemBean?.dietPortionSize))
+            InfoLabel(
+              title: "portion_size".tr,
+              description: itemBean?.dietPortionSize ?? "",
+              padding: EdgeInsets.only(bottom: 5.h),
+            ),
+          if (CommonHelper.isNotEmpty(itemBean?.dietSpecialInstructions))
+            InfoLabel(
+              title: "special_instruction".tr,
+              description: itemBean?.dietSpecialInstructions ?? "",
+              padding: EdgeInsets.only(bottom: 5.h),
+            ),
+          if (CommonHelper.isNotEmpty(itemBean?.dietWeight))
+            InfoLabel(
+              title: "weight".tr,
+              description: itemBean?.dietWeight ?? "",
+              padding: EdgeInsets.only(bottom: 5.h),
+            ),
         ],
       ),
     );

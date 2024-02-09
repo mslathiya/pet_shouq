@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/model/models.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -39,37 +40,38 @@ class PetOtherDetails extends StatelessWidget {
                 ),
           ),
           children: [
-            InfoLabel(
-              title: "chip_number".tr,
-              description: info.petMicrochipNumber ?? "",
-              padding: EdgeInsets.only(bottom: 5.h),
-            ),
-            InfoLabel(
-              title: "spayed".tr,
-              description: info.petIsNeutered ?? "",
-              padding: EdgeInsets.only(bottom: 5.h),
-            ),
-            InfoLabel(
-              title: "pedigree_front".tr,
-              description: info.petPedigreeInfoFrontside ?? "",
-              padding: EdgeInsets.only(bottom: 5.h),
-            ),
-            InfoLabel(
-              title: "pedigree_back".tr,
-              description: info.petPedigreeInfoBackside ?? "",
-              padding: EdgeInsets.only(bottom: 5.h),
-            ),
-            InfoLabel(
-              title: "allergies".tr,
-              description: info.petAllergies ?? "",
-              padding: EdgeInsets.only(bottom: 5.h),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 3.w,
-                vertical: 5.h,
+            if (CommonHelper.isNotEmpty(info.petMicrochipNumber))
+              InfoLabel(
+                title: "chip_number".tr,
+                description: info.petMicrochipNumber ?? "",
+                padding: EdgeInsets.only(bottom: 5.h),
               ),
-              child: Align(
+            if (CommonHelper.isNotEmpty(info.petIsNeutered))
+              InfoLabel(
+                title: "spayed".tr,
+                description: info.petIsNeutered ?? "",
+                padding: EdgeInsets.only(bottom: 5.h),
+              ),
+            if (CommonHelper.isNotEmpty(info.petPedigreeInfoFrontside))
+              InfoLabel(
+                title: "pedigree_front".tr,
+                description: info.petPedigreeInfoFrontside ?? "",
+                padding: EdgeInsets.only(bottom: 5.h),
+              ),
+            if (CommonHelper.isNotEmpty(info.petPedigreeInfoBackside))
+              InfoLabel(
+                title: "pedigree_back".tr,
+                description: info.petPedigreeInfoBackside ?? "",
+                padding: EdgeInsets.only(bottom: 5.h),
+              ),
+            if (CommonHelper.isNotEmpty(info.petAllergies))
+              InfoLabel(
+                title: "allergies".tr,
+                description: info.petAllergies ?? "",
+                padding: EdgeInsets.only(bottom: 5.h),
+              ),
+            if (CommonHelper.isNotEmpty(info.petDescription))
+              Align(
                 alignment: Alignment.topLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +85,7 @@ class PetOtherDetails extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall
-                          ?.copyWith(fontSize: 13.sp),
+                          ?.copyWith(fontSize: 12.sp),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -99,8 +101,7 @@ class PetOtherDetails extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
-            )
+              )
           ],
         ),
       ),

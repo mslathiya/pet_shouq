@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../controller/controllers.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -16,6 +17,15 @@ class PetMedication extends StatefulWidget {
 }
 
 class _PetMedicationState extends State<PetMedication> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<MedicationController>().setScrollListener();
+      Get.find<MedicationController>().getMedicationList();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -43,6 +53,7 @@ class _PetMedicationState extends State<PetMedication> {
                       child: RefreshIndicator(
                         onRefresh: () => controller.getMedicationList(),
                         child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
                           controller: controller.controller,
                           itemCount: controller.medicationListArray.length + 1,
                           padding: EdgeInsets.only(
@@ -54,11 +65,26 @@ class _PetMedicationState extends State<PetMedication> {
                               final item =
                                   controller.medicationListArray[index];
                               return MedicationListItem(
-                                itemBean: item,
-                                onViewDetail: () {
-                                  Get.toNamed(petMedicationDetail);
-                                },
                                 itemIndex: index,
+                                itemBean: item,
+                                onViewDetail: () async {
+                                  final response = await controller
+                                      .getMedicationDetail(item.mediId!);
+
+                                  Get.toNamed(petMedicationDetail, arguments: [
+                                    {"index": index},
+                                    {"info": response}
+                                  ]);
+                                },
+                                onDeleteItem: () {
+                                  CommonHelper.dialogBuilderDeleteItem(
+                                    title: "delete_item".tr,
+                                    subTitle: "delete_item_msg".tr,
+                                    onPressOkay: () {
+                                      controller.deleteMedication(item.mediId!);
+                                    },
+                                  );
+                                },
                               );
                             }
 
@@ -134,5 +160,11 @@ class _PetMedicationState extends State<PetMedication> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Get.find<MedicationController>().disposeController();
+    super.dispose();
   }
 }

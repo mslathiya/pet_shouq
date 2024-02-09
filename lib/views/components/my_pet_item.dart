@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -7,9 +6,9 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/model/models.dart';
-import '../../helper/helpers.dart';
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
+import 'pet_image.dart';
 
 class MyPetItem extends StatelessWidget {
   final int itemIndex;
@@ -26,13 +25,6 @@ class MyPetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool haveImage = false;
-    String imagePath = "";
-    if (itemBean.petProfilePhoto != null) {
-      imagePath = itemBean.fullProfileImageUrl.toString();
-      haveImage = imagePath.hasValidUrl();
-    }
-
     return Container(
       margin: EdgeInsets.only(
         left: 10.sp,
@@ -92,27 +84,9 @@ class MyPetItem extends StatelessWidget {
             children: [
               Hero(
                 tag: "pet$itemIndex",
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.sp),
-                  child: !haveImage
-                      ? Image.asset(
-                          AppAssets.launcherIcon,
-                          height: 70.w,
-                          width: 70.w,
-                          fit: BoxFit.cover,
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: imagePath,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          fit: BoxFit.cover,
-                          fadeInDuration: const Duration(milliseconds: 60),
-                          fadeInCurve: Curves.easeIn,
-                          height: 70.w,
-                          width: 70.w,
-                        ),
+                child: PetImage(
+                  customSize: 70.w,
+                  itemBean: itemBean,
                 ),
               ),
               SizedBox(

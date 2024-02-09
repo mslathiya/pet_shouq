@@ -41,6 +41,7 @@ class _ParentMyPetsState extends State<ParentMyPets> {
             return const ShimmerListLoading();
           }
           return Stack(
+            fit: StackFit.expand,
             children: [
               Positioned.fill(
                 child: Column(
@@ -51,6 +52,7 @@ class _ParentMyPetsState extends State<ParentMyPets> {
                       child: RefreshIndicator(
                         onRefresh: () => controller.resetRequest(),
                         child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
                           controller: controller.controller,
                           itemCount: controller.petListArray.length + 1,
                           padding: EdgeInsets.only(

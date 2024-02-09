@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/model/models.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
@@ -24,37 +25,40 @@ class PetDetail extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(
-            flex: 1,
-            child: SpotInfo(
-              icon: AppAssets.icPetColor,
-              title: (info.petColor ?? "").capitalizeFirst ?? "",
+          if (CommonHelper.isNotEmpty(info.petColor))
+            Expanded(
+              flex: 1,
+              child: SpotInfo(
+                icon: AppAssets.icPetColor,
+                title: (info.petColor ?? "").capitalizeFirst ?? "",
+              ),
             ),
-          ),
           SizedBox(
             width: 8.w,
           ),
-          Expanded(
-            flex: 1,
-            child: SpotInfo(
-              icon: AppAssets.icPetWeight,
-              title: double.parse(info.petWeight.toString()) > 0
-                  ? '${info.petWeight ?? ""} kg'
-                  : "",
+          if (double.parse(info.petWeight.toString()) > 0)
+            Expanded(
+              flex: 1,
+              child: SpotInfo(
+                icon: AppAssets.icPetWeight,
+                title: double.parse(info.petWeight.toString()) > 0
+                    ? '${info.petWeight ?? ""} kg'
+                    : "",
+              ),
             ),
-          ),
           SizedBox(
             width: 8.w,
           ),
-          Expanded(
-            flex: 1,
-            child: SpotInfo(
-              icon: AppAssets.icPetHeight,
-              title: double.parse(info.petHeight.toString()) > 0
-                  ? '${info.petHeight ?? ""} cm'
-                  : "",
-            ),
-          )
+          if (double.parse(info.petHeight.toString()) > 0)
+            Expanded(
+              flex: 1,
+              child: SpotInfo(
+                icon: AppAssets.icPetHeight,
+                title: double.parse(info.petHeight.toString()) > 0
+                    ? '${info.petHeight ?? ""} cm'
+                    : "",
+              ),
+            )
         ],
       ),
     );

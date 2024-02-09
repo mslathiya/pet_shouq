@@ -83,12 +83,6 @@ class MedicationController extends GetxController implements GetxService {
     required this.petId,
   });
 
-  @override
-  void onInit() {
-    getMedicationList();
-    super.onInit();
-  }
-
   void setScrollListener() {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.position.pixels) {
@@ -100,10 +94,13 @@ class MedicationController extends GetxController implements GetxService {
     });
   }
 
+  void disposeController() {
+    controller.removeListener(() {});
+  }
+
   Future<void> getMedicationList() async {
-    _loadingMedication = true;
     _currentPage = 1;
-    update();
+    _medicationListArray.clear();
     getMedication();
   }
 
@@ -139,11 +136,11 @@ class MedicationController extends GetxController implements GetxService {
     });
   }
 
-  Future<NutritionData?> getMedicationDetail(int nutritionId) async {
+  Future<MedicationInfo?> getMedicationDetail(int medicationId) async {
     _removingMedication = true;
     update();
-    final result = await repository.getMedicationDetail(petId);
-    NutritionData? information;
+    final result = await repository.getMedicationDetail(medicationId);
+    MedicationInfo? information;
     result.fold<void>(
       (failure) {
         _removingMedication = false;
@@ -170,10 +167,13 @@ class MedicationController extends GetxController implements GetxService {
     return information;
   }
 
-  void deleteMedication(int petId) async {
+  void deleteMedication(int medicationId) async {
+    if (_removingMedication) {
+      return;
+    }
     _removingMedication = true;
     update();
-    final result = await repository.removeMedication(petId);
+    final result = await repository.removeMedication(medicationId);
     result.fold<void>(
       (failure) {
         _removingMedication = false;
@@ -279,6 +279,9 @@ class MedicationController extends GetxController implements GetxService {
   }
 
   void saveMedicationInfo() async {
+    if (isLoading) {
+      return;
+    }
     isLoading = true;
     update();
 
@@ -304,7 +307,7 @@ class MedicationController extends GetxController implements GetxService {
     dynamic result;
 
     if (inEditMode) {
-      result = await repository.updateMedication(petId, fData);
+      result = await repository.updateMedication(medicationId, fData);
     } else {
       result = await repository.addMedication(fData);
     }

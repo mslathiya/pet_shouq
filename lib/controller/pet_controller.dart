@@ -230,6 +230,9 @@ class PetController extends GetxController implements GetxService {
   }
 
   void savePetData() async {
+    if (isLoading) {
+      return;
+    }
     isLoading = true;
     update();
 
@@ -378,8 +381,12 @@ class PetController extends GetxController implements GetxService {
       petId = info.petId ?? -1;
       _petName.text = info.petName ?? "";
       _marking.text = info.petColor ?? "";
-      _weight.text = info.petWeight ?? "";
-      _height.text = info.petHeight ?? "";
+      _weight.text = double.parse(info.petWeight.toString()) > 0
+          ? info.petWeight ?? ""
+          : "";
+      _height.text = double.parse(info.petHeight.toString()) > 0
+          ? info.petHeight ?? ""
+          : "";
       _chipNumber.text = info.petMicrochipNumber ?? "";
       _pedigreeFront.text = info.petPedigreeInfoFrontside ?? "";
       _pedigreeBack.text = info.petPedigreeInfoBackside ?? "";
@@ -406,8 +413,8 @@ class PetController extends GetxController implements GetxService {
   /* -------------------------------------------------------------------------- */
 
   Future<void> resetRequest() async {
-    _loadingPetList = true;
     _currentPage = 1;
+    _petListArray.clear();
     getPetList();
   }
 
@@ -456,6 +463,9 @@ class PetController extends GetxController implements GetxService {
   }
 
   void deletePet(int petId) async {
+    if (_removingPet) {
+      return;
+    }
     _removingPet = true;
     update();
     final result = await repository.removePet(petId);

@@ -18,6 +18,15 @@ class PetDiet extends StatefulWidget {
 
 class _PetDietState extends State<PetDiet> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<DietLogController>().setScrollListener();
+      Get.find<DietLogController>().getDietLogList();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
@@ -35,6 +44,7 @@ class _PetDietState extends State<PetDiet> {
             return const ShimmerListLoading();
           }
           return Stack(
+            fit: StackFit.expand,
             children: [
               Positioned.fill(
                 child: Column(
@@ -45,6 +55,7 @@ class _PetDietState extends State<PetDiet> {
                       child: RefreshIndicator(
                         onRefresh: () => controller.getDietLogList(),
                         child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
                           controller: controller.controller,
                           itemCount: controller.dietLogListArray.length + 1,
                           padding: EdgeInsets.only(
