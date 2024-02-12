@@ -36,7 +36,7 @@ class PetDetail extends StatelessWidget {
           SizedBox(
             width: 8.w,
           ),
-          if (double.parse(info.petWeight.toString()) > 0)
+          if (double.parse(info.petWeight?.toString() ?? "0") > 0)
             Expanded(
               flex: 1,
               child: SpotInfo(
@@ -49,7 +49,7 @@ class PetDetail extends StatelessWidget {
           SizedBox(
             width: 8.w,
           ),
-          if (double.parse(info.petHeight.toString()) > 0)
+          if (double.parse(info.petHeight?.toString() ?? "0") > 0)
             Expanded(
               flex: 1,
               child: SpotInfo(

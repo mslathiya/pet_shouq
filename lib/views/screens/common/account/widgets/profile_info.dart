@@ -25,10 +25,12 @@ class ProfileInfo extends StatelessWidget {
       UserBean userData = authController.userData.value;
       Parent? parentData = userData.parent;
       String primaryPhone =
-          '${parentData?.parentContactCountryCode ?? ""} ${parentData?.parentContactNumber ?? ""}';
+          '+${parentData?.parentContactCountryCode ?? ""} ${parentData?.parentContactNumber ?? ""}';
 
-      String secondaryPhone =
-          '${parentData?.parentSecondaryContactCountryCode ?? ""} ${parentData?.parentSecondaryContactNumber ?? ""}';
+      String secondaryPhone = CommonHelper.isNotEmpty(
+              parentData?.parentSecondaryContactNumber)
+          ? '+${parentData?.parentSecondaryContactCountryCode ?? ""} ${parentData?.parentSecondaryContactNumber ?? ""}'
+          : "";
       String imagePath = "";
       bool haveImage = false;
       if (userData.profilePicture != null && userData.profilePicture != '') {
@@ -258,7 +260,7 @@ class ProfileInfo extends StatelessWidget {
                       LabelWithIcon(
                         asset: AppAssets.icLocationPin,
                         value:
-                            "${parentData?.parentAddress ?? ""} ${parentData?.parentAddressSecondLine ?? ""}",
+                            "${parentData?.parentAddress ?? ""} ${parentData?.parentAddressSecondLine ?? ""} ${parentData?.parentCity ?? ""} ${parentData?.parentLocation ?? ""} ${parentData?.parentState ?? ""}",
                         padding: EdgeInsets.zero,
                       )
                     ],

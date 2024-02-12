@@ -92,7 +92,7 @@ class AppStrings extends Translations {
           "pedigree_front": "Pedigree Info Frontside",
           "pedigree_back": "Pedigree Info Backside",
           "allergies": "Allergies",
-          "description": "Description",
+          "description": "Description: ",
           "pet_menu": "PET MENU",
           "medical_history": "Medical history",
           "set_feeding_schedule": "Set Feeding Schedule",

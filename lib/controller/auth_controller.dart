@@ -145,38 +145,41 @@ class AuthController extends GetxController implements GetxService {
 
     result.fold<void>(
       (failure) {
-        String errorMessage = failure.message;
+        if (failure.code == 401) {
+          handleUnAuthorized(failure);
+        } else {
+          String errorMessage = failure.message;
 
-        if (failure.errorData != null) {
-          errorMessage = "error_msg".tr;
+          if (failure.errorData != null) {
+            errorMessage = "error_msg".tr;
 
-          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+            final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
 
-          if (errorResponse.oldPassword != null &&
-              errorResponse.oldPassword!.isNotEmpty) {
-            _oldPasswordError = errorResponse.oldPassword!.join("\n");
+            if (errorResponse.oldPassword != null &&
+                errorResponse.oldPassword!.isNotEmpty) {
+              _oldPasswordError = errorResponse.oldPassword!.join("\n");
+            }
+            if (errorResponse.password != null &&
+                errorResponse.password!.isNotEmpty) {
+              _newPasswordError = errorResponse.password!.join("\n");
+            }
+
+            if (errorResponse.passwordConfirmation != null &&
+                errorResponse.passwordConfirmation!.isNotEmpty) {
+              _confirmPasswordError =
+                  errorResponse.passwordConfirmation!.join("\n");
+            }
           }
-          if (errorResponse.password != null &&
-              errorResponse.password!.isNotEmpty) {
-            _newPasswordError = errorResponse.password!.join("\n");
-          }
-
-          if (errorResponse.passwordConfirmation != null &&
-              errorResponse.passwordConfirmation!.isNotEmpty) {
-            _confirmPasswordError =
-                errorResponse.passwordConfirmation!.join("\n");
-          }
+          _isLoading = false;
+          update();
+          Get.snackbar(
+            "error_in_request".tr,
+            errorMessage,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
         }
-
-        _isLoading = false;
-        update();
-        Get.snackbar(
-          "error_in_request".tr,
-          errorMessage,
-          backgroundColor: AppColors.redColor,
-          colorText: AppColors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
       },
       (success) {
         _isLoading = false;

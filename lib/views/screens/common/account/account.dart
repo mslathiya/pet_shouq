@@ -99,6 +99,7 @@ class _ProfileState extends State<Profile> {
                             onPressOkay: () {
                               Get.find<AuthController>().logoutCurrentUser();
                             },
+                            buttonText: "btn_logout".tr,
                           );
                         },
                         buttonTitle: "btn_logout".tr,

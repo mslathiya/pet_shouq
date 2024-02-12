@@ -349,7 +349,7 @@ class _RegisterState extends State<Register> {
                                       if (value.isEmpty) {
                                         return "dynamic_field_required"
                                             .trParams(
-                                          {"field": "lbl_confirm_password".tr},
+                                          {"field": "lbl_password".tr},
                                         );
                                       } else if (!regex
                                           .hasMatch(value.trim())) {

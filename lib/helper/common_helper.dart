@@ -12,6 +12,7 @@ class CommonHelper {
     required String title,
     required String subTitle,
     required VoidCallback onPressOkay,
+    String? buttonText,
   }) {
     Get.generalDialog(
       barrierLabel: "Barrier",
@@ -23,7 +24,7 @@ class CommonHelper {
           topIcon: AppAssets.icDeleteAccount,
           label: title,
           subLabel: subTitle,
-          buttonText: "btn_delete".tr,
+          buttonText: buttonText ?? "btn_delete".tr,
           onPressButton: onPressOkay,
           secondaryButtonText: "btn_cancel".tr,
           onPressSecondaryButton: () {},
