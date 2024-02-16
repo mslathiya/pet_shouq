@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../controller/controllers.dart';
+import '../../../../helper/helpers.dart';
+import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 
 class ContactUs extends StatefulWidget {
@@ -86,6 +89,31 @@ class _ContactUsState extends State<ContactUs> {
                             onTap: () => Get.back(),
                             buttonTitle: "btn_submit".tr,
                             width: width - 20,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: ButtonView(
+                            onTap: () {
+                              CommonHelper.dialogBuilderDeleteItem(
+                                title: "account_deletion".tr,
+                                subTitle: "account_deletion_message".tr,
+                                onPressOkay: () {
+                                  Get.find<AuthController>()
+                                      .logoutCurrentUser();
+                                },
+                              );
+                            },
+                            buttonTitle: "btn_delete_account".tr,
+                            width: width - 20,
+                            buttonColor: AppColors.deleteButton,
+                            buttonStyle: TextStyle(
+                              color: AppColors.redColor,
+                              fontSize: 8.sp,
+                            ),
                           ),
                         ),
                       ],

@@ -21,4 +21,4 @@ export 'petAppointment/pet_appointment.dart';
 
 export 'editParent/edit_parent_profile.dart';
 
-export "specialNotes/special_notes.dart";
+export 'specialNotes/special_notes.dart';

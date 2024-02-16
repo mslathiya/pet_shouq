@@ -406,7 +406,9 @@ class AppStrings extends Translations {
           "code_sent_msg": "Auth code sent successfully",
           "short_auth_code": "Auth code is not valid",
           "short_auth_code_msg":
-              "Auth code is not complete. Please add completely"
+              "Auth code is not complete. Please add completely",
+          "add_special_notes": "Add Special Notes",
+          "update_special_notes": "Update Special Notes"
         },
       };
 }

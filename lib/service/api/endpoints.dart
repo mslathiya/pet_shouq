@@ -54,4 +54,9 @@ class Endpoints {
   static const addDietPost = "api/parent/pet/diet-log/add";
   static const updateDietPost = "api/parent/pet/diet-log/update/";
   static const removeDietDelete = "api/parent/pet/diet-log/delete/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                              Pet Special Notes                             */
+  /* -------------------------------------------------------------------------- */
+  static const addPetSpecialNote = "api/parent/pet/special-need/";
 }

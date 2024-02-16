@@ -276,7 +276,20 @@ class PetDetailView extends StatelessWidget {
         MenuItem(
           title: "special_needs".tr,
           iconName: AppAssets.icSpecialNeeds,
-          onPressMenu: () => Get.toNamed(petSpecialNotes),
+          onPressMenu: () {
+            Get.put(SpecialNoteController(
+              repository: Get.find(),
+              petId: info.petId ?? -1,
+            ));
+            Get.offNamed(
+              petSpecialNotes,
+              arguments: [
+                {
+                  "info": info,
+                }
+              ],
+            );
+          },
         ),
         SizedBox(
           height: 15.h,

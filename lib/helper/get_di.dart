@@ -76,6 +76,13 @@ Future<void> init() async {
     ),
     fenix: true,
   );
+  Get.lazyPut(
+    () => SpecialNoteRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+    fenix: true,
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers

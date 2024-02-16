@@ -25,7 +25,8 @@ class PetDetailResponseBean {
       PetDetailResponseBean(
         success: json["success"],
         message: json["message"],
-        data: json["data"] == null ? null : PetInformation.fromJson(json["data"]),
+        data:
+            json["data"] == null ? null : PetInformation.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,6 +56,7 @@ class PetInformation {
   String? petQrCodeNumber;
   String? petDescription;
   String? fullProfileImageUrl;
+  String? petSpecialNeed;
 
   PetInformation({
     this.petId,
@@ -76,6 +78,7 @@ class PetInformation {
     this.petQrCodeNumber,
     this.petDescription,
     this.fullProfileImageUrl,
+    this.petSpecialNeed,
   });
 
   factory PetInformation.fromJson(Map<String, dynamic> json) => PetInformation(
@@ -99,6 +102,7 @@ class PetInformation {
         petQrCodeNumber: json["pet_qr_code_number"],
         petDescription: json["pet_description"],
         fullProfileImageUrl: json["full_profile_image_url"],
+        petSpecialNeed: json["pet_special_need"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -122,5 +126,6 @@ class PetInformation {
         "pet_qr_code_number": petQrCodeNumber,
         "pet_description": petDescription,
         "full_profile_image_url": fullProfileImageUrl,
+        "pet_special_need": petSpecialNeed,
       };
 }

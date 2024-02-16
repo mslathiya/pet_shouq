@@ -85,55 +85,25 @@ class _ProfileState extends State<Profile> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: ButtonView(
-                        onTap: () {
-                          CommonHelper.dialogBuilderDeleteItem(
-                            title: "btn_logout".tr,
-                            subTitle: "message_logout".tr,
-                            onPressOkay: () {
-                              Get.find<AuthController>().logoutCurrentUser();
-                            },
-                            buttonText: "btn_logout".tr,
-                          );
+                child: Align(
+                  alignment: Alignment.center,
+                  child: ButtonView(
+                    onTap: () {
+                      CommonHelper.dialogBuilderDeleteItem(
+                        title: "btn_logout".tr,
+                        subTitle: "message_logout".tr,
+                        onPressOkay: () {
+                          Get.find<AuthController>().logoutCurrentUser();
                         },
-                        buttonTitle: "btn_logout".tr,
-                        width: width * .45,
-                        buttonStyle: TextStyle(
-                          fontSize: 8.sp,
-                        ),
-                      ),
+                        buttonText: "btn_logout".tr,
+                      );
+                    },
+                    buttonTitle: "btn_logout".tr,
+                    width: width * .9,
+                    buttonStyle: TextStyle(
+                      fontSize: 8.sp,
                     ),
-                    SizedBox(
-                      width: 10.h,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ButtonView(
-                        onTap: () {
-                          CommonHelper.dialogBuilderDeleteItem(
-                            title: "account_deletion".tr,
-                            subTitle: "account_deletion_message".tr,
-                            onPressOkay: () {
-                              Get.find<AuthController>().logoutCurrentUser();
-                            },
-                          );
-                        },
-                        buttonTitle: "btn_delete_account".tr,
-                        width: width * .45,
-                        buttonColor: AppColors.deleteButton,
-                        buttonStyle: TextStyle(
-                          color: AppColors.redColor,
-                          fontSize: 8.sp,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(

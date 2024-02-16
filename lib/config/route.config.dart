@@ -39,10 +39,14 @@ const String petAddNutrition = "/petAddNutrition";
 const String petFeedSchedule = "/petFeedSchedule";
 const String petAddSchedule = "/petAddSchedule";
 
+//special notes
+const String petSpecialNotes = "/petSpecialNotes";
+const String petAddSpecialNotes = "/petAddSpecialNotes";
+
 //Appointment booking
 const String petAppointment = "/petAppointment";
 const String petBookingDetails = "/petBookingDetails";
-const String petSpecialNotes = "/petSpecialNotes";
+
 //Specific for parent
 
 //Specific for vet
@@ -184,6 +188,22 @@ List<GetPage> generateRoute = [
     name: petAddSchedule,
     page: () => const AddSchedule(),
   ),
+
+  /**
+   * 
+   * 
+   * Special notes
+   * 
+   */
+  GetPage(
+    name: petSpecialNotes,
+    page: () => const SpecialNotes(),
+  ),
+  GetPage(
+    name: petAddSpecialNotes,
+    page: () => const AddSpecialNote(),
+  ),
+
   /**
        * 
        * Appointment booking
@@ -197,10 +217,7 @@ List<GetPage> generateRoute = [
     name: petBookingDetails,
     page: () => const AppointmentDetails(),
   ),
-  GetPage(
-    name: petSpecialNotes,
-    page: () => const SpecialNotes(),
-  ),
+
   /**Specific for parent**/
 
   /**Specific for vet**/
