@@ -286,12 +286,17 @@ class AppStrings extends Translations {
           "medical_details": "Medical Details",
           "pet_vaccination_detail": "Pet Vaccination Details",
           "vaccination_name": "Vaccination Name",
+          "hint_vaccination_name": "Enter Vaccination Name",
           "vaccination_type": "Vaccination Type",
+          "hint_vaccination_type": "Select Vaccination Type",
           "vaccination_date": "Vaccination Date",
           "next_due_date": "Next Due Date",
           "vaccination_provider": "Vaccination Provider",
+          "hint_vaccination_provider": "Enter Vaccination Provider",
           "vaccination_lot_no": "Vaccination Lot Number",
+          "hint_vaccination_lot_no": "Enter Vaccination Lot Number",
           "vaccination_id": "Vaccination Certificate ID",
+          "hint_vaccination_id": "Enter Vaccination Certificate ID",
           "breed_marking": "Breed & Color/Markings",
           "emergency_info": "Emergency Contact Information",
           "primary_doc": "Primary Veterinarian",
@@ -408,7 +413,14 @@ class AppStrings extends Translations {
           "short_auth_code_msg":
               "Auth code is not complete. Please add completely",
           "add_special_notes": "Add Special Notes",
-          "update_special_notes": "Update Special Notes"
+          "update_special_notes": "Update Special Notes",
+          "btn_add_vaccination": "Add Pet Vaccination Details",
+          "add_vaccination_msg":
+              "Add new vaccination by click on below button!",
+          "no_vaccination_found": "No vaccination data found",
+          "pet_vaccination": "Pet Vaccination",
+          "screen_add_vaccination": "Add Pet Vaccination",
+          "screen_update_vaccination": "Update Pet Vaccination",
         },
       };
 }

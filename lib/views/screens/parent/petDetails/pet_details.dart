@@ -271,7 +271,13 @@ class PetDetailView extends StatelessWidget {
         MenuItem(
           title: "vaccination".tr,
           iconName: AppAssets.icVaccination,
-          onPressMenu: () {},
+          onPressMenu: () {
+            Get.put(VaccinationController(
+              repository: Get.find(),
+              petId: info.petId ?? -1,
+            ));
+            Get.toNamed(petVaccination);
+          },
         ),
         MenuItem(
           title: "special_needs".tr,

@@ -48,3 +48,4 @@ export "shimmer_list_loading.dart";
 export "no_result_found_list.dart";
 export "view_button.dart";
 export "pet_image.dart";
+export "vaccination_list_item.dart";

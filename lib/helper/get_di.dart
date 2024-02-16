@@ -83,6 +83,13 @@ Future<void> init() async {
     ),
     fenix: true,
   );
+  Get.lazyPut(
+    () => VaccinationRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+    fenix: true,
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers

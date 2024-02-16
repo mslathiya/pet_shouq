@@ -59,4 +59,13 @@ class Endpoints {
   /*                              Pet Special Notes                             */
   /* -------------------------------------------------------------------------- */
   static const addPetSpecialNote = "api/parent/pet/special-need/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Pet Vaccination                              */
+  /* -------------------------------------------------------------------------- */
+  static const vaccinationListGet = "api/parent/pet/vaccination/list/";
+  static const vaccinationDetailGet = "api/parent/pet/vaccination/detail/";
+  static const addVaccinationPost = "api/parent/pet/vaccination/add";
+  static const updateVaccinationPost = "api/parent/pet/vaccination/update/";
+  static const removeVaccinationDelete = "api/parent/pet/vaccination/delete/";
 }

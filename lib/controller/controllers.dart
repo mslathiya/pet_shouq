@@ -7,3 +7,4 @@ export "nutrition_controller.dart";
 export "medication_controller.dart";
 export "diet_log_controller.dart";
 export "special_note_controller.dart";
+export "vaccination_controller.dart";

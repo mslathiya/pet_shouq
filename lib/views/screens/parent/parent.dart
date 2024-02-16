@@ -18,7 +18,9 @@ export 'petNutrition/nutrition.dart';
 export 'petFeedingSchedule/feeding_schedule.dart';
 //Appointment
 export 'petAppointment/pet_appointment.dart';
+//special notes
+export 'specialNotes/special_notes.dart';
+//vaccination
+export "petVaccination/vaccination.dart";
 
 export 'editParent/edit_parent_profile.dart';
-
-export 'specialNotes/special_notes.dart';

@@ -24,6 +24,10 @@ const String addPet = '/addPet';
 const String petMedication = "/petMedication";
 const String petMedicationDetail = "/petMedicationDetail";
 const String petAddMedication = "/petAddMedication";
+//medication
+const String petVaccination = "/petVaccination";
+const String petVaccinationDetail = "/petVaccinationDetail";
+const String petAddVaccination = "/petAddVaccination";
 
 //diet
 const String petDiet = "/petDiet";
@@ -140,6 +144,23 @@ List<GetPage> generateRoute = [
   GetPage(
     name: petAddMedication,
     page: () => const AddMedication(),
+  ),
+  /**
+     * 
+     * Vaccination
+     * 
+     */
+  GetPage(
+    name: petVaccination,
+    page: () => const PetVaccination(),
+  ),
+  GetPage(
+    name: petVaccinationDetail,
+    page: () => const VaccinationDetails(),
+  ),
+  GetPage(
+    name: petAddVaccination,
+    page: () => const AddVaccination(),
   ),
   /**
        * 
