@@ -157,7 +157,7 @@ class MedicationListItem extends StatelessWidget {
                     width: 80.w,
                     child: const LabelWithIcon(
                       asset: AppAssets.icDocBag,
-                      value: 'Dog',
+                      value: '',
                       padding: EdgeInsets.zero,
                     ),
                   ),

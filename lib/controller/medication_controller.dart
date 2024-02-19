@@ -336,8 +336,9 @@ class MedicationController extends GetxController implements GetxService {
 
   void saveMedicationInfo() async {
     if (mediType == null) {
-      _mediTypeError = "dynamic_field_required"
-          .trParams({"field": "lbl_medication_type".tr});
+      _mediTypeError = "dynamic_field_required".trParams({
+        "field": "lbl_medication_type".tr,
+      });
       update();
       return;
     }

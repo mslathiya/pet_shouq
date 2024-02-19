@@ -105,8 +105,6 @@ class EditParentProfileController extends GetxController
       if (codeSecondary != '') {
         _pickedCodeSecondary =
             codeSecondary.startsWith("+") ? codeSecondary : "+$code";
-
-        // final codeData = CountryCode.fromDialCode(_pickedCodeSecondary!);
       }
       _gender = uParent.parentSex ?? "";
     }
@@ -247,13 +245,15 @@ class EditParentProfileController extends GetxController
       (failure) {
         isLoading = false;
         update();
-        Get.snackbar(
-          "error_in_request".tr,
-          failure.message,
-          backgroundColor: AppColors.redColor,
-          colorText: AppColors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          Get.snackbar(
+            "error_in_request".tr,
+            failure.message,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
       },
       (success) {
         isLoading = false;
