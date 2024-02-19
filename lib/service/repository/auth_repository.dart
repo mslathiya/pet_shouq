@@ -13,6 +13,9 @@ abstract class AuthRepository {
     bool rememberLogin,
   );
 
+  Future<Either<Failure, GeneralBean>> parentFieldValidation(
+    FormData formFields,
+  );
   Future<Either<Failure, GeneralBean>> registerParent(
     FormData formFields,
   );
@@ -102,7 +105,6 @@ class AuthRepositoryImpl extends AuthRepository {
           if (bean.success == true) {
             return Right(bean);
           } else {
-            AppLog.e("Fail ${bean.data}");
             return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
           }
         }
@@ -169,7 +171,6 @@ class AuthRepositoryImpl extends AuthRepository {
         }
         return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
-        e.printError();
         return Left(ApiException.handle(e).failure);
       }
     } else {
@@ -198,7 +199,6 @@ class AuthRepositoryImpl extends AuthRepository {
         }
         return Left(Failure(200, 'something_wrong'.tr));
       } catch (e) {
-        e.printError();
         return Left(ApiException.handle(e).failure);
       }
     } else {
@@ -222,7 +222,34 @@ class AuthRepositoryImpl extends AuthRepository {
           if (bean.success == true) {
             return Right(bean);
           } else {
-            AppLog.e("Fail ${bean.data}");
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, GeneralBean>> parentFieldValidation(
+      FormData formFields) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.post(
+          Endpoints.parentFieldValidationPost,
+          data: formFields,
+        );
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = GeneralBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
             return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
           }
         }

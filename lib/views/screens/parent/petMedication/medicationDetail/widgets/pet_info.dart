@@ -84,9 +84,9 @@ class PetInfo extends StatelessWidget {
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icPetPaw,
-                          value: 'Tablet',
+                          value: info.typeDetail?.title ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
@@ -125,7 +125,12 @@ class PetInfo extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: EditButton(
-              onPressEdit: () => Get.offNamed(petAddMedication),
+              onPressEdit: () => Get.offNamed(petAddMedication, arguments: [
+                {
+                  "mode": "Edit",
+                },
+                {"info": info}
+              ]),
             ),
           )
         ],

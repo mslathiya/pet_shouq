@@ -21,3 +21,5 @@ export "diet_detail_response_bean.dart";
 export "medication_detail_response_bean.dart";
 export "vaccination_list_response_bean.dart";
 export "vaccination_detail_response_bean.dart";
+export "medication_type_list_response_bean.dart";
+export "medication_type_bean.dart";

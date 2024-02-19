@@ -6,6 +6,7 @@ import 'package:get/get.dart' hide FormData;
 import 'package:intl/intl.dart';
 
 import '../data/model/models.dart';
+import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'auth_controller.dart';
@@ -43,6 +44,12 @@ class VaccinationController extends GetxController implements GetxService {
   String? _vacType = 'Core';
   String? _vacTypeError;
   String? _vacNameError;
+  String? _vacSpeciesError;
+  String? _vacStartDateError;
+  String? _vacDueDateError;
+  String? _vacProviderError;
+  String? _vacLotNoError;
+  String? _vacCertificateIdError;
 
   String? _vacDate = DateFormat('yyyy-MM-dd').format(
     DateTime.now(),
@@ -66,10 +73,16 @@ class VaccinationController extends GetxController implements GetxService {
   GlobalKey<FormState> get formKey => _formKey;
 
   String? get vacType => _vacType;
-  String? get vecTypeError => _vacTypeError;
-  String? get vacNameError => _vacNameError;
   String? get vacDate => _vacDate;
   String? get vacDueDate => _vacDueDate;
+  String? get vacTypeError => _vacTypeError;
+  String? get vacNameError => _vacNameError;
+  String? get vacSpeciesError => _vacSpeciesError;
+  String? get vacStartDateError => _vacStartDateError;
+  String? get vacDueDateError => _vacDueDateError;
+  String? get vacProviderError => _vacProviderError;
+  String? get vacLotNoError => _vacLotNoError;
+  String? get vacCertificateIdError => _vacCertificateIdError;
 
   VaccinationController({
     required this.repository,
@@ -249,13 +262,20 @@ class VaccinationController extends GetxController implements GetxService {
     dynamic argumentData = Get.arguments;
     if (argumentData != null && argumentData[0]['mode'] == "Edit") {
       inEditMode = true;
-      VaccinationBean info = argumentData[1]['info'];
+      VaccinationDetail info = argumentData[1]['info'];
       vaccinationId = info.vacId!;
       _vacName.text = info.vacName ?? "";
-      _vacPetSpecies.text = "";
-      _vacProvider.text = "";
-      _vacCertificateId.text = "";
+      _vacPetSpecies.text = info.vacPetSpecies ?? "";
+      _vacProvider.text = info.vacProvider ?? "";
+      _vacLotNo.text = info.vacLotNumber ?? "";
+      _vacCertificateId.text = info.vacCertificateId ?? "";
       _vacType = info.vacType ?? "";
+      _vacDate = DateFormat('yyyy-MM-dd').format(
+        info.vacDate ?? DateTime.now(),
+      );
+      _vacDueDate = DateFormat('yyyy-MM-dd').format(
+        info.vacDueDate ?? DateTime.now(),
+      );
     }
     update();
   }
@@ -271,13 +291,14 @@ class VaccinationController extends GetxController implements GetxService {
       "pet_id": petId,
       "vac_pet_species": _vacPetSpecies.text,
       "vac_name": _vacName.text,
-      "vac_type": _vacType,
+      "vac_type": _vacType?.toLowerCase(),
       "vac_date": _vacDate,
       "vac_due_date": _vacDueDate,
       "vac_provider": _vacProvider.text,
       "vac_lot_number": _vacLotNo.text,
       "vac_certificate_id": _vacCertificateId.text,
     };
+    AppLog.e("bodyMap $bodyMap");
 
     FormData fData = FormData.fromMap(bodyMap);
 
@@ -300,9 +321,38 @@ class VaccinationController extends GetxController implements GetxService {
             errorMessage = "error_msg".tr;
             final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
 
-            if (errorResponse.foodName != null &&
-                errorResponse.foodName!.isNotEmpty) {
-              _vacTypeError = errorResponse.foodName!.join("\n");
+            if (errorResponse.vacName != null &&
+                errorResponse.vacName!.isNotEmpty) {
+              _vacNameError = errorResponse.vacName!.join("\n");
+            }
+            if (errorResponse.vacType != null &&
+                errorResponse.vacType!.isNotEmpty) {
+              _vacTypeError = errorResponse.vacType!.join("\n");
+            }
+            if (errorResponse.vacPetSpecies != null &&
+                errorResponse.vacPetSpecies!.isNotEmpty) {
+              _vacSpeciesError = errorResponse.vacPetSpecies!.join("\n");
+            }
+            if (errorResponse.vacDate != null &&
+                errorResponse.vacDate!.isNotEmpty) {
+              _vacStartDateError = errorResponse.vacDate!.join("\n");
+            }
+            if (errorResponse.vacDueDate != null &&
+                errorResponse.vacDueDate!.isNotEmpty) {
+              _vacDueDateError = errorResponse.vacDueDate!.join("\n");
+            }
+            if (errorResponse.vacProvider != null &&
+                errorResponse.vacProvider!.isNotEmpty) {
+              _vacProviderError = errorResponse.vacProvider!.join("\n");
+            }
+            if (errorResponse.vacLotNumber != null &&
+                errorResponse.vacLotNumber!.isNotEmpty) {
+              _vacLotNoError = errorResponse.vacLotNumber!.join("\n");
+            }
+            if (errorResponse.vacCertificateId != null &&
+                errorResponse.vacCertificateId!.isNotEmpty) {
+              _vacCertificateIdError =
+                  errorResponse.vacCertificateId!.join("\n");
             }
 
             if (errorResponse.errors != null) {
@@ -387,9 +437,11 @@ class VaccinationController extends GetxController implements GetxService {
     _vacTypeError = null;
     _vacNameError = null;
     inEditMode = false;
+
     _vacName.clear();
     _vacPetSpecies.clear();
     _vacProvider.clear();
+    _vacLotNo.clear();
     _vacCertificateId.clear();
     _vacDate = DateFormat('yyyy-MM-dd').format(
       DateTime.now(),

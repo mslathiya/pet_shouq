@@ -24,6 +24,14 @@ class ErrorResponseDto {
   List<String>? passwordConfirmation;
   List<String>? dietWater;
   List<String>? dietFoodName;
+  List<String>? vacName;
+  List<String>? vacType;
+  List<String>? vacPetSpecies;
+  List<String>? vacDate;
+  List<String>? vacDueDate;
+  List<String>? vacProvider;
+  List<String>? vacLotNumber;
+  List<String>? vacCertificateId;
   Errors? errors;
 
   ErrorResponseDto({
@@ -44,6 +52,14 @@ class ErrorResponseDto {
     this.passwordConfirmation,
     this.dietWater,
     this.dietFoodName,
+    this.vacName,
+    this.vacType,
+    this.vacPetSpecies,
+    this.vacDate,
+    this.vacDueDate,
+    this.vacProvider,
+    this.vacLotNumber,
+    this.vacCertificateId,
     this.errors,
   });
 
@@ -101,6 +117,30 @@ class ErrorResponseDto {
         dietFoodName: json["diet_food_name"] == null
             ? []
             : List<String>.from(json["diet_food_name"]!.map((x) => x)),
+        vacName: json["vac_name"] == null
+            ? []
+            : List<String>.from(json["vac_name"]!.map((x) => x)),
+        vacType: json["vac_type"] == null
+            ? []
+            : List<String>.from(json["vac_type"]!.map((x) => x)),
+        vacPetSpecies: json["vac_pet_species"] == null
+            ? []
+            : List<String>.from(json["vac_pet_species"]!.map((x) => x)),
+        vacDate: json["vac_date"] == null
+            ? []
+            : List<String>.from(json["vac_date"]!.map((x) => x)),
+        vacDueDate: json["vac_due_date"] == null
+            ? []
+            : List<String>.from(json["vac_due_date"]!.map((x) => x)),
+        vacProvider: json["vac_provider"] == null
+            ? []
+            : List<String>.from(json["vac_provider"]!.map((x) => x)),
+        vacLotNumber: json["vac_lot_number"] == null
+            ? []
+            : List<String>.from(json["vac_lot_number"]!.map((x) => x)),
+        vacCertificateId: json["vac_certificate_id"] == null
+            ? []
+            : List<String>.from(json["vac_certificate_id"]!.map((x) => x)),
         errors: json["errors"] == null ? null : Errors.fromJson(json["errors"]),
       );
 
@@ -149,6 +189,27 @@ class ErrorResponseDto {
         "diet_food_name": dietFoodName == null
             ? []
             : List<dynamic>.from(dietFoodName!.map((x) => x)),
+        "vac_name":
+            vacName == null ? [] : List<dynamic>.from(vacName!.map((x) => x)),
+        "vac_type":
+            vacType == null ? [] : List<dynamic>.from(vacType!.map((x) => x)),
+        "vac_pet_species": vacPetSpecies == null
+            ? []
+            : List<dynamic>.from(vacPetSpecies!.map((x) => x)),
+        "vac_date":
+            vacDate == null ? [] : List<dynamic>.from(vacDate!.map((x) => x)),
+        "vac_due_date": vacDueDate == null
+            ? []
+            : List<dynamic>.from(vacDueDate!.map((x) => x)),
+        "vac_provider": vacProvider == null
+            ? []
+            : List<dynamic>.from(vacProvider!.map((x) => x)),
+        "vac_lot_number": vacLotNumber == null
+            ? []
+            : List<dynamic>.from(vacLotNumber!.map((x) => x)),
+        "vac_certificate_id": vacCertificateId == null
+            ? []
+            : List<dynamic>.from(vacCertificateId!.map((x) => x)),
         "errors": errors?.toJson(),
       };
 }

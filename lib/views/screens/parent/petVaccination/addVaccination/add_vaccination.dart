@@ -18,6 +18,14 @@ class AddVaccination extends StatefulWidget {
 
 class _AddVaccinationState extends State<AddVaccination> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<VaccinationController>().editVaccinationInfo();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
@@ -97,10 +105,22 @@ class _AddVaccinationState extends State<AddVaccination> {
                               ),
                               InputField(
                                 headerWidget: InputHeader(
+                                  compulsory: true,
                                   headerLabel: "lbl_species".tr,
                                 ),
                                 inputHint: "hint_species".tr,
                                 editingController: controller.vacPetSpecies,
+                                validator: MultiValidator(
+                                  [
+                                    RequiredValidator(
+                                      errorText:
+                                          "dynamic_field_required".trParams(
+                                        {"field": "lbl_species".tr},
+                                      ),
+                                    ),
+                                  ],
+                                ).call,
+                                inputError: controller.vacSpeciesError,
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -175,30 +195,68 @@ class _AddVaccinationState extends State<AddVaccination> {
                               ),
                               InputField(
                                 headerWidget: InputHeader(
+                                  compulsory: true,
                                   headerLabel: "vaccination_provider".tr,
                                 ),
                                 inputHint: "hint_vaccination_provider".tr,
                                 editingController: controller.vacProvider,
+                                validator: MultiValidator(
+                                  [
+                                    RequiredValidator(
+                                      errorText:
+                                          "dynamic_field_required".trParams(
+                                        {"field": "vaccination_provider".tr},
+                                      ),
+                                    ),
+                                  ],
+                                ).call,
+                                inputError: controller.vacProviderError,
                               ),
                               SizedBox(
                                 height: 15.h,
                               ),
                               InputField(
+                                maxLength: 6,
                                 headerWidget: InputHeader(
+                                  compulsory: true,
                                   headerLabel: "vaccination_lot_no".tr,
                                 ),
                                 inputHint: "hint_vaccination_lot_no".tr,
                                 editingController: controller.vacLotNo,
+                                validator: MultiValidator(
+                                  [
+                                    RequiredValidator(
+                                      errorText:
+                                          "dynamic_field_required".trParams(
+                                        {"field": "vaccination_lot_no".tr},
+                                      ),
+                                    ),
+                                  ],
+                                ).call,
+                                inputError: controller.vacLotNoError,
                               ),
                               SizedBox(
                                 height: 15.h,
                               ),
                               InputField(
+                                maxLength: 30,
                                 headerWidget: InputHeader(
+                                  compulsory: true,
                                   headerLabel: "vaccination_id".tr,
                                 ),
                                 inputHint: "hint_vaccination_id".tr,
                                 editingController: controller.vacCertificateId,
+                                validator: MultiValidator(
+                                  [
+                                    RequiredValidator(
+                                      errorText:
+                                          "dynamic_field_required".trParams(
+                                        {"field": "vaccination_id".tr},
+                                      ),
+                                    ),
+                                  ],
+                                ).call,
+                                inputError: controller.vacCertificateIdError,
                               ),
                               SizedBox(
                                 height: 15.h,

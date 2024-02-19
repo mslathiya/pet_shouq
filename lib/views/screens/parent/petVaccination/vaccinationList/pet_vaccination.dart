@@ -72,7 +72,7 @@ class _PetVaccinationState extends State<PetVaccination> {
                                   final response = await controller
                                       .getVaccinationDetails(item.vacId!);
 
-                                  Get.toNamed(petMedicationDetail, arguments: [
+                                  Get.toNamed(petVaccinationDetail, arguments: [
                                     {"index": index},
                                     {"info": response}
                                   ]);

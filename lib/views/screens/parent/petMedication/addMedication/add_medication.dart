@@ -18,6 +18,12 @@ class AddMedication extends StatefulWidget {
 
 class _AddMedicationState extends State<AddMedication> {
   @override
+  void initState() {
+    Get.find<MedicationController>().getMedicationTypeList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     bool isNeedSafeArea = MediaQuery.of(context).viewPadding.bottom > 0;
@@ -72,11 +78,12 @@ class _AddMedicationState extends State<AddMedication> {
                                 height: 15.h,
                               ),
                               SelectorField(
+                                errorText: controller.mediTypeError,
                                 headerWidget: InputHeader(
                                   compulsory: true,
                                   headerLabel: "lbl_medication_type".tr,
                                 ),
-                                inputHint: controller.mediType ??
+                                inputHint: controller.mediType?.title ??
                                     "hint_medication_type".tr,
                                 suffixIcon: SizedBox(
                                   width: 26.w,

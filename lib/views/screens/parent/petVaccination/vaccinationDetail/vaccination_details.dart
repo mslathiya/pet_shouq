@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../data/model/models.dart';
-import '../../../../../theme/theme.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../components/components.dart';
-import 'widgets/dosage_info.dart';
 import 'widgets/pet_info.dart';
-import 'widgets/other_specification.dart';
 
 class VaccinationDetails extends StatefulWidget {
   const VaccinationDetails({super.key});
@@ -48,6 +46,54 @@ class _VaccinationDetailsState extends State<VaccinationDetails> {
           children: [
             PetInfo(
               info: info,
+            ),
+            ExpandableBox(
+              initiallyExpanded: true,
+              infoList: [
+                if (CommonHelper.isNotEmpty(info.vacPetSpecies))
+                  MedicalInfo(
+                    title: "lbl_species".tr,
+                    description: info.vacPetSpecies ?? "",
+                  ),
+                if (CommonHelper.isNotEmpty(info.vacName))
+                  MedicalInfo(
+                    title: "vaccination_name".tr,
+                    description: info.vacName ?? "",
+                  ),
+                if (CommonHelper.isNotEmpty(info.vacType))
+                  MedicalInfo(
+                    title: "vaccination_type".tr,
+                    description: info.vacType ?? "",
+                  ),
+                if (info.vacDate != null)
+                  MedicalInfo(
+                    title: "vaccination_date".tr,
+                    description: DateFormat("yyyy-MM-dd")
+                        .format(info.vacDate ?? DateTime.now()),
+                  ),
+                if (info.vacDueDate != null)
+                  MedicalInfo(
+                    title: "next_due_date".tr,
+                    description: DateFormat("yyyy-MM-dd")
+                        .format(info.vacDueDate ?? DateTime.now()),
+                  ),
+                if (CommonHelper.isNotEmpty(info.vacProvider))
+                  MedicalInfo(
+                    title: "vaccination_provider".tr,
+                    description: info.vacProvider ?? "",
+                  ),
+                if (CommonHelper.isNotEmpty(info.vacLotNumber))
+                  MedicalInfo(
+                    title: "vaccination_lot_no".tr,
+                    description: info.vacLotNumber ?? "",
+                  ),
+                if (CommonHelper.isNotEmpty(info.vacCertificateId))
+                  MedicalInfo(
+                    title: "vaccination_id".tr,
+                    description: info.vacCertificateId ?? "",
+                  ),
+              ],
+              title: "pet_vaccination_detail".tr,
             ),
           ],
         ),

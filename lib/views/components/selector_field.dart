@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../helper/helpers.dart';
 import '../../theme/theme.dart';
 
 class SelectorField extends StatelessWidget {
@@ -10,6 +11,7 @@ class SelectorField extends StatelessWidget {
   final String inputHint;
   final VoidCallback onSelectItem;
   final bool? documentUploader;
+  final String? errorText;
 
   const SelectorField({
     super.key,
@@ -19,6 +21,7 @@ class SelectorField extends StatelessWidget {
     required this.inputHint,
     required this.onSelectItem,
     this.documentUploader = false,
+    this.errorText,
   });
 
   @override
@@ -79,6 +82,26 @@ class SelectorField extends StatelessWidget {
             ),
           ),
         ),
+        if (errorText != null && CommonHelper.isNotEmpty(errorText))
+          Padding(
+            padding: EdgeInsets.only(
+              left: 5.sp,
+              top: 5.sp,
+            ),
+            child: Text(
+              errorText ?? "",
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(
+                    color: AppColors.redColor,
+                  )
+                  .merge(labelStyle),
+            ),
+          )
       ],
     );
   }

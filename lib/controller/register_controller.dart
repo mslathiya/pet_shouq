@@ -451,8 +451,102 @@ class RegisterController extends GetxController implements GetxService {
   }
 
   ///
-  ///Use below code for verification concept
+  ///Use above code for verification concept
   ///
+
+  void registerValidationParent() async {
+    _firstNameError = null;
+    _lastNameError = null;
+    _emailError = null;
+    _phoneNumberError = null;
+    _passwordError = null;
+
+    isLoading = true;
+    update();
+
+    Map<String, dynamic> bodyMap = {
+      "parent_fname": firstName.text,
+      "parent_lname": lastName.text,
+      "user_email": email.text,
+      "password": password.text,
+      "parent_contact_number": phoneNumber.text,
+      "parent_contact_country_code": pickedCode?.replaceAll("+", ""),
+      "parent_sex": gender,
+      "parent_dob": birthDate,
+      "parent_address": addressOne.text,
+      "parent_address_second_line": addressTwo.text,
+      "parent_city": city.text,
+      "parent_state": province.text,
+      "parent_secondary_contact_code": pickedCodeSecondary?.replaceAll("+", ""),
+      "parent_secondary_contact_country_number": alternatePhone.text,
+      "parent_display_name": displayName.text,
+      "parent_mailing_address": mailingAddress.text,
+    };
+
+    FormData fData = FormData.fromMap(bodyMap);
+
+    final result = await repository.parentFieldValidation(fData);
+
+    result.fold<void>(
+      (failure) {
+        String errorMessage = failure.message;
+
+        if (failure.errorData != null) {
+          errorMessage = "error_msg".tr;
+
+          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+
+          if (errorResponse.parentFname != null &&
+              errorResponse.parentFname!.isNotEmpty) {
+            _firstNameError = errorResponse.parentFname!.join("\n");
+          }
+          if (errorResponse.parentLname != null &&
+              errorResponse.parentLname!.isNotEmpty) {
+            _lastNameError = errorResponse.parentLname!.join("\n");
+          }
+
+          if (errorResponse.userEmail != null &&
+              errorResponse.userEmail!.isNotEmpty) {
+            _emailError = errorResponse.userEmail!.join("\n");
+          }
+
+          if (errorResponse.password != null &&
+              errorResponse.password!.isNotEmpty) {
+            _passwordError = errorResponse.password!.join("\n");
+          }
+
+          if (errorResponse.parentContactCountryCode != null &&
+              errorResponse.parentContactCountryCode!.isNotEmpty) {
+            _phoneNumberError =
+                errorResponse.parentContactCountryCode!.join("\n");
+          }
+
+          if (errorResponse.parentContactNumber != null &&
+              errorResponse.parentContactNumber!.isNotEmpty) {
+            _phoneNumberError = errorResponse.parentContactNumber!.join("\n");
+          }
+        }
+
+        isLoading = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          errorMessage,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      },
+      (success) {
+        isLoading = false;
+        update();
+
+        Future.delayed(const Duration(seconds: 2), () {
+          Get.toNamed(verification);
+        });
+      },
+    );
+  }
 
   void registerNewUser() async {
     _firstNameError = null;

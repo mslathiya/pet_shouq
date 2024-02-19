@@ -155,9 +155,9 @@ class VaccinationListItem extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 80.w,
-                    child: const LabelWithIcon(
+                    child: LabelWithIcon(
                       asset: AppAssets.icDocBag,
-                      value: 'Dog',
+                      value: itemBean.vacCertificateId ?? "",
                       padding: EdgeInsets.zero,
                     ),
                   ),
@@ -165,8 +165,8 @@ class VaccinationListItem extends StatelessWidget {
                     width: 190.w,
                     child: LabelWithIcon(
                       asset: AppAssets.icCalendar,
-                      value: DateFormat("yyyy-MM-dd")
-                          .format(itemBean.vacDate ?? DateTime.now()),
+                      value:
+                          "${DateFormat("yyyy-MM-dd").format(itemBean.vacDate ?? DateTime.now())} - ${DateFormat("yyyy-MM-dd").format(itemBean.vacDueDate ?? DateTime.now())}",
                       padding: EdgeInsets.zero,
                     ),
                   )

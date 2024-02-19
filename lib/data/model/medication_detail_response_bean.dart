@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'medication_type_bean.dart';
 import 'pet_info_bean.dart';
 
 MedicationDetailResponseBean medicationDetailResponseBeanFromJson(String str) =>
@@ -27,7 +28,8 @@ class MedicationDetailResponseBean {
       MedicationDetailResponseBean(
         success: json["success"],
         message: json["message"],
-        data: json["data"] == null ? null : MedicationInfo.fromJson(json["data"]),
+        data:
+            json["data"] == null ? null : MedicationInfo.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,6 +55,7 @@ class MedicationInfo {
   DateTime? mediEndDate;
   String? mediRefills;
   String? mediSpecialNotes;
+  MedicationType? typeDetail;
   PetItemBean? pet;
 
   MedicationInfo({
@@ -71,6 +74,7 @@ class MedicationInfo {
     this.mediEndDate,
     this.mediRefills,
     this.mediSpecialNotes,
+    this.typeDetail,
     this.pet,
   });
 
@@ -94,6 +98,9 @@ class MedicationInfo {
             : DateTime.parse(json["medi_end_date"]),
         mediRefills: json["medi_refills"],
         mediSpecialNotes: json["medi_special_notes"],
+        typeDetail: json["type_detail"] == null
+            ? null
+            : MedicationType.fromJson(json["type_detail"]),
         pet: json["pet"] == null ? null : PetItemBean.fromJson(json["pet"]),
       );
 
@@ -115,6 +122,7 @@ class MedicationInfo {
             "${mediEndDate!.year.toString().padLeft(4, '0')}-${mediEndDate!.month.toString().padLeft(2, '0')}-${mediEndDate!.day.toString().padLeft(2, '0')}",
         "medi_refills": mediRefills,
         "medi_special_notes": mediSpecialNotes,
+        "type_detail": typeDetail?.toJson(),
         "pet": pet?.toJson(),
       };
 }

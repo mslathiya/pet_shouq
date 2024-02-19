@@ -76,17 +76,17 @@ class PetInfo extends StatelessWidget {
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icDoctor,
-                          value: 'Whiskers',
+                          value: info.vacProvider ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icPetPaw,
-                          value: 'Tablet',
+                          value: info.vacType ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
@@ -108,7 +108,7 @@ class PetInfo extends StatelessWidget {
                             ),
                             Flexible(
                               child: LabelWithIcon(
-                                asset: AppAssets.icStethoscope,
+                                asset: AppAssets.icCalendar,
                                 value: info.vacProvider ?? "",
                                 padding: EdgeInsets.zero,
                               ),
@@ -125,7 +125,15 @@ class PetInfo extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: EditButton(
-              onPressEdit: () => Get.offNamed(petAddVaccination, arguments: []),
+              onPressEdit: () => Get.offNamed(
+                petAddVaccination,
+                arguments: [
+                  {
+                    "mode": "Edit",
+                  },
+                  {"info": info}
+                ],
+              ),
             ),
           )
         ],

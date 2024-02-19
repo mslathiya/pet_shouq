@@ -18,6 +18,8 @@ class Endpoints {
   static const profileGet = "api/profile";
   static const updateParentProfilePost = "api/parent/update/profile";
   static const changePasswordPost = "api/change-password";
+  static const parentFieldValidationPost =
+      "auth/pet-parents/register-validation-check";
 
   /* -------------------------------------------------------------------------- */
   /*                                     Pet                                    */
@@ -45,6 +47,7 @@ class Endpoints {
   static const addMedicationPost = "api/parent/pet/medication/add";
   static const updateMedicationPost = "api/parent/pet/medication/update/";
   static const removeMedicationDelete = "api/parent/pet/medication/delete/";
+  static const medicationTypeListGet = "api/medication-type-list";
 
   /* -------------------------------------------------------------------------- */
   /*                                Pet Diet Log                                */

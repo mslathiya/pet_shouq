@@ -6,7 +6,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-import '../../../../config/config.dart';
 import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
@@ -739,14 +738,13 @@ class _RegisterState extends State<Register> {
                                   Align(
                                     alignment: Alignment.center,
                                     child: ButtonView(
-                                      // isLoading: controller.isLoading,
+                                      isLoading: controller.isLoading,
                                       onTap: () {
                                         if (controller.registerKey.currentState!
                                             .validate()) {
                                           FocusManager.instance.primaryFocus!
                                               .unfocus();
-                                          // controller.registerNewUser();
-                                          Get.toNamed(verification);
+                                          controller.registerValidationParent();
                                         }
                                       },
                                       buttonTitle: "sign_up".tr,

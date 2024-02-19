@@ -11,6 +11,8 @@ abstract class MedicationRepository {
     int petId,
     Map<String, dynamic> requestField,
   );
+  Future<Either<Failure, MedicationTypeListResponseBean>>
+      getMedicationTypeList();
   Future<Either<Failure, GeneralBean>> addMedication(
     FormData formFields,
   );
@@ -168,6 +170,32 @@ class MedicationRepositoryImpl extends MedicationRepository {
           }
         }
         return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, MedicationTypeListResponseBean>>
+      getMedicationTypeList() async {
+    if (await networkInfo.isConnected) {
+      try {
+        late MedicationTypeListResponseBean bean;
+        var result = await apiService.get(Endpoints.medicationTypeListGet);
+        if (result.statusCode == 200) {
+          var response = result.data;
+
+          bean = MedicationTypeListResponseBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(422, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(422, 'something_wrong'.tr));
       } catch (e) {
         return Left(ApiException.handle(e).failure);
       }

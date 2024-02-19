@@ -38,8 +38,8 @@ class MedicationController extends GetxController implements GetxService {
   /*                             Medication Add/Edit                            */
   /* -------------------------------------------------------------------------- */
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  List<String> medicationTypeList = ['Liquid', "Tablet"];
-  String? _mediType = "Liquid";
+  List<MedicationType> medicationTypeList = [];
+  MedicationType? _mediType;
 
   String? _mediStartDate = DateFormat('yyyy-MM-dd').format(
     DateTime.now(),
@@ -49,6 +49,7 @@ class MedicationController extends GetxController implements GetxService {
   );
 
   String? _mediNameError;
+  String? _mediTypeError;
 
   final TextEditingController _mediName = TextEditingController();
   final TextEditingController _mediPreVeterinarian = TextEditingController();
@@ -72,10 +73,11 @@ class MedicationController extends GetxController implements GetxService {
   TextEditingController get mediRefills => _mediRefills;
   TextEditingController get mediSpecialNotes => _mediSpecialNotes;
 
-  String? get mediType => _mediType;
+  MedicationType? get mediType => _mediType;
   String? get mediStartDate => _mediStartDate;
   String? get mediEndDate => _mediEndDate;
   String? get mediNameError => _mediNameError;
+  String? get mediTypeError => _mediTypeError;
   GlobalKey<FormState> get formKey => _formKey;
 
   MedicationController({
@@ -201,6 +203,58 @@ class MedicationController extends GetxController implements GetxService {
   /*                               Add/Edit module                              */
   /* -------------------------------------------------------------------------- */
 
+  void editMedicationDetail() async {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null && argumentData[0]['mode'] == "Edit") {
+      inEditMode = true;
+      MedicationInfo info = argumentData[1]['info'];
+
+      _mediName.text = info.mediName ?? "";
+      _mediPreVeterinarian.text = info.mediPreVeterinarian ?? "";
+      _mediPetSpecies.text = info.mediPetSpecies ?? "";
+      _mediDosage.text = info.mediDosage ?? "";
+      _mediFrequency.text = info.mediFrequency ?? "";
+      _mediDuration.text = info.mediDuration ?? "";
+      _mediReasonPrescription.text = info.mediReasonPrescription ?? "";
+      _mediAdminInstruction.text = info.mediAdminInstruction ?? "";
+      _mediRefills.text = info.mediRefills ?? "";
+      _mediSpecialNotes.text = info.mediSpecialNotes ?? "";
+
+      _mediType = info.typeDetail;
+
+      _mediStartDate = DateFormat('yyyy-MM-dd').format(
+        info.mediStartDate ?? DateTime.now(),
+      );
+      _mediEndDate = DateFormat('yyyy-MM-dd').format(
+        info.mediEndDate ?? DateTime.now(),
+      );
+      _mediNameError = null;
+      _mediTypeError = null;
+    }
+  }
+
+  void getMedicationTypeList() async {
+    final result = await repository.getMedicationTypeList();
+    result.fold<void>(
+      (failure) {
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          editMedicationDetail();
+          update();
+        }
+      },
+      (success) {
+        if (success.success == true) {
+          medicationTypeList = success.data ?? List.empty();
+          _mediType = medicationTypeList[0];
+          resetFieldData();
+          // Edit here
+          editMedicationDetail();
+          update();
+        }
+      },
+    );
+  }
+
   void selectMedicationType() {
     Get.bottomSheet(
       Container(
@@ -219,12 +273,14 @@ class MedicationController extends GetxController implements GetxService {
                   onTap: () {
                     Get.back();
                     _mediType = e;
+                    _mediTypeError = null;
+                    update();
                   },
                   behavior: HitTestBehavior.opaque,
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.h),
                     child: Text(
-                      e,
+                      e.title ?? "",
                       style: Theme.of(Get.context!)
                           .textTheme
                           .headlineSmall
@@ -279,6 +335,13 @@ class MedicationController extends GetxController implements GetxService {
   }
 
   void saveMedicationInfo() async {
+    if (mediType == null) {
+      _mediTypeError = "dynamic_field_required"
+          .trParams({"field": "lbl_medication_type".tr});
+      update();
+      return;
+    }
+
     if (isLoading) {
       return;
     }
@@ -288,7 +351,7 @@ class MedicationController extends GetxController implements GetxService {
     Map<String, dynamic> bodyMap = {
       "pet_id": petId,
       "medi_name": _mediName.text,
-      "medi_type": _mediType,
+      "medi_type": _mediType?.id ?? "",
       "medi_pre_veterinarian": _mediPreVeterinarian.text,
       "medi_pet_species": _mediPetSpecies.text,
       "medi_dosage": _mediDosage.text,
@@ -376,7 +439,7 @@ class MedicationController extends GetxController implements GetxService {
   }
 
   void resetFieldData() {
-    _mediType = "Liquid";
+    _mediType = medicationTypeList.isNotEmpty ? medicationTypeList[0] : null;
     _mediStartDate = DateFormat('yyyy-MM-dd').format(
       DateTime.now(),
     );

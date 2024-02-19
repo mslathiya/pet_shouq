@@ -9,8 +9,11 @@ import '../../../../components/components.dart';
 
 class ProfileMenus extends StatelessWidget {
   final Function(String) onTapMenu;
-  const ProfileMenus(
-      {super.key, required this.onTapMenu, required this.userType});
+  const ProfileMenus({
+    super.key,
+    required this.onTapMenu,
+    required this.userType,
+  });
   final UserType userType;
 
   @override
