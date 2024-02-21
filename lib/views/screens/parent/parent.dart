@@ -22,5 +22,7 @@ export 'petAppointment/pet_appointment.dart';
 export 'specialNotes/special_notes.dart';
 //vaccination
 export "petVaccination/vaccination.dart";
+//Medical history
+export "petMedicalHistory/pet_medical_history.dart";
 
 export 'editParent/edit_parent_profile.dart';

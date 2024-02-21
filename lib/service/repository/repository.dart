@@ -5,3 +5,4 @@ export "medication_repository.dart";
 export "diet_log_repository.dart";
 export "special_note_repository.dart";
 export "vaccination_repository.dart";
+export "medical_history_repository.dart";

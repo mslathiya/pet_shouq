@@ -155,9 +155,9 @@ class MedicationListItem extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 80.w,
-                    child: const LabelWithIcon(
+                    child: LabelWithIcon(
                       asset: AppAssets.icDocBag,
-                      value: '',
+                      value: itemBean.typeDetail?.title ?? "",
                       padding: EdgeInsets.zero,
                     ),
                   ),

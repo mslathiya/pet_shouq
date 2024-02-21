@@ -6,6 +6,7 @@ import 'package:get/get.dart' hide FormData;
 import 'package:intl/intl.dart';
 
 import '../data/model/models.dart';
+import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'auth_controller.dart';
@@ -208,7 +209,7 @@ class MedicationController extends GetxController implements GetxService {
     if (argumentData != null && argumentData[0]['mode'] == "Edit") {
       inEditMode = true;
       MedicationInfo info = argumentData[1]['info'];
-
+      medicationId = info.mediId ?? -1;
       _mediName.text = info.mediName ?? "";
       _mediPreVeterinarian.text = info.mediPreVeterinarian ?? "";
       _mediPetSpecies.text = info.mediPetSpecies ?? "";
@@ -247,9 +248,13 @@ class MedicationController extends GetxController implements GetxService {
           medicationTypeList = success.data ?? List.empty();
           _mediType = medicationTypeList[0];
           resetFieldData();
-          // Edit here
-          editMedicationDetail();
-          update();
+          Future.delayed(
+            const Duration(seconds: 1),
+            () {
+              editMedicationDetail();
+              update();
+            },
+          );
         }
       },
     );
@@ -365,6 +370,8 @@ class MedicationController extends GetxController implements GetxService {
       "medi_refills": _mediRefills.text,
       "medi_special_notes": _mediSpecialNotes.text,
     };
+
+    AppLog.e("bodyMap $bodyMap");
 
     FormData fData = FormData.fromMap(bodyMap);
 

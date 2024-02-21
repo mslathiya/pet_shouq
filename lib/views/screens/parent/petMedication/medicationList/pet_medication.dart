@@ -71,10 +71,13 @@ class _PetMedicationState extends State<PetMedication> {
                                   final response = await controller
                                       .getMedicationDetail(item.mediId!);
 
-                                  Get.toNamed(petMedicationDetail, arguments: [
-                                    {"index": index},
-                                    {"info": response}
-                                  ]);
+                                  Get.toNamed(
+                                    petMedicationDetail,
+                                    arguments: [
+                                      {"index": index},
+                                      {"info": response}
+                                    ],
+                                  );
                                 },
                                 onDeleteItem: () {
                                   CommonHelper.dialogBuilderDeleteItem(

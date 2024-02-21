@@ -90,6 +90,13 @@ Future<void> init() async {
     ),
     fenix: true,
   );
+  Get.lazyPut(
+    () => MedicalHistoryRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+    fenix: true,
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers

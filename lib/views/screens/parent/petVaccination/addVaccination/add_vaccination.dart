@@ -132,10 +132,10 @@ class _AddVaccinationState extends State<AddVaccination> {
                                   Expanded(
                                     child: SelectorField(
                                       inputHint: controller.vacDate ??
-                                          "vaccination_date".tr,
+                                          "hint_select_date".tr,
                                       headerWidget: InputHeader(
                                         compulsory: true,
-                                        headerLabel: "hint_select_date".tr,
+                                        headerLabel: "vaccination_date".tr,
                                       ),
                                       suffixIcon: SizedBox(
                                         width: 24.w,
@@ -163,10 +163,10 @@ class _AddVaccinationState extends State<AddVaccination> {
                                   Expanded(
                                     child: SelectorField(
                                       inputHint: controller.vacDueDate ??
-                                          "next_due_date".tr,
+                                          "hint_select_date".tr,
                                       headerWidget: InputHeader(
                                         compulsory: true,
-                                        headerLabel: "hint_select_date".tr,
+                                        headerLabel: "next_due_date".tr,
                                       ),
                                       suffixIcon: SizedBox(
                                         width: 24.w,

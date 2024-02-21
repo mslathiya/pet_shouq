@@ -421,6 +421,8 @@ class AppStrings extends Translations {
           "pet_vaccination": "Pet Vaccination",
           "screen_add_vaccination": "Add Pet Vaccination",
           "screen_update_vaccination": "Update Pet Vaccination",
+          "add_medical_history": "Add Medical History",
+          "update_medical_history": "Update Medical History"
         },
       };
 }

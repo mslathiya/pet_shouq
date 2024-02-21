@@ -76,9 +76,9 @@ class PetInfo extends StatelessWidget {
                         SizedBox(
                           height: 5.h,
                         ),
-                        const LabelWithIcon(
+                        LabelWithIcon(
                           asset: AppAssets.icDoctor,
-                          value: 'Whiskers',
+                          value: info.mediPreVeterinarian ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
@@ -86,7 +86,7 @@ class PetInfo extends StatelessWidget {
                         ),
                         LabelWithIcon(
                           asset: AppAssets.icPetPaw,
-                          value: info.typeDetail?.title ?? "",
+                          value: info.mediPetSpecies ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(
@@ -99,17 +99,17 @@ class PetInfo extends StatelessWidget {
                             Flexible(
                               child: LabelWithIcon(
                                 asset: AppAssets.icDocBag,
-                                value: info.mediPetSpecies ?? "",
+                                value: info.typeDetail?.title ?? "",
                                 padding: EdgeInsets.zero,
                               ),
                             ),
                             SizedBox(
                               width: 5.h,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: LabelWithIcon(
                                 asset: AppAssets.icStethoscope,
-                                value: info.mediPreVeterinarian ?? "",
+                                value: "-",
                                 padding: EdgeInsets.zero,
                               ),
                             ),

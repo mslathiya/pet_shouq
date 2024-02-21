@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -92,23 +91,6 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: const [
               Locale('en'),
             ],
-            localizationsDelegates: const [
-              ApplicationLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            localeResolutionCallback: (locale, supportedLocales) {
-              for (var supportedLocaleLanguage in supportedLocales) {
-                if (supportedLocaleLanguage.languageCode ==
-                        locale?.languageCode &&
-                    supportedLocaleLanguage.countryCode ==
-                        locale?.countryCode) {
-                  return supportedLocaleLanguage;
-                }
-              }
-              return supportedLocales.first;
-            },
-            // initialRoute: controller.isLoggedIn ? vetDashboard : login,
             initialRoute:
                 Get.find<AuthController>().isLoggedIn.value ? routeName : intro,
           ),

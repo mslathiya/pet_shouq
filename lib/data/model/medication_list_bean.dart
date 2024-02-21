@@ -1,9 +1,6 @@
-// To parse this JSON data, do
-//
-//     final medicationListResponseBean = medicationListResponseBeanFromJson(jsonString);
-
 import 'dart:convert';
 
+import 'medication_type_bean.dart';
 import 'meta_bean.dart';
 
 MedicationListResponseBean medicationListResponseBeanFromJson(String str) =>
@@ -65,24 +62,30 @@ class MedicationData {
 
 class MedicationBean {
   int? mediId;
+  String? mediName;
   String? mediPreVeterinarian;
+  int? mediType;
   DateTime? mediStartDate;
   DateTime? mediEndDate;
   String? mediPetSpecies;
-  String? mediName;
+  MedicationType? typeDetail;
 
   MedicationBean({
     this.mediId,
+    this.mediName,
     this.mediPreVeterinarian,
+    this.mediType,
     this.mediStartDate,
     this.mediEndDate,
     this.mediPetSpecies,
-    this.mediName,
+    this.typeDetail,
   });
 
   factory MedicationBean.fromJson(Map<String, dynamic> json) => MedicationBean(
         mediId: json["medi_id"],
+        mediName: json["medi_name"],
         mediPreVeterinarian: json["medi_pre_veterinarian"],
+        mediType: json["medi_type"],
         mediStartDate: json["medi_start_date"] == null
             ? null
             : DateTime.parse(json["medi_start_date"]),
@@ -90,17 +93,21 @@ class MedicationBean {
             ? null
             : DateTime.parse(json["medi_end_date"]),
         mediPetSpecies: json["medi_pet_species"],
-        mediName: json["medi_name"],
+        typeDetail: json["type_detail"] == null
+            ? null
+            : MedicationType.fromJson(json["type_detail"]),
       );
 
   Map<String, dynamic> toJson() => {
         "medi_id": mediId,
+        "medi_name": mediName,
         "medi_pre_veterinarian": mediPreVeterinarian,
+        "medi_type": mediType,
         "medi_start_date":
             "${mediStartDate!.year.toString().padLeft(4, '0')}-${mediStartDate!.month.toString().padLeft(2, '0')}-${mediStartDate!.day.toString().padLeft(2, '0')}",
         "medi_end_date":
             "${mediEndDate!.year.toString().padLeft(4, '0')}-${mediEndDate!.month.toString().padLeft(2, '0')}-${mediEndDate!.day.toString().padLeft(2, '0')}",
         "medi_pet_species": mediPetSpecies,
-        "medi_name": mediName,
+        "type_detail": typeDetail?.toJson(),
       };
 }
