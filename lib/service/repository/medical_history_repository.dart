@@ -1,6 +1,13 @@
+import 'package:dartz/dartz.dart';
+
+import '../../data/model/models.dart';
 import '../api/api_imports.dart';
 
-abstract class MedicalHistoryRepository {}
+abstract class MedicalHistoryRepository {
+  Future<Either<Failure, GeneralBean>> addMedicalHistory(
+    Map<String, dynamic> requestField,
+  );
+}
 
 class MedicalHistoryRepositoryImpl extends MedicalHistoryRepository {
   final NetworkInfo networkInfo;
@@ -10,4 +17,11 @@ class MedicalHistoryRepositoryImpl extends MedicalHistoryRepository {
     required this.networkInfo,
     required this.apiService,
   });
+
+  @override
+  Future<Either<Failure, GeneralBean>> addMedicalHistory(
+      Map<String, dynamic> requestField) async {
+    // TODO: implement addMedicalHistory
+    throw UnimplementedError();
+  }
 }

@@ -42,7 +42,7 @@ class PetOtherDetails extends StatelessWidget {
           children: [
             if (CommonHelper.isNotEmpty(info.petMicrochipNumber))
               InfoLabel(
-                title: "chip_number".tr,
+                title: "lbl_chip_no".tr,
                 description: info.petMicrochipNumber ?? "",
                 padding: EdgeInsets.only(bottom: 5.h),
               ),

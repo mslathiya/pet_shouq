@@ -16,6 +16,7 @@ class InputField extends StatelessWidget {
   final int? maxLength;
   final Widget? headerWidget;
   final bool isMultiline;
+  final bool? isFilled;
   final String? inputError;
 
   const InputField({
@@ -33,6 +34,7 @@ class InputField extends StatelessWidget {
     this.headerWidget,
     this.isMultiline = false,
     this.inputError,
+    this.isFilled = false,
   });
 
   @override
@@ -66,6 +68,9 @@ class InputField extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(10),
             ),
+            fillColor:
+                isFilled == true ? AppColors.inputBorder : Colors.transparent,
+            filled: isFilled,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
@@ -74,6 +79,13 @@ class InputField extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1,
+                color: AppColors.inputBorder,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            disabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
                 color: AppColors.inputBorder,

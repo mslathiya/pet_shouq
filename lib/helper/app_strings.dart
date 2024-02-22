@@ -87,7 +87,6 @@ class AppStrings extends Translations {
           "btn_edit_pet": "Edit Pet",
           "screen_pet_details": "Pet Details",
           "pet_other_details": "Pet Other Details",
-          "chip_number": "Microchip Number",
           "spayed": "is Neutered/Spayed",
           "pedigree_front": "Pedigree Info Frontside",
           "pedigree_back": "Pedigree Info Backside",
@@ -422,7 +421,13 @@ class AppStrings extends Translations {
           "screen_add_vaccination": "Add Pet Vaccination",
           "screen_update_vaccination": "Update Pet Vaccination",
           "add_medical_history": "Add Medical History",
-          "update_medical_history": "Update Medical History"
+          "update_medical_history": "Update Medical History",
+          "lbl_record_type": "Record Type",
+          "hint_select_type": "Select Type",
+          "lbl_value": "Value",
+          "hint_value": "Enter Value",
+          "incomplete_fields": "Fill all fields",
+          "incomplete_fields_msg": "Please fill above fields first!"
         },
       };
 }

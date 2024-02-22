@@ -24,6 +24,8 @@ class AppLog {
   ///SET APP LOG LEVEL, Default ALL
   static int _currentLogLevel = verbose;
 
+  AppLog(String s);
+
   static setLogLevel(int priority) {
     int newPriority = priority;
     if (newPriority <= verbose) {
