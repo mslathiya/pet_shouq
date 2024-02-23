@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../data/model/models.dart';
+import '../../../../../helper/helpers.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/dosage_info.dart';
@@ -58,18 +59,21 @@ class _MedicationDetailsState extends State<MedicationDetails> {
             DosageInfo(
               info: info,
             ),
-            OtherSpecification(
-              title: "prescription_reason".tr,
-              description: info.mediReasonPrescription ?? "",
-            ),
-            OtherSpecification(
-              title: "administrative_info".tr,
-              description: info.mediAdminInstruction ?? "",
-            ),
-            OtherSpecification(
-              title: "special_notes".tr,
-              description: info.mediSpecialNotes ?? "",
-            ),
+            if (CommonHelper.isNotEmpty(info.mediReasonPrescription))
+              OtherSpecification(
+                title: "prescription_reason".tr,
+                description: info.mediReasonPrescription ?? "",
+              ),
+            if (CommonHelper.isNotEmpty(info.mediAdminInstruction))
+              OtherSpecification(
+                title: "administrative_info".tr,
+                description: info.mediAdminInstruction ?? "",
+              ),
+            if (CommonHelper.isNotEmpty(info.mediSpecialNotes))
+              OtherSpecification(
+                title: "special_notes".tr,
+                description: info.mediSpecialNotes ?? "",
+              ),
           ],
         ),
       ),

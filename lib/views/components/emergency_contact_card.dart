@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../../theme/theme.dart';
-import '../../../../components/components.dart';
+import '../../theme/theme.dart';
+import 'shadow_box.dart';
 
 class EmergencyContactCard extends StatelessWidget {
   const EmergencyContactCard({

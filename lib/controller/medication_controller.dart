@@ -6,7 +6,6 @@ import 'package:get/get.dart' hide FormData;
 import 'package:intl/intl.dart';
 
 import '../data/model/models.dart';
-import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
 import 'auth_controller.dart';
@@ -332,6 +331,7 @@ class MedicationController extends GetxController implements GetxService {
     if (picked != null) {
       if (pickType == 1) {
         _mediStartDate = DateFormat('yyyy-MM-dd').format(picked);
+        _mediEndDate = DateFormat('yyyy-MM-dd').format(picked);
       } else {
         _mediEndDate = DateFormat('yyyy-MM-dd').format(picked);
       }
@@ -370,8 +370,6 @@ class MedicationController extends GetxController implements GetxService {
       "medi_refills": _mediRefills.text,
       "medi_special_notes": _mediSpecialNotes.text,
     };
-
-    AppLog.e("bodyMap $bodyMap");
 
     FormData fData = FormData.fromMap(bodyMap);
 

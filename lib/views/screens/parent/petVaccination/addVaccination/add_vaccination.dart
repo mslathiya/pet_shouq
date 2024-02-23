@@ -69,7 +69,7 @@ class _AddVaccinationState extends State<AddVaccination> {
                                     RequiredValidator(
                                       errorText:
                                           "dynamic_field_required".trParams(
-                                        {"field": "lbl_medication_name".tr},
+                                        {"field": "vaccination_name".tr},
                                       ),
                                     ),
                                   ],

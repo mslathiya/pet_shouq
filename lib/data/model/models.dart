@@ -25,3 +25,5 @@ export "medication_type_list_response_bean.dart";
 export "medication_type_bean.dart";
 export "record_type_bean.dart";
 export "medical_history_request_bean.dart";
+export "medical_history_response_bean.dart";
+export "medical_history_list_response_bean.dart";

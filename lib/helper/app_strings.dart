@@ -427,7 +427,11 @@ class AppStrings extends Translations {
           "lbl_value": "Value",
           "hint_value": "Enter Value",
           "incomplete_fields": "Fill all fields",
-          "incomplete_fields_msg": "Please fill above fields first!"
+          "incomplete_fields_msg": "Please fill above fields first!",
+          "complete_current": "Please fill current fields first!",
+          "add_history_msg":
+              "Add new medical history by click on below button!",
+          "no_history_found": "No medical history data found",
         },
       };
 }

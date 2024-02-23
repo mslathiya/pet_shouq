@@ -54,6 +54,7 @@ const String petBookingDetails = "/petBookingDetails";
 //Medical history
 const String addMedicalHistory = "/addHistory";
 const String listMedicalHistory = "/listMedicalHistory";
+const String medicalHistoryDetails = "/medicalHistoryDetails";
 
 //Specific for parent
 
@@ -242,6 +243,10 @@ List<GetPage> generateRoute = [
   GetPage(
     name: listMedicalHistory,
     page: () => const ListHistory(),
+  ),
+  GetPage(
+    name: medicalHistoryDetails,
+    page: () => const MedicalHistoryDetail(),
   ),
 
   /**

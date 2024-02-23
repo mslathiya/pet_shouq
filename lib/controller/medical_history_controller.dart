@@ -1,17 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart' hide FormData;
 
 import '../data/model/models.dart';
 import '../helper/helpers.dart';
 import '../service/repository/repository.dart';
 import '../theme/theme.dart';
+import 'auth_controller.dart';
 
 class MedicalHistoryController extends GetxController implements GetxService {
   final MedicalHistoryRepositoryImpl repository;
   final int petId;
+  final PetInformation information;
+  final AppPreferences preferences;
+
   bool inEditMode = false;
   bool isLoading = false;
 
@@ -68,28 +71,60 @@ class MedicalHistoryController extends GetxController implements GetxService {
 
   final GlobalKey<FormState> _historyAddEditKey = GlobalKey<FormState>();
   final ScrollController _scrollController = ScrollController();
+  UserBean? _userData;
 
-  final List<MedicalHistoryBean> _historyList = [];
+  final List<HistoryRequestBean> _historyList = [];
 
   GlobalKey<FormState> get historyAddEditKey => _historyAddEditKey;
   ScrollController? get scrollController => _scrollController;
+  UserBean? get userData => _userData;
+  List<HistoryRequestBean> get historyList => _historyList;
 
-  List<MedicalHistoryBean> get historyList => _historyList;
+  /* -------------------------------------------------------------------------- */
+  /*                               listing module                               */
+  /* -------------------------------------------------------------------------- */
+  bool _loadingHistory = false;
+  bool _removingHistory = false;
+  final List<HistoryListItemBean> _historyLogArray = [];
+  ScrollController controller = ScrollController();
+  int limit = 10;
+  int _currentPage = 1;
+  bool haveMoreResult = false;
+
+  List<HistoryListItemBean> get historyLogArray => _historyLogArray;
+  bool get loadingDietLog => _loadingHistory;
+  bool get removingHistory => _removingHistory;
+  int get currentPage => _currentPage;
 
   MedicalHistoryController({
+    required this.information,
     required this.repository,
     required this.petId,
+    required this.preferences,
   });
+
+  // @override
+  // void initState() async {
+  //
+  //   super.initState();
+  // }
+
+  @override
+  void onInit() async {
+    _userData = await preferences.getUserData();
+    super.onInit();
+  }
 
   void initializeProcess() async {
     _historyList.clear();
     _historyList.add(
-      MedicalHistoryBean(
+      HistoryRequestBean(
         listArray: [
-          HistoryDataBean(label: "", value: ""),
+          HistoryRequestListItem(label: "", value: ""),
         ],
       ),
     );
+    update();
   }
 
   void addNewRecord() {
@@ -97,7 +132,7 @@ class MedicalHistoryController extends GetxController implements GetxService {
     if (isAnyEmpty) {
       Get.snackbar(
         "incomplete_fields".tr,
-        "incomplete_fields_msg".tr,
+        "complete_current".tr,
         backgroundColor: AppColors.redColor,
         colorText: AppColors.white,
         snackPosition: SnackPosition.BOTTOM,
@@ -106,9 +141,9 @@ class MedicalHistoryController extends GetxController implements GetxService {
     }
 
     _historyList.add(
-      MedicalHistoryBean(
+      HistoryRequestBean(
         listArray: [
-          HistoryDataBean(label: "", value: ""),
+          HistoryRequestListItem(label: "", value: ""),
         ],
       ),
     );
@@ -129,7 +164,7 @@ class MedicalHistoryController extends GetxController implements GetxService {
     if (itemIndex > _historyList.length) {
       return;
     }
-    MedicalHistoryBean beanItem = _historyList[itemIndex];
+    HistoryRequestBean beanItem = _historyList[itemIndex];
     beanItem.recordType = item;
     update();
   }
@@ -197,12 +232,12 @@ class MedicalHistoryController extends GetxController implements GetxService {
     if (itemIndex > _historyList.length) {
       return;
     }
-    MedicalHistoryBean beanItem = _historyList[itemIndex];
+    HistoryRequestBean beanItem = _historyList[itemIndex];
 
     if (childIndex > beanItem.listArray.length) {
       return;
     }
-    HistoryDataBean dataBean = beanItem.listArray[childIndex];
+    HistoryRequestListItem dataBean = beanItem.listArray[childIndex];
     if (type == 1) {
       dataBean.label = value;
     } else {
@@ -215,7 +250,7 @@ class MedicalHistoryController extends GetxController implements GetxService {
     if (itemIndex > _historyList.length) {
       return;
     }
-    MedicalHistoryBean beanItem = _historyList[itemIndex];
+    HistoryRequestBean beanItem = _historyList[itemIndex];
 
     if (childIndex > beanItem.listArray.length) {
       return;
@@ -228,7 +263,7 @@ class MedicalHistoryController extends GetxController implements GetxService {
     if (itemIndex > _historyList.length) {
       return;
     }
-    MedicalHistoryBean beanItem = _historyList[itemIndex];
+    HistoryRequestBean beanItem = _historyList[itemIndex];
 
     if (childIndex > beanItem.listArray.length) {
       return;
@@ -251,7 +286,7 @@ class MedicalHistoryController extends GetxController implements GetxService {
     }
 
     beanItem.listArray.add(
-      HistoryDataBean(label: "", value: ""),
+      HistoryRequestListItem(label: "", value: ""),
     );
     scrollToEnd();
     update();
@@ -265,14 +300,204 @@ class MedicalHistoryController extends GetxController implements GetxService {
     );
   }
 
-  void saveInformation() {
-    Map<String, List<HistoryDataBean>> typeObject = {};
-    AppLog.e("size ${_historyList.length}");
+  void saveInformation() async {
+    Map<String, List<HistoryRequestListItem>> typeObject = {};
 
     _historyList.map((e) {
       AppLog.e("message");
-      typeObject[e.recordType!.key] = e.listArray;
+      List<HistoryRequestListItem> tempList = [];
+
+      e.listArray.map((e) {
+        if (CommonHelper.isNotEmpty(e.label) &&
+            CommonHelper.isNotEmpty(e.value)) {
+          tempList.add(e);
+        }
+      }).toList();
+      if (tempList.isNotEmpty) {
+        typeObject[e.recordType!.key] = tempList;
+      }
     }).toList();
-    AppLog.e("Json ${jsonDecode(jsonEncode(typeObject))}");
+
+    if (typeObject.isNotEmpty) {
+      isLoading = true;
+      update();
+
+      Map<String, dynamic> requestParams = {
+        "pet_id": petId,
+        "type": typeObject,
+      };
+      dynamic result = await repository.addMedicalHistory(requestParams);
+      result.fold<void>(
+        (failure) {
+          isLoading = false;
+          update();
+
+          if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+            String errorMessage = failure.message;
+            if (failure.errorData != null) {
+              errorMessage = "error_msg".tr;
+              final errorResponse =
+                  ErrorResponseDto.fromJson(failure.errorData!);
+
+              if (errorResponse.errors != null) {
+                errorMessage = errorResponse.errors?.title ?? "";
+              }
+            }
+
+            Get.snackbar(
+              "error_in_request".tr,
+              errorMessage,
+              backgroundColor: AppColors.redColor,
+              colorText: AppColors.white,
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          }
+        },
+        (success) {
+          isLoading = false;
+          update();
+
+          Get.snackbar(
+            "congratulations".tr,
+            success.message ?? "",
+            backgroundColor: AppColors.greenColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
+            icon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                MaterialIcons.done_all,
+                size: 24.sp,
+                color: AppColors.white,
+              ),
+            ),
+            borderRadius: 5.sp,
+          );
+          Future.delayed(
+            const Duration(seconds: 3),
+            () {
+              Get.back(closeOverlays: true);
+            },
+          );
+        },
+      );
+    } else {}
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                               listing module                               */
+  /* -------------------------------------------------------------------------- */
+  void setScrollListener() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.position.pixels) {
+        if (haveMoreResult) {
+          _currentPage += 1;
+          getDietLog();
+        }
+      }
+    });
+  }
+
+  Future<void> getHistoryList() async {
+    _currentPage = 1;
+    _historyLogArray.clear();
+    getDietLog();
+  }
+
+  void getDietLog() async {
+    _loadingHistory = true;
+    update();
+    final requestParams = {
+      "current_page": _currentPage,
+      "limit": limit,
+    };
+    final result = await repository.getMedicalHistory(petId, requestParams);
+
+    result.fold<void>((failure) {
+      _loadingHistory = false;
+      update();
+      Get.find<AuthController>().handleUnAuthorized(failure);
+    }, (success) {
+      _loadingHistory = false;
+      if (success.success == true) {
+        final meta = success.data?.meta;
+        if (meta != null) {
+          haveMoreResult = meta.haveMoreRecords ?? false;
+        }
+        final arrayList = success.data?.data ?? [];
+        if (currentPage == 1) {
+          _historyLogArray.clear();
+          _historyLogArray.addAll(arrayList);
+        } else {
+          _historyLogArray.addAll(arrayList);
+        }
+        update();
+      }
+    });
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                 delete log                                 */
+  /* -------------------------------------------------------------------------- */
+  void deleteHistoryLog(int historyId) async {
+    _removingHistory = true;
+    update();
+    final result = await repository.removeHistory(historyId);
+    result.fold<void>(
+      (failure) {
+        _removingHistory = false;
+        update();
+
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          Get.snackbar(
+            "error_in_request".tr,
+            failure.message,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
+      },
+      (success) {
+        _removingHistory = false;
+        update();
+        getHistoryList();
+      },
+    );
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                detail module                               */
+  /* -------------------------------------------------------------------------- */
+  Future<HistoryDetails?> getHistoryDetails(int historyId) async {
+    _removingHistory = true;
+    update();
+    final result = await repository.getHistoryDetail(historyId);
+    HistoryDetails? information;
+    result.fold<void>(
+      (failure) {
+        _removingHistory = false;
+        update();
+
+        if (!Get.find<AuthController>().handleUnAuthorized(failure)) {
+          Get.snackbar(
+            "error_in_request".tr,
+            failure.message,
+            backgroundColor: AppColors.redColor,
+            colorText: AppColors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
+      },
+      (success) {
+        _removingHistory = false;
+        update();
+        if (success.success == true) {
+          information = success.data;
+        }
+      },
+    );
+    return information;
   }
 }

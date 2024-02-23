@@ -86,7 +86,7 @@ class PetInfo extends StatelessWidget {
                         ),
                         LabelWithIcon(
                           asset: AppAssets.icPetPaw,
-                          value: info.vacType ?? "",
+                          value: (info.vacType ?? "").capitalizeFirst ?? "",
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(

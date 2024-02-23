@@ -162,11 +162,14 @@ class VaccinationListItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
+                    width: 8.w,
+                  ),
+                  SizedBox(
                     width: 190.w,
                     child: LabelWithIcon(
                       asset: AppAssets.icCalendar,
                       value:
-                          "${DateFormat("yyyy-MM-dd").format(itemBean.vacDate ?? DateTime.now())} - ${DateFormat("yyyy-MM-dd").format(itemBean.vacDueDate ?? DateTime.now())}",
+                          "${DateFormat("yyyy-MM-dd").format(itemBean.vacDate ?? DateTime.now())} To ${DateFormat("yyyy-MM-dd").format(itemBean.vacDueDate ?? DateTime.now())}",
                       padding: EdgeInsets.zero,
                     ),
                   )

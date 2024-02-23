@@ -42,7 +42,10 @@ class _AddHistoryState extends State<AddHistory> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const PetDefaultInformation(),
+                PetDefaultInformation(
+                  information: controller.information,
+                  userData: controller.userData,
+                ),
                 SizedBox(
                   height: 15.h,
                 ),

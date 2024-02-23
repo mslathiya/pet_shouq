@@ -22,7 +22,7 @@ class HistoryItem extends StatelessWidget {
   });
   final int itemIndex;
   final bool showAddButton;
-  final MedicalHistoryBean bean;
+  final HistoryRequestBean bean;
   final VoidCallback onSelectType;
   final VoidCallback onAddNewRecord;
   final VoidCallback onRemoveRecord;

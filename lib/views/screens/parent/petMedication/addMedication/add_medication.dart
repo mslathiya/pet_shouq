@@ -105,10 +105,21 @@ class _AddMedicationState extends State<AddMedication> {
                               InputField(
                                 headerWidget: InputHeader(
                                   headerLabel: "lbl_veterinarian".tr,
+                                  compulsory: true,
                                 ),
                                 inputHint: "hint_veterinarian".tr,
                                 editingController:
                                     controller.mediPreVeterinarian,
+                                validator: MultiValidator(
+                                  [
+                                    RequiredValidator(
+                                      errorText:
+                                          "dynamic_field_required".trParams(
+                                        {"field": "lbl_veterinarian".tr},
+                                      ),
+                                    ),
+                                  ],
+                                ).call,
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -121,10 +132,21 @@ class _AddMedicationState extends State<AddMedication> {
                                     child: InputField(
                                       headerWidget: InputHeader(
                                         headerLabel: "lbl_species".tr,
+                                        compulsory: true,
                                       ),
                                       inputHint: "hint_species".tr,
                                       editingController:
                                           controller.mediPetSpecies,
+                                      validator: MultiValidator(
+                                        [
+                                          RequiredValidator(
+                                            errorText: "dynamic_field_required"
+                                                .trParams(
+                                              {"field": "lbl_species".tr},
+                                            ),
+                                          ),
+                                        ],
+                                      ).call,
                                     ),
                                   ),
                                   SizedBox(
@@ -205,10 +227,10 @@ class _AddMedicationState extends State<AddMedication> {
                                   Expanded(
                                     child: SelectorField(
                                       inputHint: controller.mediStartDate ??
-                                          "lbl_start_date".tr,
+                                          "hint_select_date".tr,
                                       headerWidget: InputHeader(
                                         compulsory: true,
-                                        headerLabel: "hint_select_date".tr,
+                                        headerLabel: "lbl_start_date".tr,
                                       ),
                                       suffixIcon: SizedBox(
                                         width: 24.w,
@@ -236,10 +258,10 @@ class _AddMedicationState extends State<AddMedication> {
                                   Expanded(
                                     child: SelectorField(
                                       inputHint: controller.mediEndDate ??
-                                          "lbl_end_date".tr,
+                                          "hint_select_date".tr,
                                       headerWidget: InputHeader(
                                         compulsory: true,
-                                        headerLabel: "hint_select_date".tr,
+                                        headerLabel: "lbl_end_date".tr,
                                       ),
                                       suffixIcon: SizedBox(
                                         width: 24.w,

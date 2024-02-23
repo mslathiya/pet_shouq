@@ -71,4 +71,17 @@ class Endpoints {
   static const addVaccinationPost = "api/parent/pet/vaccination/add";
   static const updateVaccinationPost = "api/parent/pet/vaccination/update/";
   static const removeVaccinationDelete = "api/parent/pet/vaccination/delete/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                             pet medical history                            */
+  /* -------------------------------------------------------------------------- */
+
+  static const medicalHistoryListGet = "api/parent/pet/medical-history/list/";
+  static const medicalHistoryDetailGet =
+      "api/parent/pet/medical-history/detail/";
+  static const addMedicalHistoryPost = "api/parent/pet/medical-history/add";
+  static const updateMedicalHistoryPost =
+      "api/parent/pet/medical-history/update/";
+  static const removeMedicalHistoryDelete =
+      "api/parent/pet/medical-history/delete/";
 }

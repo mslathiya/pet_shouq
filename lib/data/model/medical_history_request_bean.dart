@@ -1,25 +1,25 @@
 import 'record_type_bean.dart';
 
-class MedicalHistoryBean {
+class HistoryRequestBean {
   RecordTypeBean? recordType;
-  List<HistoryDataBean> listArray;
+  List<HistoryRequestListItem> listArray;
 
-  MedicalHistoryBean({
+  HistoryRequestBean({
     this.recordType,
     required this.listArray,
   });
 }
 
-class HistoryDataBean {
+class HistoryRequestListItem {
   String label;
   String value;
 
-  HistoryDataBean({
+  HistoryRequestListItem({
     required this.label,
     required this.value,
   });
 
-  HistoryDataBean.fromJson(Map<String, dynamic> json)
+  HistoryRequestListItem.fromJson(Map<String, dynamic> json)
       : label = json['label'],
         value = json['value'];
 

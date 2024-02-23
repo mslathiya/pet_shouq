@@ -103,16 +103,16 @@ class PetInfo extends StatelessWidget {
                                 padding: EdgeInsets.zero,
                               ),
                             ),
-                            SizedBox(
-                              width: 5.h,
-                            ),
-                            const Flexible(
-                              child: LabelWithIcon(
-                                asset: AppAssets.icStethoscope,
-                                value: "-",
-                                padding: EdgeInsets.zero,
-                              ),
-                            ),
+                            // SizedBox(
+                            //   width: 5.h,
+                            // ),
+                            // const Flexible(
+                            //   child: LabelWithIcon(
+                            //     asset: AppAssets.icStethoscope,
+                            //     value: "-",
+                            //     padding: EdgeInsets.zero,
+                            //   ),
+                            // ),
                           ],
                         )
                       ],

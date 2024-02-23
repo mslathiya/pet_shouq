@@ -232,6 +232,8 @@ class PetDetailView extends StatelessWidget {
             Get.put(MedicalHistoryController(
               repository: Get.find(),
               petId: info.petId ?? -1,
+              information: info,
+              preferences: Get.find(),
             ));
             Get.toNamed(listMedicalHistory);
           },

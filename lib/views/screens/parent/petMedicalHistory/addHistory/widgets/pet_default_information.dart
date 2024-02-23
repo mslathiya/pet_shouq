@@ -2,35 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../components/components.dart';
+import '../../../../../../data/model/models.dart';
+import 'info_field.dart';
 
 class PetDefaultInformation extends StatelessWidget {
-  const PetDefaultInformation({super.key});
+  const PetDefaultInformation({
+    super.key,
+    required this.information,
+    required this.userData,
+  });
+  final PetInformation information;
+  final UserBean? userData;
 
   @override
   Widget build(BuildContext context) {
+    String age = (DateTime.now().year - information.petDob!.year).toString();
     return Column(
       children: [
-        InputField(
-          isFilled: true,
-          enableInput: false,
-          headerWidget: InputHeader(
-            compulsory: false,
-            headerLabel: "lbl_pet_name".tr,
-          ),
-          inputHint: "hint_pet_name".tr,
+        InfoField(
+          inputHeader: "lbl_pet_name".tr,
+          inputValue: information.petName ?? "",
         ),
         SizedBox(
           height: 15.h,
         ),
-        InputField(
-          isFilled: true,
-          enableInput: false,
-          headerWidget: InputHeader(
-            compulsory: false,
-            headerLabel: "lbl_breed".tr,
-          ),
-          inputHint: "hint_breed".tr,
+        InfoField(
+          inputHeader: "hint_breed".tr,
+          inputValue: information.petBreed ?? "",
         ),
         SizedBox(
           height: 15.h,
@@ -38,28 +36,18 @@ class PetDefaultInformation extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: InputField(
-                isFilled: true,
-                enableInput: false,
-                headerWidget: InputHeader(
-                  compulsory: false,
-                  headerLabel: "lbl_age".tr,
-                ),
-                inputHint: "hint_age".tr,
+              child: InfoField(
+                inputHeader: "lbl_age".tr,
+                inputValue: "$age ${"years".tr}",
               ),
             ),
             SizedBox(
               width: 8.w,
             ),
             Expanded(
-              child: InputField(
-                isFilled: true,
-                enableInput: false,
-                headerWidget: InputHeader(
-                  compulsory: false,
-                  headerLabel: "lbl_gender".tr,
-                ),
-                inputHint: "hint_gender".tr,
+              child: InfoField(
+                inputHeader: "lbl_gender".tr,
+                inputValue: userData?.parent?.parentSex ?? "",
               ),
             ),
           ],
@@ -67,14 +55,9 @@ class PetDefaultInformation extends StatelessWidget {
         SizedBox(
           height: 15.h,
         ),
-        InputField(
-          isFilled: true,
-          enableInput: false,
-          headerWidget: InputHeader(
-            compulsory: false,
-            headerLabel: "lbl_marking".tr,
-          ),
-          inputHint: "hint_marking".tr,
+        InfoField(
+          inputHeader: "lbl_marking".tr,
+          inputValue: information.petColor ?? "",
         ),
         SizedBox(
           height: 15.h,
@@ -82,28 +65,18 @@ class PetDefaultInformation extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: InputField(
-                isFilled: true,
-                enableInput: false,
-                headerWidget: InputHeader(
-                  compulsory: false,
-                  headerLabel: "lbl_weight".tr,
-                ),
-                inputHint: "hint_weight".tr,
+              child: InfoField(
+                inputHeader: "lbl_weight".tr,
+                inputValue: information.petWeight ?? "",
               ),
             ),
             SizedBox(
               width: 8.w,
             ),
             Expanded(
-              child: InputField(
-                isFilled: true,
-                enableInput: false,
-                headerWidget: InputHeader(
-                  compulsory: false,
-                  headerLabel: "lbl_chip_no".tr,
-                ),
-                inputHint: "hint_chip_no".tr,
+              child: InfoField(
+                inputHeader: "lbl_chip_no".tr,
+                inputValue: information.petMicrochipNumber ?? "",
               ),
             ),
           ],

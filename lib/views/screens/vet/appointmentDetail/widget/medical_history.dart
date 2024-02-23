@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
-import 'contact_card.dart';
+
 import 'medical_specification.dart';
 
 class MedicalHistory extends StatelessWidget {
