@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_shouq/data/model/vat_details_response_model.dart';
 
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 
 class ClinicInfo extends StatelessWidget {
+  final VetDetailsData info;
+
   const ClinicInfo({
-    super.key,
+    super.key, required this.info,
   });
 
   @override
@@ -43,7 +46,7 @@ class ClinicInfo extends StatelessWidget {
             height: 10.h,
           ),
           Text(
-            'Rimadyl',
+            '${info.vetFname} ${info.vetLname}',
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -55,9 +58,9 @@ class ClinicInfo extends StatelessWidget {
           SizedBox(
             height: 5.h,
           ),
-          const LabelWithIcon(
+           LabelWithIcon(
             asset: AppAssets.icDoctor,
-            value: 'Acute Kidney Disease',
+            value: '${info.vetSpeciality}',
             padding: EdgeInsets.zero,
           ),
           SizedBox(
@@ -77,7 +80,7 @@ class ClinicInfo extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore, karnataka - 560016',
+                  '${info.vetAddress}',
                   textAlign: TextAlign.left,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,

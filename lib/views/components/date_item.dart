@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pet_shouq/controller/vet_data_controller.dart';
 
 import '../../theme/theme.dart';
 
@@ -11,8 +12,11 @@ class DateItem extends StatelessWidget {
     required this.isSelected,
     required this.isDisabled,
     required this.index,
+    // required this.vetDataController,
   });
+
   final String date;
+  // final VetDataController vetDataController;
   final String day;
   final bool isSelected;
   final bool isDisabled;
@@ -24,9 +28,8 @@ class DateItem extends StatelessWidget {
       height: 55.sp,
       width: 50.sp,
       padding: EdgeInsets.all(9.sp),
-      margin: index > 0
-          ? EdgeInsets.symmetric(horizontal: 5.w)
-          : EdgeInsets.only(right: 5.w),
+      margin:
+          index > 0 ? EdgeInsets.symmetric(horizontal: 5.w) : EdgeInsets.only(right: 5.w),
       decoration: BoxDecoration(
         border: Border.all(
           color: isDisabled
@@ -41,7 +44,7 @@ class DateItem extends StatelessWidget {
         ),
         color: isDisabled
             ? AppColors.disableFieldColor
-            : isSelected
+            :  isSelected
                 ? AppColors.secondary
                 : AppColors.white,
       ),
@@ -50,12 +53,12 @@ class DateItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '01',
+            date,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 14.sp,
+                  fontSize: 12.sp,
                   color: isDisabled
                       ? AppColors.disableFieldText
                       : isSelected
@@ -64,7 +67,7 @@ class DateItem extends StatelessWidget {
                 ),
           ),
           Text(
-            'Tue',
+            day,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,

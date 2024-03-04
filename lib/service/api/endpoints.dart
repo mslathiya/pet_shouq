@@ -40,6 +40,15 @@ class Endpoints {
   static const removeNutritionDelete = "api/parent/pet/nutrition/delete/";
 
   /* -------------------------------------------------------------------------- */
+  /*                            Pet Side Vet Listing                            */
+  /* -------------------------------------------------------------------------- */
+  static const vetDashboardListGet = "api/parent/dashboard/nearby-vet-list?";
+  static const vetDetailsGet = "api/parent/dashboard/vet-detail/";
+  static const vetSlotListGet = "api/parent/appointment/get-slot-list?";
+  static const bookSlotPost = "api/parent/appointment/book-slot";
+  // static const bookSlotPost = "api/parent/appointment/book-slot";
+
+  /* -------------------------------------------------------------------------- */
   /*                               Pet Medication                               */
   /* -------------------------------------------------------------------------- */
   static const medicationListGet = "api/parent/pet/medication/list/";
@@ -84,4 +93,27 @@ class Endpoints {
       "api/parent/pet/medical-history/update/";
   static const removeMedicalHistoryDelete =
       "api/parent/pet/medical-history/delete/";
+
+/* -------------------------------------------------------------------------- */
+/*                             pet booking history                            */
+/* -------------------------------------------------------------------------- */
+
+  static const bookingHistoryGet = "api/parent/appointment/list?";
+  static const bookingHistoryDetailsGet = "api/parent/appointment/detail/";
+  static const rescheduleAppointmentPost = "api/parent/appointment/reschedule-booking-slot";
+
+/* -------------------------------------------------------------------------- */
+/*                             pet calender                                   */
+/* -------------------------------------------------------------------------- */
+
+  static const calenderListGet = "api/parent/calendar/list";
+
+/* -------------------------------------------------------------------------- */
+/*                             pet feeding schedule                                   */
+/* -------------------------------------------------------------------------- */
+
+  static const feedingScheduleGet = "api/parent/pet/feeding-schedules/list/";
+  static const addSchedulePost = "api/parent/pet/feeding-schedules/add";
+
+
 }

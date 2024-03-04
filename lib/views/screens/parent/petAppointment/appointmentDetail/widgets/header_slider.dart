@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,8 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../theme/theme.dart';
 
 class HeaderSlider extends StatelessWidget {
+  final String imageSource;
+
   const HeaderSlider({
     super.key,
+    required this.imageSource,
   });
 
   @override
@@ -19,7 +23,7 @@ class HeaderSlider extends StatelessWidget {
         viewportFraction: 1,
         enlargeCenterPage: false,
       ),
-      items: [1, 2, 3].map((i) {
+      items: [1].map((i) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
@@ -41,11 +45,27 @@ class HeaderSlider extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10.sp),
                 ),
-                child: Image.asset(
-                  AppAssets.doctorBanner,
-                  height: double.maxFinite,
-                  width: double.maxFinite,
+                child: CachedNetworkImage(
+                  imageUrl: imageSource,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
+                  fadeInDuration: const Duration(milliseconds: 60),
+                  fadeInCurve: Curves.easeIn,
+                  height: 95.h,
+                  width: 95.h,
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: 95.h,
+                    width: 95.h,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             );

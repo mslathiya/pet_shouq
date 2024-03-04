@@ -83,7 +83,7 @@ class _VetAppointmentDetailState extends State<VetAppointmentDetail> {
       barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 700),
       pageBuilder: (_, __, ___) {
-        return const ReScheduleAppointment(
+        return ReScheduleAppointment(
           selectDoctor: false,
         );
       },

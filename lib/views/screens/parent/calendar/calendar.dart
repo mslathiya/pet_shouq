@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:pet_shouq/controller/pet_calender_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../data/enum/enums.dart';
@@ -17,6 +18,7 @@ class CalendarAppointment extends StatefulWidget {
 }
 
 class _CalendarAppointmentState extends State<CalendarAppointment> {
+  PetCalenderController petCalenderController = Get.find();
   final ValueNotifier<DateTime> _focusedDay = ValueNotifier(DateTime.now());
   late PageController _pageController;
   CalendarFormat _calendarFormat = CalendarFormat.month;
@@ -25,12 +27,12 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
   DateTime? _rangeEnd;
   final kFirstDay = DateTime(
     DateTime.now().year,
-    DateTime.now().month - 3,
+    DateTime.now().month,
     DateTime.now().day,
   );
   final kLastDay = DateTime(
     DateTime.now().year,
-    DateTime.now().month + 3,
+    DateTime.now().month + 100000,
     DateTime.now().day,
   );
 
@@ -41,6 +43,16 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
       _rangeEnd = null;
       _rangeSelectionMode = RangeSelectionMode.toggledOff;
     });
+    petCalenderController.setCalenderDate(dateTime: _focusedDay.value);
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      petCalenderController.setScrollListener();
+      petCalenderController.getCalenderData();
+    });
+    super.initState();
   }
 
   @override
@@ -50,109 +62,129 @@ class _CalendarAppointmentState extends State<CalendarAppointment> {
         title: "tab_calendar".tr,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ValueListenableBuilder<DateTime>(
-              valueListenable: _focusedDay,
-              builder: (context, value, _) {
-                return CalendarHeader(
-                  focusedDay: value,
-                  onLeftArrowTap: () {
-                    _pageController.previousPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
+        child: GetBuilder<PetCalenderController>(
+          builder: (controller) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ValueListenableBuilder<DateTime>(
+                  valueListenable: _focusedDay,
+                  builder: (context, value, _) {
+                    return CalendarHeader(
+                      focusedDay: value,
+                      onLeftArrowTap: () {
+                        _pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeOut,
+                        );
+                      },
+                      onRightArrowTap: () {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeOut,
+                        );
+                      },
                     );
                   },
-                  onRightArrowTap: () {
-                    _pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
+                ),
+                TableCalendar(
+                  firstDay: kFirstDay,
+                  lastDay: kLastDay,
+                  focusedDay: _focusedDay.value,
+                  calendarFormat: _calendarFormat,
+                  headerVisible: false,
+                  rangeStartDay: _rangeStart,
+                  rangeEndDay: _rangeEnd,
+                  rangeSelectionMode: _rangeSelectionMode,
+                  onDaySelected: _onDaySelected,
+                  onFormatChanged: (format) {
+                    if (_calendarFormat != format) {
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    }
                   },
-                );
-              },
-            ),
-            TableCalendar(
-              firstDay: kFirstDay,
-              lastDay: kLastDay,
-              focusedDay: _focusedDay.value,
-              calendarFormat: _calendarFormat,
-              headerVisible: false,
-              rangeStartDay: _rangeStart,
-              rangeEndDay: _rangeEnd,
-              rangeSelectionMode: _rangeSelectionMode,
-              onDaySelected: _onDaySelected,
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onCalendarCreated: (controller) => _pageController = controller,
-              onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
-              selectedDayPredicate: (day) => isSameDay(day, _focusedDay.value),
-              calendarBuilders: CalendarBuilders(
-                dowBuilder: (context, day) {
-                  final text = DateFormat.E().format(day);
-                  return Center(
-                    child: Text(
-                      text[0],
-                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                            fontSize: 14.sp,
-                            color: AppColors.secondary,
-                          ),
+                  onCalendarCreated: (controller) => _pageController = controller,
+                  onPageChanged: (focusedDay) => _focusedDay.value = focusedDay,
+                  selectedDayPredicate: (day) => isSameDay(day, _focusedDay.value),
+                  calendarBuilders: CalendarBuilders(
+                    dowBuilder: (context, day) {
+                      final text = DateFormat.E().format(day);
+                      return Center(
+                        child: Text(
+                          text[0],
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                                fontSize: 14.sp,
+                                color: AppColors.secondary,
+                              ),
+                        ),
+                      );
+                    },
+                    todayBuilder: (context, day, focusedDay) => _dayBuilder(
+                      context,
+                      day,
+                      focusedDay,
+                      2,
                     ),
-                  );
-                },
-                todayBuilder: (context, day, focusedDay) => _dayBuilder(
-                  context,
-                  day,
-                  focusedDay,
-                  2,
+                    selectedBuilder: (context, day, focusedDay) => _dayBuilder(
+                      context,
+                      day,
+                      focusedDay,
+                      1,
+                    ),
+                    defaultBuilder: (context, day, focusedDay) => _dayBuilder(
+                      context,
+                      day,
+                      focusedDay,
+                      2,
+                    ),
+                    outsideBuilder: (context, day, focusedDay) => _dayBuilder(
+                      context,
+                      day,
+                      focusedDay,
+                      3,
+                    ),
+                  ),
                 ),
-                selectedBuilder: (context, day, focusedDay) => _dayBuilder(
-                  context,
-                  day,
-                  focusedDay,
-                  1,
+                SizedBox(
+                  height: 12.h,
                 ),
-                defaultBuilder: (context, day, focusedDay) => _dayBuilder(
-                  context,
-                  day,
-                  focusedDay,
-                  2,
-                ),
-                outsideBuilder: (context, day, focusedDay) => _dayBuilder(
-                  context,
-                  day,
-                  focusedDay,
-                  3,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 12.h,
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 10,
-              padding: EdgeInsets.only(
-                bottom: 15.h,
-              ),
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                final EventType type = index == 2
-                    ? EventType.typeBirthday
-                    : EventType.typeAppointment;
-                return EventListItem(
-                  eventType: type,
-                );
-              },
-            )
-          ],
+                if (controller.loadingCalenderData && controller.currentPage == 1)
+                  const ShimmerListLoading(),
+                if (controller.currentPage == 1 && controller.petCalenderArray.isEmpty)
+                  Center(child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("no_data_found".tr),
+                  )),
+                RefreshIndicator(
+                  onRefresh: () => controller.getCalenderData(),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.petCalenderArray.length + 1,
+                      padding: EdgeInsets.only(
+                        bottom: 15.h,
+                      ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        if (index < controller.petCalenderArray.length) {
+                          final item = controller.petCalenderArray[index];
+
+                          const EventType
+                              type = /* index == 2
+                              ? EventType.typeBirthday
+                              :*/
+                              EventType.typeAppointment;
+                          return EventListItem(
+                            info: item,
+                            eventType: type,
+                          );
+                        }
+                      }),
+                )
+              ],
+            );
+          },
         ),
       ),
     );

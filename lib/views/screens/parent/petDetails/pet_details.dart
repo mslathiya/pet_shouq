@@ -67,6 +67,7 @@ class AppBarHeader extends StatelessWidget {
     required this.info,
     required this.index,
   });
+
   final PetInformation info;
   final int index;
 
@@ -149,10 +150,8 @@ class AppBarHeader extends StatelessWidget {
                     )
                   : CachedNetworkImage(
                       imageUrl: imagePath,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                       fit: BoxFit.cover,
                       fadeInDuration: const Duration(milliseconds: 60),
                       fadeInCurve: Curves.easeIn,
@@ -241,7 +240,9 @@ class PetDetailView extends StatelessWidget {
         MenuItem(
           title: "set_feeding_schedule".tr,
           iconName: AppAssets.icFeedingSchedule,
-          onPressMenu: () => Get.toNamed(petFeedSchedule),
+          onPressMenu: () => Get.toNamed(petFeedSchedule, arguments: [
+            {"petId": "${info.petId}"},
+          ]),
         ),
         MenuItem(
           title: "diet".tr,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_shouq/data/model/feeding_schedule_response_model.dart';
+import 'package:pet_shouq/helper/time_formater.dart';
 
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
@@ -11,9 +13,10 @@ class FeedScheduleListItem extends StatelessWidget {
   const FeedScheduleListItem({
     super.key,
     required this.onToggleSwitch,
-    required this.itemIndex,
+    required this.itemIndex, required this.info,
   });
   final int itemIndex;
+  final FeedingScheduleList info;
   final Function(bool isToggled) onToggleSwitch;
 
   @override
@@ -81,7 +84,7 @@ class FeedScheduleListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '12:00 Pm',
+                      convertToAMPM(info.fsTime.toString()),
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -93,9 +96,9 @@ class FeedScheduleListItem extends StatelessWidget {
                     SizedBox(
                       height: 5.h,
                     ),
-                    const LabelWithIcon(
+                     LabelWithIcon(
                       asset: AppAssets.icFeedTag,
-                      value: 'Morning Feeding',
+                      value: info.fsTitle??"",
                       padding: EdgeInsets.zero,
                     ),
                   ],

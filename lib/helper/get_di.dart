@@ -1,5 +1,13 @@
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:pet_shouq/controller/booking_history_controller.dart';
+import 'package:pet_shouq/controller/pet_calender_controller.dart';
+import 'package:pet_shouq/controller/pet_feeding_schedules_controller.dart';
+import 'package:pet_shouq/controller/vet_data_controller.dart';
+import 'package:pet_shouq/service/repository/booking_repository.dart';
+import 'package:pet_shouq/service/repository/calender_list_repository.dart';
+import 'package:pet_shouq/service/repository/pet_feeding_schedule_repository.dart';
+import 'package:pet_shouq/service/repository/vet_data_repository.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -125,6 +133,52 @@ Future<void> init() async {
   );
   Get.lazyPut(
     () => PetController(
+      repository: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+    () => VetDataController(
+      repository: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+    () => VetDataRepositoryImpl(
+      apiService: Get.find(),
+      networkInfo: Get.find(),
+    ),
+  );
+
+  Get.lazyPut(
+    () => BookingHistoryRepositoryImpl(
+      apiService: Get.find(),
+      networkInfo: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+    () => BookingHistoryController(
+      repository: Get.find(),
+    ),
+  );
+
+  Get.lazyPut(
+    () => CalenderListRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+    () => PetCalenderController(
+      repository: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+    () => PetFeedingSchedulesRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+        () => PetFeedingSchedulesController(
       repository: Get.find(),
     ),
   );

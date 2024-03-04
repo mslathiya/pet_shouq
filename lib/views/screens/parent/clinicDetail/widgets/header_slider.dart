@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../theme/theme.dart';
 
 class HeaderSlider extends StatelessWidget {
-  const HeaderSlider({super.key});
+  String imagePath;
+   HeaderSlider({super.key,required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,35 @@ class HeaderSlider extends StatelessWidget {
                   ),
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.only(left: 1, right: 1),
-                  child: Image.asset(
-                    AppAssets.doctorBanner,
-                    height: double.maxFinite,
-                    width: double.maxFinite,
+                  child:  CachedNetworkImage(
+                    imageUrl: imagePath,
+                    placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                    const Icon(Icons.error),
                     fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 60),
+                    fadeInCurve: Curves.easeIn,
+                    height: 95.h,
+                    width: 95.h,
+                    imageBuilder: (context, imageProvider) => Container(
+                      height: 95.h,
+                      width: 95.h,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
+                  // child: Image.asset(
+                  //   AppAssets.doctorBanner,
+                  //   height: double.maxFinite,
+                  //   width: double.maxFinite,
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
                 Positioned(
                   left: 0,
