@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:pet_shouq/data/model/calender_list_reponse_model.dart';
+import 'package:pet_shouq/helper/time_formater.dart';
 
 import '../../data/enum/enums.dart';
 import '../../theme/theme.dart';
@@ -9,8 +12,11 @@ class EventListItem extends StatelessWidget {
   const EventListItem({
     super.key,
     required this.eventType,
+    required this.info,
   });
+
   final EventType eventType;
+  final CalenderListData info;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +49,11 @@ class EventListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'HB0053K05',
+              '${info.bookingId}',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: Theme.of(context)
-                  .textTheme
-                  .displayMedium
-                  ?.copyWith(fontSize: 14.sp),
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(fontSize: 14.sp),
             ),
             SizedBox(
               height: 5.h,
@@ -60,18 +63,18 @@ class EventListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const LabelWithIcon(
+                      LabelWithIcon(
                         asset: AppAssets.icHospital,
-                        value: 'Rimadyl',
+                        value: '${info.vet!.vetFname}',
                         padding: EdgeInsets.zero,
                       ),
                       SizedBox(
                         height: 5.h,
                       ),
-                      const LabelWithIcon(
+                      LabelWithIcon(
                         asset: AppAssets.icPetPaw,
                         padding: EdgeInsets.zero,
-                        value: 'Max',
+                        value: '${info.vet!.vetFname}',
                       ),
                       SizedBox(
                         height: 5.h,
@@ -82,9 +85,9 @@ class EventListItem extends StatelessWidget {
                         children: [
                           SizedBox(
                             width: 115.sp,
-                            child: const LabelWithIcon(
+                            child: LabelWithIcon(
                               asset: AppAssets.icCalendar,
-                              value: '04-Jan-2024',
+                              value: DateFormat('dd-MMM-yyyy').format(info.bookingDate!),
                               padding: EdgeInsets.zero,
                             ),
                           ),
@@ -93,9 +96,10 @@ class EventListItem extends StatelessWidget {
                           ),
                           SizedBox(
                             width: 170.sp,
-                            child: const LabelWithIcon(
+                            child: LabelWithIcon(
                               asset: AppAssets.icClock,
-                              value: '11:00 Am To 11:30 AM',
+                              value:
+                                  "${convertToAMPM(info.timeSlot.toString().split('to').first)} To ${convertToAMPM(info.timeSlot.toString().split('to').last)}",
                               padding: EdgeInsets.zero,
                             ),
                           )

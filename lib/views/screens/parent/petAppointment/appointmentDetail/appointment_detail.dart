@@ -1,14 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:pet_shouq/controller/booking_history_controller.dart';
+import 'package:pet_shouq/controller/vet_data_controller.dart';
+import 'package:pet_shouq/data/model/booking_history_details_response_model.dart';
+import 'package:pet_shouq/helper/time_formater.dart';
 
 import '../../../../../theme/theme.dart';
 import '../../../../components/components.dart';
 import 'widgets/header_slider.dart';
 import 'widgets/informative_text.dart';
 
-class AppointmentDetails extends StatelessWidget {
+class AppointmentDetails extends StatefulWidget {
   const AppointmentDetails({super.key});
+
+  @override
+  State<AppointmentDetails> createState() => _AppointmentDetailsState();
+}
+
+class _AppointmentDetailsState extends State<AppointmentDetails> {
+  late BookingHistoryDetailsData info;
+  late int index;
+
+  @override
+  void initState() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null) {
+      index = argumentData[0]['index'];
+      info = argumentData[1]['info'];
+      setState(() {
+        info;
+        index;
+      });
+      Get.find<BookingHistoryController>().petId = info.petId.toString();
+      super.initState();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +57,7 @@ class AppointmentDetails extends StatelessWidget {
                 horizontal: 12.w,
                 vertical: 15.h,
               ),
-              child: const HeaderSlider(),
+              child: HeaderSlider(imageSource: info.vet!.fullClinicPhotoPath ?? ""),
             ),
             Padding(
               padding: EdgeInsets.only(left: 12.w, right: 12.w),
@@ -38,7 +66,7 @@ class AppointmentDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'HB0053K05',
+                    '${info.bookingId}',
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -47,17 +75,17 @@ class AppointmentDetails extends StatelessWidget {
                         .displayMedium
                         ?.copyWith(fontSize: 14.sp, height: 2),
                   ),
-                  const LabelWithIcon(
+                  LabelWithIcon(
                     asset: AppAssets.icHospital,
-                    value: 'Rimadyl',
+                    value: '${info.vet!.vetFname}',
                     padding: EdgeInsets.zero,
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
-                  const LabelWithIcon(
+                  LabelWithIcon(
                     asset: AppAssets.icPetPaw,
-                    value: 'Max',
+                    value: '${info.pet!.petName}',
                     padding: EdgeInsets.zero,
                   ),
                   SizedBox(
@@ -69,9 +97,9 @@ class AppointmentDetails extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 115.sp,
-                        child: const LabelWithIcon(
+                        child: LabelWithIcon(
                           asset: AppAssets.icCalendar,
-                          value: '04-Jan-2024',
+                          value: DateFormat('dd-MMM-yyyy').format(info.bookingDate!),
                           padding: EdgeInsets.zero,
                         ),
                       ),
@@ -80,9 +108,10 @@ class AppointmentDetails extends StatelessWidget {
                       ),
                       SizedBox(
                         width: 170.sp,
-                        child: const LabelWithIcon(
+                        child: LabelWithIcon(
                           asset: AppAssets.icClock,
-                          value: '11:00 Am To 11:30 AM',
+                          value:
+                              "${convertToAMPM(info.timeSlot.toString().split('to').first)} To ${convertToAMPM(info.timeSlot.toString().split('to').last)}",
                           padding: EdgeInsets.zero,
                         ),
                       )
@@ -93,30 +122,39 @@ class AppointmentDetails extends StatelessWidget {
                   ),
                   InformativeText(
                     header: "disease".tr,
-                    subHeader: "External parasites (ticks, fleas and mange)",
+                    subHeader: "${info.disease}",
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
                   InformativeText(
-                    header: "special_notes".tr,
-                    subHeader:
-                        "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, ",
-                  ),
+                      header: "special_notes".tr, subHeader: "${info.specialNotes}"),
                   SizedBox(
                     height: 15.h,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ButtonView(
-                      onTap: _dialogBuilder,
-                      buttonTitle: "btn_reschedule_appointment".tr,
-                      width: width - 20,
-                      buttonStyle: TextStyle(
-                        fontSize: 7.sp,
-                      ),
-                    ),
-                  ),
+                  GetBuilder<VetDataController>(
+                    builder: (controller) {
+                      return Align(
+                        alignment: Alignment.center,
+                        child: ButtonView(
+                          onTap: () {
+                            Get.find<BookingHistoryController>().setSelectedItems(
+                                value: controller.vetDataList.first.vetFname.toString(),
+                                vetIdValue: controller.vetDataList.first.veterinarianId
+                                    .toString());
+                            controller.selectionDate = "";
+                            controller.selectionSlotTime = "";
+                            _dialogBuilder();
+                          },
+                          buttonTitle: "btn_reschedule_appointment".tr,
+                          width: width - 20,
+                          buttonStyle: TextStyle(
+                            fontSize: 7.sp,
+                          ),
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             ),
@@ -133,7 +171,7 @@ class AppointmentDetails extends StatelessWidget {
       barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 700),
       pageBuilder: (_, __, ___) {
-        return const ReScheduleAppointment();
+        return ReScheduleAppointment();
       },
       transitionBuilder: (_, anim, __, child) {
         Tween<Offset> tween;

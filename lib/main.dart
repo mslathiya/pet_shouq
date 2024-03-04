@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
             popGesture: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.system,
+            themeMode: ThemeMode.light,
             getPages: generateRoute,
             translations: AppStrings(),
             locale: const Locale('en', "US"),

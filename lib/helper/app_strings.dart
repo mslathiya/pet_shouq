@@ -393,6 +393,7 @@ class AppStrings extends Translations {
           "delete_item_msg": "Are you sure you want to remove?",
           "add_pet_msg": "Add new pet by click on below button!",
           "no_pet_found": "No Pet's found",
+          "no_data_found": "No Data found",
           "add_nutrition_msg":
               "Add new nutrition/feeding by click on below button!",
           "no_nutrition_found": "No nutrition/feeding data found",
@@ -402,6 +403,7 @@ class AppStrings extends Translations {
           "password_week":
               "Password must contain one special later and 8 character long",
           "add_diet_msg": "Add new diet log by click on below button!",
+          "add_feeding_msg": "Add new feeding log by click on below button!",
           "no_diet_found": "No diet log data found",
           "phone_not_valid": "Entered phone number not belongs to country",
           "auth_code_invalid": "The provided code is not valid.",
@@ -432,6 +434,8 @@ class AppStrings extends Translations {
           "add_history_msg":
               "Add new medical history by click on below button!",
           "no_history_found": "No medical history data found",
+          "no_feeding_found": "No feeding schedule data found",
+          "no_booking_found": "No booking history data found",
         },
       };
 }

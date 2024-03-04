@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:intl/intl.dart';
+import 'package:pet_shouq/data/model/booking_history_reponse_model.dart';
+import 'package:pet_shouq/helper/time_formater.dart';
 
 import '../../theme/theme.dart';
 import 'label_with_icon.dart';
 
 class AppointmentListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
+  final BookingHistoryDatum info;
+
   const AppointmentListItem({
     super.key,
     required this.onViewDetail,
+    required this.info,
   });
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +57,7 @@ class AppointmentListItem extends StatelessWidget {
                     top: 2.h,
                   ),
                   child: Text(
-                    'HB0053K05',
+                    '${info.bookingId}',
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -110,17 +118,17 @@ class AppointmentListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const LabelWithIcon(
+                           LabelWithIcon(
                             asset: AppAssets.icHospital,
-                            value: 'Rimadyl',
+                            value: "${info.vet?.vetFname}",
                             padding: EdgeInsets.zero,
                           ),
                           SizedBox(
                             height: 5.h,
                           ),
-                          const LabelWithIcon(
+                           LabelWithIcon(
                             asset: AppAssets.icPetPaw,
-                            value: 'Max',
+                            value: "${info.pet?.petName}",
                             padding: EdgeInsets.zero,
                           ),
                         ],
@@ -162,9 +170,9 @@ class AppointmentListItem extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 115.sp,
-                      child: const LabelWithIcon(
+                      child:  LabelWithIcon(
                         asset: AppAssets.icCalendar,
-                        value: '04-Jan-2024',
+                        value: DateFormat('dd-MMM-yyyy').format(info.bookingDate!),
                         padding: EdgeInsets.zero,
                       ),
                     ),
@@ -173,9 +181,10 @@ class AppointmentListItem extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 170.sp,
-                      child: const LabelWithIcon(
+                      child:  LabelWithIcon(
                         asset: AppAssets.icClock,
-                        value: '11:00 Am To 11:30 AM',
+                        value:"${ convertToAMPM(info.timeSlot.toString().split('to').first)} To ${ convertToAMPM(info.timeSlot.toString().split('to').last)}",
+                        // value: "${info.timeSlot}",
                         padding: EdgeInsets.zero,
                       ),
                     )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:pet_shouq/data/model/vet_list_response_model.dart';
 
 import '../../data/enum/enums.dart';
 import '../../theme/theme.dart';
@@ -9,10 +10,13 @@ import 'label_with_icon.dart';
 class DoctorListItem extends StatelessWidget {
   final VoidCallback onViewDetail;
   final ViewType viewType;
+  final VetDataDatum doctorData;
+
   const DoctorListItem({
     super.key,
     required this.onViewDetail,
     required this.viewType,
+    required this.doctorData,
   });
 
   @override
@@ -50,7 +54,7 @@ class DoctorListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Rimadyl',
+                  '${doctorData.vetFname} ${doctorData.vetLname}',
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
@@ -62,9 +66,9 @@ class DoctorListItem extends StatelessWidget {
                 SizedBox(
                   height: 8.h,
                 ),
-                const LabelWithIcon(
+                 LabelWithIcon(
                   asset: AppAssets.icDoctor,
-                  value: 'Acute Kidney Disease',
+                  value: '${doctorData.vetSpeciality}',
                   padding: EdgeInsets.zero,
                 ),
               ],

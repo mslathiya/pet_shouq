@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:pet_shouq/controller/pet_controller.dart';
+import 'package:pet_shouq/controller/vet_data_controller.dart';
+import 'package:pet_shouq/data/model/vat_details_response_model.dart';
 
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widgets/booking_view.dart';
 import 'widgets/clinic_info.dart';
 import 'widgets/header_slider.dart';
+import 'widgets/slot_list_loading.dart';
 
 class ClinicDetails extends StatefulWidget {
   const ClinicDetails({super.key});
@@ -17,17 +22,49 @@ class ClinicDetails extends StatefulWidget {
 }
 
 class _ClinicDetailsState extends State<ClinicDetails> {
+  late String veterinarianId;
+  late VetDetailsData info;
+  VetDataController vetDataController = Get.find();
+
+  @override
+  void initState() {
+    dynamic argumentData = Get.arguments;
+    if (argumentData != null) {
+      veterinarianId = argumentData[0]['veterinarian_id'].toString();
+      info = argumentData[1]['info'];
+      setState(() {
+        info;
+        veterinarianId;
+      });
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getSlotDateData();
+      Get.find<PetController>().getPetList();
+      vetDataController.vetId = veterinarianId;
+    });
+    super.initState();
+  }
+
+  getSlotDateData() {
+    String todayDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    vetDataController.setDateSelected(
+        index: 0, selectedDate: todayDate, vetId: veterinarianId);
+    vetDataController.setTimeSelected(index: "", selectedSlotTime: "", vatIdValue: "");
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: true,
       body: CustomScrollView(
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
-          SliverAppBarHeader(),
+          SliverAppBarHeader(info: info),
           SliverFillRemaining(
-            child: DetailChildView(),
+            child: DetailChildView(
+              vatId: veterinarianId,
+            ),
           ),
         ],
       ),
@@ -36,9 +73,9 @@ class _ClinicDetailsState extends State<ClinicDetails> {
 }
 
 class SliverAppBarHeader extends StatelessWidget {
-  const SliverAppBarHeader({
-    super.key,
-  });
+  final VetDetailsData info;
+
+  SliverAppBarHeader({super.key, required this.info});
 
   @override
   Widget build(BuildContext context) {
@@ -101,12 +138,12 @@ class SliverAppBarHeader extends StatelessWidget {
                 ),
               ),
             ),
-            const HeaderSlider(),
-            const Positioned(
+            HeaderSlider(imagePath: info.fullClinicPhotoPath!),
+            Positioned(
               bottom: 5,
               left: 0,
               right: 0,
-              child: ClinicInfo(),
+              child: ClinicInfo(info: info),
             ),
           ],
         ),
@@ -116,98 +153,195 @@ class SliverAppBarHeader extends StatelessWidget {
 }
 
 class DetailChildView extends StatelessWidget {
-  const DetailChildView({super.key});
+  final String vatId;
+
+  DetailChildView({super.key, required this.vatId});
+
+  DateTime now = DateTime.now();
+  VetDataController vetDataController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+
     double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 12.w,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 5.h,
+    List<DateTime> next30Days = [];
+
+    for (int i = 0; i < 30; i++) {
+      next30Days.add(now.add(Duration(days: i)));
+    }
+
+    return GetBuilder<VetDataController>(
+      builder: (controller) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 12.w,
           ),
-          InputHeader(
-            headerLabel: "date".tr,
-            compulsory: true,
-            headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          SizedBox(
-            height: 55.sp,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 7,
-              physics: const ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return DateItem(
-                  index: index,
-                  date: "1",
-                  day: "Mon",
-                  isSelected: false,
-                  isDisabled: false,
-                );
-              },
-            ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          InputHeader(
-            headerLabel: "time".tr,
-            compulsory: true,
-            headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            itemCount: 6,
-            primary: false,
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              mainAxisExtent: 42.sp,
-            ),
-            itemBuilder: (context, index) {
-              return const TimeItem(
-                isSelected: false,
-                time: "10:00 Am To 10:30 Am",
-                isDisabled: false,
-              );
-            },
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: ButtonView(
-              onTap: _dialogBuilder,
-              buttonTitle: "btn_book_now".tr,
-              width: width - 40,
-              buttonStyle: TextStyle(
-                fontSize: 7.sp,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 5.h,
               ),
-            ),
-          )
-        ],
-      ),
+              InputHeader(
+                headerLabel: "date".tr,
+                compulsory: true,
+                headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      fontSize: 14.sp,
+                    ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              SizedBox(
+                height: 55.sp,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: next30Days.length,
+                  physics: const ClampingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    DateTime currentDate = next30Days[index];
+
+                    // debugPrint("formattedDate --- $formattedDate");
+                    return GestureDetector(
+                      onTap: () {
+                        controller.setDateSelected(
+                            vetId: vatId,
+                            index: index,
+                            selectedDate: DateFormat('yyyy-MM-dd').format(currentDate));
+                      },
+                      child: DateItem(
+                        index: index,
+                        isSelected: vetDataController.selectedDateIndex == index,
+                        date: DateFormat('EEE').format(currentDate),
+                        day: DateFormat('dd').format(currentDate),
+                        // isSelected: false,
+                        isDisabled: false,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              InputHeader(
+                headerLabel: "time".tr,
+                compulsory: true,
+                headerStyle: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      fontSize: 14.sp,
+                    ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              if (controller.loadingGetSlot)
+                const SlotListLoading()
+              else if (controller.slotDataList.isEmpty)
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('No Slot Available'),
+                    ],
+                  ),
+                )
+              else
+                GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.slotDataList.length,
+                  primary: false,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    mainAxisExtent: 42.sp,
+                  ),
+                  itemBuilder: (context, index) {
+                    DateTime parsedStartTime = DateFormat('HH:mm:ss')
+                        .parse(controller.slotDataList[index].vaStartTime.toString());
+                    DateTime parsedEndTime = DateFormat('HH:mm:ss')
+                        .parse(controller.slotDataList[index].vaEndTime.toString());
+                    String formattedStartTime =
+                        DateFormat('hh:mm a').format(parsedStartTime);
+                    String formattedEndTime = DateFormat('hh:mm a').format(parsedEndTime);
+                    return GestureDetector(
+                      onTap: () {
+                        if (controller.slotDataList[index].isAvailable!) {
+                          controller.setTimeSelected(
+                              index: index.toString(),
+                              vatIdValue: controller.slotDataList[index].vaId.toString(),
+                              selectedSlotTime:
+                                  "${controller.slotDataList[index].vaStartTime} to ${controller.slotDataList[index].vaEndTime}");
+                        }
+                      },
+                      child: TimeItem(
+                        isSelected: controller.selectedSlotIndex == index.toString(),
+                        time: "$formattedStartTime To $formattedEndTime",
+                        isDisabled: controller.slotDataList[index].isAvailable == true
+                            ? false
+                            : true,
+                      ),
+                    );
+                  },
+                ),
+              SizedBox(
+                height: 15.h,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: ButtonView(
+                  onTap: () {
+                    debugPrint("selectedDate --- ${controller.selectionDate}");
+                    debugPrint("selectedTime --- ${controller.selectionSlotTime}");
+
+                    if (controller.selectionDate.isEmpty) {
+                      Get.snackbar(
+                        "error_in_request".tr,
+                        'Please select Slot Date',
+                        backgroundColor: AppColors.redColor,
+                        colorText: AppColors.white,
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                    } else if (controller.selectionSlotTime.isEmpty) {
+                      Get.snackbar(
+                        "error_in_request".tr,
+                        'Please select Slot Time',
+                        backgroundColor: AppColors.redColor,
+                        colorText: AppColors.white,
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                    } else {
+                      controller.setSelectedItems(
+                          value: Get.find<PetController>()
+                              .petListArray
+                              .first
+                              .petName
+                              .toString(),
+                          petIdValue: Get.find<PetController>()
+                              .petListArray
+                              .first
+                              .petId
+                              .toString());
+                      controller.resetFields();
+
+                      _dialogBuilder();
+                    }
+                  },
+                  buttonTitle: "btn_book_now".tr,
+                  width: width - 40,
+                  buttonStyle: TextStyle(
+                    fontSize: 7.sp,
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
