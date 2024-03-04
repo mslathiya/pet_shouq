@@ -50,7 +50,10 @@ class _VetDashboardState extends State<VetDashboard> {
   }
 
   /// on Page Changed
-  void onPageChanged(int page) {}
+  void onPageChanged(int page) {
+    currentIndex = page;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../config/config.dart';
 import '../../../../controller/controllers.dart';
 import '../../../../data/enum/enums.dart';
 import '../../../../helper/helpers.dart';
-import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
 import 'widgets/profile_info.dart';
 import 'widgets/profile_menus.dart';
@@ -45,32 +43,8 @@ class _ProfileState extends State<Profile> {
                 height: 70.h,
               ),
               ProfileInfo(
-                onTapEdit: () {
-                  if (widget.userType == UserType.typeParent) {
-                    Get.toNamed(
-                      editParentProfile,
-                    );
-                  } else {
-                    Get.toNamed(
-                      vetEditProfile,
-                    );
-                  }
-                },
+                userType: widget.userType,
               ),
-              widget.userType == UserType.typeVet
-                  ? Column(
-                      children: [
-                        SingleLabelItem(
-                          title: "specialization".tr,
-                          subTitle: "Surgery, Dermatology, Nutrition",
-                          asset: AppAssets.icDoctor,
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        )
-                      ],
-                    )
-                  : const SizedBox(),
               SizedBox(
                 height: 10.h,
               ),

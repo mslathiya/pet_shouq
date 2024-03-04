@@ -9,3 +9,4 @@ export "diet_log_controller.dart";
 export "special_note_controller.dart";
 export "vaccination_controller.dart";
 export "medical_history_controller.dart";
+export "availability_controller.dart";

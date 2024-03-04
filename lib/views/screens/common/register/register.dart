@@ -5,11 +5,11 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:pet_shouq/views/screens/common/register/widget/radio_widget.dart';
 
 import '../../../../controller/controllers.dart';
 import '../../../../theme/theme.dart';
 import '../../../components/components.dart';
-import 'widget/radio_widget.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -576,6 +576,49 @@ class _RegisterState extends State<Register> {
                                             SizedBox(
                                               height: 15.h,
                                             ),
+                                            SelectorField(
+                                              documentUploader: true,
+                                              headerWidget: InputHeader(
+                                                compulsory: true,
+                                                headerLabel:
+                                                    "hint_clinic_photo".tr,
+                                              ),
+                                              inputHint: controller
+                                                          .vetClinicPickedFile !=
+                                                      null
+                                                  ? "file_selected".tr
+                                                  : "lbl_document".tr,
+                                              suffixIcon: Container(
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.secondary,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight: Radius.circular(
+                                                      10.sp,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(
+                                                      10.sp,
+                                                    ),
+                                                  ),
+                                                ),
+                                                width: 60.w,
+                                                height: 48.h,
+                                                padding: EdgeInsets.all(
+                                                  10.sp,
+                                                ),
+                                                child: SvgPicture.asset(
+                                                  AppAssets.icUpload,
+                                                  height: 18.sp,
+                                                  width: 18.sp,
+                                                ),
+                                              ),
+                                              onSelectItem: () => controller
+                                                  .openFilePickerForClinic(),
+                                            ),
+                                            SizedBox(
+                                              height: 15.h,
+                                            ),
                                             InputField(
                                               headerWidget: InputHeader(
                                                 compulsory: true,
@@ -744,7 +787,12 @@ class _RegisterState extends State<Register> {
                                             .validate()) {
                                           FocusManager.instance.primaryFocus!
                                               .unfocus();
-                                          controller.registerValidationParent();
+                                          if (controller.accountType == 1) {
+                                            controller
+                                                .registerValidationParent();
+                                          } else {
+                                            controller.registerValidationVet();
+                                          }
                                         }
                                       },
                                       buttonTitle: "sign_up".tr,

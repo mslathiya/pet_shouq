@@ -32,12 +32,21 @@ class ErrorResponseDto {
   List<String>? vacProvider;
   List<String>? vacLotNumber;
   List<String>? vacCertificateId;
+  List<String>? vetSpeciality;
+  List<String>? expireLicenseDate;
+  List<String>? yearsOfExperience;
+  List<String>? vetLocation;
+  List<String>? vetClinicPhoto;
   Errors? errors;
 
   ErrorResponseDto({
     this.parentFname,
+    this.vetClinicPhoto,
+    this.vetLocation,
+    this.expireLicenseDate,
     this.parentLname,
     this.userEmail,
+    this.vetSpeciality,
     this.password,
     this.parentContactNumber,
     this.parentContactCountryCode,
@@ -60,6 +69,7 @@ class ErrorResponseDto {
     this.vacProvider,
     this.vacLotNumber,
     this.vacCertificateId,
+    this.yearsOfExperience,
     this.errors,
   });
 
@@ -68,6 +78,22 @@ class ErrorResponseDto {
         parentFname: json["parent_fname"] == null
             ? []
             : List<String>.from(json["parent_fname"]!.map((x) => x)),
+        vetClinicPhoto: json["vet_clinic_photo"] == null
+            ? []
+            : List<String>.from(json["vet_clinic_photo"]!.map((x) => x)),
+        vetLocation: json["vet_location"] == null
+            ? []
+            : List<String>.from(json["vet_location"]!.map((x) => x)),
+        yearsOfExperience: json["vet_years_of_experiance"] == null
+            ? []
+            : List<String>.from(json["vet_years_of_experiance"]!.map((x) => x)),
+        expireLicenseDate: json["vet_license_expiration_date"] == null
+            ? []
+            : List<String>.from(
+                json["vet_license_expiration_date"]!.map((x) => x)),
+        vetSpeciality: json["vet_speciality"] == null
+            ? []
+            : List<String>.from(json["vet_speciality"]!.map((x) => x)),
         parentLname: json["parent_lname"] == null
             ? []
             : List<String>.from(json["parent_lname"]!.map((x) => x)),
@@ -148,6 +174,21 @@ class ErrorResponseDto {
         "parent_fname": parentFname == null
             ? []
             : List<dynamic>.from(parentFname!.map((x) => x)),
+        "vet_speciality": vetSpeciality == null
+            ? []
+            : List<dynamic>.from(vetSpeciality!.map((x) => x)),
+        "vet_license_expiration_date": expireLicenseDate == null
+            ? []
+            : List<dynamic>.from(expireLicenseDate!.map((x) => x)),
+        "vet_years_of_experiance": yearsOfExperience == null
+            ? []
+            : List<dynamic>.from(yearsOfExperience!.map((x) => x)),
+        "vet_location": vetLocation == null
+            ? []
+            : List<dynamic>.from(vetLocation!.map((x) => x)),
+        "vet_clinic_photo": vetClinicPhoto == null
+            ? []
+            : List<dynamic>.from(vetClinicPhoto!.map((x) => x)),
         "parent_lname": parentLname == null
             ? []
             : List<dynamic>.from(parentLname!.map((x) => x)),

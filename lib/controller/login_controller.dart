@@ -57,9 +57,6 @@ class LoginController extends GetxController implements GetxService {
       );
     }, (success) async {
       await Get.find<AuthController>().setLoginStatus();
-      resetData();
-      _isLoading = false;
-      update();
 
       Get.snackbar(
         "congratulations".tr,
@@ -79,15 +76,20 @@ class LoginController extends GetxController implements GetxService {
         borderRadius: 5.sp,
       );
 
-      Future.delayed(const Duration(seconds: 2), () {
+      await Future.delayed(const Duration(seconds: 2), () {
         UserBean? loginData = success.data;
         if (loginData != null) {
           List<String> roles = loginData.roleNames ?? [];
           if (roles[0] == 'pet_parent') {
             Get.offAllNamed(parentDashboard);
+          } else {
+            Get.offAllNamed(vetDashboard);
           }
         }
       });
+      resetData();
+      _isLoading = false;
+      update();
     });
   }
 

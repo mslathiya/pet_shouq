@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:pet_shouq/controller/availability_controller.dart';
 
 import '../../../../data/model/models.dart';
 import '../../../../theme/theme.dart';
@@ -15,78 +16,6 @@ class AddAvailability extends StatefulWidget {
 }
 
 class AddAvailabilityState extends State<AddAvailability> {
-  Availability availability = Availability(
-    day: "monday",
-    isClosed: false,
-    timing: [
-      AvailabilityTiming(startTime: "", endTime: ""),
-    ],
-  );
-
-  void addNewTime() {
-    List<AvailabilityTiming> timing = availability.timing;
-    timing.add(
-      AvailabilityTiming(endTime: "", startTime: ""),
-    );
-    setState(() {
-      availability;
-    });
-  }
-
-  void removeTime(int childIndex) {
-    List<AvailabilityTiming> timing = availability.timing;
-    timing.removeAt(childIndex);
-    setState(() {
-      availability;
-    });
-  }
-
-  Future<void> openTimePicker(
-    BuildContext superContext,
-    int childIndex,
-    int type,
-  ) async {
-    final TimeOfDay? timeOfDay = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-      initialEntryMode: TimePickerEntryMode.dialOnly,
-      orientation: Orientation.portrait,
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: Theme.of(context),
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                alwaysUse24HourFormat: false,
-              ),
-              child: child!,
-            ),
-          ),
-        );
-      },
-    );
-
-    if (!context.mounted) {
-      return;
-    }
-    if (timeOfDay != null) {
-      List<AvailabilityTiming> timing = availability.timing;
-      AvailabilityTiming time = timing[childIndex];
-
-      if (type == 0) {
-        String timeValue = timeOfDay.format(context);
-        time.startTime = timeValue;
-      } else if (type == 1) {
-        String timeValue = timeOfDay.format(context);
-        time.endTime = timeValue;
-      }
-      setState(() {
-        availability;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -94,45 +23,109 @@ class AddAvailabilityState extends State<AddAvailability> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: HeaderWithBack(
-        title: "add_availability".tr,
+        title: Get.parameters['name'] != null
+            ? '${Get.parameters['name']}'
+            : "add_availability".tr,
         onPressBack: () => Get.back(),
       ),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 8.h,
-            ),
-            ListTileItem(
-              item: availability,
-              onSelectTime: (childIndex, type) =>
-                  openTimePicker(context, childIndex, type),
-              onAddTime: () => addNewTime(),
-              onRemoveTime: (childIndex) => removeTime(childIndex),
-            ),
-            const Spacer(),
-            SizedBox(
-              height: 15.h,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: ButtonView(
-                onTap: () => Get.back(),
-                buttonTitle: "btn_save".tr,
-                width: width - 20,
-                buttonStyle: TextStyle(
-                  fontSize: 8.sp,
-                ),
+      body: GetBuilder<AvailabilityController>(
+        builder: (controller) {
+          Availability? availability;
+
+          try {
+            if (Get.parameters['index'] != null) {
+              availability = controller
+                  .vetUpdateAvailability[int.parse(Get.parameters['index']!)];
+              if (availability.timing.isEmpty) {
+                availability.timing = [
+                  AvailabilityTiming(startTime: "", endTime: "", id: "")
+                ];
+              }
+            }
+          } catch (e) {}
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Get.parameters['index'] == null
+                            ? addAvailabilityWidget(controller)
+                            : editAvailabilityWidget(controller, availability!),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: ButtonView(
+                      isLoading: controller.isLoading,
+                      onTap: () {
+                        if (Get.parameters['index'] == null) {
+                          controller.addAvailability();
+                        } else {
+                          controller.updateAvailability(availability!);
+                        }
+                      },
+                      buttonTitle: "btn_save".tr,
+                      width: width - 20,
+                      buttonStyle: TextStyle(
+                        fontSize: 8.sp,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 10.h,
-            ),
-          ],
-        ),
+          );
+        },
       ),
+    );
+  }
+
+  ListView addAvailabilityWidget(AvailabilityController controller) {
+    return ListView.builder(
+      itemCount: controller.vetAddAvailability.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, mainIndex) {
+        return ListTileItem(
+          availabilityController: controller,
+          item: controller.vetAddAvailability[mainIndex],
+          onSelectTime: (childIndex, type) => controller.openTimePicker(context,
+              childIndex, type, controller.vetAddAvailability[mainIndex]),
+          onAddTime: () =>
+              controller.addNewTime(controller.vetAddAvailability[mainIndex]),
+          onRemoveTime: (childIndex) => controller.removeTime(
+              context: context,
+              childIndex,
+              controller.vetAddAvailability[mainIndex]),
+          updateClosed: (p0) => controller.updateClosedValue(
+              controller.vetAddAvailability[mainIndex], p0),
+        );
+      },
+    );
+  }
+
+  editAvailabilityWidget(
+      AvailabilityController controller, Availability availability) {
+    return ListTileItem(
+      availabilityController: controller,
+      item: availability,
+      onSelectTime: (childIndex, type) =>
+          controller.openTimePicker(context, childIndex, type, availability),
+      onAddTime: () => controller.addNewTime(availability),
+      onRemoveTime: (childIndex) => controller.removeTime(
+          childIndex, availability,
+          context: context, isCallApi: true),
+      updateClosed: (p0) => controller.updateClosedValue(availability, p0),
     );
   }
 }
@@ -144,12 +137,16 @@ class ListTileItem extends StatelessWidget {
     required this.onSelectTime,
     required this.onAddTime,
     required this.onRemoveTime,
+    required this.updateClosed,
+    required this.availabilityController,
   });
 
   final Availability item;
   final Function(int, int) onSelectTime;
   final VoidCallback onAddTime;
   final Function(int) onRemoveTime;
+  final Function(bool) updateClosed;
+  final AvailabilityController availabilityController;
 
   @override
   Widget build(BuildContext context) {
@@ -173,9 +170,10 @@ class ListTileItem extends StatelessWidget {
           title: Text(
             item.day.tr,
             textAlign: TextAlign.left,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontSize: 15.sp,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(fontSize: 15.sp, color: AppColors.secondary),
           ),
           expandedAlignment: Alignment.topLeft,
           children: [
@@ -189,7 +187,7 @@ class ListTileItem extends StatelessWidget {
                     vertical: VisualDensity.minimumDensity,
                   ),
                   value: item.isClosed,
-                  onChanged: (value) {},
+                  onChanged: (value) => updateClosed(value!),
                   activeColor: AppColors.secondary,
                 ),
                 Expanded(
@@ -230,7 +228,11 @@ class ListTileItem extends StatelessWidget {
                           Expanded(
                             child: SelectorField(
                               inputHint: item.startTime != ''
-                                  ? item.startTime
+                                  ? item.startTime.contains('AM') ||
+                                          item.startTime.contains('PM')
+                                      ? item.startTime
+                                      : availabilityController
+                                          .convertTo12HourFormat(item.startTime)
                                   : "start_time".tr,
                               suffixIcon: SizedBox(
                                 width: 20.w,
@@ -250,7 +252,11 @@ class ListTileItem extends StatelessWidget {
                           Expanded(
                             child: SelectorField(
                               inputHint: item.endTime != ''
-                                  ? item.endTime
+                                  ? item.endTime.contains('AM') ||
+                                          item.endTime.contains('PM')
+                                      ? item.endTime
+                                      : availabilityController
+                                          .convertTo12HourFormat(item.endTime)
                                   : "end_time".tr,
                               suffixIcon: SizedBox(
                                 width: 20.w,

@@ -14,12 +14,15 @@ class Endpoints {
   /* -------------------------------------------------------------------------- */
   static const loginPost = "auth/login";
   static const registerPetPost = "auth/pet-parents/register";
+  static const registerVet = "auth/vet/register";
   static const forgotPasswordPost = "password/forgot";
   static const profileGet = "api/profile";
   static const updateParentProfilePost = "api/parent/update/profile";
+  static const updateVetProfilePost = "api/vet/update-profile";
   static const changePasswordPost = "api/change-password";
   static const parentFieldValidationPost =
       "auth/pet-parents/register-validation-check";
+  static const vetFieldValidationPost = "auth/vet/register-validation-check";
 
   /* -------------------------------------------------------------------------- */
   /*                                     Pet                                    */
@@ -84,4 +87,43 @@ class Endpoints {
       "api/parent/pet/medical-history/update/";
   static const removeMedicalHistoryDelete =
       "api/parent/pet/medical-history/delete/";
+
+/* -------------------------------------------------------------------------- */
+/*                                     VET                                    */
+/* -------------------------------------------------------------------------- */
+  static const getAvailability = "api/vet/availability/detail";
+  static const addAvailability = "api/vet/availability/add";
+  static const updateAvailability = "api/vet/availability/update";
+  static const deleteAvailability = "api/vet/availability/delete/";
+
+  /* -------------------------------------------------------------------------- */
+  /*                            Pet Side Vet Listing                            */
+  /* -------------------------------------------------------------------------- */
+  static const vetDashboardListGet = "api/parent/dashboard/nearby-vet-list?";
+  static const vetDetailsGet = "api/parent/dashboard/vet-detail/";
+  static const vetSlotListGet = "api/parent/appointment/get-slot-list?";
+  static const bookSlotPost = "api/parent/appointment/book-slot";
+// static const bookSlotPost = "api/parent/appointment/book-slot";
+
+/* -------------------------------------------------------------------------- */
+/*                             pet feeding schedule                                   */
+/* -------------------------------------------------------------------------- */
+
+  static const feedingScheduleGet = "api/parent/pet/feeding-schedules/list/";
+  static const addSchedulePost = "api/parent/pet/feeding-schedules/add";
+
+  /* -------------------------------------------------------------------------- */
+/*                             pet booking history                            */
+/* -------------------------------------------------------------------------- */
+
+  static const bookingHistoryGet = "api/parent/appointment/list?";
+  static const bookingHistoryDetailsGet = "api/parent/appointment/detail/";
+  static const rescheduleAppointmentPost =
+      "api/parent/appointment/reschedule-booking-slot";
+
+/* -------------------------------------------------------------------------- */
+/*                             pet calender                                   */
+/* -------------------------------------------------------------------------- */
+
+  static const calenderListGet = "api/parent/calendar/list";
 }

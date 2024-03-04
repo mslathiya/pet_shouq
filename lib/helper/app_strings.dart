@@ -350,6 +350,7 @@ class AppStrings extends Translations {
           "lbl_license_end_date": "License Expiration Date",
           "lbl_document": "Document",
           "hint_document": "Upload Document",
+          "hint_clinic_photo": "Upload Clinic Photo",
           "lbl_experience": "Years of Experience",
           "hint_experience": "Enter Years of Experience",
           "lbl_language_spoken": "Languages Spoken",

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
+import 'package:pet_shouq/service/repository/availability_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/controllers.dart';
@@ -98,6 +98,14 @@ Future<void> init() async {
     fenix: true,
   );
 
+  Get.lazyPut(
+    () => AvailabilityRepositoryImpl(
+      networkInfo: Get.find(),
+      apiService: Get.find(),
+    ),
+    fenix: true,
+  );
+
   /* -------------------------------------------------------------------------- */
   /*                          Initialize controllers
   */
@@ -123,8 +131,14 @@ Future<void> init() async {
       repository: Get.find(),
     ),
   );
+
   Get.lazyPut(
     () => PetController(
+      repository: Get.find(),
+    ),
+  );
+  Get.lazyPut(
+    () => AvailabilityController(
       repository: Get.find(),
     ),
   );

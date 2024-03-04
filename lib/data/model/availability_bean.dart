@@ -13,9 +13,11 @@ class Availability {
 class AvailabilityTiming {
   String startTime;
   String endTime;
+  String id;
 
   AvailabilityTiming({
     required this.startTime,
     required this.endTime,
+    this.id = "",
   });
 }

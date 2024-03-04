@@ -32,7 +32,9 @@ class RadioWidget extends StatelessWidget {
               ),
               materialTapTargetSize: MaterialTapTargetSize.padded,
               activeColor: AppColors.secondary,
-              onChanged: (index) => onSelectOption(1),
+              onChanged: (index) {
+                onSelectOption(index!);
+              },
             ),
             SizedBox(
               width: 5.w,
@@ -55,16 +57,17 @@ class RadioWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Radio(
-              value: 2,
-              groupValue: selectedOption,
-              visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity,
-              ),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
-              activeColor: AppColors.secondary,
-              onChanged: (index) => onSelectOption(2),
-            ),
+                value: 2,
+                groupValue: selectedOption,
+                visualDensity: const VisualDensity(
+                  horizontal: VisualDensity.minimumDensity,
+                  vertical: VisualDensity.minimumDensity,
+                ),
+                materialTapTargetSize: MaterialTapTargetSize.padded,
+                activeColor: AppColors.secondary,
+                onChanged: (index) {
+                  onSelectOption(index!);
+                }),
             SizedBox(
               width: 5.w,
             ),

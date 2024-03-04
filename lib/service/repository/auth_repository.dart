@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide FormData;
 
 import '../../data/model/models.dart';
-import '../api/api_imports.dart';
 import "../../helper/helpers.dart";
+import '../api/api_imports.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, LoginBean>> loginMember(
@@ -27,6 +27,9 @@ abstract class AuthRepository {
   Future<Either<Failure, UserProfileBean>> getProfile();
 
   Future<Either<Failure, UserProfileBean>> updateParentProfile(
+    FormData formFields,
+  );
+  Future<Either<Failure, UserProfileBean>> updateVetProfile(
     FormData formFields,
   );
 
@@ -97,6 +100,33 @@ class AuthRepositoryImpl extends AuthRepository {
       try {
         late GeneralBean bean;
         var result = await apiService.post(Endpoints.registerPetPost,
+            data: formFields,
+            options: Options(headers: {"Content-Type": "multipart/form-data"}));
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = GeneralBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  Future<Either<Failure, GeneralBean>> registerVeterinarian(
+    FormData formFields,
+  ) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.post(Endpoints.registerVet,
             data: formFields,
             options: Options(headers: {"Content-Type": "multipart/form-data"}));
         if (result.statusCode == 200) {
@@ -248,6 +278,64 @@ class AuthRepositoryImpl extends AuthRepository {
           var response = result.data;
           bean = GeneralBean.fromJson(response);
           if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  Future<Either<Failure, GeneralBean>> vetFieldValidation(
+      FormData formFields) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late GeneralBean bean;
+        var result = await apiService.post(
+          Endpoints.vetFieldValidationPost,
+          data: formFields,
+        );
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = GeneralBean.fromJson(response);
+          if (bean.success == true) {
+            return Right(bean);
+          } else {
+            return Left(Failure(200, bean.message ?? 'something_wrong'.tr));
+          }
+        }
+        return Left(Failure(200, 'something_wrong'.tr));
+      } catch (e) {
+        return Left(ApiException.handle(e).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserProfileBean>> updateVetProfile(
+      FormData formFields) async {
+    if (await networkInfo.isConnected) {
+      try {
+        late UserProfileBean bean;
+        var result = await apiService.post(Endpoints.updateVetProfilePost,
+            data: formFields,
+            options: Options(headers: {"Content-Type": "multipart/form-data"}));
+        if (result.statusCode == 200) {
+          var response = result.data;
+          bean = UserProfileBean.fromJson(response);
+          if (bean.success == true) {
+            var data = bean.data;
+            if (data != null) {
+              await preferences.setUserInfo(userBeanToJson(data));
+            }
             return Right(bean);
           } else {
             return Left(Failure(200, bean.message ?? 'something_wrong'.tr));

@@ -71,6 +71,7 @@ class RegisterController extends GetxController implements GetxService {
   String _age = "0";
   String _expirationDate = '';
   File? _pickedFile;
+  File? _vetClinicPickedFile;
   var _accountType = 1;
 
   String? _pickedCode = CountryCode.fromCountryCode("AE").dialCode;
@@ -81,6 +82,11 @@ class RegisterController extends GetxController implements GetxService {
   String? _emailError;
   String? _phoneNumberError;
   String? _passwordError;
+  String? _specialistError;
+  String? _vetLicenseExpirationDateError;
+  String? _yearsOfExperienceError;
+  String? _locationError;
+  String? _vetClinicPhotoError;
 
   String? get imagePath => _imagePath;
   String get gender => _gender;
@@ -93,6 +99,11 @@ class RegisterController extends GetxController implements GetxService {
   String? get emailError => _emailError;
   String? get phoneNumberError => _phoneNumberError;
   String? get passwordError => _passwordError;
+  String? get specialistError => _specialistError;
+  String? get locationError => _locationError;
+  String? get yearsOfExperienceError => _yearsOfExperienceError;
+  String? get vetLicenseExpirationDateError => _vetLicenseExpirationDateError;
+  String? get vetClinicPhotoError => _vetClinicPhotoError;
   bool get resendingAuth => _resendingAuth;
 
   TextEditingController get city => _city;
@@ -116,6 +127,7 @@ class RegisterController extends GetxController implements GetxService {
   //Veterinarian
   String get expirationDate => _expirationDate;
   File? get pickedFile => _pickedFile;
+  File? get vetClinicPickedFile => _vetClinicPickedFile;
   TextEditingController get specialty => _specialty;
   TextEditingController get qualification => _qualification;
   TextEditingController get profileSummary => _profileSummary;
@@ -146,10 +158,8 @@ class RegisterController extends GetxController implements GetxService {
   });
 
   void onToggleType(int index) {
-    if (index == 0) {
-      _accountType = index;
-      update();
-    }
+    _accountType = index;
+    update();
   }
 
   void onPickImage(CroppedFile file) {
@@ -201,7 +211,7 @@ class RegisterController extends GetxController implements GetxService {
     );
     if (picked != null) {
       if (pickerType == 1) {
-        _expirationDate = DateFormat('DD/MM/yyyy').format(picked);
+        _expirationDate = DateFormat('yyyy-MM-dd').format(picked);
       } else {
         _birthDate = DateFormat('yyyy-MM-dd').format(picked);
         _age = (DateTime.now().year - picked.year).toString();
@@ -261,6 +271,14 @@ class RegisterController extends GetxController implements GetxService {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       _pickedFile = File(result.files.single.path!);
+      update();
+    }
+  }
+
+  void openFilePickerForClinic() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      _vetClinicPickedFile = File(result.files.single.path!);
       update();
     }
   }
@@ -378,7 +396,11 @@ class RegisterController extends GetxController implements GetxService {
       var response = await _auth.signInWithCredential(credential);
       if (response.user != null) {
         stopTimer();
-        registerNewUser();
+        if (_accountType == 1) {
+          registerNewUser();
+        } else {
+          registerNewVeterinarianUser();
+        }
         AppLog.e("Verification success!");
       } else {
         isLoading = false;
@@ -548,6 +570,149 @@ class RegisterController extends GetxController implements GetxService {
     );
   }
 
+  void registerValidationVet() async {
+    _firstNameError = null;
+    _lastNameError = null;
+    _emailError = null;
+    _phoneNumberError = null;
+    _passwordError = null;
+    _specialistError = null;
+    _yearsOfExperienceError = null;
+    _vetLicenseExpirationDateError = null;
+    _vetClinicPhotoError = null;
+    _locationError = null;
+
+    isLoading = true;
+    update();
+
+    Map<String, dynamic> bodyMap = {
+      "vet_fname": firstName.text,
+      "vet_lname": lastName.text,
+      "vet_display_name": displayName.text,
+      "vet_speciality": specialty.text,
+      "user_email": email.text,
+      "vet_contact_number": phoneNumber.text,
+      "vet_country_code": pickedCode?.replaceAll("+", ""),
+      "password": password.text,
+      "vet_qualification": qualification.text,
+      "vet_profile_summary": profileSummary.text,
+      "vet_license_number": licenseNo.text,
+      "vet_license_expiration_date": expirationDate,
+      "vet_years_of_experiance": experience.text,
+      "vet_languages_spoken": spokenLanguages.text,
+      "vet_consent_and_release": consent.text,
+      "vet_address": address.text,
+      "vet_location": location.text,
+      "vet_latitude": '33.45457544',
+      "vet_longitude": '72.45678978',
+      "vet_city": city.text,
+      "vet_state": province.text,
+      "vet_country": country.text,
+      "vet_pincode": zipCode.text,
+    };
+
+    FormData fData = FormData.fromMap(bodyMap);
+    if (pickedFile != null && pickedFile?.path != '') {
+      fData.files.add(
+        MapEntry(
+          "vet_document",
+          await MultipartFile.fromFile(
+            pickedFile!.path,
+          ),
+        ),
+      );
+    }
+    if (vetClinicPickedFile != null && vetClinicPickedFile?.path != '') {
+      fData.files.add(
+        MapEntry(
+          "vet_clinic_photo",
+          await MultipartFile.fromFile(
+            vetClinicPickedFile!.path,
+          ),
+        ),
+      );
+    }
+
+    final result = await repository.vetFieldValidation(fData);
+
+    result.fold<void>(
+      (failure) {
+        String errorMessage = failure.message;
+
+        if (failure.errorData != null) {
+          errorMessage = "error_msg".tr;
+
+          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+
+          if (errorResponse.parentFname != null &&
+              errorResponse.parentFname!.isNotEmpty) {
+            _firstNameError = errorResponse.parentFname!.join("\n");
+          }
+          if (errorResponse.parentLname != null &&
+              errorResponse.parentLname!.isNotEmpty) {
+            _lastNameError = errorResponse.parentLname!.join("\n");
+          }
+
+          if (errorResponse.userEmail != null &&
+              errorResponse.userEmail!.isNotEmpty) {
+            _emailError = errorResponse.userEmail!.join("\n");
+          }
+
+          if (errorResponse.password != null &&
+              errorResponse.password!.isNotEmpty) {
+            _passwordError = errorResponse.password!.join("\n");
+          }
+
+          if (errorResponse.parentContactCountryCode != null &&
+              errorResponse.parentContactCountryCode!.isNotEmpty) {
+            _phoneNumberError =
+                errorResponse.parentContactCountryCode!.join("\n");
+          }
+
+          if (errorResponse.parentContactNumber != null &&
+              errorResponse.parentContactNumber!.isNotEmpty) {
+            _phoneNumberError = errorResponse.parentContactNumber!.join("\n");
+          }
+          if (errorResponse.vetSpeciality != null &&
+              errorResponse.vetSpeciality!.isNotEmpty) {
+            _specialistError = errorResponse.vetSpeciality!.join("\n");
+          }
+          if (errorResponse.expireLicenseDate != null &&
+              errorResponse.expireLicenseDate!.isNotEmpty) {
+            _vetLicenseExpirationDateError =
+                errorResponse.expireLicenseDate!.join("\n");
+          }
+          if (errorResponse.yearsOfExperience != null &&
+              errorResponse.expireLicenseDate!.isNotEmpty) {
+            _yearsOfExperienceError =
+                errorResponse.yearsOfExperience!.join("\n");
+          }
+          if (errorResponse.vetClinicPhoto != null &&
+              errorResponse.vetClinicPhoto!.isNotEmpty) {
+            _vetClinicPhotoError = errorResponse.vetClinicPhoto!.join("\n");
+          }
+        }
+
+        isLoading = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          errorMessage,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      },
+      (success) async {
+        await Future.delayed(const Duration(seconds: 2), () {
+          Get.toNamed(verification);
+        });
+        isLoading = false;
+        update();
+      },
+    );
+  }
+
   void registerNewUser() async {
     _firstNameError = null;
     _lastNameError = null;
@@ -591,6 +756,163 @@ class RegisterController extends GetxController implements GetxService {
     }
 
     final result = await repository.registerParent(fData);
+
+    result.fold<void>(
+      (failure) {
+        String errorMessage = failure.message;
+
+        if (failure.errorData != null) {
+          errorMessage = "error_msg".tr;
+
+          final errorResponse = ErrorResponseDto.fromJson(failure.errorData!);
+
+          if (errorResponse.parentFname != null &&
+              errorResponse.parentFname!.isNotEmpty) {
+            _firstNameError = errorResponse.parentFname!.join("\n");
+          }
+          if (errorResponse.parentLname != null &&
+              errorResponse.parentLname!.isNotEmpty) {
+            _lastNameError = errorResponse.parentLname!.join("\n");
+          }
+
+          if (errorResponse.userEmail != null &&
+              errorResponse.userEmail!.isNotEmpty) {
+            _emailError = errorResponse.userEmail!.join("\n");
+          }
+
+          if (errorResponse.password != null &&
+              errorResponse.password!.isNotEmpty) {
+            _passwordError = errorResponse.password!.join("\n");
+          }
+
+          if (errorResponse.parentContactCountryCode != null &&
+              errorResponse.parentContactCountryCode!.isNotEmpty) {
+            _phoneNumberError =
+                errorResponse.parentContactCountryCode!.join("\n");
+          }
+
+          if (errorResponse.parentContactNumber != null &&
+              errorResponse.parentContactNumber!.isNotEmpty) {
+            _phoneNumberError = errorResponse.parentContactNumber!.join("\n");
+          }
+        }
+
+        isLoading = false;
+        update();
+        Get.snackbar(
+          "error_in_request".tr,
+          errorMessage,
+          backgroundColor: AppColors.redColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      },
+      (success) {
+        resetFields();
+        isLoading = false;
+        update();
+
+        Get.snackbar(
+          "congratulations".tr,
+          success.message ?? "",
+          backgroundColor: AppColors.greenColor,
+          colorText: AppColors.white,
+          snackPosition: SnackPosition.BOTTOM,
+          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 12.sp),
+          icon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              MaterialIcons.done_all,
+              size: 24.sp,
+              color: AppColors.white,
+            ),
+          ),
+          borderRadius: 5.sp,
+        );
+        _registerKey.currentState!.reset();
+        Future.delayed(const Duration(seconds: 3), () {
+          Get.offAllNamed(login);
+        });
+      },
+    );
+  }
+
+  registerNewVeterinarianUser() async {
+    _firstNameError = null;
+    _lastNameError = null;
+    _emailError = null;
+    _phoneNumberError = null;
+    _passwordError = null;
+    _specialistError = null;
+    _yearsOfExperienceError = null;
+    _vetLicenseExpirationDateError = null;
+    _vetClinicPhotoError = null;
+    _locationError = null;
+
+    isLoading = true;
+    update();
+
+    Map<String, dynamic> bodyMap = {
+      "vet_fname": firstName.text,
+      "vet_lname": lastName.text,
+      "vet_display_name": displayName.text,
+      "vet_speciality": specialty.text,
+      "user_email": email.text,
+      "vet_contact_number": phoneNumber.text,
+      "vet_country_code": pickedCode?.replaceAll("+", "").trim(),
+      "password": password.text,
+      "vet_qualification": qualification.text,
+      "vet_profile_summary": profileSummary.text,
+      "vet_license_number": licenseNo.text,
+      "vet_license_expiration_date": expirationDate,
+      "vet_years_of_experiance": experience.text,
+      "vet_languages_spoken": spokenLanguages.text,
+      "vet_consent_and_release": consent.text,
+      "vet_address": address.text,
+      "vet_location": location.text,
+      "vet_latitude": '33.45457544',
+      "vet_longitude": '72.45678978',
+      "vet_city": city.text,
+      "vet_state": province.text,
+      "vet_country": country.text,
+      "vet_pincode": zipCode.text,
+    };
+
+    FormData fData = FormData.fromMap(bodyMap);
+
+    if (pickedFile != null && pickedFile?.path != '') {
+      fData.files.add(
+        MapEntry(
+          "vet_document",
+          await MultipartFile.fromFile(
+            pickedFile!.path,
+          ),
+        ),
+      );
+    }
+    if (imagePath != null && imagePath != '') {
+      fData.files.add(
+        MapEntry(
+          "profile_picture",
+          await MultipartFile.fromFile(
+            imagePath!,
+          ),
+        ),
+      );
+    }
+
+    if (vetClinicPickedFile != null && vetClinicPickedFile?.path != '') {
+      fData.files.add(
+        MapEntry(
+          "vet_clinic_photo",
+          await MultipartFile.fromFile(
+            vetClinicPickedFile!.path,
+          ),
+        ),
+      );
+    }
+
+    final result = await repository.registerVeterinarian(fData);
 
     result.fold<void>(
       (failure) {
@@ -722,5 +1044,10 @@ class RegisterController extends GetxController implements GetxService {
     _emailError = null;
     _phoneNumberError = null;
     _passwordError = null;
+    _specialistError = null;
+    _yearsOfExperienceError = null;
+    _vetLicenseExpirationDateError = null;
+    _vetClinicPhotoError = null;
+    _locationError = null;
   }
 }

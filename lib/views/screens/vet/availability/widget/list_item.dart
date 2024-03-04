@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:pet_shouq/controller/availability_controller.dart';
 
 import '../../../../../data/model/models.dart';
 import '../../../../../theme/theme.dart';
@@ -12,10 +13,12 @@ class ListItem extends StatelessWidget {
     super.key,
     required this.item,
     required this.onAddTime,
+    required this.controller,
   });
 
   final Availability item;
   final VoidCallback onAddTime;
+  final AvailabilityController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -61,56 +64,24 @@ class ListItem extends StatelessWidget {
                       spacing: 5.w,
                       runSpacing: 8.h,
                       children: [
-                        Text(
-                          '9:30 Am To 1:00 Pm,',
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
+                        ...List.generate(
+                          item.timing.length,
+                          (index) => Text(
+                            controller
+                                    .convertTo12HourFormat(
+                                        item.timing[index].startTime)
+                                    .isEmpty
+                                ? ""
+                                : '${controller.convertTo12HourFormat(item.timing[index].startTime)} To ${controller.convertTo12HourFormat(item.timing[index].endTime)},',
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontSize: 12.sp,
+                                    ),
+                          ),
                         ),
-                        Text(
-                          '9:30 Am To 1:00 Pm,',
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
-                        ),
-                        Text(
-                          '9:30 Am To 1:00 Pm,',
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
-                        ),
-                        Text(
-                          '9:30 Am To 1:00 Pm,',
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
-                        ),
-                        Text(
-                          '9:30 Am To 1:00 Pm,',
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
-                        )
                       ],
                     ),
                   ),
@@ -146,4 +117,14 @@ class ListItem extends StatelessWidget {
       ),
     );
   }
+  //
+  // String getTimeIn12HrFormat(String time) {
+  //   // Convert time from 24-hour format to 12-hour format and add AM or PM
+  //   final DateTime dateTime = DateTime.parse("2022-01-01 $time");
+  //   final int hour = dateTime.hour;
+  //   final String period = hour < 12 ? 'AM' : 'PM';
+  //   final int displayHour = hour == 0 || hour == 12 ? 12 : hour % 12;
+  //
+  //   return "$displayHour:${dateTime.minute.toString().padLeft(2, '0')} $period";
+  // }
 }
