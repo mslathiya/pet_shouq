@@ -8,6 +8,7 @@ const String keyUserToken = "keyUserToken";
 const String keyUserInfo = "keyUserInfo";
 const String keyUserType = "keyUserType";
 
+//
 class AppPreferences {
   final SharedPreferences preferences;
   AppPreferences({
